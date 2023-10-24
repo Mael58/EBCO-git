@@ -1,5 +1,7 @@
 <?php include 'template/header.php';
 include 'modele/ProduitsBDD.php';
+$a = 1;
+echo $a;
 ?>
 
 
