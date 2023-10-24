@@ -786,36 +786,62 @@ input
 .row-2-usb select {
     align-self: flex-end;
 }
-
-
-.form-container-achat{
-    background: #fff;
-     width: 45%;
-    height: 100%; 
-     position: relative;
-    text-align: center;
-    padding: 20px 0;
+.container-achat{
+    max-width: 1300px;
     margin: auto;
-    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1); 
-     overflow: hidden;  
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+
+    
+}
+.col-2-achat{
+    flex-basis: 50%;
+    min-width: 300px;
+}
+
+
+.form-container-achat {
+    background: #fff;
+    width: 70%; /* Ajustez la largeur du formulaire selon vos besoins */
+    height: auto; /* Ajustez la hauteur du formulaire selon vos besoins */
+    position: relative;
+    text-align: center;
+    padding: 10px 20px; /* Ajustez les marges intérieures selon vos besoins */
+    margin: auto;
+    box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1); /* Ajustez l'ombre selon vos besoins */
+}
+
+
+.section-1 {
+    float: left;
+    width: 45%; 
+   
+}
+
+
+.section-2 {
+    float: right; 
+    width: 45%; 
+ 
 }
 
 
 
+.form-container-achat label {
+    display: block; /* Affichez les libellés sur des lignes séparées */
+    margin-bottom: 5px; /* Ajustez la marge entre les libellés */
+}
 
-    
+.form-container-achat input,
+.form-container-achat select {
+    width: 100%; /* Ajustez la largeur des champs de saisie pour remplir la largeur du formulaire */
+    padding: 5px; /* Ajustez le rembourrage des champs de saisie */
+    margin-bottom: 10px; /* Ajustez la marge entre les champs de saisie */
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.form-container-achat legend {
+    font-size: 1.2em; /* Ajustez la taille de la légende */
+    margin-bottom: 10px; /* Ajustez la marge sous la légende */
+}
 
