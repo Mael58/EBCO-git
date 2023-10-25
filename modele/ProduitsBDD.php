@@ -73,7 +73,8 @@ class ProduitsBDD
         $checkUser = $this->db->prepare($sqlQuery);
         $checkUser->execute();
         if ($checkUser->rowCount() == 1) {
-        //   $this->rememberMe($remember);
+           
+    
             header("Location: index.php?nom=$username&mdp=$hashedPassword");
             exit;
            
@@ -83,15 +84,7 @@ class ProduitsBDD
         }
         ob_end_flush();
     }
-    // public function rememberMe($rememberMe=false){
-    //     if ($rememberMe) {
-    //         $cookieExpire = time() + 60 * 60 * 24 * 30; // Par exemple, 30 jours
-    //         setcookie('remember_me_username', $this->username, $cookieExpire);
-    //         setcookie('remember_me_password', $this->mdp, $cookieExpire);
-    //     }
-       
-        
-    // }
+   
 
     public function mdpOublie($username, $pass)
     {

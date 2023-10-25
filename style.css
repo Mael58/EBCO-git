@@ -845,6 +845,10 @@ input
     margin-bottom: 10px; /* Ajustez la marge sous la légende */
 }
 .remember{
-    text-align: left;
+    float: left;
+    margin-right: 10px;
+    
 }
+
+
 
