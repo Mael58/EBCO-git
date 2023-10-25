@@ -844,11 +844,17 @@ input
     font-size: 1.2em; /* Ajustez la taille de la légende */
     margin-bottom: 10px; /* Ajustez la marge sous la légende */
 }
-.remember{
+/* .remember{
     float: left;
-    margin-right: 10px;
-    
+   
 }
+.check{
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
+ */
+
 
 
 

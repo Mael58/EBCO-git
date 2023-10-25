@@ -29,9 +29,9 @@ include 'modele/ProduitsBDD.php';
                 <form id="LoginForm" method="post">
                     <input type="text" name="username2" placeholder="Nom d'utilisateur">
                     <input type="password" name="password2" placeholder="Mot de Passe">
-                    
-                        <input type="checkbox" class="remember" name="remember" value="1">Se souvenir de moi
-                    
+                    <!-- <div class="remember">
+                        <input type="checkbox" class="check" name="remember" value="1">Se souvenir de moi
+                    </div> -->
                     <button type="submit" class="btn">Connection</button>
                     <a href="error.php">Mot de passe oublié</a>
                 </form>

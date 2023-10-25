@@ -41,7 +41,7 @@
                     <input type="text" name="username" placeholder="Nom d'utilisateur">
                     <!-- <input type="email" placeholder="E-mail"> -->
                     <input type="password" name="password" placeholder="Mot de passe">
-                    <bouton> <a href="compte.php" type="submit" class="btn">Enregistrer</a></bouton>
+                    <bouton type="submit" class="btn">Enregistrer</bouton>
                 </form>
 
                 <!-- <?php
@@ -49,6 +49,8 @@
                 if (isset($_POST['username']) && isset($_POST['password'])) {
                     $password = $_POST['password'];
                     $username = $_POST['username'];
+                    echo $username;
+                    echo $password;
                     $bdd = new ProduitsBDD;
                     $bdd->mdpOublie($username, $password);
                 }

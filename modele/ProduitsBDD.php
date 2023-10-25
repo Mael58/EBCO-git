@@ -62,7 +62,7 @@ class ProduitsBDD
         }
     }
 
-    public function connexion($username, $pass, $remember=false)
+    public function connexion($username, $pass)
     {
        $this->username=$username;
        
@@ -72,8 +72,10 @@ class ProduitsBDD
         $sqlQuery = "select * from `acces` where nom='$this->username' and pswd='$hashedPassword'";
         $checkUser = $this->db->prepare($sqlQuery);
         $checkUser->execute();
-        if ($checkUser->rowCount() == 1) {
+        if ($checkUser->rowCount() == 1) {  
+                          
            
+          
     
             header("Location: index.php?nom=$username&mdp=$hashedPassword");
             exit;
@@ -88,13 +90,27 @@ class ProduitsBDD
 
     public function mdpOublie($username, $pass)
     {
-       
+        if(empty($username) || empty($pass)){
+            echo "Nom d'utilisateur et/ou mot de passe non valides.";
+            return;
+        }
+       try{
         $hashedPassword = hash('sha256', $pass);
        
-        $sqlQuery = "update `acces` set pswd='$hashedPassword' where nom='$username'";
+        $sqlQuery = "update `acces` set pswd=':newPassword' where nom=':user'";
 
         $checkUser = $this->db->prepare($sqlQuery);
-        $checkUser->execute();
+        $checkUser->bindParam(':newPassword', $hashedPassword);
+        $checkUser->bindParam(':user', $username);
+        if ($checkUser->execute()) {
+            echo "Mot de passe mis à jour avec succès.";
+        } else {
+            echo "Erreur lors de la mise à jour du mot de passe.";
+        }
+       }
+ catch (PDOException $e) {
+        echo "Erreur lors de la mise à jour du mot de passe : " . $e->getMessage();
+    }
       
     }
 
