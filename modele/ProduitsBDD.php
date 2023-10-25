@@ -38,6 +38,11 @@ class ProduitsBDD
 
     public function inscription($username, $pass)
     {
+       if(empty($username)|| empty($pass)){
+        echo "veuillez remplir les champs";
+        
+       }
+    else{
         $sqlQuery = "SELECT * FROM `acces` WHERE nom = :username";
         $checkUser = $this->db->prepare($sqlQuery);
         $checkUser->bindParam(':username', $username);
@@ -61,6 +66,7 @@ class ProduitsBDD
             }
         }
     }
+    }
 
     public function connexion($username, $pass)
     {
@@ -74,7 +80,8 @@ class ProduitsBDD
         $checkUser->execute();
         if ($checkUser->rowCount() == 1) {  
                           
-           
+           session_start();
+           $_SESSION['username'] = $username;
           
     
             header("Location: index.php?nom=$username&mdp=$hashedPassword");
@@ -97,7 +104,7 @@ class ProduitsBDD
        try{
         $hashedPassword = hash('sha256', $pass);
        
-        $sqlQuery = "update `acces` set pswd=':newPassword' where nom=':user'";
+        $sqlQuery = "update `acces` set pswd=:newPassword where nom=:user";
 
         $checkUser = $this->db->prepare($sqlQuery);
         $checkUser->bindParam(':newPassword', $hashedPassword);
@@ -111,6 +118,7 @@ class ProduitsBDD
  catch (PDOException $e) {
         echo "Erreur lors de la mise à jour du mot de passe : " . $e->getMessage();
     }
+ 
       
     }
 

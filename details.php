@@ -1,4 +1,5 @@
-<?php include 'template/header.php'; ?>
+<?php ob_start(); 
+include 'template/header.php'; ?>
 
 
 <?php
@@ -84,9 +85,12 @@ if ($recipe) {
 
     echo "Produit non trouvé.";
 }
-?>
 
-<script>
+
+if (isset($_SESSION['username'])) {
+    // L'utilisateur est connecté, permettez-lui d'ajouter au panier
+    // Insérez ici la logique pour ajouter au panier
+    ?><script>
     document.addEventListener('DOMContentLoaded', function() {
         var btnAjouterAuPanier = document.getElementById('ajouter-au-panier');
         var inputQuantite = document.getElementById('quantite');
@@ -116,6 +120,17 @@ if ($recipe) {
         console.log(cartCountElement);
     }
 </script>
+<?php
+    
+} else {
+    // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+    header("Location: compte.php");
+    exit;
+}
+ob_end_flush();
+?>
+
+
 </div>
 
 

@@ -42,6 +42,7 @@ include 'modele/ProduitsBDD.php';
                     <input type="password" name="password" placeholder="Mot de passe">
                     <button type="submit" class="btn">Enregistrer</button>
                 </form>
+                
             </div>
         </div>
     </div>
@@ -60,12 +61,13 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
 
 
-if (isset($_POST['username2'])) {
+if (isset($_POST['username2']) && isset($_POST['password2'])) {
     $username2 = $_POST['username2'];
     $password2 = $_POST['password2'];
     $bdd = new ProduitsBDD;
     $bdd->connexion($username2, $password2);
 }
+
 
 ?>
 
