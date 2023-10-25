@@ -3,6 +3,8 @@
 class ProduitsBDD
 {
     private $db;
+    private $username;
+    private $mdp;
     public function __construct()
     {
         try {
@@ -60,15 +62,18 @@ class ProduitsBDD
         }
     }
 
-    public function connexion($username, $pass)
+    public function connexion($username, $pass, $remember=false)
     {
+       $this->username=$username;
+       
        
         $hashedPassword = hash('sha256', $pass);
-        $sqlQuery = "select * from `acces` where nom='$username' and pswd='$hashedPassword'";
+        $this->mdp=$hashedPassword;
+        $sqlQuery = "select * from `acces` where nom='$this->username' and pswd='$hashedPassword'";
         $checkUser = $this->db->prepare($sqlQuery);
         $checkUser->execute();
         if ($checkUser->rowCount() == 1) {
-          
+        //   $this->rememberMe($remember);
             header("Location: index.php?nom=$username&mdp=$hashedPassword");
             exit;
            
@@ -78,17 +83,29 @@ class ProduitsBDD
         }
         ob_end_flush();
     }
+    // public function rememberMe($rememberMe=false){
+    //     if ($rememberMe) {
+    //         $cookieExpire = time() + 60 * 60 * 24 * 30; // Par exemple, 30 jours
+    //         setcookie('remember_me_username', $this->username, $cookieExpire);
+    //         setcookie('remember_me_password', $this->mdp, $cookieExpire);
+    //     }
+       
+        
+    // }
 
     public function mdpOublie($username, $pass)
     {
        
         $hashedPassword = hash('sha256', $pass);
-        echo $pass;
-        echo $username;
+       
         $sqlQuery = "update `acces` set pswd='$hashedPassword' where nom='$username'";
 
         $checkUser = $this->db->prepare($sqlQuery);
         $checkUser->execute();
       
     }
+
+    
+
+
 }

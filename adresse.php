@@ -22,11 +22,12 @@
                         <input type="email" name="email" placeholder="Votre email" required="required">
 
                         <label for="societe">Société</label>
-                        <input type="text" name="societe" placeholder="Votre société pour qui vous achetez (vide si pour usage personnel)">
+                        <input type="text" name="societe" placeholder="Votre société pour qui vous achetez">
 
                         <label for="tel">Numéro de téléphone</label>
-                        <input type="tel" name="tel" placeholder="Votre numéro de téléphone si vous souhaitez être contacté par téléphone en cas de besoin" required="required">
+                        <input type="tel" name="tel" placeholder="Votre numéro de téléphone" required="required">
                     </div>
+
 
                     <div class="section-2">
                         <label for="rue">Rue*</label>

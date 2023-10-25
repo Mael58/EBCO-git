@@ -844,4 +844,7 @@ input
     font-size: 1.2em; /* Ajustez la taille de la légende */
     margin-bottom: 10px; /* Ajustez la marge sous la légende */
 }
+.remember{
+    text-align: left;
+}
 

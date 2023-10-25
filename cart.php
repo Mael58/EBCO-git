@@ -76,7 +76,9 @@ include 'template/header.php' ?>
 
 
 <?php
+if(isset($_SESSION['panier'])){
 $_SESSION['cart'] = $_SESSION['panier'];
+}
 $_SESSION['total'] = $total;
 
 

@@ -44,7 +44,7 @@
                     <bouton> <a href="compte.php" type="submit" class="btn">Enregistrer</a></bouton>
                 </form>
 
-                <?php
+                <!-- <?php
                 include 'modele/ProduitsBDD.php';
                 if (isset($_POST['username']) && isset($_POST['password'])) {
                     $password = $_POST['password'];
@@ -53,7 +53,7 @@
                     $bdd->mdpOublie($username, $password);
                 }
             
-                ?>
+                ?> -->
 
                 <a href="compte.php" class="btn">revenir à la page precedente &#8594;</a>
             </div>
