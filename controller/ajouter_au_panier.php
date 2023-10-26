@@ -19,4 +19,5 @@ echo "<script>updateCartCount()</script>";
 array_push($_SESSION['panier'], $produit);
 
 
-header('Location: ../details.php?nom=' . urlencode($_GET['nom']));
+//header('Location: ../details.php?nom=' . urlencode($_GET['nom']));
+header('Location: ' . $_SERVER['HTTP_REFERER']);

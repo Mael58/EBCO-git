@@ -1,5 +1,7 @@
-<?php ob_start(); 
-include 'template/header.php'; ?>
+<?php 
+ob_start(); 
+include 'template/header.php'; 
+?>
 
 
 <?php
@@ -88,6 +90,8 @@ if ($recipe) {
 
 
 if (isset($_SESSION['username'])) {
+
+    echo var_dump($_SESSION['username']);
     // L'utilisateur est connecté, permettez-lui d'ajouter au panier
     // Insérez ici la logique pour ajouter au panier
     ?><script>
@@ -123,8 +127,13 @@ if (isset($_SESSION['username'])) {
 <?php
     
 } else {
+    
+ 
+        
+         // Supprimez le message de la session pour qu'il ne s'affiche qu'une fois
+    
     // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
-    header("Location: compte.php");
+    header("Location: redirection.php");
     exit;
 }
 ob_end_flush();

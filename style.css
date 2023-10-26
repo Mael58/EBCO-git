@@ -855,6 +855,25 @@ input
 }
  */
 
+ .redirection{
+    border: 1px solid black;
+    display: flex;
+    height: 300px;
+    width: 300px;
+    margin-left: 40%;
+   
+    margin-top: 5%;
+    
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Cette propriété centre horizontalement */
+    
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.25);
+    position: relative;
+    
+ }
 
+ 
 
 

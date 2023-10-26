@@ -14,6 +14,7 @@ include 'template/header.php' ?>
         </tr>
 
         <?php
+        session_destroy();
         $total = 0;
         $fraisPort = 10;
         if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
@@ -67,7 +68,16 @@ include 'template/header.php' ?>
     </table>
 </div>
 <div class="total-price">
+    <?php
+    if(isset($_SESSION['username'])){?>
     <a href="adresse.php" class="btn">Procéder au paiement &#8594;</a>
+    <?php
+    }
+
+    else{
+        header("Location: redirection.php");
+    }
+    ?>
 </div>
 
 </div>
