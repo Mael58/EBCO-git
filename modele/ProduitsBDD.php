@@ -38,91 +38,86 @@ class ProduitsBDD
 
     public function inscription($username, $pass)
     {
-       if(empty($username)|| empty($pass)){
-        echo "veuillez remplir les champs";
-        
-       }
-    else{
-        $sqlQuery = "SELECT * FROM `acces` WHERE nom = :username";
-        $checkUser = $this->db->prepare($sqlQuery);
-        $checkUser->bindParam(':username', $username);
-        $checkUser->execute();
-
-        if ($checkUser->rowCount() > 0) {
-            echo 'L\'utilisateur existe déjà.';
+        if (empty($username) || empty($pass)) {
+            echo "veuillez remplir les champs";
         } else {
+            $sqlQuery = "SELECT * FROM `acces` WHERE nom = :username";
+            $checkUser = $this->db->prepare($sqlQuery);
+            $checkUser->bindParam(':username', $username);
+            $checkUser->execute();
 
-            $hashedPassword = hash('sha256', $pass);
-            $sqlQuery = "INSERT into `acces` (nom, pswd)
+            if ($checkUser->rowCount() > 0) {
+                echo 'L\'utilisateur existe déjà.';
+            } else {
+
+                $hashedPassword = hash('sha256', $pass);
+                $sqlQuery = "INSERT into `acces` (nom, pswd)
     VALUES (:username, :password )";
-            $donnees = $this->db->prepare($sqlQuery);
-            $donnees->bindParam(':username', $username);
-            $donnees->bindParam(':password', $hashedPassword);
-            try {
-                $donnees->execute();
-                echo 'Inscription réussie';
-            } catch (PDOException $e) {
-                echo 'Erreur lors de l\'inscription : ' . $e->getMessage();
+                $donnees = $this->db->prepare($sqlQuery);
+                $donnees->bindParam(':username', $username);
+                $donnees->bindParam(':password', $hashedPassword);
+                try {
+                    $donnees->execute();
+                    echo 'Inscription réussie';
+                } catch (PDOException $e) {
+                    echo 'Erreur lors de l\'inscription : ' . $e->getMessage();
+                }
             }
         }
-    }
     }
 
     public function connexion($username, $pass)
     {
-       $this->username=$username;
-       
-       
+        $this->username = $username;
+
+
         $hashedPassword = hash('sha256', $pass);
-        $this->mdp=$hashedPassword;
+        $this->mdp = $hashedPassword;
         $sqlQuery = "select * from `acces` where nom='$this->username' and pswd='$hashedPassword'";
         $checkUser = $this->db->prepare($sqlQuery);
         $checkUser->execute();
-        if ($checkUser->rowCount() == 1) {  
-                          
-           session_start();
-           $_SESSION['username'] = $username;
-          
-    
+        if ($checkUser->rowCount() == 1) {
+
+            $_SESSION['username'] = $username;
+            
+              
+                // Générez un identifiant de session unique pour cet utilisateur (une seule fois)
+                $user_session_id = bin2hex(random_bytes(32));
+                session_id($user_session_id);
+                session_regenerate_id(true);
+            
+            
+
             header("Location: index.php?nom=$username&mdp=$hashedPassword");
             exit;
-           
-          
         } else {
             echo "Le nom d'utilisateur ou le mot de passe est incorrect.";
         }
         ob_end_flush();
     }
-   
+
 
     public function mdpOublie($username, $pass)
     {
-        if(empty($username) || empty($pass)){
+        if (empty($username) || empty($pass)) {
             echo "Nom d'utilisateur et/ou mot de passe non valides.";
             return;
         }
-       try{
-        $hashedPassword = hash('sha256', $pass);
-       
-        $sqlQuery = "update `acces` set pswd=:newPassword where nom=:user";
+        try {
+            $hashedPassword = hash('sha256', $pass);
 
-        $checkUser = $this->db->prepare($sqlQuery);
-        $checkUser->bindParam(':newPassword', $hashedPassword);
-        $checkUser->bindParam(':user', $username);
-        if ($checkUser->execute()) {
-            echo "Mot de passe mis à jour avec succès.";
-        } else {
-            echo "Erreur lors de la mise à jour du mot de passe.";
+            $sqlQuery = "update `acces` set pswd=:newPassword where nom=:user";
+
+            $checkUser = $this->db->prepare($sqlQuery);
+            $checkUser->bindParam(':newPassword', $hashedPassword);
+            $checkUser->bindParam(':user', $username);
+            if ($checkUser->execute()) {
+                echo "Mot de passe mis à jour avec succès.";
+            } else {
+                echo "Erreur lors de la mise à jour du mot de passe.";
+            }
+        } catch (PDOException $e) {
+            echo "Erreur lors de la mise à jour du mot de passe : " . $e->getMessage();
         }
-       }
- catch (PDOException $e) {
-        echo "Erreur lors de la mise à jour du mot de passe : " . $e->getMessage();
     }
- 
-      
-    }
-
-    
-
-
 }

@@ -1,6 +1,7 @@
 <?php include 'template/header.php';
 include 'modele/ProduitsBDD.php';
 
+ 
 
 ?>
            <div class="row">

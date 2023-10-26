@@ -45,9 +45,9 @@
     
     </div>"; ?>
     <script>
-    setTimeout(function() {
-        window.location.href = 'compte.php';
-    }, 1500); // Redirection après 3 secondes (3000 millisecondes)
-</script>
+        setTimeout(function() {
+            window.location.href = 'compte.php';
+        }, 1500); // Redirection après 3 secondes (3000 millisecondes)
+    </script>
 
 </body>

@@ -14,7 +14,7 @@ include 'template/header.php' ?>
         </tr>
 
         <?php
-        session_destroy();
+       
         $total = 0;
         $fraisPort = 10;
         if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {

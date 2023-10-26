@@ -9,9 +9,9 @@ include 'template/header.php';
     <div class="row">
         <div class="col-2">
             <form method="post">
-                <input type="text" name="user" placeholder="Nom d'utilisateur">
+                <input type="text" name="user" placeholder="Saisir votre nom d'utilisateur">
                 <!-- <input type="email" placeholder="E-mail"> -->
-                <input type="password" name="pswd" placeholder="Mot de passe">
+                <input type="password" name="pswd" placeholder="Saisir votre nouveau mot de passe">
                 <button type="submit" class="btn">Enregistrer</button>
             </form>
 

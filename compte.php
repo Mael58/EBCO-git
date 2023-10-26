@@ -27,8 +27,8 @@ include 'modele/ProduitsBDD.php';
                 </div>
 
                 <form id="LoginForm" method="post">
-                    <input type="text" name="username2" placeholder="Nom d'utilisateur">
-                    <input type="password" name="password2" placeholder="Mot de Passe">
+                    <input type="text" name="username2" placeholder="Saisir votre nom d'utilisateur">
+                    <input type="password" name="password2" placeholder="Saisir votre mot de passe">
                     <!-- <div class="remember">
                         <input type="checkbox" class="check" name="remember" value="1">Se souvenir de moi
                     </div> -->
@@ -37,9 +37,9 @@ include 'modele/ProduitsBDD.php';
                 </form>
 
                 <form id="RegForm" method="post">
-                    <input type="text" name="username" placeholder="Nom d'utilisateur">
+                    <input type="text" name="username" placeholder="Saisir votre nom d'utilisateur">
                     <!-- <input type="email" placeholder="E-mail"> -->
-                    <input type="password" name="password" placeholder="Mot de passe">
+                    <input type="password" name="password" placeholder="Saisir votre mot de passe">
                     <button type="submit" class="btn">Enregistrer</button>
                 </form>
                 
@@ -67,6 +67,9 @@ if (isset($_POST['username2']) && isset($_POST['password2'])) {
     $bdd = new ProduitsBDD;
     $bdd->connexion($username2, $password2);
 }
+
+
+    
 
 
 ?>
