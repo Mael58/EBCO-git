@@ -81,7 +81,13 @@ class ProduitsBDD
         if ($checkUser->rowCount() == 1) {
 
             
-           
+            if (isset($_COOKIE['panier'])) {
+                // Désérialiser le panier depuis le cookie
+                $panierPrecedent = unserialize($_COOKIE['panier']);
+                
+                // Stocker le panier dans la session de l'utilisateur
+                $_SESSION['panier'] = $panierPrecedent;
+            }
         
 
           
@@ -91,9 +97,7 @@ class ProduitsBDD
             echo var_dump($_SESSION['username']);
 
                
-                $panierRestaure = unserialize($_COOKIE['panier']);
-                echo $panierRestaure;
-               $_SESSION['panier']=$panierRestaure;
+                
             
             
             
