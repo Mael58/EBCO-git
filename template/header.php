@@ -4,6 +4,8 @@ session_start();
 echo var_dump($_SESSION['panier']);
 
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">

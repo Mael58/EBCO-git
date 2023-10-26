@@ -81,13 +81,13 @@ class ProduitsBDD
         if ($checkUser->rowCount() == 1) {
 
             
-            if (isset($_COOKIE['panier'])) {
-                // Désérialiser le panier depuis le cookie
-                $panierPrecedent = unserialize($_COOKIE['panier']);
-                
-                // Stocker le panier dans la session de l'utilisateur
-                $_SESSION['panier'] = $panierPrecedent;
-            }
+           if (isset($_COOKIE['panier'])) {
+    // Désérialiser le panier depuis le cookie
+    $panierPrecedent = unserialize($_COOKIE['panier']);
+    
+    // Stocker le panier dans la session de l'utilisateur
+    $_SESSION['panier'] = $panierPrecedent;
+}
         
 
           
