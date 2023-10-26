@@ -4,6 +4,11 @@ include 'modele/ProduitsBDD.php';
  
 
 ?>
+<?php
+if(isset($_SESSION['username'])){?>
+<h1>Bienvenue <?=$_SESSION['username'];?></h1>
+<?php
+}?>
            <div class="row">
                 <div class="col-2">
 

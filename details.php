@@ -91,7 +91,7 @@ if ($recipe) {
 
 if (isset($_SESSION['username'])) {
 
-    echo var_dump($_SESSION['username']);
+
     // L'utilisateur est connecté, permettez-lui d'ajouter au panier
     // Insérez ici la logique pour ajouter au panier
     ?><script>

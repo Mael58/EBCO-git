@@ -73,18 +73,28 @@ class ProduitsBDD
 
         $hashedPassword = hash('sha256', $pass);
         $this->mdp = $hashedPassword;
-        $sqlQuery = "select * from `acces` where nom='$this->username' and pswd='$hashedPassword'";
+        $sqlQuery = "select * from `acces` where nom=:user and pswd=:pass ";
         $checkUser = $this->db->prepare($sqlQuery);
+        $checkUser->bindParam(":user", $this->username);
+        $checkUser->bindParam(":pass", $hashedPassword);
         $checkUser->execute();
         if ($checkUser->rowCount() == 1) {
 
-            $_SESSION['username'] = $username;
             
-              
-                // Générez un identifiant de session unique pour cet utilisateur (une seule fois)
-                $user_session_id = bin2hex(random_bytes(32));
-                session_id($user_session_id);
-                session_regenerate_id(true);
+           
+        
+
+          
+            
+            // Stockez les informations de session spécifiques à l'utilisateur, par exemple l'ID de l'utilisateur
+            $_SESSION['username'] = $username;
+            echo var_dump($_SESSION['username']);
+
+               
+                $panierRestaure = unserialize($_COOKIE['panier']);
+                echo $panierRestaure;
+               $_SESSION['panier']=$panierRestaure;
+            
             
             
 
@@ -120,4 +130,7 @@ class ProduitsBDD
             echo "Erreur lors de la mise à jour du mot de passe : " . $e->getMessage();
         }
     }
+
+
+    
 }
