@@ -4,8 +4,6 @@ session_start();
 echo var_dump($_SESSION['panier']);
 
 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -98,16 +96,16 @@ $categoriesUniques = array_unique($categories);
 
                     <li><a href="contact.php">Contact</a></li>
                     <?php if (!isset($_SESSION['username'])) {
-                    echo '<li><a href="compte.php">Compte</a></li>';
-                    }?>
+                        echo '<li><a href="compte.php">Compte</a></li>';
+                    } ?>
                     <?php if (isset($_SESSION['username'])) {
                         echo '<li> <a href="cart.php"><img src="images/cart.png" width="30px" height="30px"></a>
                         <span id="cart-count">0</span>
                         <img src="images/menu.png" onclick="menutoggle()" class="menu-icon">
                     </li>
                     <li>';
-                    
-                    
+
+
                         // L'utilisateur est connecté, affichez le bouton de déconnexion
                         echo '
     <form method="post">

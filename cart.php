@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'template/header.php' ?>
 
 
@@ -14,7 +14,7 @@ include 'template/header.php' ?>
         </tr>
 
         <?php
-       
+
         $total = 0;
         $fraisPort = 10;
         if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
@@ -69,12 +69,10 @@ include 'template/header.php' ?>
 </div>
 <div class="total-price">
     <?php
-    if(isset($_SESSION['username'])){?>
-    <a href="adresse.php" class="btn">Procéder au paiement &#8594;</a>
+    if (isset($_SESSION['username'])) { ?>
+        <a href="adresse.php" class="btn">Procéder au paiement &#8594;</a>
     <?php
-    }
-
-    else{
+    } else {
         header("Location: redirection.php");
     }
     ?>
@@ -86,8 +84,8 @@ include 'template/header.php' ?>
 
 
 <?php
-if(isset($_SESSION['panier'])){
-$_SESSION['cart'] = $_SESSION['panier'];
+if (isset($_SESSION['panier'])) {
+    $_SESSION['cart'] = $_SESSION['panier'];
 }
 $_SESSION['total'] = $total;
 
