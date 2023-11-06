@@ -88,7 +88,6 @@ include 'template/header.php' ?>
 <?php
 if (isset($_SESSION['panier'])) {
     $_SESSION['cart'][$_SESSION['username']] = $_SESSION['panier'][$_SESSION['username']];
-    echo var_dump($_SESSION['cart']);
 }
 $_SESSION['total'] = $total;
 

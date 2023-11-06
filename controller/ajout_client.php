@@ -9,8 +9,11 @@ $pays = $_POST['pays'];
 $adresse = $_POST['numRue'] . " " . $_POST['rue'];
 $contact = $_POST['prenom'] . " " . $_POST['nom'];
 $societe = $_POST['societe'];
+$nom = $_POST['nom'];
+$prenom = $_POST['prenom'];
 
 $client = $societe . "-" . $contact;
+$_SESSION['client'] = $client;
 
 
 
@@ -72,35 +75,6 @@ foreach ($cart as $produit) {
     $itemURL .= '&nomCommande[]=' . urlencode($nomCommande) .
         '&prix[]=' . urlencode($prix) .
         '&quantite[]=' . urlencode($quantite);
-
-
-    // Vérifiez d'abord si une commande similaire existe
-    $sqlQuery = "SELECT ncde FROM commandes WHERE ref = ? AND clients = ?";
-    $stmt = $pdo->prepare($sqlQuery);
-
-    if ($stmt->execute([$nomCommande, $client])) {
-        $existingCommandeId = $stmt->fetchColumn();
-
-        if ($existingCommandeId) {
-            // Une commande similaire existe, mettez à jour la quantité
-            $sqlQuery = "UPDATE commandes SET qte = ?, prix = ? WHERE ncde = ?";
-            $stmt = $pdo->prepare($sqlQuery);
-
-            if ($stmt->execute([$quantite, $total, $existingCommandeId]) === false) {
-                die("Erreur lors de la mise à jour de la commande : " . $stmt->errorInfo()[2]);
-            }
-        } else {
-            // La commande n'existe pas, insérez une nouvelle commande
-            $sqlQuery = "INSERT INTO commandes (ref, qte, prix, CA, clients) VALUES (?, ?, ?, ?, ?)";
-            $stmt = $pdo->prepare($sqlQuery);
-
-            if ($stmt->execute([$nomCommande, $quantite, $prix, $total, $client]) === false) {
-                die(" " . $stmt->errorInfo()[2]);
-            }
-        }
-    } else {
-        die("Erreur lors de la vérification de la commande existante : " . $stmt->errorInfo()[2]);
-    }
 }
 
 // Fermez la connexion PDO lorsque vous avez terminé
@@ -113,7 +87,10 @@ $url = '../Paypal/index.php?' .
     '&pays=' . urlencode($pays) .
     '&numRue=' . urlencode($_POST['numRue']) .
     '&rue=' . urlencode($_POST['rue']) .
-    '&societe=' . urlencode($societe) . $itemURL;
+    '&societe=' . urlencode($societe) .
+    '&nom=' . urlencode($nom) .
+    '&prenom=' . urlencode($prenom) . $itemURL;
+
 
 header('Location:' . $url);
 exit();
