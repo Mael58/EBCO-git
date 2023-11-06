@@ -42,11 +42,12 @@ if ($stmt->execute([$tel])) {
 if ($stmt->execute()) {
     echo "Le client a été ajouté avec succès.";
 } else {
-    echo "Erreur lors de l'ajout du client : " . implode(" - ", $stmt->errorInfo());
+    echo "Erreur lors de l'ajout du client : ";
 }
 
 
-$cart = $_SESSION['cart'];
+$cart = $_SESSION['cart'][$_SESSION['username']];
+echo var_dump($cart);
 
 
 try {

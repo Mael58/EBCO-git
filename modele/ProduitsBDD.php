@@ -79,14 +79,16 @@ class ProduitsBDD
         $checkUser->bindParam(":pass", $hashedPassword);
         $checkUser->execute();
         if ($checkUser->rowCount() == 1) {
+            if (isset($_SESSION['username'])) {
+                $username = $_SESSION['username'];
 
+                if (isset($_COOKIE['panier'])) {
+                    // Désérialiser le panier depuis le cookie
+                    $panierPrecedent = unserialize($_COOKIE['panier-' . $username]);
 
-            if (isset($_COOKIE['panier'])) {
-                // Désérialiser le panier depuis le cookie
-                $panierPrecedent = unserialize($_COOKIE['panier-' . $username]);
-
-                // Stocker le panier dans la session de l'utilisateur
-                $_SESSION['panier'][$_SESSION['username']] = $panierPrecedent;
+                    // Stocker le panier dans la session de l'utilisateur
+                    $_SESSION['panier'][$_SESSION['username']] = $panierPrecedent;
+                }
             }
 
 
