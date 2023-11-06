@@ -83,6 +83,7 @@ class ProduitsBDD
 
 
 
+
             if (isset($_COOKIE['panier-' . $username])) {
                 // Désérialiser le panier depuis le cookie
                 $panierPrecedent = unserialize($_COOKIE['panier-' . $username]);
@@ -96,10 +97,6 @@ class ProduitsBDD
             // Stockez les informations de session spécifiques à l'utilisateur, par exemple l'ID de l'utilisateur
             $_SESSION['username'] = $username;
             echo var_dump($_SESSION['username']);
-
-
-
-
 
 
 

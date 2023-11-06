@@ -1,8 +1,10 @@
 <?php
 session_start();
 
+
 //echo var_dump($_SESSION['panier']);
 echo var_dump($_SESSION['panier'][$_SESSION['username']]);
+
 
 
 
@@ -135,12 +137,14 @@ $categoriesUniques = array_unique($categories);
     if (isset($_SESSION['username'])) {
         if (isset($_POST['deconnexion'])) {
             // Détruisez la session actuelle
+
             $username = $_SESSION['username'];
             $panier = $_SESSION['panier'][$username];
 
 
             // Stocker le panier dans un cookie
             setcookie("panier-$username", serialize($panier), time() + 2592000);
+
 
 
 
