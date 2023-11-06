@@ -80,27 +80,25 @@ class ProduitsBDD
         $checkUser->execute();
         if ($checkUser->rowCount() == 1) {
 
-            
-           if (isset($_COOKIE['panier'])) {
-    // Désérialiser le panier depuis le cookie
-    $panierPrecedent = unserialize($_COOKIE['panier']);
-    
-    // Stocker le panier dans la session de l'utilisateur
-    $_SESSION['panier'] = $panierPrecedent;
-}
-        
 
-          
-            
+
+
+
+            if (isset($_COOKIE['panier-' . $username])) {
+                // Désérialiser le panier depuis le cookie
+                $panierPrecedent = unserialize($_COOKIE['panier-' . $username]);
+
+                // Stocker le panier dans la session de l'utilisateur
+                $_SESSION['panier'][$username] = $panierPrecedent;
+            }
+
+
+
             // Stockez les informations de session spécifiques à l'utilisateur, par exemple l'ID de l'utilisateur
             $_SESSION['username'] = $username;
             echo var_dump($_SESSION['username']);
 
-               
-                
-            
-            
-            
+
 
             header("Location: index.php?nom=$username&mdp=$hashedPassword");
             exit;
@@ -134,7 +132,4 @@ class ProduitsBDD
             echo "Erreur lors de la mise à jour du mot de passe : " . $e->getMessage();
         }
     }
-
-
-    
 }
