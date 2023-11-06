@@ -96,16 +96,16 @@ $categoriesUniques = array_unique($categories);
 
                     <li><a href="contact.php">Contact</a></li>
                     <?php if (!isset($_SESSION['username'])) {
-                    echo '<li><a href="compte.php">Compte</a></li>';
-                    }?>
+                        echo '<li><a href="compte.php">Compte</a></li>';
+                    } ?>
                     <?php if (isset($_SESSION['username'])) {
                         echo '<li> <a href="cart.php"><img src="images/cart.png" width="30px" height="30px"></a>
                         <span id="cart-count">0</span>
                         <img src="images/menu.png" onclick="menutoggle()" class="menu-icon">
                     </li>
                     <li>';
-                    
-                    
+
+
                         // L'utilisateur est connecté, affichez le bouton de déconnexion
                         echo '
     <form method="post">
@@ -127,12 +127,12 @@ $categoriesUniques = array_unique($categories);
     // Démarrez la session
 
 
-
+    $username = $_SESSION['username'];
     // Vérifiez si l'utilisateur est connecté et a cliqué sur le bouton de déconnexion
     if (isset($_SESSION['username'])) {
         if (isset($_POST['deconnexion'])) {
             // Détruisez la session actuelle
-            setcookie("panier", serialize($_SESSION['panier']), time() + 2592000);
+            setcookie("panier-$username", serialize($_SESSION['panier'][$_SESSION['username']]), time() + 2592000);
 
             session_destroy();
 

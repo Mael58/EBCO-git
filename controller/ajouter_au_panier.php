@@ -1,8 +1,8 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['panier'])) {
-    $_SESSION['panier'] = array();
+$username = $_SESSION['username'];
+if (!isset($_SESSION['panier'][$username])) {
+    $_SESSION['panier'][$username] = array();
 }
 
 $produit = array(
@@ -16,7 +16,7 @@ $produit = array(
 echo "<script>updateCartCount()</script>";
 
 
-array_push($_SESSION['panier'], $produit);
+array_push($_SESSION['panier'][$username], $produit);
 
 
 
