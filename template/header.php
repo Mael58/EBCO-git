@@ -1,7 +1,10 @@
 <?php
 session_start();
 
-echo var_dump($_SESSION['panier']);
+//echo var_dump($_SESSION['panier']);
+echo var_dump($_SESSION['panier'][$_SESSION['username']]);
+
+
 
 
 ?>
@@ -127,12 +130,19 @@ $categoriesUniques = array_unique($categories);
     // Démarrez la session
 
 
-    $username = $_SESSION['username'];
+
     // Vérifiez si l'utilisateur est connecté et a cliqué sur le bouton de déconnexion
     if (isset($_SESSION['username'])) {
         if (isset($_POST['deconnexion'])) {
             // Détruisez la session actuelle
-            setcookie("panier-$username", serialize($_SESSION['panier'][$_SESSION['username']]), time() + 2592000);
+            $username = $_SESSION['username'];
+            $panier = $_SESSION['panier'][$username];
+
+
+            // Stocker le panier dans un cookie
+            setcookie("panier-$username", serialize($panier), time() + 2592000);
+
+
 
             session_destroy();
 
@@ -141,6 +151,7 @@ $categoriesUniques = array_unique($categories);
             exit;
         }
     }
+
 
     ?>
 
