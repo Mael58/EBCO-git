@@ -1,19 +1,34 @@
 <?php
 header('Content-Type: application/octet-stream');
-header('Content-Disposition: attachment; filename="backup_' . strftime("%d-%m-%Y_%H-%M-%S") . '.sql"');
+header('Content-Disposition: attachment; filename="backup_' . strftime("%d-%m-%Y_%H-%M-%S") . '.zip');
 
-$command = "C:/xampp/mysql/bin/mysqldump -u root ebcon_crm";
-$descriptorspec = array(
-    0 => array("pipe", "r"),
-    1 => array("pipe", "w"),
-);
-$process = proc_open($command, $descriptorspec, $pipes);
+$today = strftime("%d-%m-%Y_%H-%M-%S");
+$backupFile = 'C:/Users/matze/Downloads/backup_' . $today . '.sql';
 
-if (is_resource($process)) {
-    while (!feof($pipes[1])) {
-        echo fread($pipes[1], 8192); // Envoyer la sortie de mysqldump directement à la réponse HTTP
-        flush();
+// Vérifiez si le fichier de sauvegarde existe déjà
+if (!file_exists($backupFile)) {
+    // Commande de sauvegarde (MySQL)
+    $command = "C:/xampp/mysql/bin/mysqldump -u root ebcon_crm > $backupFile";
+    exec($command);
+}
+
+// Envoi du fichier de sauvegarde au navigateur
+if (file_exists($backupFile)) {
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename="backup_' . $today . '.zip"');
+
+    $zip = new ZipArchive();
+    $zipFileName = sys_get_temp_dir() . '/backup_' . $today . '.zip';
+    if ($zip->open($zipFileName, ZipArchive::CREATE) === TRUE) {
+        $zip->addFile($backupFile, basename($backupFile));
+        $zip->close();
+
+        ob_end_clean();
+        readfile($zipFileName);
+        unlink($zipFileName); // Supprimer le fichier ZIP temporaire après l'envoi
+    } else {
+        echo "Erreur lors de la création du fichier ZIP.";
     }
-    fclose($pipes[1]);
-    proc_close($process);
+} else {
+    echo "Erreur lors de la création du fichier de sauvegarde.";
 }
