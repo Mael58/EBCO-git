@@ -51,8 +51,8 @@ class ProduitsBDD
             } else {
 
                 $hashedPassword = hash('sha256', $pass);
-                $sqlQuery = "INSERT into `acces` (nom, pswd)
-    VALUES (:username, :password )";
+                $sqlQuery = "INSERT into `acces` (nom, pswd, role)
+    VALUES (:username, :password, 'commercial')";
                 $donnees = $this->db->prepare($sqlQuery);
                 $donnees->bindParam(':username', $username);
                 $donnees->bindParam(':password', $hashedPassword);
@@ -73,12 +73,15 @@ class ProduitsBDD
 
         $hashedPassword = hash('sha256', $pass);
         $this->mdp = $hashedPassword;
-        $sqlQuery = "select * from `acces` where nom=:user and pswd=:pass ";
+        $sqlQuery = "select * from `acces` where nom=:user and pswd=:pass";
         $checkUser = $this->db->prepare($sqlQuery);
         $checkUser->bindParam(":user", $this->username);
         $checkUser->bindParam(":pass", $hashedPassword);
         $checkUser->execute();
         if ($checkUser->rowCount() == 1) {
+            $role = $checkUser->fetch();
+            $_SESSION['role'] = $role['role'];
+
 
 
 

@@ -14,6 +14,11 @@ $numRue = isset($_GET['numRue']) ? urldecode($_GET['numRue']) : "";
 $rue = isset($_GET['rue']) ? urldecode($_GET['rue']) : "";
 $societe = isset($_GET['societe']) ? urldecode($_GET['societe']) : "";
 
+
+
+
+
+
 $nomCommande = $_GET['nomCommande'];
 $prix = $_GET['prix'];
 $quantite = $_GET['quantite'];
@@ -171,13 +176,13 @@ $db->close();
                                     nomCommande: nomCommande,
                                     quantite: quantite,
                                     prix: prix
-                                    // Ajoutez d'autres données si nécessaire
+
                                 };
-                                console.log(dataToSend);
+
 
                                 xhr.send(JSON.stringify(dataToSend));
 
-                                // On affiche un message de succès
+
                                 alert(details.payer.name.given_name + ' ' + details.payer.name.surname + ', votre transaction est effectuée. Vous allez recevoir une notification très bientôt lorsque nous validons votre paiement.');
                             });
                         },
@@ -186,7 +191,7 @@ $db->close();
                             alert("Transaction annulée !");
                         }
 
-                        // JavaScript (Front-end)
+
 
 
                     }).render('#paypal-button-container');

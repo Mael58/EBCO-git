@@ -79,6 +79,16 @@ foreach ($cart as $produit) {
 
 // Fermez la connexion PDO lorsque vous avez terminé
 $pdo = null;
+// $tel = openssl_encrypt($tel, 'aes-256-cbc', $encryptionKey, 0, $encryptionIV);
+// $email = openssl_encrypt($email, 'aes-256-cbc', $encryptionKey, 0, $encryptionIV);
+// $cdp = openssl_encrypt($cdp, 'aes-256-cbc', $encryptionKey, 0, $encryptionIV);
+// // $ville = openssl_encrypt($ville, 'aes-256-cbc', $encryptionKey, 0, $encryptionIV);
+// // $pays = openssl_encrypt($pays, 'aes-256-cbc', $encryptionKey, 0, $encryptionIV);
+// // $societe = openssl_encrypt($societe, 'aes-256-cbc', $encryptionKey, 0, $encryptionIV);
+// $nom = openssl_encrypt($nom, 'aes-256-cbc', $encryptionKey, 0, $encryptionIV);
+// $prenom = openssl_encrypt($prenom, 'aes-256-cbc', $encryptionKey, 0, $encryptionIV);
+// $numRue = openssl_encrypt($_POST['numRue'], 'aes-256-cbc', $encryptionKey, 0, $encryptionIV);
+// $rue = openssl_encrypt($_POST['rue'], 'aes-256-cbc', $encryptionKey, 0, $encryptionIV);
 $url = '../Paypal/index.php?' .
     'tel=' . urlencode($tel) .
     '&email=' . urlencode($email) .
@@ -90,6 +100,9 @@ $url = '../Paypal/index.php?' .
     '&societe=' . urlencode($societe) .
     '&nom=' . urlencode($nom) .
     '&prenom=' . urlencode($prenom) . $itemURL;
+
+// Répétez ce processus pour les autres données sensibles
+
 
 
 header('Location:' . $url);

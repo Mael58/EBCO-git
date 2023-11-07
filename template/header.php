@@ -2,9 +2,6 @@
 session_start();
 
 
-//echo var_dump($_SESSION['panier']);
-echo var_dump($_SESSION['panier'][$_SESSION['username']]);
-
 
 
 
@@ -119,6 +116,21 @@ $categoriesUniques = array_unique($categories);
                     }
                     ?>
                     </li>
+                    <?php
+                    if (isset($_SESSION['role'])) {
+                        if ($_SESSION['role'] === 'ADMINISTRATEUR' || $_SESSION['role'] === 'TECHNICIEN') {
+                            echo '<li> <form method="post">
+    <input type="submit" class="btn" name="sauvegarde" value="sauvegarde">
+</form></li>';
+                        }
+                    }
+                    if (isset($_POST['sauvegarde'])) {
+
+                        include 'controller/backup.php';
+
+                        echo "La sauvegarde de la base de données a été effectuée avec succès.";
+                    }
+                    ?>
                 </ul>
             </nav>
             <!-- <a href="cart.php"><img src="images/cart.png" width="30px" height="30px"></a>
