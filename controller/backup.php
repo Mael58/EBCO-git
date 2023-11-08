@@ -20,7 +20,11 @@ if (file_exists($backupFile)) {
     $zip = new ZipArchive();
     $zipFileName = sys_get_temp_dir() . '/backup_' . $today . '.zip';
     if ($zip->open($zipFileName, ZipArchive::CREATE) === TRUE) {
+        $zip->setPassword("123");
+
         $zip->addFile($backupFile, basename($backupFile));
+        // $zip->setEncryptionName(basename($backupFile), ZipArchive::EM_AES_256);
+
         $zip->close();
 
         ob_end_clean();
