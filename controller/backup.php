@@ -1,4 +1,20 @@
 <?php
+$userProfile = getenv('USERPROFILE');
+
+if ($userProfile) {
+    $downloadsPath = $userProfile . DIRECTORY_SEPARATOR . 'Downloads';
+    $zipFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'backup.zip';
+    $sqlFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'ebcon_crm.sql';
+
+    // Utilisez les chemins générés comme nécessaire
+
+    // ...
+} else {
+    echo "Impossible d'obtenir le répertoire de l'utilisateur.";
+}
+
+
+
 header('Content-Type: application/octet-stream');
 header('Content-Disposition: attachment; filename="backup_' . strftime("%d-%m-%Y_%H-%M-%S") . '.zip');
 
@@ -6,14 +22,14 @@ $today = strftime("%d-%m-%Y_%H-%M-%S");
 $backupFile = 'C:/Users/matze/Downloads/ebcon_crm.sql';
 
 // Vérifiez si le fichier de sauvegarde existe déjà
-if (!file_exists($backupFile)) {
+if (!file_exists($sqlFilePath)) {
     // Commande de sauvegarde (MySQL)
-    $command = "C:/xampp/mysql/bin/mysqldump -u root ebcon_crm > $backupFile";
+    $command = "C:/xampp/mysql/bin/mysqldump -u root ebcon_crm > $sqlFilePath";
     exec($command);
 }
 
 // Envoi du fichier de sauvegarde au navigateur
-if (file_exists($backupFile)) {
+if (file_exists($sqlFilePath)) {
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="backup_' . $today . '.zip"');
 
@@ -22,7 +38,7 @@ if (file_exists($backupFile)) {
     if ($zip->open($zipFileName, ZipArchive::CREATE) === TRUE) {
         $zip->setPassword("123");
 
-        $zip->addFile($backupFile, basename($backupFile));
+        $zip->addFile($sqlFilePath, basename($sqlFilePath));
         // $zip->setEncryptionName(basename($backupFile), ZipArchive::EM_AES_256);
 
         $zip->close();

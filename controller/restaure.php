@@ -1,7 +1,22 @@
 <?php
 // Chemin du fichier ZIP
-$zipFilePath = 'C:\Users\matze\Downloads\backup_09-11-2023_11-07-48.zip';
-$sqlFilePath = 'C:\Users\matze\Downloads\ebcon_crm.sql';
+$userProfile = getenv('USERPROFILE');
+
+if ($userProfile) {
+    $scriptDirectory = __DIR__;
+    $Fichierbat = $scriptDirectory . DIRECTORY_SEPARATOR . 'test.bat';
+
+
+    $downloadsPath = $userProfile . DIRECTORY_SEPARATOR . 'Downloads';
+    $zipFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'backup.zip';
+    $sqlFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'ebcon_crm.sql';
+
+    // Utilisez les chemins générés comme nécessaire
+
+    // ...
+} else {
+    echo "Impossible d'obtenir le répertoire de l'utilisateur.";
+}
 
 if (file_exists($zipFilePath)) {
     $zip = new ZipArchive();
@@ -10,7 +25,7 @@ if (file_exists($zipFilePath)) {
         // Extrait le fichier SQL du ZIP
 
 
-        if ($zip->extractTo('C:\Users\matze\Downloads', 'ebcon_crm.sql')) {
+        if ($zip->extractTo($downloadsPath, 'ebcon_crm.sql')) {
             $zip->close();
             echo 'Extrait avec succès.';
         } else {
@@ -33,7 +48,7 @@ if (file_exists($zipFilePath)) {
 //     echo "Commande MySQL exécutée avec succès.";
 // }
 
-$batFilePath = "C:/xampp/htdocs/EBCO-git/controller/test.bat";
+$batFilePath = $Fichierbat;
 $command = exec($batFilePath, $outputArray, $return_var);
 $escaped_command = escapeshellcmd($command);
 
