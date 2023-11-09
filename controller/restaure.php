@@ -1,42 +1,50 @@
 <?php
-// Chemin du fichier ZIP
+
 $userProfile = getenv('USERPROFILE');
 
 if ($userProfile) {
     $scriptDirectory = __DIR__;
     $Fichierbat = $scriptDirectory . DIRECTORY_SEPARATOR . 'test.bat';
 
-
     $downloadsPath = $userProfile . DIRECTORY_SEPARATOR . 'Downloads';
-    //$zipFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'backup.zip';
-    $zipFilePath = getenv('BACKUP_ZIP_PATH');
 
+    // Trouver le fichier ZIP le plus récent
+    $zipFiles = glob($downloadsPath . DIRECTORY_SEPARATOR . 'backup_*.zip');
+    if (!empty($zipFiles)) {
+        // Triez les fichiers par date (du plus récent au plus ancien)
+        usort($zipFiles, function ($a, $b) {
+            return filemtime($b) - filemtime($a);
+        });
 
-    $sqlFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'ebcon_crm.sql';
+        // Récupérez le chemin du fichier ZIP le plus récent
+        $zipFilePath = $zipFiles[0];
 
-    // Utilisez les chemins générés comme nécessaire
+        // Assurez-vous que la date est récupérée correctement
+        $today = strftime("%d-%m-%Y_%H-%M-%S");
+        $sqlFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'ebcon_crm.sql';
 
-    // ...
+        $zip = new ZipArchive();
+
+        if ($zip->open($zipFilePath) === true) {
+            // Extrait le fichier SQL du ZIP
+            if ($zip->extractTo($downloadsPath, 'ebcon_crm.sql')) {
+                $zip->close();
+                echo 'Extrait avec succès.';
+            } else {
+                echo "Erreur lors de l'ouverture du fichier ZIP.";
+            }
+        } else {
+            echo "Le fichier ZIP n'existe pas ou ne peut pas être ouvert.";
+        }
+
+        // Restaurez la base de données avec le fichier SQL
+        // ...
+
+    } else {
+        echo "Aucun fichier ZIP trouvé dans le répertoire de téléchargement.";
+    }
 } else {
     echo "Impossible d'obtenir le répertoire de l'utilisateur.";
-}
-
-if (file_exists($zipFilePath)) {
-    $zip = new ZipArchive();
-
-    if ($zip->open($zipFilePath) === true) {
-        // Extrait le fichier SQL du ZIP
-
-
-        if ($zip->extractTo($downloadsPath, 'ebcon_crm.sql')) {
-            $zip->close();
-            echo 'Extrait avec succès.';
-        } else {
-            echo "Erreur lors de l'ouverture du fichier ZIP.";
-        }
-    } else {
-        echo "Le fichier ZIP n'existe pas.";
-    }
 }
 
 
