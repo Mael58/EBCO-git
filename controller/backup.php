@@ -1,6 +1,6 @@
 <?php
 $userProfile = getenv('USERPROFILE');
-
+$a = 1;
 if ($userProfile) {
     $downloadsPath = $userProfile . DIRECTORY_SEPARATOR . 'Downloads';
     $zipFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'backup.zip';
