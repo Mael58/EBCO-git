@@ -8,7 +8,10 @@ if ($userProfile) {
 
 
     $downloadsPath = $userProfile . DIRECTORY_SEPARATOR . 'Downloads';
-    $zipFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'backup.zip';
+    //$zipFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'backup.zip';
+    $zipFilePath = getenv('BACKUP_ZIP_PATH');
+
+
     $sqlFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'ebcon_crm.sql';
 
     // Utilisez les chemins générés comme nécessaire
@@ -36,17 +39,6 @@ if (file_exists($zipFilePath)) {
     }
 }
 
-// $sqlFilePath = "C:/Users/matze/Downloads/backup_08-11-2023_13-38-23.sql";
-// //$powershellCommand = "C:/xampp/mysql/bin/mysql -u root test2 < $sqlFilePath";
-// $powershellCommand = " Get-Content $sqlFilePath | C:/xampp/mysql/bin/mysql -u root test2";
-// echo $powershellCommand;
-// $output = shell_exec($powershellCommand);
-
-// if ($output === null) {
-//     echo "Erreur lors de l'exécution de la commande PowerShell.";
-// } else {
-//     echo "Commande MySQL exécutée avec succès.";
-// }
 
 $batFilePath = $Fichierbat;
 $command = exec($batFilePath, $outputArray, $return_var);

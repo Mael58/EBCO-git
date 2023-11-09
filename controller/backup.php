@@ -1,10 +1,14 @@
 <?php
 $userProfile = getenv('USERPROFILE');
-$a = 1;
+
 if ($userProfile) {
     $downloadsPath = $userProfile . DIRECTORY_SEPARATOR . 'Downloads';
-    $zipFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'backup.zip';
+    //$zipFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'backup.zip';
     $sqlFilePath = $downloadsPath . DIRECTORY_SEPARATOR . 'ebcon_crm.sql';
+    $zipFileName = $downloadsPath . DIRECTORY_SEPARATOR . 'backup_' . $today . '.zip';
+
+    putenv("BACKUP_ZIP_PATH=$zipFileName");
+
 
     // Utilisez les chemins générés comme nécessaire
 
@@ -19,7 +23,7 @@ header('Content-Type: application/octet-stream');
 header('Content-Disposition: attachment; filename="backup_' . strftime("%d-%m-%Y_%H-%M-%S") . '.zip');
 
 $today = strftime("%d-%m-%Y_%H-%M-%S");
-$backupFile = 'C:/Users/matze/Downloads/ebcon_crm.sql';
+
 
 // Vérifiez si le fichier de sauvegarde existe déjà
 if (!file_exists($sqlFilePath)) {
@@ -34,7 +38,7 @@ if (file_exists($sqlFilePath)) {
     header('Content-Disposition: attachment; filename="backup_' . $today . '.zip"');
 
     $zip = new ZipArchive();
-    $zipFileName = sys_get_temp_dir() . '/backup_' . $today . '.zip';
+    //$zipFileName = sys_get_temp_dir() . '/backup_' . $today . '.zip';
     if ($zip->open($zipFileName, ZipArchive::CREATE) === TRUE) {
         $zip->setPassword("123");
 

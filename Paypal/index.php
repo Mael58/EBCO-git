@@ -14,6 +14,8 @@ $numRue = isset($_GET['numRue']) ? urldecode($_GET['numRue']) : "";
 $rue = isset($_GET['rue']) ? urldecode($_GET['rue']) : "";
 $societe = isset($_GET['societe']) ? urldecode($_GET['societe']) : "";
 
+$tel = openssl_encrypt($tel, 'aes-256-cbc', $encryptionKey, 0, $encryptionIV);
+
 
 
 
