@@ -3,7 +3,7 @@ header('Content-Type: application/octet-stream');
 header('Content-Disposition: attachment; filename="backup_' . strftime("%d-%m-%Y_%H-%M-%S") . '.zip');
 
 $today = strftime("%d-%m-%Y_%H-%M-%S");
-$backupFile = 'C:/Users/matze/Downloads/backup_' . $today . '.sql';
+$backupFile = 'C:/Users/matze/Downloads/ebcon_crm.sql';
 
 // Vérifiez si le fichier de sauvegarde existe déjà
 if (!file_exists($backupFile)) {
