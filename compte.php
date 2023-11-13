@@ -42,7 +42,7 @@ include 'modele/ProduitsBDD.php';
                     <input type="password" name="password" placeholder="Saisir votre mot de passe">
                     <button type="submit" class="btn">Enregistrer</button>
                 </form>
-                
+
             </div>
         </div>
     </div>
@@ -69,7 +69,7 @@ if (isset($_POST['username2']) && isset($_POST['password2'])) {
 }
 
 
-    
+
 
 
 ?>

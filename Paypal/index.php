@@ -14,7 +14,18 @@ $numRue = isset($_GET['numRue']) ? urldecode($_GET['numRue']) : "";
 $rue = isset($_GET['rue']) ? urldecode($_GET['rue']) : "";
 $societe = isset($_GET['societe']) ? urldecode($_GET['societe']) : "";
 
-$tel = openssl_encrypt($tel, 'aes-256-cbc', $encryptionKey, 0, $encryptionIV);
+$ivlen = openssl_cipher_iv_length("aes-128-gcm");
+$key = openssl_random_pseudo_bytes($ivlen);
+$iv = openssl_random_pseudo_bytes($ivlen);
+
+// Ajoutez un "tag" en utilisant une variable pour le stocker
+$tag = null;
+
+$tel = openssl_encrypt($tel, "aes-128-gcm", $key, 0, $iv, $tag);
+
+
+
+
 
 
 
@@ -58,7 +69,7 @@ $db->close();
 
 <head>
     <title>Confirmation de paiment</title>
-    <link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='Paypal/css/style.css' type='text/css' media='all' />
 </head>
 
 <body>

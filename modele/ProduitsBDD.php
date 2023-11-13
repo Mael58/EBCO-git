@@ -99,13 +99,9 @@ class ProduitsBDD
 
             // Stockez les informations de session spécifiques à l'utilisateur, par exemple l'ID de l'utilisateur
             $_SESSION['username'] = $username;
-            echo var_dump($_SESSION['username']);
-            $user = openssl_encrypt($username, 'aes-256-cbc', 0);
-            $password = openssl_encrypt($hashedPassword, 'aes-256-cbc', 0);
 
 
-
-            header("Location: index.php?nom=$user&mdp=$password");
+            //header("Location: index.php?nom=$$username&mdp=$hashedPassword");
             exit;
         } else {
             echo "Le nom d'utilisateur ou le mot de passe est incorrect.";

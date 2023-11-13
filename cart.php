@@ -17,8 +17,8 @@ include 'template/header.php' ?>
 
         $total = 0;
         $fraisPort = 10;
-        if (isset($_SESSION['panier'][$_SESSION['username']]) && !empty($_SESSION['panier'][$_SESSION['username']])) {
-            foreach ($_SESSION['panier'][$_SESSION['username']] as $produit) {
+        if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
+            foreach ($_SESSION['panier'] as $produit) {
                 if (isset($produit['image']) && isset($produit['nom']) && isset($produit['prix']) && isset($produit['quantite'])) {
                     echo '<tr>';
                     echo '<td>';
@@ -70,14 +70,10 @@ include 'template/header.php' ?>
     </table>
 </div>
 <div class="total-price">
-    <?php
-    if (isset($_SESSION['username'])) { ?>
-        <a href="adresse.php" class="btn">Procéder au paiement &#8594;</a>
-    <?php
-    } else {
-        header("Location: redirection.php");
-    }
-    ?>
+
+
+    <a href="adresse.php" class="btn">Procéder au paiement &#8594;</a>
+
 </div>
 
 </div>
@@ -88,8 +84,7 @@ include 'template/header.php' ?>
 <?php
 if (isset($_SESSION['panier'])) {
 
-    $_SESSION['cart'][$_SESSION['username']] = $_SESSION['panier'][$_SESSION['username']];
-
+    $_SESSION['cart'] = $_SESSION['panier'];
 }
 $_SESSION['total'] = $total;
 

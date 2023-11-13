@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$cart = $_SESSION['cart'][$_SESSION['username']];
+$cart = $_SESSION['cart'];
 $client = $_SESSION['client'];
 
 // Récupérer les données JSON envoyées par le client

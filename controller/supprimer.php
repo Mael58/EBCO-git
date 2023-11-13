@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-if (isset($_GET['nom']) && isset($_SESSION['panier'][$_SESSION['username']])) {
+if (isset($_GET['nom']) && isset($_SESSION['panier'])) {
     $nomProduit = $_GET['nom'];
-    foreach ($_SESSION['panier'][$_SESSION['username']] as $key => $produit) {
+    foreach ($_SESSION['panier'] as $key => $produit) {
         if ($produit['nom'] == $nomProduit) {
-            unset($_SESSION['panier'][$_SESSION['username']][$key]);
+            unset($_SESSION['panier'][$key]);
         }
     }
 }

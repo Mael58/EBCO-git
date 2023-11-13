@@ -3,6 +3,10 @@ session_start();
 
 
 
+// Récupère le chemin absolu du fichier en cours d'exécution (header.php)
+
+
+
 
 
 
@@ -49,10 +53,35 @@ $categoriesUniques = array_unique($categories);
 
     <div class="container">
 
-        <div class="navbar">
+        <div class="navbar-logo">
             <div class="logo">
-                <a href="index.html"><img src="images/logo.png" width="200px"></a>
+                <a href="index.php"><img src="images/logo.png" width="200px"></a>
+
+
+
             </div>
+            <ul>
+                <li> <a href="cart.php"><img src="images/cart.png" width="30px" height="30px"> <span id="cart-count">0</span>
+                        <img src="images/menu.png" onclick="menutoggle()" class="menu-icon">Panier</a>
+
+                </li>
+
+                <?php if (!isset($_SESSION['username'])) {
+                    echo '<li><a href="compte.php"><img src="images/conn.png" width="30px" height="30px "> Connexion</a></li>';
+                } ?>
+
+
+
+                <?php if (isset($_SESSION['username'])) {
+                    echo '
+    <form method="post">
+        <input type="submit" class="btn" name="deconnexion" value="Déconnexion">
+    </form>';
+                }
+                ?>
+            </ul>
+        </div>
+        <div class="navbar">
             <nav>
                 <ul id="MenuItems">
                     <li><a href="index.php">Accueil</a></li>
@@ -97,25 +126,8 @@ $categoriesUniques = array_unique($categories);
 
 
                     <li><a href="contact.php">Contact</a></li>
-                    <?php if (!isset($_SESSION['username'])) {
-                        echo '<li><a href="compte.php">Compte</a></li>';
-                    } ?>
-                    <?php if (isset($_SESSION['username'])) {
-                        echo '<li> <a href="cart.php"><img src="images/cart.png" width="30px" height="30px"></a>
-                        <span id="cart-count">0</span>
-                        <img src="images/menu.png" onclick="menutoggle()" class="menu-icon">
-                    </li>
-                    <li>';
 
 
-                        // L'utilisateur est connecté, affichez le bouton de déconnexion
-                        echo '
-    <form method="post">
-        <input type="submit" class="btn" name="deconnexion" value="Déconnexion">
-    </form>';
-                    }
-                    ?>
-                    </li>
                     <?php
                     if (isset($_SESSION['role'])) {
                         if ($_SESSION['role'] === 'ADMINISTRATEUR' || $_SESSION['role'] === 'TECHNICIEN') {

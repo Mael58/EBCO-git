@@ -1,6 +1,6 @@
-<?php 
-ob_start(); 
-include 'template/header.php'; 
+<?php
+ob_start();
+include 'template/header.php';
 ?>
 
 
@@ -89,12 +89,12 @@ if ($recipe) {
 }
 
 
-if (isset($_SESSION['username'])) {
+// if (isset($_SESSION['username'])) {
 
 
-    // L'utilisateur est connecté, permettez-lui d'ajouter au panier
-    // Insérez ici la logique pour ajouter au panier
-    ?><script>
+// L'utilisateur est connecté, permettez-lui d'ajouter au panier
+// Insérez ici la logique pour ajouter au panier
+?><script>
     document.addEventListener('DOMContentLoaded', function() {
         var btnAjouterAuPanier = document.getElementById('ajouter-au-panier');
         var inputQuantite = document.getElementById('quantite');
@@ -125,17 +125,17 @@ if (isset($_SESSION['username'])) {
     }
 </script>
 <?php
-    
-} else {
-    
- 
-        
-         // Supprimez le message de la session pour qu'il ne s'affiche qu'une fois
-    
-    // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
-    header("Location: redirection.php");
-    exit;
-}
+
+// } else {
+
+
+
+//          // Supprimez le message de la session pour qu'il ne s'affiche qu'une fois
+
+//     // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+//     header("Location: redirection.php");
+//     exit;
+// }
 ob_end_flush();
 ?>
 
