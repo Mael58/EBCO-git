@@ -98,6 +98,8 @@ if ($recipe) {
     document.addEventListener('DOMContentLoaded', function() {
         var btnAjouterAuPanier = document.getElementById('ajouter-au-panier');
         var inputQuantite = document.getElementById('quantite');
+        var panierCounter = document.getElementById('cart-count'); // Assuming you have an element with id 'panier-counter'
+
 
         btnAjouterAuPanier.addEventListener('click', function(e) {
             e.preventDefault(); // Empêche le lien de rediriger immédiatement
@@ -106,23 +108,18 @@ if ($recipe) {
             var nom = "<?= $nom ?>";
             var prix = "<?= $prix ?>";
             var image = "<?= $image ?>";
-            updateCartCount();
+
+
 
             // Redirigez l'utilisateur vers ajouter_au_panier.php en incluant les valeurs dans la requête
             window.location.href = 'controller/ajouter_au_panier.php?nom=' + nom + '&prix=' + prix + '&image=' + image + '&quantite=' + quantite;
 
         });
+
+
+
+
     });
-
-    function updateCartCount() {
-
-        var cartCountElement = document.getElementById("cart-count");
-        var currentCount = parseInt(cartCountElement.innerText);
-        var quantite = document.getElementById('quantite').value;
-
-        cartCountElement.innerText = currentCount + parseInt(quantite);
-        console.log(cartCountElement);
-    }
 </script>
 <?php
 

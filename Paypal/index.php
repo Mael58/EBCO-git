@@ -14,14 +14,7 @@ $numRue = isset($_GET['numRue']) ? urldecode($_GET['numRue']) : "";
 $rue = isset($_GET['rue']) ? urldecode($_GET['rue']) : "";
 $societe = isset($_GET['societe']) ? urldecode($_GET['societe']) : "";
 
-$ivlen = openssl_cipher_iv_length("aes-128-gcm");
-$key = openssl_random_pseudo_bytes($ivlen);
-$iv = openssl_random_pseudo_bytes($ivlen);
 
-// Ajoutez un "tag" en utilisant une variable pour le stocker
-$tag = null;
-
-$tel = openssl_encrypt($tel, "aes-128-gcm", $key, 0, $iv, $tag);
 
 
 
@@ -143,7 +136,7 @@ $db->close();
 
 
                 ?>
-                <script src="https://www.paypal.com/sdk/js?client-id=AVb3qzYweFsCxGFdimPz957tf1ZdRwteKvaplwAqGdQUP_DsFPUC9TfR7i9SwkCv1-R79UWA_C0ThDi4&currency=EUR"></script>
+                <script src="https://www.paypal.com/sdk/js?client-id=AVF-Rm38cZLM-9p7H_m-RR3cDm0xeo5_xBhDcLLvD58iWh63mZ8zMNVJ1rT63CTPNMDMzo2-0yELB_nC&currency=EUR"></script>
 
                 <script>
                     paypal.Buttons({

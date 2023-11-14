@@ -536,6 +536,11 @@ table {
     border-collapse: collapse;
 }
 
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
 .cart-info {
     display: flex;
     flex-wrap: wrap;
@@ -894,15 +899,17 @@ h1 {
 }
 
 .form-Commande {
-    display: none;
+    display: block;
     background: #fff;
     width: 70%;
 
     position: relative;
+    margin-top: 15px;
+    margin-left: 10%;
 
     padding: 10px 20px;
 
-    margin: auto;
+
     box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     border: black 1px solid;
@@ -948,47 +955,54 @@ h1 {
     /* Ajustez la marge selon vos besoins */
 }
 
+/*----------Recap commande----------*/
+
 .recap {
     width: 30%;
-    height: 50%;
-    border: 1px solid gray;
-    background-color: white;
+    margin-left: 5%;
+    /* Limitation de la largeur maximale pour une meilleure lisibilité */
+    border: 1px solid #ddd;
+    background-color: #fff;
     padding: 20px;
-
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-left: auto;
 
 }
 
 .produit-recap {
-    border: 1px solid gray;
+    border: 1px solid #ddd;
     margin-bottom: 10px;
-    /* Ajout de marge en bas entre les produits pour une meilleure lisibilité */
+    padding: 10px;
+    /* Ajout de remplissage pour une meilleure séparation */
 }
 
-/* Ajout de styles pour le texte ou tout autre élément dans .recap selon vos besoins */
 .recap h2 {
     color: #333;
-    /* Couleur du texte */
+    font-size: 18px;
+    /* Augmentation de la taille de la police pour le titre */
+    margin-bottom: 15px;
+    /* Espace en bas du titre pour séparation du contenu en dessous */
 }
 
 .recap p {
     font-size: 14px;
-    /* Taille de la police */
+    margin-bottom: 8px;
+    /* Espace en bas de chaque paragraphe pour une meilleure séparation */
+}
+
+/* Style pour le montant total */
+.recap .total {
+    font-size: 16px;
+    font-weight: bold;
 }
 
 
-.paiement {
-
-    width: 65%;
-    border: 1px black solid
-}
 
 .cont {
     display: flex;
 }
 
-
+/*----------Formulaire Commandes----------*/
+/*----------Formulaire Commandes----------*/
 .container-achat {
     max-width: 1300px;
     margin: auto;
@@ -996,7 +1010,11 @@ h1 {
     padding-right: 25px;
     padding-bottom: 25px;
     display: none;
+
+
+
 }
+
 
 .col-2-achat {
     flex-basis: 50%;
@@ -1005,33 +1023,59 @@ h1 {
 
 
 .form-container-achat {
-    background: #fff;
-    width: 70%;
+
+
+    width: auto;
     /* Ajustez la largeur du formulaire selon vos besoins */
     height: auto;
     /* Ajustez la hauteur du formulaire selon vos besoins */
     position: relative;
-    text-align: center;
+
     padding: 10px 20px;
     /* Ajustez les marges intérieures selon vos besoins */
-    margin: auto;
-    box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1);
-    /* Ajustez l'ombre selon vos besoins */
+    margin-top: 15px;
+    margin-left: 15px;
+
+
 }
 
 
 
-.section-1 {
-    float: left;
-    width: 45%;
+
+
+.section-nom h2 {
+    margin-bottom: 10px;
+}
+
+.div-nom {
+    display: flex;
+}
+
+.div-nom label {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.div-nom input {
+    border-radius: 15px;
 
 }
 
 
-.section-2 {
-    float: right;
-    width: 45%;
+.info h2 {
+    margin-bottom: 10px;
+}
 
+.info input {
+    border-radius: 15px;
+}
+
+.adresse h2 {
+    margin-bottom: 10px;
+}
+
+.adresse input {
+    border-radius: 15px;
 }
 
 
@@ -1060,39 +1104,117 @@ h1 {
     /* Ajustez la marge sous la légende */
 }
 
+/*----------Connexion----------*/
+
 .co {
-    display: none;
+    display: flex;
+    justify-content: center;
+
+
+
 }
 
-.connexion {
+.contain h3 {
+    text-align: center;
+}
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+
+.connexion {
+    margin: 10px;
 }
 
 .connexion input {
-    width: 50%;
+
+    border-radius: 15px;
 
 }
 
-.connexion button {
-    width: 50%;
-}
+
+
+
 
 /*----------Enregistrement----------*/
 .reg {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .reg input {
+    border-radius: 15px;
 
-    width: 50%;
 }
 
-.reg button {
-    width: 50%;
+
+
+.step {
+    margin: 20px auto 0;
+}
+
+.step-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px auto 70px;
+    max-width: 768px;
+    position: relative;
+}
+
+
+
+.cart-item {
+    background: #fff;
+    border: 2px solid #20548e;
+    border-radius: 50%;
+    display: block;
+    height: 40px;
+    margin-right: auto;
+    position: relative;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: #20548e;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cart-item.completed {
+    background-color: #20548e;
+    color: #fff;
+}
+
+.cart-item span {
+    bottom: calc(100% + 7px);
+    color: #20548e;
+    font-size: 14px;
+    font-weight: 500;
+    left: 50%;
+    margin-left: -75px;
+
+    position: absolute;
+
+    width: 150px;
+}
+
+.form-separator {
+
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+}
+
+.paiement {
+    display: flex;
+    justify-content: center;
+}
+
+.paypal {
+    width: 30%;
+    height: 30%;
+}
+
+.cart {
+    width: 65%;
+}
+
+.verif {
+    display: flex;
 }

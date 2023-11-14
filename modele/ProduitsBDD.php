@@ -64,6 +64,7 @@ class ProduitsBDD
                 }
             }
         }
+        $this->connexion($username, $pass);
     }
 
     public function connexion($username, $pass)
@@ -87,13 +88,16 @@ class ProduitsBDD
 
 
 
-            if (isset($_COOKIE['panier-' . $username])) {
-                // Désérialiser le panier depuis le cookie
-                $panierPrecedent = unserialize($_COOKIE['panier-' . $username]);
 
-                // Stocker le panier dans la session de l'utilisateur
-                $_SESSION['panier'][$username] = $panierPrecedent;
-            }
+
+
+            // if (isset($_COOKIE['panier-' . $username])) {
+            //     // Désérialiser le panier depuis le cookie
+            //     $panierPrecedent = unserialize($_COOKIE['panier-' . $username]);
+
+            //     // Stocker le panier dans la session de l'utilisateur
+            //     $_SESSION['panier'][$username] = $panierPrecedent;
+            // }
 
 
 
@@ -101,7 +105,7 @@ class ProduitsBDD
             $_SESSION['username'] = $username;
 
 
-            //header("Location: index.php?nom=$$username&mdp=$hashedPassword");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit;
         } else {
             echo "Le nom d'utilisateur ou le mot de passe est incorrect.";

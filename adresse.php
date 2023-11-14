@@ -1,241 +1,308 @@
 <?php include 'template/header.php';
+ob_start();
 include 'modele/ProduitsBDD.php';
 ?>
 
 <body>
 
 
-    <div class="cont">
-        <div class="paiement">
 
-            <h2>Compte</h2>
-            <a href="#" id="showLoginForm">
-                <p>Cliquez ici, pour vous connecter </p>
+
+
+    <div class="step">
+        <div class="step-content">
+
+            <a href="../EBCO-git/cart.php" class="cart-item completed" data-step="1">
+
+                <span class="text">Panier</span>
             </a>
-            <div class="co" id="LoginForm">
-                <h3>Connexion</h3>
-                <form class="connexion" method="post">
-                    <input type="text" name="username2" placeholder="Saisir votre nom d'utilisateur">
-                    <input type="password" name="password2" placeholder="Saisir votre mot de passe">
-                    <!-- <div class="remember">
+            <a class="cart-item completed" data-step="2">
+                <span class="text">Se connecter</span>
+            </a>
+            <a class="cart-item" data-step="3">
+                <span class="text">Adresse</span>
+            </a>
+
+            <a class="cart-item" data-step="4">
+                <span class="text">Verification</span>
+            </a>
+            <!-- Add more steps as needed -->
+        </div>
+    </div>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const loginForm = document.getElementById("LoginForm");
+            const regForm = document.getElementById("RegForm");
+            const formAdresse = document.getElementById("formAdresse");
+            const steps = document.querySelectorAll('.cart-item');
+
+
+            function handleLogin() {
+
+                formAdresse.style.display = "flex";
+                loginForm.style.display = "none";
+                regForm.style.display = "none";
+
+                updateCompletedSteps(3);
+            }
+
+            // function handleAddAdresse() {
+
+            //     formAdresse.style.display = "none";
+            //     paiement.style.display = "flex";
+            //     updateCompletedSteps(4);
+            // }
+
+            // Attach click event to the login button
+            const loginButton = loginForm.querySelector('.btn');
+            loginButton.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the form from submitting
+                handleLogin();
+            });
+
+            // const btnAdresse = document.getElementById('btnAdresse');
+            // btnAdresse.addEventListener('click', function(event) {
+            //     event.preventDefault(); // Prevent the form from submitting
+            //     handleAddAdresse();
+            // });
+
+
+
+
+
+            function updateCompletedSteps(stepNumber) {
+                steps.forEach(step => {
+                    const currentStep = parseInt(step.getAttribute('data-step'));
+                    step.classList.toggle('completed', currentStep <= stepNumber);
+                });
+            }
+        });
+    </script>
+
+
+
+
+
+
+    <div class="co" id="LoginForm">
+        <div class="contain">
+            <h3>Connexion</h3>
+            <form class="connexion" id="connexion" method="post">
+                <input type="text" name="username2" placeholder="Saisir votre nom d'utilisateur">
+                <input type="password" name="password2" placeholder="Saisir votre mot de passe">
+                <!-- <div class="remember">
                         <input type="checkbox" class="check" name="remember" value="1">Se souvenir de moi
                     </div> -->
-                    <button type="submit" class="btn">Connexion</button>
-                    <a href="error.php">Mot de passe oublié</a>
-                </form>
-            </div>
-
-            <?php
-            if (isset($_POST['username']) && isset($_POST['password'])) {
-                $username = $_POST['username'];
-                $password = $_POST['password'];
-
-                $bdd = new ProduitsBDD;
-                $bdd->inscription($username, $password);
-            }
+                <button type="submit" class="btn">Se connecter</button>
+                <a href="error.php">Mot de passe oublié</a>
+            </form>
+        </div>
 
 
 
-            if (isset($_POST['username2']) && isset($_POST['password2'])) {
-                $username2 = $_POST['username2'];
-                $password2 = $_POST['password2'];
-                $bdd = new ProduitsBDD;
-                $bdd->connexion($username2, $password2);
-            }
-
-
-
-
-
-            ?>
-
-            <div class="separator"></div>
-
-            <script>
-                document.getElementById('showLoginForm').addEventListener('click', function() {
-                    var login = document.getElementById('LoginForm');
-
-                    // Check the current display state
-                    if (login.style.display === 'none' || login.style.display === '') {
-                        login.style.display = 'block'; // Display the form
-                    } else {
-                        login.style.display = 'none'; // Hide the form
-                    }
-                });
-            </script>
-
-
-
+        <div class="form-separator"></div>
+        <div class="contain">
             <h3>Inscription</h3>
             <form id="RegForm" class="reg" method="post">
                 <input type="text" name="username" placeholder="Saisir votre nom d'utilisateur">
                 <!-- <input type="email" placeholder="E-mail"> -->
                 <input type="password" name="password" placeholder="Saisir votre mot de passe">
-                <button type="submit" class="btn">Enregistrer</button>
+                <button type="submit" class="btn">S'inscrire</button>
             </form>
-            <div class="separator"></div>
-
-            <h2 id="show">Adresse de livraison</h2>
-            <div class="container-achat" id="formAdresse">
-                <div class="col-2-achat">
-                    <div class="form-container-achat">
-                        <form method='post'>
-                            <legend>Merci d'inscrire vos informations de livraison</legend>
-                            <div class="section-1">
-                                <label for="prenom">Prénom*</label>
-                                <input type="text" name="prenom" placeholder="Votre prénom">
-
-                                <label for="nom">nom*</label>
-                                <input type="text" name="nom" placeholder="Votre nom">
-
-                                <label for="mail">E-mail*</label>
-                                <input type="email" name="email" placeholder="Votre email">
-
-                                <label for="societe">Société</label>
-                                <input type="text" name="societe" placeholder="Votre société pour qui vous achetez">
-
-                                <label for="tel">Numéro de téléphone</label>
-                                <input type="tel" name="tel" placeholder="Votre numéro de téléphone">
-                            </div>
+        </div>
 
 
-                            <div class="section-2">
-                                <label for="rue">Rue*</label>
-                                <input type="text" name="rue" placeholder="Nom de la rue">
+    </div>
+    <?php
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-                                <label for="numRue">Numéro de rue*</label>
-                                <input type="text" name="numRue" placeholder="Numéro de la rue">
+        $bdd = new ProduitsBDD;
+        $bdd->inscription($username, $password);
+    }
 
-                                <label for="cdp">Code postal*</label>
-                                <input type="number" name="cdp" placeholder="Code postal">
 
-                                <label for="ville">Ville*</label>
-                                <input type="text" name="ville" placeholder="Ville">
 
-                                <label for="pays">Pays</label>
-                                <select name="pays">
-                                    <option value="FR" selected>France</option>
-                                    <option value="BE">Belgique</option>
-                                    <option value="CH">Suisse</option>
-                                    <option value="IT">Italie</option>
-                                    <option value="ES">Espagne</option>
-                                    <option value="">Autre</option>
-                                </select>
-                            </div>
+    if (isset($_POST['username2']) && isset($_POST['password2'])) {
+        $username2 = $_POST['username2'];
+        $password2 = $_POST['password2'];
+        $bdd = new ProduitsBDD;
+        $bdd->connexion($username2, $password2);
+    }
 
-                            <input type="submit" class="btn" value="Ajouter votre adresse">
-                        </form>
-                    </div>
-                </div>
+
+
+
+
+    ?>
+
+
+
+    <div class="container-achat" id="formAdresse">
+        <h2 id="show">Adresse de livraison</h2>
+        <div class="col-2-achat">
+            <div class="form-container-achat">
+                <form method='POST'>
+                    <legend>Merci d'inscrire vos informations de livraison</legend>
+                    <section class="section-nom">
+                        <h2>1.Nom complet</h2>
+                        <div class="div-nom">
+                            <label for="prenom">Prénom*</label>
+                            <input type="text" name="prenom" placeholder="Prénom">
+
+                            <label for="nom">nom*</label>
+                            <input type="text" name="nom" placeholder="Nom">
+                        </div>
+
+                    </section>
+                    <section class="info">
+                        <h2>2.Informations personnelles</h2>
+
+                        <label for="mail">E-mail*</label>
+                        <input type="email" name="email" placeholder="Email">
+
+                        <label for="societe">Société</label>
+                        <input type="text" name="societe" placeholder="Votre société pour qui vous achetez">
+
+                        <label for="tel">Numéro de téléphone</label>
+                        <input type="tel" name="tel" placeholder="Numéro de téléphone">
+
+                    </section>
+
+                    <section class="adresse">
+                        <h2>3.Adresse</h2>
+
+
+                        <label for="numRue">Numéro de rue*</label>
+                        <input type="text" name="numRue" placeholder="Numéro de la rue">
+
+                        <label for="rue">Rue*</label>
+                        <input type="text" name="rue" placeholder="Nom de la rue">
+
+                        <label for="cdp">Code postal*</label>
+                        <input type="number" name="cdp" placeholder="Code postal">
+
+                        <label for="ville">Ville*</label>
+                        <input type="text" name="ville" placeholder="Ville">
+
+                        <label for="pays">Pays</label>
+                        <select name="pays">
+                            <option value="FR" selected>France</option>
+                            <option value="BE">Belgique</option>
+                            <option value="CH">Suisse</option>
+                            <option value="IT">Italie</option>
+                            <option value="ES">Espagne</option>
+                            <option value="">Autre</option>
+
+                    </section>
+                    <input type="submit" id="btnAdresse" class="btn" value="Ajouter votre adresse">
+                </form>
             </div>
-
-            <?php
-            $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : "";
-            $nom = isset($_POST['nom']) ? $_POST['nom'] : "";
-            $tel = isset($_POST['tel']) ? $_POST['tel'] : "";
-            $email = isset($_POST['email']) ? $_POST['email'] : "";
-            $cdp = isset($_POST['cdp']) ? $_POST['cdp'] : "";
-            $ville = isset($_POST['ville']) ? $_POST['ville'] : "";
-            $pays = isset($_POST['pays']) ? $_POST['pays'] : "";
-            $numRue = isset($_POST['numRue']) ? $_POST['numRue'] : "";
-            $rue = isset($_POST['rue']) ? $_POST['rue'] : "";
-            $societe = isset($_POST['societe']) ? $_POST['societe'] : "";
+        </div>
+    </div>
 
 
 
-            ?>
-
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    // Récupérer les références aux éléments de formulaire
-                    var formAdresse = document.getElementById("formAdresse");
-                    var formCommande = document.getElementById("commande");
-
-                    // Ajouter un gestionnaire d'événements pour le formulaire d'adresse
-                    formAdresse.addEventListener("submit", function(event) {
-                        event.preventDefault();
-
-                        var formData = new FormData(event.target);
-                        var prenom = formData.get("prenom");
-                        var nom = formData.get("nom");
-                        var tel = formData.get("tel");
-                        var email = formData.get("email");
-                        var cdp = formData.get("cdp");
-                        var ville = formData.get("ville");
-                        var pays = formData.get("pays");
-                        var numRue = formData.get("numRue");
-                        var rue = formData.get("rue");
-                        var societe = formData.get("societe");
-
-                        // Ajouter les données à la liste des adresses dans le formulaire de commande
-                        var adresseHtml = "<input type='radio' name='adresse' checked>" +
-                            "<label>" +
-                            "<p>" + prenom + " " + nom + ", " + numRue + " " + rue + ", " + ville + ", " + cdp + ", " + pays + "</p>" +
-                            "</label>" +
-                            "<p class='lien-adresse'><a href='#' id='modifierAdresse'>Modifier une adresse</a></p>";
-
-                        document.getElementById("commande").innerHTML = "<h2>Vos adresses</h2><div class='commande'>" + adresseHtml + "</div><p><a href='#'>Ajouter une nouvelle adresse</a></p>";
-
-                        // Cacher le formulaire d'adresse
-                        formAdresse.style.display = "none";
-
-                        // Afficher le formulaire de commande
-                        formCommande.style.display = "block";
-
-                        // Ajouter un gestionnaire d'événements pour le lien "Modifier une adresse"
-                        document.getElementById("modifierAdresse").addEventListener("click", function(event) {
-                            event.preventDefault();
-
-                            // Remplir le formulaire d'adresse avec les données actuelles
-                            document.querySelector("#formAdresse [name=prenom]").value = prenom;
-                            document.querySelector("#formAdresse [name=nom]").value = nom;
-                            document.querySelector("#formAdresse [name=tel]").value = tel;
-                            document.querySelector("#formAdresse [name=email]").value = email;
-                            document.querySelector("#formAdresse [name=cdp]").value = cdp;
-                            document.querySelector("#formAdresse [name=ville]").value = ville;
-                            document.querySelector("#formAdresse [name=pays]").value = pays;
-                            document.querySelector("#formAdresse [name=numRue]").value = numRue;
-                            document.querySelector("#formAdresse [name=rue]").value = rue;
-                            document.querySelector("#formAdresse [name=societe]").value = societe;
-
-                            // Afficher le formulaire d'adresse
-                            formAdresse.style.display = "block";
-
-                            // Cacher la div de commande
-                            formCommande.style.display = "none";
-                        });
-                    });
-                });
-            </script>
 
 
-            <div class="form-Commande" id="commande">
-                <h2>Vos adresses</h2>
-                <!-- <div class="commande">
-            <input type="radio" checked>
-            <label for="adresse1">
-                <p><?= "$prenom $nom, $numRue $rue, $ville, $cdp, $pays" ?></p>
-            </label>
-            <p class="lien-adresse"><a href="#">Modifier une adresse</a></p>
-        </div> -->
-                <!-- 
-        <p><a href="#">Ajouter une nouvelle adresse</a></p> -->
 
-            </div>
 
-            <div class="separator"></div>
-            <h2 id="showPaiement">Mode de paiement</h2>
+
+
+
+    <div class="titreVerif">
+
+
+        <?php
+        echo "<div class='info-item'><strong>Prénom:</strong> " . $_POST["prenom"] . "</div>";
+        echo "<div class='info-item'><strong>Nom:</strong> " . $_POST["nom"] . "</div>";
+
+        // echo "<div class='info-item'><strong>E-mail:</strong> " . $_POST["email"] . "</div>";
+        // echo "<div class='info-item'><strong>Société:</strong> " . $_POST["societe"] . "</div>";
+        // echo "<div class='info-item'><strong>Numéro de téléphone:</strong> " . $_POST["tel"] . "</div>";
+        echo "<div class='info-item'><strong>Adresse:</strong> " . $_POST["numRue"] . " " . $_POST["rue"] . "</div>";
+        echo "<div class='info-item'><strong>Code postal, Ville, Pays:</strong> " . $_POST["cdp"] . ", " . $_POST["ville"] . ", " . $_POST["pays"] . "</div>";
+        ?>
+    </div>
+
+    <div class="verif">
+
+        <div class="recapAdresse">
+
+
+        </div>
+
+        <div class="cart">
+            <table class="table">
+                <tr>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Sous total</th>
+                </tr>
+
+                <?php
+
+                $total = 0;
+                $fraisPort = 10;
+                if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
+                    foreach ($_SESSION['panier'] as $produit) {
+                        if (isset($produit['image']) && isset($produit['nom']) && isset($produit['prix']) && isset($produit['quantite'])) {
+                            echo '<tr>';
+                            echo '<td>';
+                            echo '<div class="cart-info">';
+                            echo '<img src="' . $produit['image'] . '">';
+                            echo '<div>';
+                            echo '<p>' . $produit['nom'] . '</p>';
+                            echo '<small>Prix: ' . $produit['prix'] . ' €</small><br>';
+                            echo '<a href="controller/supprimer.php?nom=' . $produit['nom'] . '">Supprimer</a>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</td>';
+
+                            // echo '<td>' .$sousTotal= ($produit['prix'] * $produit['quantite']) . ' €</td>';
+                            // echo '</tr>';
+                            $sousTotal = floatval($produit['prix']) * floatval($produit['quantite']);
+
+                            $total += $sousTotal; // Ajoutez le sous-total au total
+                            echo '<td>' . $produit['prix'] . ' €</td>';
+                            echo '<td><input type="number" value="' . $produit['quantite'] . '"></td>';
+                            echo '<td>' . $sousTotal . ' €</td>';
+                            echo '</tr>';
+                        }
+                        // Vérifiez si le total est inférieur à 50 euros
+                        // if ($total < 50) {
+                        //     $total += $fraisPort;
+                        // } else {
+                        //     $fraisPort = 0;
+                        // }
+                    }
+                }
+
+
+                ?>
+
+            </table>
+
+
 
         </div>
         <?php
         if (isset($_SESSION['cart'])) {
+
             foreach ($_SESSION['cart'] as $produit) {
-                $nomCommande[] = $produit['nom'];
-                $prix[] = $produit['prix'];
-                $quantite[] = $produit['quantite'];
+                if (isset($produit['nom']) && isset($produit['prix']) && isset($produit['quantite'])) {
+                    $nomCommande[] = $produit['nom'];
+                    $prix[] = $produit['prix'];
+                    $quantite[] = $produit['quantite'];
+                }
             }
             echo '<div class="recap">';
-            echo "<h2>Récapitulatif de commande</h2>";
+
 
             for ($i = 0; $i < count($nomCommande); $i++) {
                 $totalProduit = $prix[$i] * $quantite[$i];
@@ -253,150 +320,35 @@ include 'modele/ProduitsBDD.php';
                 return $p * $q;
             }, $prix, $quantite));
 
-            echo "<p><strong>Montant total de la commande:</strong> " . $montantTotal . " EUR</p>";
+            echo "<p><strong>Montant total de la commande:</strong> " . $montantTotal . " EUR</p>"; ?>
+            <div class="paiement">
+                <div class="form-container-achat">
+                    <form method='post'>
+                        <div id="paypal-button-container"></div>
 
-            echo "</div>";
-        }
-        ?>
+                        <script src="https://www.paypal.com/sdk/js?client-id=AVF-Rm38cZLM-9p7H_m-RR3cDm0xeo5_xBhDcLLvD58iWh63mZ8zMNVJ1rT63CTPNMDMzo2-0yELB_nC&currency=EUR"></script>
 
-        <script>
-            document.getElementById('show').addEventListener('click', function() {
-                var formAdresse = document.getElementById('formAdresse').style.display = 'block';
-            })
-            document.getElementById('showPaiement').addEventListener('click', function() {
-                document.getElementById('formAdresse').style.display = 'block';
-            })
-        </script>
-
-    </div>
-
-    <div class="container-achat">
-        <div class="col-2-achat">
-            <div class="form-container-achat">
-                <form method='post'>
-                    <div id="paypal-button-container"></div>
-                    <?php
-                    $order = [
-                        'purchase_units' => [
-                            [
-                                'amount' => [
-                                    'value' => "0.1", // Montant en euros
-                                    'currency_code' => 'EUR'
-                                ],
-                                'shipping' => [
-                                    'address' => [
-                                        'address_line_1' => "{$numRue} {$rue}",
-                                        'admin_area_2' => $ville,
-                                        'postal_code' => $cdp,
-                                        'country_code' => $pays,
-                                        'given_name' => $prenom,
-                                        'surname' => $nom
-                                    ]
-                                ],
-                                'item_list' => [
-                                    'items' => []
-                                ]
-                            ]
-                        ]
-                    ];
-
-                    for ($i = 0; $i < count($nomCommande); $i++) {
-                        $item_name = $nomCommande[$i];
-                        $item_prix = $prix[$i];
-                        $item_qte = $quantite[$i];
-
-                        $item = [
-                            'name' => $item_name,
-                            'unit_amount' => [
-                                'price' => $item_prix,
-                                'currency_code' => 'EUR'
-                            ],
-                            'quantity' => $item_qte
-                        ];
-
-                        // Utilisez [] pour ajouter un élément à la liste d'articles
-                        $order['purchase_units'][0]['item_list']['items'][] = $item;
-                    }
-
-                    // Convertissez le tableau en JSON à la fin
-                    $order = json_encode($order);
+                        <script>
+                            paypal.Buttons().render('#paypal-button-container');
+                        </script>
 
 
+
+
+                    </form>
+                </div>
+            </div><?php
+
+                    echo "</div>";
+                }
                     ?>
-                    <script src="https://www.paypal.com/sdk/js?client-id=AVb3qzYweFsCxGFdimPz957tf1ZdRwteKvaplwAqGdQUP_DsFPUC9TfR7i9SwkCv1-R79UWA_C0ThDi4&currency=EUR"></script>
-
-                    <script>
-                        paypal.Buttons({
-                            createOrder: function(data, actions) {
-                                return actions.order.create(<?= $order ?>);
-                            },
-
-                            // JavaScript (Front-end)
-                            onApprove: function(data, actions) {
-                                return actions.order.capture().then(function(details) {
-                                    // Afficher les détails de la transaction dans la console
-                                    console.log(details);
-
-                                    // Récupérer les détails de la commande
-                                    var nomCommande = [];
-                                    var prix = [];
-                                    var quantite = [];
-
-                                    <?php
-                                    // PHP (Back-end)
-                                    $cart = $_SESSION['cart'];
-                                    foreach ($cart as $produit) {
-                                        $nomCommande = $produit['nom'];
-                                        $quantite = $produit['quantite'];
-                                        $prix = $produit['prix'];
-                                        $total = $quantite * $prix;
-
-                                        // Ici, vous pouvez stocker ces valeurs dans des tableaux JavaScript
-                                        echo "nomCommande.push('" . $nomCommande . "');\n";
-                                        echo "quantite.push(" . $quantite . ");\n";
-                                        echo "prix.push(" . $prix . ");\n";
-
-                                        // ... Autres opérations de base de données
-                                    }
-                                    ?>
-
-                                    // Maintenant, vous pouvez envoyer ces données au serveur via une requête AJAX
-                                    var xhr = new XMLHttpRequest();
-                                    xhr.open('POST', '../controller/ajout_commandes.php', true);
-                                    xhr.setRequestHeader('Content-Type', 'application/json');
-
-                                    var dataToSend = {
-                                        nomCommande: nomCommande,
-                                        quantite: quantite,
-                                        prix: prix
-
-                                    };
-
-
-                                    xhr.send(JSON.stringify(dataToSend));
-
-
-                                    alert(details.payer.name.given_name + ' ' + details.payer.name.surname + ', votre transaction est effectuée. Vous allez recevoir une notification très bientôt lorsque nous validons votre paiement.');
-                                });
-                            },
-
-                            onCancel: function(data) {
-                                alert("Transaction annulée !");
-                            }
 
 
 
 
-                        }).render('#paypal-button-container');
-                    </script>
-
-
-
-                    <button class='pay'><a href="../cart.php">Non, revenir au panier</a></button>
-                </form>
-            </div>
-        </div>
     </div>
+
+
 
 
 
