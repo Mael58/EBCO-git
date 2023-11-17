@@ -40,7 +40,7 @@ include 'modele/ProduitsBDD.php';
             const steps = document.querySelectorAll('.cart-item');
             const modifier = document.getElementById('modifier');
             const verif = document.getElementById('verif');
-            //const adresse = document.getElementById('adresseCommande');
+            const adresse = document.getElementById('adresseCommande');
 
 
 
