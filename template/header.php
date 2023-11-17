@@ -1,6 +1,7 @@
 <?php
 session_start();
-echo $_SESSION['username'];
+
+
 
 
 
@@ -62,13 +63,24 @@ $categoriesUniques = array_unique($categories);
 
             </div>
             <ul>
-                <li> <a href="cart.php"><img src="images/cart.png" width="30px" height="30px"> <span id="cart-count">0</span>
+                <li> <a href="cart.php"><img src="images/cart.png" width="30px" height="30px">
+                        <span id="cart-count">
+                            <?php
+
+                            if (isset($_SESSION['nombreTotalArticles'])) {
+                                echo max(0, $_SESSION['nombreTotalArticles']);
+                            } else {
+                                echo 0;
+                            }
+
+                            ?>
+                        </span>
                         <img src="images/menu.png" onclick="menutoggle()" class="menu-icon">Panier</a>
 
                 </li>
 
                 <?php if (!isset($_SESSION['username'])) {
-                    echo '<li><a href="compte.php"><img src="images/conn.png" width="30px" height="30px "> Connexion</a></li>';
+                    echo '<li><a href="compte.php"><img src="images/conn.png"  width="30px" height="30px"> Connexion</a></li>';
                 } ?>
 
 
@@ -129,21 +141,7 @@ $categoriesUniques = array_unique($categories);
                     <li><a href="contact.php">Contact</a></li>
 
 
-                    <?php
-                    if (isset($_SESSION['role'])) {
-                        if ($_SESSION['role'] === 'ADMINISTRATEUR' || $_SESSION['role'] === 'TECHNICIEN') {
-                            echo '<li> <form method="post">
-    <input type="submit" class="btn" name="sauvegarde" value="sauvegarde">
-</form></li>';
-                        }
-                    }
-                    if (isset($_POST['sauvegarde'])) {
 
-                        include 'controller/backup.php';
-
-                        echo "La sauvegarde de la base de données a été effectuée avec succès.";
-                    }
-                    ?>
                 </ul>
             </nav>
             <!-- <a href="cart.php"><img src="images/cart.png" width="30px" height="30px"></a>
@@ -164,19 +162,22 @@ $categoriesUniques = array_unique($categories);
             // Détruisez la session actuelle
 
             $username = $_SESSION['username'];
-            $panier = $_SESSION['panier'][$username];
 
 
-            // Stocker le panier dans un cookie
-            setcookie("panier-$username", serialize($panier), time() + 2592000);
 
+
+
+
+            $cookie_expiration = time() + (7 * 24 * 60 * 60);
+            //setcookie("adresse-$username", json_encode($_SESSION['adresse']), $cookie_expiration, '/');
+            //setcookie("panier-$username", json_encode($_SESSION['panier']), $cookie_expiration, '/');
 
 
 
             session_destroy();
 
             // Redirigez l'utilisateur vers la page de connexion (ou une autre page de votre choix)
-            header("Location: index.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit;
         }
     }

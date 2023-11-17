@@ -1216,5 +1216,23 @@ h1 {
 }
 
 .verif {
-    display: flex;
+    display: none;
+
+}
+
+.info-commande {
+
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin: 20px;
+    width: 20%;
+
+
+}
+
+.modifier {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+
 }

@@ -1,5 +1,9 @@
 <?php
-include 'template/header.php' ?>
+include 'template/header.php';
+
+
+
+?>
 
 
 
@@ -18,7 +22,9 @@ include 'template/header.php' ?>
         $total = 0;
         $fraisPort = 10;
         if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
+
             foreach ($_SESSION['panier'] as $produit) {
+
                 if (isset($produit['image']) && isset($produit['nom']) && isset($produit['prix']) && isset($produit['quantite'])) {
                     echo '<tr>';
                     echo '<td>';
@@ -31,7 +37,8 @@ include 'template/header.php' ?>
                     echo '</div>';
                     echo '</div>';
                     echo '</td>';
-                    echo '<td><input type="number" value="' . $produit['quantite'] . '"></td>';
+                    //echo '<td><input type="number" value="' . $produit['quantite'] . '"></td>';
+                    echo '<td><input type="number" min="1" value="' . $produit['quantite'] . '" id="quantite-' . $produit['nom'] . '" data-prix="' . $produit['prix'] . '" onchange="updateQuantitePrix(this, \'' . $produit['nom'] . '\',\'' . $produit['prix'] . '\')"></td>';
                     // echo '<td>' .$sousTotal= ($produit['prix'] * $produit['quantite']) . ' €</td>';
                     // echo '</tr>';
                     $sousTotal = floatval($produit['prix']) * floatval($produit['quantite']);
@@ -57,6 +64,37 @@ include 'template/header.php' ?>
 
     </table>
 </div>
+<script>
+    function updateQuantitePrix(input, nomProduit, prix) {
+        var nouvelleQuantite = input.value;
+
+        // Utiliser AJAX pour envoyer les données au serveur
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "controller/update_panier.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    // Actualisez la quantité dans la partie visible du panier
+                    var sousTotalCell = document.getElementById('quantite-' + nomProduit).parentNode.nextElementSibling;
+                    sousTotalCell.innerHTML = response.nouveauSousTotal + ' €';
+
+
+
+                    // Vous pouvez également mettre à jour d'autres éléments si nécessaire
+                } else {
+
+                }
+            }
+        };
+        console.log(nouvelleQuantite);
+        // Envoyer les données au serveur
+        var params = "nomProduit=" + encodeURIComponent(nomProduit) + "&nouvelleQuantite=" + encodeURIComponent(nouvelleQuantite) + "&prix=" + encodeURIComponent(prix);
+        xhr.send(params);
+
+    }
+</script>
 
 
 <div class="total-price">

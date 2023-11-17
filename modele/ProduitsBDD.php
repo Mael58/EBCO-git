@@ -64,7 +64,7 @@ class ProduitsBDD
                 }
             }
         }
-        $this->connexion($username, $pass);
+        // $this->connexion($username, $pass);
     }
 
     public function connexion($username, $pass)
@@ -79,37 +79,41 @@ class ProduitsBDD
         $checkUser->bindParam(":user", $this->username);
         $checkUser->bindParam(":pass", $hashedPassword);
         $checkUser->execute();
-        if ($checkUser->rowCount() == 1) {
-            $role = $checkUser->fetch();
-            $_SESSION['role'] = $role['role'];
+
+
+
+        // Envoyer une réponse JSON pour indiquer que la connexion a réussi
 
 
 
 
+        $_SESSION['username'] = $username;
 
 
 
 
+        // if (isset($_COOKIE['panier-' . $username])) {
+        //     // Désérialiser le panier depuis le cookie
+        //     $panierPrecedent = json_decode($_COOKIE['panier-' . $username], true);
 
-            // if (isset($_COOKIE['panier-' . $username])) {
-            //     // Désérialiser le panier depuis le cookie
-            //     $panierPrecedent = unserialize($_COOKIE['panier-' . $username]);
-
-            //     // Stocker le panier dans la session de l'utilisateur
-            //     $_SESSION['panier'][$username] = $panierPrecedent;
-            // }
-
+        //     // Stocker le panier dans la session de l'utilisateur
+        //     $_SESSION['username']['panier'] = $panierPrecedent;
+        // }
 
 
-            // Stockez les informations de session spécifiques à l'utilisateur, par exemple l'ID de l'utilisateur
-            $_SESSION['username'] = $username;
 
 
-            header("Location: " . $_SERVER['HTTP_REFERER']);
-            exit;
-        } else {
-            echo "Le nom d'utilisateur ou le mot de passe est incorrect.";
-        }
+        // Stockez les informations de session spécifiques à l'utilisateur, par exemple l'ID de l'utilisateur
+
+
+
+        // if (isset($_COOKIE['adresse-' . $username])) {
+        //     $user_data = json_decode($_COOKIE['adresse-' . $username], true);
+
+
+        //     $_SESSION['adresse'] = $user_data;
+        // }
+
         ob_end_flush();
     }
 
