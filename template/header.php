@@ -1,23 +1,6 @@
 <?php
 session_start();
 
-var_dump($_SESSION['adresse']);
-var_dump($_SESSION['adresseFacturation']);
-
-
-
-
-
-
-
-
-
-
-// Récupère le chemin absolu du fichier en cours d'exécution (header.php)
-
-
-
-
 
 
 ?>

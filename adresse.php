@@ -513,22 +513,20 @@ include 'modele/ProduitsBDD.php';
             }
             echo '<div class="recap">';
 
-            if (isset($nomCommande)) {
-                for ($i = 0; $i < count($nomCommande); $i++) {
-                    $totalProduit = $prix[$i] * $quantite[$i];
+            for ($i = 0; $i < count($nomCommande); $i++) {
+                $totalProduit = $prix[$i] * $quantite[$i];
 
-                    echo "<div class='produit-recap'>";
-                    echo "<p><strong>Produit:</strong> " . $nomCommande[$i] . "</p>";
-                    echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
-                    echo "<p><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
-                    echo "<p><strong>Total:</strong> " . $totalProduit . " EUR</p>";
-                    echo "</div>";
+                echo "<div class='produit-recap'>";
+                echo "<p><strong>Produit:</strong> " . $nomCommande[$i] . "</p>";
+                echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
+                echo "<p><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
+                echo "<p><strong>Total:</strong> " . $totalProduit . " EUR</p>";
+                echo "</div>";
 
-                    $montantTotal = array_sum(array_map(function ($p, $q) {
-                        return $p * $q;
-                    }, $prix, $quantite));
-                    echo "<p><strong>Montant total de la commande:</strong> " . $montantTotal . " EUR</p>";
-                }
+                $montantTotal = array_sum(array_map(function ($p, $q) {
+                    return $p * $q;
+                }, $prix, $quantite));
+                echo "<p><strong>Montant total de la commande:</strong> " . $montantTotal . " EUR</p>";
             }
 
 

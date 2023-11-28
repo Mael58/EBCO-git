@@ -13,4 +13,7 @@ if (isset($_GET['nom']) && isset($_SESSION['panier'])) {
     }
 }
 
-header('Location: ../cart.php');
+//header('Location: ../cart.php');
+echo '<script>
+window.history.back();
+</script>';

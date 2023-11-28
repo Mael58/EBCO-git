@@ -41,7 +41,7 @@ try {
 $sqlQuery = "SELECT COUNT(*) FROM clients WHERE tel = ?";
 $stmt = $pdo->prepare($sqlQuery);
 
-if ($stmt->execute([$tel])) {
+if ($stmt->execute([$telLivraison])) {
     $row = $stmt->fetchColumn();
 
     if ($row > 0) {

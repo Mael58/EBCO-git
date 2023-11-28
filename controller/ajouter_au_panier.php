@@ -17,7 +17,7 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
     );
 
     array_push($_SESSION['panier'], $produit);
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    //header('Location: ' . $_SERVER['HTTP_REFERER']);
 } else {
 
     if (isset($_SESSION['panier']) && is_array($_SESSION['panier']) && count($_SESSION['panier']) > 0) {
@@ -35,7 +35,7 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
 }
 
 
-header('Location: ' . $_SERVER['HTTP_REFERER']);
+
 
 
 // Calculer et stocker le nombre total d'articles dans le panier global
@@ -47,3 +47,6 @@ $_SESSION['nombreTotalArticles'] = $nombreTotalArticles;
 
 // Afficher le nombre total d'articles dans le panier global
 echo $nombreTotalArticles;
+echo '<script>
+window.history.back();
+</script>';
