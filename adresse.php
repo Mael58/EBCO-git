@@ -1,6 +1,7 @@
 <?php include 'template/header.php';
 ob_start();
 include 'modele/ProduitsBDD.php';
+
 ?>
 
 <body>
@@ -30,154 +31,6 @@ include 'modele/ProduitsBDD.php';
         </div>
     </div>
 
-
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const loginForm = document.getElementById("LoginForm");
-            const regForm = document.getElementById("RegForm");
-            const formAdresse = document.getElementById("formAdresse");
-            const steps = document.querySelectorAll('.cart-item');
-            const modifier = document.getElementById('modifier');
-            const verif = document.getElementById('verif');
-            const adresse = document.getElementById('adresseCommande');
-
-
-
-
-            const loginButton = document.getElementById('bouton');
-            loginButton.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent the form from submitting
-
-                makeAjaxRequest();
-
-            });
-
-
-            function makeAjaxRequest() {
-                var username = document.getElementById('username2').value;
-                var password = document.getElementById('password2').value;
-                var url = 'traitement.php?username2=' + encodeURIComponent(username) + '&password2=' + encodeURIComponent(password);
-
-
-                fetch(url, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        }
-                    })
-                    .then(function(response) {
-
-                        return response.json(); // Attend une réponse JSON
-                    })
-                    .then(function(data) {
-
-
-                        location.reload();
-                    })
-
-
-            }
-
-
-
-
-
-
-
-            modifier.addEventListener("click", function() {
-                handleLogin();
-            });
-
-
-
-            function handleLogin() {
-
-                formAdresse.style.display = "flex";
-                loginForm.style.display = "none";
-                regForm.style.display = "none";
-                verif.style.display = "none";
-                adresse.style.display = "none";
-
-
-                updateCompletedSteps(3);
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-            const btnAdresse = document.getElementById('btnAdresse');
-            btnAdresse.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent the form from submitting
-                handleAddAdresse();
-            });
-
-
-
-
-
-            function handleAddAdresse() {
-
-                formAdresse.style.display = "none";
-                adresse.style.display = "flex";
-                verif.style.display = "flex";
-                updateCompletedSteps(4);
-            }
-
-            function updateCompletedSteps(stepNumber) {
-                steps.forEach(step => {
-                    const currentStep = parseInt(step.getAttribute('data-step'));
-                    step.classList.toggle('completed', currentStep <= stepNumber);
-                });
-            }
-        });
-    </script>
-
-    <?php
-    if (isset($_SESSION['username'])) {
-        echo '<script>';
-        echo 'document.addEventListener("DOMContentLoaded", function() {';
-        echo '    const loginForm = document.getElementById("LoginForm");';
-        echo '    const regForm = document.getElementById("RegForm");';
-        echo '    const formAdresse = document.getElementById("formAdresse");';
-        echo '    const steps = document.querySelectorAll(".cart-item");';
-        echo '    const modifier = document.getElementById("modifier");';
-        echo '    const verif = document.getElementById("verif");';
-        echo '    const adresse = document.getElementById("adresseCommande");';
-        echo '';
-        echo '    function updateCompletedSteps(stepNumber) {';
-        echo '        steps.forEach(step => {';
-        echo '            const currentStep = parseInt(step.getAttribute("data-step"));';
-        echo '            step.classList.toggle("completed", currentStep <= stepNumber);';
-        echo '        });';
-        echo '    }';
-        echo '';
-        echo '    function handleLogin() {';
-        echo '        formAdresse.style.display = "flex";';
-        echo '        loginForm.style.display = "none";';
-        echo '        regForm.style.display = "none";';
-        echo '        verif.style.display = "none";';
-        echo '         adresse.style.display = "none";';
-        echo '        updateCompletedSteps(4);';
-        echo '    }';
-        echo '';
-        echo '    handleLogin();';
-
-        echo '});';
-        echo '</script>';
-    }
-    ?>
 
 
 
@@ -224,15 +77,11 @@ include 'modele/ProduitsBDD.php';
 
 
 
-    // if (isset($_POST['username2']) && isset($_POST['password2'])) {
-    //     $username2 = $_POST['username2'];
-    //     $password2 = $_POST['password2'];
-    //     $bdd = new ProduitsBDD;
-    //     $bdd->connexion($username2, $password2);
-    // }
+
 
 
     ?>
+
 
 
 
@@ -247,10 +96,10 @@ include 'modele/ProduitsBDD.php';
                         <h2>1.Nom complet</h2>
                         <div class="div-nom">
                             <label for="prenom">Prénom*</label>
-                            <input type="text" name="prenom" placeholder="Prénom">
+                            <input type="text" name="prenom" placeholder="Prénom" value="<?php echo isset($_SESSION['adresse']['prenom']) ? $_SESSION['adresse']['prenom'] : '';  ?>">
 
                             <label for="nom">nom*</label>
-                            <input type="text" name="nom" placeholder="Nom">
+                            <input type="text" name="nom" placeholder="Nom" value="<?php echo isset($_SESSION['adresse']['nom']) ? $_SESSION['adresse']['nom'] : '';  ?>">
                         </div>
 
                     </section>
@@ -258,13 +107,13 @@ include 'modele/ProduitsBDD.php';
                         <h2>2.Informations personnelles</h2>
 
                         <label for="mail">E-mail*</label>
-                        <input type="email" name="email" placeholder="Email">
+                        <input type="email" name="email" placeholder="Email" value="<?php echo isset($_SESSION['adresse']['email']) ? $_SESSION['adresse']['email'] : '';  ?>">
 
                         <label for="societe">Société</label>
-                        <input type="text" name="societe" placeholder="Votre société pour qui vous achetez">
+                        <input type="text" name="societe" placeholder="Votre société pour qui vous achetez" value="<?php echo isset($_SESSION['adresse']['societe']) ? $_SESSION['adresse']['societe'] : '';  ?>">
 
                         <label for="tel">Numéro de téléphone</label>
-                        <input type="tel" name="tel" placeholder="Numéro de téléphone">
+                        <input type="tel" name="tel" placeholder="Numéro de téléphone" value="<?php echo isset($_SESSION['adresse']['tel']) ? $_SESSION['adresse']['tel'] : '';  ?>">
 
                     </section>
 
@@ -273,100 +122,156 @@ include 'modele/ProduitsBDD.php';
 
 
                         <label for="numRue">Numéro de rue*</label>
-                        <input type="text" name="numRue" placeholder="Numéro de la rue">
+                        <input type="text" name="numRue" placeholder="Numéro de la rue" value="<?php echo isset($_SESSION['adresse']['numRue']) ? $_SESSION['adresse']['numRue'] : '';  ?>">
 
                         <label for="rue">Rue*</label>
-                        <input type="text" name="rue" placeholder="Nom de la rue">
+                        <input type="text" name="rue" placeholder="Nom de la rue" value="<?php echo isset($_SESSION['adresse']['rue']) ? $_SESSION['adresse']['rue'] : '';  ?>">
 
                         <label for="cdp">Code postal*</label>
-                        <input type="number" name="cdp" placeholder="Code postal">
+                        <input type="number" name="cdp" placeholder="Code postal" value="<?php echo isset($_SESSION['adresse']['cdp']) ? $_SESSION['adresse']['cdp'] : '';  ?>">
 
                         <label for="ville">Ville*</label>
-                        <input type="text" name="ville" placeholder="Ville">
+                        <input type="text" name="ville" placeholder="Ville" value="<?php echo isset($_SESSION['adresse']['ville']) ? $_SESSION['adresse']['ville'] : '';  ?>">
 
                         <label for="pays">Pays</label>
                         <select name="pays">
-                            <option value="FR" selected>France</option>
-                            <option value="BE">Belgique</option>
-                            <option value="CH">Suisse</option>
-                            <option value="IT">Italie</option>
-                            <option value="ES">Espagne</option>
-                            <option value="">Autre</option>
+                            <option value="FR" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'FR') ? 'selected' : ''; ?>>France</option>
+                            <option value="BE" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'BE') ? 'selected' : ''; ?>>Belgique</option>
+                            <option value="CH" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'CH') ? 'selected' : ''; ?>>Suisse</option>
+                            <option value="IT" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'IT') ? 'selected' : ''; ?>>Italie</option>
+                            <option value="ES" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'ES') ? 'selected' : ''; ?>>Espagne</option>
+                            <option value="" <?php echo (empty($_SESSION['adresse']['pays'])) ? 'selected' : ''; ?>>Autre</option>
 
                     </section>
-                    <input type="submit" class="btn" id="btnAdresse" value="Ajouter votre adresse">
+                    <input type="submit" class="btn" id="btnAdresse" <?php if (isset($_SESSION['adresse'])) {
+                                                                            echo 'value="continuer"';
+                                                                        } else {
+                                                                            echo 'value="Ajouter votre adresse"';
+                                                                        } ?>>
                 </form>
             </div>
         </div>
     </div>
 
-    <?php
-    echo var_dump($_SESSION['adresse']);
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Récupérer les valeurs des champs du formulaire
-        $prenom = isset($_POST["prenom"]) ? $_POST["prenom"] : "";
-        $nom = isset($_POST["nom"]) ? $_POST["nom"] : "";
-        $email = isset($_POST["email"]) ? $_POST["email"] : "";
-        $societe = isset($_POST["societe"]) ? $_POST["societe"] : "";
-        $tel = isset($_POST["tel"]) ? $_POST["tel"] : "";
-        $numRue = isset($_POST["numRue"]) ? $_POST["numRue"] : "";
-        $rue = isset($_POST["rue"]) ? $_POST["rue"] : "";
-        $cdp = isset($_POST["cdp"]) ? $_POST["cdp"] : "";
-        $ville = isset($_POST["ville"]) ? $_POST["ville"] : "";
-        $pays = isset($_POST["pays"]) ? $_POST["pays"] : "";
-        if (isset($_SESSION['adresse'])) {
-            // Mettre à jour uniquement les champs non vides
-            $_SESSION['adresse']['prenom'] = !empty($prenom) ? $prenom : $_SESSION['adresse']['prenom'];
-            $_SESSION['adresse']['nom'] = !empty($nom) ? $nom : $_SESSION['adresse']['nom'];
-            $_SESSION['adresse']['email'] = !empty($email) ? $email : $_SESSION['adresse']['email'];
-            $_SESSION['adresse']['societe'] = !empty($societe) ? $societe : $_SESSION['adresse']['societe'];
-            $_SESSION['adresse']['tel'] = !empty($tel) ? $tel : $_SESSION['adresse']['tel'];
-            $_SESSION['adresse']['numRue'] = !empty($numRue) ? $numRue : $_SESSION['adresse']['numRue'];
-            $_SESSION['adresse']['rue'] = !empty($rue) ? $rue : $_SESSION['adresse']['rue'];
-            $_SESSION['adresse']['cdp'] = !empty($cdp) ? $cdp : $_SESSION['adresse']['cdp'];
-            $_SESSION['adresse']['ville'] = !empty($ville) ? $ville : $_SESSION['adresse']['ville'];
-            $_SESSION['adresse']['pays'] = !empty($pays) ? $pays : $_SESSION['adresse']['pays'];
-        } else {
-            // Si $_SESSION['adresse'] n'existe pas, la créer
-            $_SESSION['adresse'] = [
-                'prenom' => $prenom,
-                'nom' => $nom,
-                'email' => $email,
-                'societe' => $societe,
-                'tel' => $tel,
-                'numRue' => $numRue,
-                'rue' => $rue,
-                'cdp' => $cdp,
-                'ville' => $ville,
-                'pays' => $pays
-            ];
-        }
-    }
-
-    if (isset($_SESSION['adresse'])) {
-
-        echo '<div id="adresseCommande" class="info-commande">';
-        echo "Prénom: " . $_SESSION['adresse']['prenom'] . "<br>";
-        echo "Nom: " . $_SESSION['adresse']['nom'] . "<br>";
-        echo "Email: " . $_SESSION['adresse']['email'] . "<br>";
-        echo "Société: " . $_SESSION['adresse']['societe'] . "<br>";
-        echo "Téléphone: " . $_SESSION['adresse']['tel'] . "<br>";
-        echo "Numéro de rue: " . $_SESSION['adresse']['numRue'] . " " . $_SESSION['adresse']['rue'] . "<br>";
-
-        echo "Code postal: " . $_SESSION['adresse']['cdp'] . "<br>";
-        echo "Ville: " . $_SESSION['adresse']['ville'] . "<br>";
-        echo "Pays: " . $_SESSION['adresse']['pays'] . "<br>";
-        echo  '<p id="modifier" class="modifier">modifier</p>';
-        echo '</div>';
-    }
-
-
-
-    ?>
 
 
 
 
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const loginForm = document.getElementById("LoginForm");
+            const regForm = document.getElementById("RegForm");
+            const formAdresse = document.getElementById("formAdresse");
+            const steps = document.querySelectorAll('.cart-item');
+            const modifier = document.getElementById('modifier');
+            const verif = document.getElementById('verif');
+            const adresse = document.getElementById('adresseCommande');
+
+            const loginButton = document.getElementById('bouton');
+            loginButton.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the form from submitting
+                makeAjaxRequest();
+            });
+
+            function makeAjaxRequest() {
+                var username = document.getElementById('username2').value;
+                var password = document.getElementById('password2').value;
+                var url = 'traitement.php?username2=' + encodeURIComponent(username) + '&password2=' + encodeURIComponent(password);
+
+                fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    })
+                    .then(function(response) {
+                        return response.json(); // Attend une réponse JSON
+                    })
+                    .then(function(data) {
+                        location.reload();
+                    });
+            }
+
+            // Uncomment the following lines if you want handleLogin to execute on page load
+            // handleLogin();
+            <?php
+            if (isset($_SESSION['username'])) {
+                echo 'handleLogin();';
+            }
+
+            ?>
+
+            // modifier.addEventListener("click", function() {
+            //     handleLogin();
+            // });
+
+            function handleLogin() {
+                formAdresse.style.display = "flex";
+                loginForm.style.display = "none";
+                regForm.style.display = "none";
+                verif.style.display = "none";
+                // adresse.style.display = "none";
+                updateCompletedSteps(3);
+            }
+
+            function handleAddAdresse() {
+                const prenom = document.querySelector('input[name="prenom"]').value;
+                const nom = document.querySelector('input[name="nom"]').value;
+                const email = document.querySelector('input[name="email"]').value;
+                const societe = document.querySelector('input[name="societe"]').value;
+                const tel = document.querySelector('input[name="tel"]').value;
+                const numRue = document.querySelector('input[name="numRue"]').value;
+                const rue = document.querySelector('input[name="rue"]').value;
+                const cdp = document.querySelector('input[name="cdp"]').value;
+                const ville = document.querySelector('input[name="ville"]').value;
+                const pays = document.querySelector('select[name="pays"]').value;
+
+                const formData = new FormData();
+                formData.append('prenom', prenom);
+                formData.append('nom', nom);
+                formData.append('email', email);
+                formData.append('societe', societe);
+                formData.append('tel', tel);
+                formData.append('numRue', numRue);
+                formData.append('rue', rue);
+                formData.append('cdp', cdp);
+                formData.append('ville', ville);
+                formData.append('pays', pays);
+
+                fetch('controller/formAdresse.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data); // Vous pouvez accéder aux données encodées en JSON ici
+                        // Traitez les données comme nécessaire
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors de l\'envoi de la requête AJAX:', error);
+                    });
+                formAdresse.style.display = "none";
+                // adresse.style.display = "flex";
+                verif.style.display = "flex";
+                updateCompletedSteps(4);
+            }
+
+            const btnAdresse = document.getElementById('btnAdresse');
+            btnAdresse.addEventListener('click', function(event) {
+                event.preventDefault();
+                handleAddAdresse();
+            });
+
+            function updateCompletedSteps(stepNumber) {
+                steps.forEach(step => {
+                    const currentStep = parseInt(step.getAttribute('data-step'));
+                    step.classList.toggle('completed', currentStep <= stepNumber);
+                });
+            }
+        });
+    </script>
 
 
 
@@ -471,9 +376,117 @@ include 'modele/ProduitsBDD.php';
                         <div id="paypal-button-container"></div>
 
                         <script src="https://www.paypal.com/sdk/js?client-id=AVF-Rm38cZLM-9p7H_m-RR3cDm0xeo5_xBhDcLLvD58iWh63mZ8zMNVJ1rT63CTPNMDMzo2-0yELB_nC&currency=EUR"></script>
+                        <?php
+                        $order = [
+                            'purchase_units' => [
+                                [
+                                    'amount' => [
+                                        'value' => "{$montantTotal}", // Montant en euros
+                                        'currency_code' => 'EUR'
+                                    ],
+                                    // 'shipping' => [
+                                    //     'address' => [
+                                    //         // 'address_line_1' => "{$_SESSION} {$rue}",
+                                    //         // 'admin_area_2' => $ville,
+                                    //         // 'postal_code' => $cdp,
+                                    //         // 'country_code' => $pays,
+                                    //         // 'given_name' => $prenom,
+                                    //         // 'surname' => $nom
+                                    //     ]
+                                    // ],
+                                    'item_list' => [
+                                        'items' => []
+                                    ]
+                                ]
+                            ]
+                        ];
+                        if (isset($nomCommande)) {
+                            for ($i = 0; $i < count($nomCommande); $i++) {
+                                $item_name = $nomCommande[$i];
+                                $item_prix = $prix[$i];
+                                $item_qte = $quantite[$i];
 
+                                $item = [
+                                    'name' => $item_name,
+                                    'unit_amount' => [
+                                        'price' => $item_prix,
+                                        'currency_code' => 'EUR'
+                                    ],
+                                    'quantity' => $item_qte
+                                ];
+
+                                // Utilisez [] pour ajouter un élément à la liste d'articles
+                                $order['purchase_units'][0]['item_list']['items'][] = $item;
+                            }
+                        }
+
+                        // Convertissez le tableau en JSON à la fin
+                        $order = json_encode($order);
+
+
+                        ?>
                         <script>
-                            paypal.Buttons().render('#paypal-button-container');
+                            paypal.Buttons({
+                                createOrder: function(data, actions) {
+                                    return actions.order.create(<?= $order ?>);
+                                },
+
+                                // JavaScript (Front-end)
+                                onApprove: function(data, actions) {
+                                    return actions.order.capture().then(function(details) {
+                                        // Afficher les détails de la transaction dans la console
+                                        console.log(details);
+
+                                        // Récupérer les détails de la commande
+                                        var nomCommande = [];
+                                        var prix = [];
+                                        var quantite = [];
+
+                                        <?php
+                                        // PHP (Back-end)
+                                        $cart = $_SESSION['cart'];
+                                        foreach ($cart as $produit) {
+                                            // Vérifier si les clés existent avant de les utiliser
+                                            $nomCommande = isset($produit['nom']) ? $produit['nom'] : '';
+                                            $quantite = isset($produit['quantite']) ? $produit['quantite'] : 0;
+                                            $prix = isset($produit['prix']) ? $produit['prix'] : 0;
+                                            $total = $quantite * $prix;
+
+                                            // Ici, vous pouvez stocker ces valeurs dans des tableaux JavaScript
+                                            echo "nomCommande.push('" . $nomCommande . "');\n";
+                                            echo "quantite.push(" . $quantite . ");\n";
+                                            echo "prix.push(" . $prix . ");\n";
+
+                                            // ... Autres opérations de base de données
+                                        }
+
+
+                                        ?>
+
+                                        // Maintenant, vous pouvez envoyer ces données au serveur via une requête AJAX
+                                        var xhr = new XMLHttpRequest();
+                                        xhr.open('POST', 'controller/ajout_commandes.php', true);
+                                        xhr.setRequestHeader('Content-Type', 'application/json');
+
+                                        var dataToSend = {
+                                            nomCommande: nomCommande,
+                                            quantite: quantite,
+                                            prix: prix
+
+                                        };
+
+
+                                        xhr.send(JSON.stringify(dataToSend));
+
+
+                                        alert(details.payer.name.given_name + ' ' + details.payer.name.surname + ', votre transaction est effectuée. Vous allez recevoir une notification très bientôt lorsque nous validons votre paiement.');
+                                    });
+                                },
+
+                                onCancel: function(data) {
+                                    alert("Transaction annulée !");
+                                }
+                            }).render('#paypal-button-container');
                         </script>
 
 
@@ -488,15 +501,6 @@ include 'modele/ProduitsBDD.php';
                     ?>
 
 
-
-
     </div>
-
-
-
-
-
-
-
 
     <?php include 'template/footer.html' ?>

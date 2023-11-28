@@ -5,6 +5,11 @@ session_start();
 
 
 
+
+
+
+
+
 // Récupère le chemin absolu du fichier en cours d'exécution (header.php)
 
 
@@ -144,15 +149,12 @@ $categoriesUniques = array_unique($categories);
 
                 </ul>
             </nav>
-            <!-- <a href="cart.php"><img src="images/cart.png" width="30px" height="30px"></a>
-            <span id="cart-count">0</span>
-            <img src="images/menu.png" onclick="menutoggle()" class="menu-icon"> -->
 
 
         </div>
     </div>
     <?php
-    // Démarrez la session
+
 
 
 
@@ -169,9 +171,11 @@ $categoriesUniques = array_unique($categories);
 
 
             $cookie_expiration = time() + (7 * 24 * 60 * 60);
-            //setcookie("adresse-$username", json_encode($_SESSION['adresse']), $cookie_expiration, '/');
-            //setcookie("panier-$username", json_encode($_SESSION['panier']), $cookie_expiration, '/');
+            setcookie("adresse-$username", json_encode($_SESSION['adresse']), $cookie_expiration, '/');
 
+
+
+            setcookie("panier-$username", json_encode($_SESSION['panier']), $cookie_expiration, '/');
 
 
             session_destroy();

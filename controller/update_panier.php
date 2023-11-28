@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$nouveauSousTotal = 0; // Définir la variable à une valeur par défaut
+$nouveauSousTotal = 0;
 
 
-// Récupérer les données envoyées par l'appel AJAX
+
 $nomProduit = isset($_POST["nomProduit"]) ? $_POST["nomProduit"] : "";
 $nouvelleQuantite = isset($_POST["nouvelleQuantite"]) ? $_POST["nouvelleQuantite"] : "";
 $prix = isset($_POST["prix"]) ? $_POST["prix"] : "";

@@ -92,27 +92,34 @@ class ProduitsBDD
 
 
 
-        // if (isset($_COOKIE['panier-' . $username])) {
-        //     // Désérialiser le panier depuis le cookie
-        //     $panierPrecedent = json_decode($_COOKIE['panier-' . $username], true);
+        if (isset($_COOKIE['panier-' . $username])) {
+            // Désérialiser le panier depuis le cookie
+            if (!isset($_SESSION['panier'])) {
+                $_SESSION['panier'] = array();
+            }
+            $panierPrecedent = json_decode($_COOKIE['panier-' . $username], true);
 
-        //     // Stocker le panier dans la session de l'utilisateur
-        //     $_SESSION['username']['panier'] = $panierPrecedent;
-        // }
-
-
-
-
-        // Stockez les informations de session spécifiques à l'utilisateur, par exemple l'ID de l'utilisateur
-
-
-
-        // if (isset($_COOKIE['adresse-' . $username])) {
-        //     $user_data = json_decode($_COOKIE['adresse-' . $username], true);
+            // Ajouter chaque produit du panier à $_SESSION['panier']
+            foreach ($panierPrecedent as $produit) {
+                $_SESSION['panier'][] = $produit;
+            }
+        }
 
 
-        //     $_SESSION['adresse'] = $user_data;
-        // }
+
+
+
+
+
+
+
+
+        if (isset($_COOKIE['adresse-' . $username])) {
+            $user_data = json_decode($_COOKIE['adresse-' . $username], true);
+
+
+            $_SESSION['adresse'] = $user_data;
+        }
 
         ob_end_flush();
     }

@@ -7,11 +7,7 @@ include 'modele/ProduitsBDD.php';
     <div class="row-2-usb">
         <h2>Câbles USB: </h2>
 
-        <!-- <p>Le composant FT232RL de FTDICHIP permet une connexion USB vers une liaison RS232 très rapide.<br>
-Une liaison série virtuelle ou une programmation utilisant la
-librairie DDL permet l'interfaçage aussi bien sous Windows,
-Mac ou Linux</p> 
-                 -->
+
         <select id="tri">
             <option>Trier par</option>
             <option class="prixCroissant">prix croissant</option>

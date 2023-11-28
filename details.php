@@ -36,23 +36,24 @@ if ($recipe) {
     $categorie = $recipe['categorie'];
     $prix = $recipe['prix'];
     $ref = $recipe['reference'];
-    $des = $recipe['description']; ?>
+    $des = $recipe['description'];
+    $lienDoc = $recipe['lienDoc']; ?>
 
 
     <div class="small-container single-product">
         <div class="row">
             <div class="col-2">
-                <img src="<?= $image ?>" width="100%" id="ProductImg">
+                <img class="imgDetail" src="<?= $image ?>" width="100%" id="ProductImg">
             </div>
             <div class="col-2">
                 <p>Accueil / <?= $des ?> / <?= $nom ?></p>
                 <h1><?= $nom ?></h1>
                 <h5><?= $ref ?></h5>
-                <p>Le composant FT232RL de FTDICHIP permet une
+                <!-- <p>Le composant FT232RL de FTDICHIP permet une
                     connexion USB vers une liaison <?= $nom ?> très rapide.<br>
                     Une liaison série virtuelle ou une programmation utilisant la
                     librairie DDL permet l'interfaçage aussi bien sous Windows,
-                    Mac ou Linux</p>
+                    Mac ou Linux</p> -->
                 <h4><?= $prix ?> €</h4>
                 <!-- 
             <select>
@@ -73,6 +74,8 @@ if ($recipe) {
                     <li>Connecteur: <?= $connecteur ?> </li>
                     <li>Debit: <?= $dataRate ?> </li>
                     <li>Longueur: <?= $longueur ?> </li>
+                    <li>Lien de la documentation: <a class="lienDoc" href="<?= $lienDoc ?>"><?= $lienDoc ?></a></li>
+
                 </ul>
                 <br>
 

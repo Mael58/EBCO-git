@@ -25,17 +25,18 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
         foreach ($_SESSION['panier'] as $produit) {
 
 
-            $_SESSION['username']['panier'][] = $produit;
+            $_SESSION['panier'][] = $produit;
         }
-        var_dump($_SESSION['username']['panier']);
+
 
 
         $_SESSION['panier'] = array();
     }
-
-
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
+
+
+header('Location: ' . $_SERVER['HTTP_REFERER']);
+
 
 // Calculer et stocker le nombre total d'articles dans le panier global
 $nombreTotalArticles = 0;

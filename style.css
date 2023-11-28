@@ -1236,3 +1236,14 @@ h1 {
     text-decoration: underline;
 
 }
+
+.lienDoc {
+
+    color: blue;
+}
+
+.imgDetail {
+    border: 1px solid rgb(0, 0, 0, 0.30);
+    border-radius: 15px;
+
+}
