@@ -8,6 +8,7 @@ if (isset($_GET['nom']) && isset($_SESSION['panier'])) {
         if ($produit['nom'] == $nomProduit) {
             $_SESSION['nombreTotalArticles'] -= $produit['quantite'];
             unset($_SESSION['panier'][$key]);
+            break;
         }
     }
 }

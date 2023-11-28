@@ -109,8 +109,13 @@ include 'template/header.php';
 </div>
 <div class="total-price">
 
+    <?php
+    if (!empty($_SESSION['panier'])) {
+        echo '<a href="adresse.php" class="btn">Passer la commande &#8594;</a>';
+    }
+    ?>
 
-    <a href="adresse.php" class="btn">Procéder au paiement &#8594;</a>
+
 
 </div>
 

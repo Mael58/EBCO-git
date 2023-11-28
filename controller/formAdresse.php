@@ -1,67 +1,97 @@
 <?php
 session_start();
 
-$response = array(); // Créez un tableau pour stocker les données à renvoyer
+$response = array();
 
-$prenom = isset($_POST["prenom"]) ? $_POST["prenom"] : "";
-$nom = isset($_POST["nom"]) ? $_POST["nom"] : "";
-$email = isset($_POST["email"]) ? $_POST["email"] : "";
-$societe = isset($_POST["societe"]) ? $_POST["societe"] : "";
-$tel = isset($_POST["tel"]) ? $_POST["tel"] : "";
-$numRue = isset($_POST["numRue"]) ? $_POST["numRue"] : "";
-$rue = isset($_POST["rue"]) ? $_POST["rue"] : "";
-$cdp = isset($_POST["cdp"]) ? $_POST["cdp"] : "";
-$ville = isset($_POST["ville"]) ? $_POST["ville"] : "";
-$pays = isset($_POST["pays"]) ? $_POST["pays"] : "";
+// Fonction pour récupérer les données du formulaire
+function getFormData($fieldName, $default = "")
+{
+    return isset($_POST[$fieldName]) ? $_POST[$fieldName] : $default;
+}
 
-$_SESSION['client'] = $societe . "-" . $prenom . " " . $nom;
+// Données de livraison
+$prenomLivraison = getFormData("prenomLivraison");
+$nomLivraison = getFormData("nomLivraison");
+$emailLivraison = getFormData("emailLivraison");
+$societeLivraison = getFormData("societeLivraison");
+$telLivraison = getFormData("telLivraison");
+$numRueLivraison = getFormData("numRueLivraison");
+$rueLivraison = getFormData("rueLivraison");
+$cdpLivraison = getFormData("cdpLivraison");
+$villeLivraison = getFormData("villeLivraison");
+$paysLivraison = getFormData("paysLivraison");
 
+// Données de facturation
+$prenomFacturation = getFormData("prenomFacturation");
+$nomFacturation = getFormData("nomFacturation");
+$emailFacturation = getFormData("emailFacturation");
+$societeFacturation = getFormData("societeFacturation");
+$telFacturation = getFormData("telFacturation");
+$numRueFacturation = getFormData("numRueFacturation");
+$rueFacturation = getFormData("rueFacturation");
+$cdpFacturation = getFormData("cdpFacturation");
+$villeFacturation = getFormData("villeFacturation");
+$paysFacturation = getFormData("paysFacturation");
+
+// Construction de la clé client
+$_SESSION['client'] = $societeLivraison . "-" . $prenomLivraison . " " . $nomLivraison;
+
+// Traitement des adresses de livraison et de facturation
+function updateAddress($type, &$sessionData)
+{
+    global ${"prenom$type"}, ${"nom$type"}, ${"email$type"}, ${"societe$type"}, ${"tel$type"}, ${"numRue$type"}, ${"rue$type"}, ${"cdp$type"}, ${"ville$type"}, ${"pays$type"};
+
+    $sessionData['prenom'] = !empty(${"prenom$type"}) ? ${"prenom$type"} : $sessionData['prenom'];
+    $sessionData['nom'] = !empty(${"nom$type"}) ? ${"nom$type"} : $sessionData['nom'];
+    $sessionData['email'] = !empty(${"email$type"}) ? ${"email$type"} : $sessionData['email'];
+    $sessionData['societe'] = !empty(${"societe$type"}) ? ${"societe$type"} : $sessionData['societe'];
+    $sessionData['tel'] = !empty(${"tel$type"}) ? ${"tel$type"} : $sessionData['tel'];
+    $sessionData['numRue'] = !empty(${"numRue$type"}) ? ${"numRue$type"} : $sessionData['numRue'];
+    $sessionData['rue'] = !empty(${"rue$type"}) ? ${"rue$type"} : $sessionData['rue'];
+    $sessionData['cdp'] = !empty(${"cdp$type"}) ? ${"cdp$type"} : $sessionData['cdp'];
+    $sessionData['ville'] = !empty(${"ville$type"}) ? ${"ville$type"} : $sessionData['ville'];
+    $sessionData['pays'] = !empty(${"pays$type"}) ? ${"pays$type"} : $sessionData['pays'];
+}
+
+// Adresse de livraison
 if (isset($_SESSION['adresse'])) {
-    // Mettre à jour uniquement les champs non vides
-    $_SESSION['adresse']['prenom'] = !empty($prenom) ? $prenom : $_SESSION['adresse']['prenom'];
-    $_SESSION['adresse']['nom'] = !empty($nom) ? $nom : $_SESSION['adresse']['nom'];
-    $_SESSION['adresse']['email'] = !empty($email) ? $email : $_SESSION['adresse']['email'];
-    $_SESSION['adresse']['societe'] = !empty($societe) ? $societe : $_SESSION['adresse']['societe'];
-    $_SESSION['adresse']['tel'] = !empty($tel) ? $tel : $_SESSION['adresse']['tel'];
-    $_SESSION['adresse']['numRue'] = !empty($numRue) ? $numRue : $_SESSION['adresse']['numRue'];
-    $_SESSION['adresse']['rue'] = !empty($rue) ? $rue : $_SESSION['adresse']['rue'];
-    $_SESSION['adresse']['cdp'] = !empty($cdp) ? $cdp : $_SESSION['adresse']['cdp'];
-    $_SESSION['adresse']['ville'] = !empty($ville) ? $ville : $_SESSION['adresse']['ville'];
-    $_SESSION['adresse']['pays'] = !empty($pays) ? $pays : $_SESSION['adresse']['pays'];
+    updateAddress("Livraison", $_SESSION['adresse']);
 } else {
     $_SESSION['adresse'] = [
-        'prenom' => $prenom,
-        'nom' => $nom,
-        'email' => $email,
-        'societe' => $societe,
-        'tel' => $tel,
-        'numRue' => $numRue,
-        'rue' => $rue,
-        'cdp' => $cdp,
-        'ville' => $ville,
-        'pays' => $pays
+        'prenom' => $prenomLivraison,
+        'nom' => $nomLivraison,
+        'email' => $emailLivraison,
+        'societe' => $societeLivraison,
+        'tel' => $telLivraison,
+        'numRue' => $numRueLivraison,
+        'rue' => $rueLivraison,
+        'cdp' => $cdpLivraison,
+        'ville' => $villeLivraison,
+        'pays' => $paysLivraison
     ];
 }
 
+// Adresse de facturation
+if (isset($_SESSION['adresseFacturation'])) {
+    updateAddress("Facturation", $_SESSION['adresseFacturation']);
+} else {
+    $_SESSION['adresseFacturation'] = [
+        'prenom' => $prenomFacturation,
+        'nom' => $nomFacturation,
+        'email' => $emailFacturation,
+        'societe' => $societeFacturation,
+        'tel' => $telFacturation,
+        'numRue' => $numRueFacturation,
+        'rue' => $rueFacturation,
+        'cdp' => $cdpFacturation,
+        'ville' => $villeFacturation,
+        'pays' => $paysFacturation
+    ];
+}
 
-// Vous pouvez également utiliser var_dump pour vérifier le contenu de la variable de session
-
-
-$response['prenom'] = $prenom;
-$response['nom'] = $nom;
-$response['email'] = $email;
-$response['societe'] = $societe;
-$response['tel'] = $tel;
-$response['numRue'] = $numRue;
-$response['rue'] = $rue;
-$response['cdp'] = $cdp;
-$response['ville'] = $ville;
-$response['pays'] = $pays;
-
-
-
-
-
+// Réponse JSON
+$response['livraison'] = $_SESSION['adresse'];
+$response['facturation'] = $_SESSION['adresseFacturation'];
 
 
 

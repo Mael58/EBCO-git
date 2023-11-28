@@ -37,7 +37,8 @@ if ($recipe) {
     $prix = $recipe['prix'];
     $ref = $recipe['reference'];
     $des = $recipe['description'];
-    $lienDoc = $recipe['lienDoc']; ?>
+    $lienDoc = $recipe['lienDoc'];
+    $lienDriver = $recipe['lienDriver']; ?>
 
 
     <div class="small-container single-product">
@@ -75,6 +76,7 @@ if ($recipe) {
                     <li>Debit: <?= $dataRate ?> </li>
                     <li>Longueur: <?= $longueur ?> </li>
                     <li>Lien de la documentation: <a class="lienDoc" href="<?= $lienDoc ?>"><?= $lienDoc ?></a></li>
+                    <li>Telecharger les drivers <a href="<?= $lienDriver ?>" class="btn">Driver.zip</a></li>
 
                 </ul>
                 <br>

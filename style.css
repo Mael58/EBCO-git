@@ -1010,6 +1010,7 @@ h1 {
     padding-right: 25px;
     padding-bottom: 25px;
     display: none;
+    justify-content: center;
 
 
 
@@ -1246,4 +1247,26 @@ h1 {
     border: 1px solid rgb(0, 0, 0, 0.30);
     border-radius: 15px;
 
+}
+
+.container-facturation {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    display: none;
+    justify-content: center;
+
+}
+
+.livraison {
+    margin-right: 5px;
+    width: 30px;
+
+}
+
+.livraison-container {
+    display: flex;
+    align-items: center;
 }

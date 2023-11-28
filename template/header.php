@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+var_dump($_SESSION['adresse']);
+var_dump($_SESSION['adresseFacturation']);
+
 
 
 
@@ -172,7 +175,7 @@ $categoriesUniques = array_unique($categories);
 
             $cookie_expiration = time() + (7 * 24 * 60 * 60);
             setcookie("adresse-$username", json_encode($_SESSION['adresse']), $cookie_expiration, '/');
-
+            setcookie("adresseFacturation-$username", json_encode($_SESSION['adresseFacturation']), $cookie_expiration, '/');
 
 
             setcookie("panier-$username", json_encode($_SESSION['panier']), $cookie_expiration, '/');

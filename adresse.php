@@ -87,9 +87,10 @@ include 'modele/ProduitsBDD.php';
 
 
     <div class="container-achat" id="formAdresse">
-        <h2 id="show">Adresse de livraison</h2>
+
         <div class="col-2-achat">
             <div class="form-container-achat">
+                <h2 id="show">Adresse de livraison</h2>
                 <form method='POST'>
                     <legend>Merci d'inscrire vos informations de livraison</legend>
                     <section class="section-nom">
@@ -135,11 +136,11 @@ include 'modele/ProduitsBDD.php';
 
                         <label for="pays">Pays</label>
                         <select name="pays">
-                            <option value="FR" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'FR') ? 'selected' : ''; ?>>France</option>
-                            <option value="BE" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'BE') ? 'selected' : ''; ?>>Belgique</option>
-                            <option value="CH" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'CH') ? 'selected' : ''; ?>>Suisse</option>
-                            <option value="IT" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'IT') ? 'selected' : ''; ?>>Italie</option>
-                            <option value="ES" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'ES') ? 'selected' : ''; ?>>Espagne</option>
+                            <option value="France" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'FR') ? 'selected' : ''; ?>>France</option>
+                            <option value="Belgique" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'BE') ? 'selected' : ''; ?>>Belgique</option>
+                            <option value="Suisse" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'CH') ? 'selected' : ''; ?>>Suisse</option>
+                            <option value="Italie" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'IT') ? 'selected' : ''; ?>>Italie</option>
+                            <option value="Espagne" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'ES') ? 'selected' : ''; ?>>Espagne</option>
                             <option value="" <?php echo (empty($_SESSION['adresse']['pays'])) ? 'selected' : ''; ?>>Autre</option>
 
                     </section>
@@ -150,9 +151,90 @@ include 'modele/ProduitsBDD.php';
                                                                         } ?>>
                 </form>
             </div>
+            <div class="livraison-container">
+                <input type="checkbox" name="livraison" id="livraison" class="livraison" checked>
+                <label for="livraison">Utiliser l'adresse de livraison comme l'adresse de facturation</label>
+            </div>
+
+
+
         </div>
+
     </div>
 
+
+
+
+
+
+
+    <div class="container-facturation" id="container-facturation">
+
+        <div class="col-2-achat">
+            <div class="form-container-achat">
+                <h2 class="titre" id="show">Adresse de facturation</h2>
+                <form method='POST'>
+                    <legend>Merci d'inscrire vos informations de livraison</legend>
+                    <section class="section-nom">
+                        <h2>1.Nom complet</h2>
+                        <div class="div-nom">
+                            <label for="prenom">Prénom*</label>
+                            <input type="text" name="prenom" placeholder="Prénom" value="<?php echo isset($_SESSION['adresseFacturation']['prenom']) ? $_SESSION['adresseFacturation']['prenom'] : '';  ?>">
+
+                            <label for="nom">nom*</label>
+                            <input type="text" name="nom" placeholder="Nom" value="<?php echo isset($_SESSION['adresseFacturation']['nom']) ? $_SESSION['adresseFacturation']['nom'] : '';  ?>">
+                        </div>
+
+                    </section>
+                    <section class="info">
+                        <h2>2.Informations personnelles</h2>
+
+                        <label for="mail">E-mail*</label>
+                        <input type="email" name="email" placeholder="Email" value="<?php echo isset($_SESSION['adresseFacturation']['email']) ? $_SESSION['adresseFacturation']['email'] : '';  ?>">
+
+                        <label for="societe">Société</label>
+                        <input type="text" name="societe" placeholder="Votre société pour qui vous achetez" value="<?php echo isset($_SESSION['adresseFacturation']['societe']) ? $_SESSION['adresseFacturation']['societe'] : '';  ?>">
+
+                        <label for="tel">Numéro de téléphone</label>
+                        <input type="tel" name="tel" placeholder="Numéro de téléphone" value="<?php echo isset($_SESSION['adresseFacturation']['tel']) ? $_SESSION['adresseFacturation']['tel'] : '';  ?>">
+
+                    </section>
+
+                    <section class="adresse">
+                        <h2>3.Adresse</h2>
+
+
+                        <label for="numRue">Numéro de rue*</label>
+                        <input type="text" name="numRue" placeholder="Numéro de la rue" value="<?php echo isset($_SESSION['adresseFacturation']['numRue']) ? $_SESSION['adresseFacturation']['numRue'] : '';  ?>">
+
+                        <label for="rue">Rue*</label>
+                        <input type="text" name="rue" placeholder="Nom de la rue" value="<?php echo isset($_SESSION['adresseFacturation']['rue']) ? $_SESSION['adresseFacturation']['rue'] : '';  ?>">
+
+                        <label for="cdp">Code postal*</label>
+                        <input type="number" name="cdp" placeholder="Code postal" value="<?php echo isset($_SESSION['adresseFacturation']['cdp']) ? $_SESSION['adresseFacturation']['cdp'] : '';  ?>">
+
+                        <label for="ville">Ville*</label>
+                        <input type="text" name="ville" placeholder="Ville" value="<?php echo isset($_SESSION['adresseFacturation']['ville']) ? $_SESSION['adresseFacturation']['ville'] : '';  ?>">
+
+                        <label for="pays">Pays</label>
+                        <select name="pays">
+                            <option value="France" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'FR') ? 'selected' : ''; ?>>France</option>
+                            <option value="Belgique" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'BE') ? 'selected' : ''; ?>>Belgique</option>
+                            <option value="Suisse" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'CH') ? 'selected' : ''; ?>>Suisse</option>
+                            <option value="Italie" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'IT') ? 'selected' : ''; ?>>Italie</option>
+                            <option value="Espagne" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'ES') ? 'selected' : ''; ?>>Espagne</option>
+                            <option value="" <?php echo (empty($_SESSION['adresseFacturation']['pays'])) ? 'selected' : ''; ?>>Autre</option>
+
+                    </section>
+                    <input type="submit" class="btn" id="btnLivraison" <?php if (isset($_SESSION['adresse de facturation '])) {
+                                                                            echo 'value="continuer"';
+                                                                        } else {
+                                                                            echo 'value="Ajouter votre adresse de facturation"';
+                                                                        } ?>>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -167,6 +249,9 @@ include 'modele/ProduitsBDD.php';
             const steps = document.querySelectorAll('.cart-item');
             const modifier = document.getElementById('modifier');
             const verif = document.getElementById('verif');
+            const checkbox = document.getElementById("livraison");
+            const facturation = document.getElementById("container-facturation");
+            const boutton = document.getElementById("btnAdresse");
             const adresse = document.getElementById('adresseCommande');
 
             const loginButton = document.getElementById('bouton');
@@ -194,8 +279,7 @@ include 'modele/ProduitsBDD.php';
                     });
             }
 
-            // Uncomment the following lines if you want handleLogin to execute on page load
-            // handleLogin();
+
             <?php
             if (isset($_SESSION['username'])) {
                 echo 'handleLogin();';
@@ -217,28 +301,63 @@ include 'modele/ProduitsBDD.php';
             }
 
             function handleAddAdresse() {
-                const prenom = document.querySelector('input[name="prenom"]').value;
-                const nom = document.querySelector('input[name="nom"]').value;
-                const email = document.querySelector('input[name="email"]').value;
-                const societe = document.querySelector('input[name="societe"]').value;
-                const tel = document.querySelector('input[name="tel"]').value;
-                const numRue = document.querySelector('input[name="numRue"]').value;
-                const rue = document.querySelector('input[name="rue"]').value;
-                const cdp = document.querySelector('input[name="cdp"]').value;
-                const ville = document.querySelector('input[name="ville"]').value;
-                const pays = document.querySelector('select[name="pays"]').value;
+
+
+                const prenomLivraison = document.querySelector('#formAdresse input[name="prenom"]').value;
+                const nomLivraison = document.querySelector('#formAdresse input[name="nom"]').value
+                const emailLivraison = document.querySelector('#formAdresse input[name="email"]').value;
+                const societeLivraison = document.querySelector('#formAdresse input[name="societe"]').value;
+                const telLivraison = document.querySelector('#formAdresse input[name="tel"]').value;
+                const numRueLivraison = document.querySelector('#formAdresse input[name="numRue"]').value;
+                const rueLivraison = document.querySelector('#formAdresse input[name="rue"]').value;
+                const cdpLivraison = document.querySelector('#formAdresse input[name="cdp"]').value;
+                const villeLivraison = document.querySelector('#formAdresse input[name="ville"]').value;
+                const paysLivraison = document.querySelector('#formAdresse select[name="pays"]').value;
+
+                const prenomFacturation = document.querySelector('#container-facturation input[name="prenom"]').value;
+                const nomFacturation = document.querySelector('#container-facturation input[name="nom"]').value;
+                const emailFacturation = document.querySelector('#container-facturation input[name="email"]').value;
+                const societeFacturation = document.querySelector('#formAdresse input[name="societe"]').value;
+                const telFacturation = document.querySelector('#formAdresse input[name="tel"]').value;
+                const numRueFacturation = document.querySelector('#formAdresse input[name="numRue"]').value;
+                const rueFacturation = document.querySelector('#formAdresse input[name="rue"]').value;
+                const cdpFacturation = document.querySelector('#formAdresse input[name="cdp"]').value;
+                const villeFacturation = document.querySelector('#formAdresse input[name="ville"]').value;
+                const paysFacturation = document.querySelector('#formAdresse select[name="pays"]').value;
+
+
+
+
 
                 const formData = new FormData();
-                formData.append('prenom', prenom);
-                formData.append('nom', nom);
-                formData.append('email', email);
-                formData.append('societe', societe);
-                formData.append('tel', tel);
-                formData.append('numRue', numRue);
-                formData.append('rue', rue);
-                formData.append('cdp', cdp);
-                formData.append('ville', ville);
-                formData.append('pays', pays);
+
+
+                formData.append('prenomLivraison', prenomLivraison);
+                formData.append('nomLivraison', nomLivraison);
+                formData.append('emailLivraison', emailLivraison);
+                formData.append('societeLivraison', societeLivraison);
+                formData.append('telLivraison', telLivraison);
+                formData.append('numRueLivraison', numRueLivraison);
+                formData.append('rueLivraison', rueLivraison);
+                formData.append('cdpLivraison', cdpLivraison);
+                formData.append('villeLivraison', villeLivraison);
+                formData.append('paysLivraison', paysLivraison);
+
+                formData.append('prenomFacturation', prenomFacturation);
+                formData.append('nomFacturation', nomFacturation);
+                formData.append('emailFacturation', emailFacturation);
+                formData.append('societeFacturation', societeFacturation);
+                formData.append('telFacturation', telFacturation);
+                formData.append('numRueFacturation', numRueFacturation);
+                formData.append('rueFacturation', rueFacturation);
+                formData.append('cdpFacturation', cdpFacturation);
+                formData.append('villeFacturation', villeFacturation);
+                formData.append('paysFacturation', paysFacturation);
+
+
+
+
+
 
                 fetch('controller/formAdresse.php', {
                         method: 'POST',
@@ -253,12 +372,19 @@ include 'modele/ProduitsBDD.php';
                         console.error('Erreur lors de l\'envoi de la requête AJAX:', error);
                     });
                 formAdresse.style.display = "none";
+                facturation.style.display = "none";
                 // adresse.style.display = "flex";
                 verif.style.display = "flex";
                 updateCompletedSteps(4);
             }
 
             const btnAdresse = document.getElementById('btnAdresse');
+            const btnLivraison = document.getElementById("btnLivraison");
+            btnLivraison.addEventListener('click', function(event) {
+                event.preventDefault();
+                handleAddAdresse();
+            });
+
             btnAdresse.addEventListener('click', function(event) {
                 event.preventDefault();
                 handleAddAdresse();
@@ -270,6 +396,23 @@ include 'modele/ProduitsBDD.php';
                     step.classList.toggle('completed', currentStep <= stepNumber);
                 });
             }
+
+
+
+
+
+
+
+            checkbox.addEventListener("click", function() {
+                if (this.checked) {
+                    facturation.style.display = "none";
+                    boutton.style.display = "block"
+                } else {
+                    facturation.style.display = "flex";
+                    boutton.style.display = "none"
+                }
+            })
+
         });
     </script>
 
@@ -352,24 +495,29 @@ include 'modele/ProduitsBDD.php';
             }
             echo '<div class="recap">';
 
+            if (isset($nomCommande)) {
+                for ($i = 0; $i < count($nomCommande); $i++) {
+                    $totalProduit = $prix[$i] * $quantite[$i];
 
-            for ($i = 0; $i < count($nomCommande); $i++) {
-                $totalProduit = $prix[$i] * $quantite[$i];
+                    echo "<div class='produit-recap'>";
+                    echo "<p><strong>Produit:</strong> " . $nomCommande[$i] . "</p>";
+                    echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
+                    echo "<p><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
+                    echo "<p><strong>Total:</strong> " . $totalProduit . " EUR</p>";
+                    echo "</div>";
 
-                echo "<div class='produit-recap'>";
-                echo "<p><strong>Produit:</strong> " . $nomCommande[$i] . "</p>";
-                echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
-                echo "<p><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
-                echo "<p><strong>Total:</strong> " . $totalProduit . " EUR</p>";
-                echo "</div>";
+                    $montantTotal = array_sum(array_map(function ($p, $q) {
+                        return $p * $q;
+                    }, $prix, $quantite));
+                    echo "<p><strong>Montant total de la commande:</strong> " . $montantTotal . " EUR</p>";
+                }
             }
 
 
-            $montantTotal = array_sum(array_map(function ($p, $q) {
-                return $p * $q;
-            }, $prix, $quantite));
 
-            echo "<p><strong>Montant total de la commande:</strong> " . $montantTotal . " EUR</p>"; ?>
+
+
+        ?>
             <div class="paiement">
                 <div class="form-container-achat">
                     <form method='post'>
@@ -381,6 +529,7 @@ include 'modele/ProduitsBDD.php';
                             'purchase_units' => [
                                 [
                                     'amount' => [
+
                                         'value' => "{$montantTotal}", // Montant en euros
                                         'currency_code' => 'EUR'
                                     ],

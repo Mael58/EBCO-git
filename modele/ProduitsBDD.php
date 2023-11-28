@@ -121,6 +121,13 @@ class ProduitsBDD
             $_SESSION['adresse'] = $user_data;
         }
 
+        if (isset($_COOKIE['adresseFacturation-' . $username])) {
+            $user_data = json_decode($_COOKIE['adresseFacturation-' . $username], true);
+
+
+            $_SESSION['adresseFacturation'] = $user_data;
+        }
+
         ob_end_flush();
     }
 

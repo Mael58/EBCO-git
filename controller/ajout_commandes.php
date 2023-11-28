@@ -47,10 +47,14 @@ if (is_array($nomCommande) && is_array($quantite) && is_array($prix)) {
                 }
             } else {
                 // La commande n'existe pas, insérez une nouvelle commande
-                $sqlQuery = "INSERT INTO commandes (ref, qte, prix, CA, clients) VALUES (?, ?, ?, ?, ?)";
+                $date = date('Y/m/d');
+
+
+
+                $sqlQuery = "INSERT INTO commandes (ref, qte, prix, CA, clients,date) VALUES (?, ?, ?, ?, ?, ?)";
                 $stmt = $pdo->prepare($sqlQuery);
 
-                if ($stmt->execute([$nom, $quantiteProduit, $prixProduit, $total, $client]) === false) {
+                if ($stmt->execute([$nom, $quantiteProduit, $prixProduit, $total, $client, $date]) === false) {
                     die("Erreur lors de l'insertion de la commande : " . $stmt->errorInfo()[2]);
                 }
             }
