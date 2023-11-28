@@ -355,22 +355,40 @@ include 'modele/ProduitsBDD.php';
                 formData.append('paysFacturation', paysFacturation);
 
 
+                function AjaxRequest(url) {
+                    return fetch(url, {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data); // Vous pouvez accéder aux données encodées en JSON ici
+                            // Traitez les données comme nécessaire
+                        })
+                        .catch(error => {
+                            console.error('Erreur lors de l\'envoi de la requête AJAX:', error);
+                        });
+                }
 
+                Promise.all([
+                        AjaxRequest('controller/formAdresse.php'),
+                        AjaxRequest('controller/ajout_client.php'),
+                    ]).then(results => {
+                        // results est un tableau contenant les résultats des deux requêtes
+                        const result1 = results[0];
+                        const result2 = results[1];
 
+                        // Faites quelque chose avec les résultats
+                        console.log('Résultat de la première requête:', result1);
+                        console.log('Résultat de la deuxième requête:', result2);
 
-
-                fetch('controller/formAdresse.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data); // Vous pouvez accéder aux données encodées en JSON ici
-                        // Traitez les données comme nécessaire
+                        // Exécutez une action supplémentaire ici
                     })
                     .catch(error => {
-                        console.error('Erreur lors de l\'envoi de la requête AJAX:', error);
+                        console.error('Erreur lors de l\'exécution simultanée des requêtes:', error);
                     });
+
+
                 formAdresse.style.display = "none";
                 facturation.style.display = "none";
                 // adresse.style.display = "flex";

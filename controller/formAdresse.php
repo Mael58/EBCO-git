@@ -33,7 +33,7 @@ $cdpFacturation = getFormData("cdpFacturation");
 $villeFacturation = getFormData("villeFacturation");
 $paysFacturation = getFormData("paysFacturation");
 
-// Construction de la clé client
+
 $_SESSION['client'] = $societeLivraison . "-" . $prenomLivraison . " " . $nomLivraison;
 
 // Traitement des adresses de livraison et de facturation
