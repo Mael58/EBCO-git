@@ -2,6 +2,20 @@
 ob_start();
 include 'modele/ProduitsBDD.php';
 
+if (isset($_SESSION['adresseFacturation'])) {
+    $prenom = $_SESSION['adresseFacturation']['prenom'];
+    $nom = $_SESSION['adresseFacturation']['nom'];
+    $email = $_SESSION['adresseFacturation']['email'];
+
+    $telephone = $_SESSION['adresseFacturation']['tel'];
+    $codePostal = $_SESSION['adresseFacturation']['cdp'];
+    $ville = $_SESSION['adresseFacturation']['ville'];
+    $pays = $_SESSION['adresseFacturation']['pays'];
+    $rue = $_SESSION['adresseFacturation']['rue'];
+    $numeroRue = $_SESSION['adresseFacturation']['numRue'];
+}
+
+
 ?>
 
 <body>
@@ -136,11 +150,11 @@ include 'modele/ProduitsBDD.php';
 
                         <label for="pays">Pays</label>
                         <select name="pays">
-                            <option value="France" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'FR') ? 'selected' : ''; ?>>France</option>
-                            <option value="Belgique" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'BE') ? 'selected' : ''; ?>>Belgique</option>
-                            <option value="Suisse" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'CH') ? 'selected' : ''; ?>>Suisse</option>
-                            <option value="Italie" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'IT') ? 'selected' : ''; ?>>Italie</option>
-                            <option value="Espagne" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'ES') ? 'selected' : ''; ?>>Espagne</option>
+                            <option value="FR" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'FR') ? 'selected' : ''; ?>>France</option>
+                            <option value="BE" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'BE') ? 'selected' : ''; ?>>Belgique</option>
+                            <option value="CH" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'CH') ? 'selected' : ''; ?>>Suisse</option>
+                            <option value="IT" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'IT') ? 'selected' : ''; ?>>Italie</option>
+                            <option value="ES" <?php echo (isset($_SESSION['adresse']['pays']) && $_SESSION['adresse']['pays'] == 'ES') ? 'selected' : ''; ?>>Espagne</option>
                             <option value="" <?php echo (empty($_SESSION['adresse']['pays'])) ? 'selected' : ''; ?>>Autre</option>
 
                     </section>
@@ -218,11 +232,11 @@ include 'modele/ProduitsBDD.php';
 
                         <label for="pays">Pays</label>
                         <select name="pays">
-                            <option value="France" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'FR') ? 'selected' : ''; ?>>France</option>
-                            <option value="Belgique" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'BE') ? 'selected' : ''; ?>>Belgique</option>
-                            <option value="Suisse" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'CH') ? 'selected' : ''; ?>>Suisse</option>
-                            <option value="Italie" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'IT') ? 'selected' : ''; ?>>Italie</option>
-                            <option value="Espagne" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'ES') ? 'selected' : ''; ?>>Espagne</option>
+                            <option value="FR" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'FR') ? 'selected' : ''; ?>>France</option>
+                            <option value="BE" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'BE') ? 'selected' : ''; ?>>Belgique</option>
+                            <option value="CH" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'CH') ? 'selected' : ''; ?>>Suisse</option>
+                            <option value="IT" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'IT') ? 'selected' : ''; ?>>Italie</option>
+                            <option value="ES" <?php echo (isset($_SESSION['adresseFacturation']['pays']) && $_SESSION['adresseFacturation']['pays'] == 'ES') ? 'selected' : ''; ?>>Espagne</option>
                             <option value="" <?php echo (empty($_SESSION['adresseFacturation']['pays'])) ? 'selected' : ''; ?>>Autre</option>
 
                     </section>
@@ -379,8 +393,7 @@ include 'modele/ProduitsBDD.php';
                         const result2 = results[1];
 
                         // Faites quelque chose avec les résultats
-                        console.log('Résultat de la première requête:', result1);
-                        console.log('Résultat de la deuxième requête:', result2);
+
 
                         // Exécutez une action supplémentaire ici
                     })
@@ -514,74 +527,98 @@ include 'modele/ProduitsBDD.php';
             echo '<div class="recap">';
 
             for ($i = 0; $i < count($nomCommande); $i++) {
-                $totalProduit = $prix[$i] * $quantite[$i];
-
-                echo "<div class='produit-recap'>";
-                echo "<p><strong>Produit:</strong> " . $nomCommande[$i] . "</p>";
-                echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
-                echo "<p><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
-                echo "<p><strong>Total:</strong> " . $totalProduit . " EUR</p>";
-                echo "</div>";
 
                 $montantTotal = array_sum(array_map(function ($p, $q) {
                     return $p * $q;
                 }, $prix, $quantite));
-                echo "<p><strong>Montant total de la commande:</strong> " . $montantTotal . " EUR</p>";
+                $totalProduit = $prix[$i] * $quantite[$i];
+
+                echo "<div class='produit-recap'>";
+                // echo "<p><strong>Produit:</strong> " . $nomCommande[$i] . "</p>";
+                echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
+                echo "<p><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
+                echo "<p><strong>Total:</strong> " . $totalProduit . " EUR</p>";
+                if ($pays != "FR") {
+                    echo "<p><strong>Frais de port :</strong> " . $fraisPort . "€</p>";
+                    //$montantTotal = $montantTotal + $fraisPort;
+                }
+                echo "</div>";
             }
 
 
 
+            echo "<p><strong>Montant total de la commande:</strong> " . $montantTotal . " EUR</p>";
+
 
 
         ?>
+
             <div class="paiement">
                 <div class="form-container-achat">
                     <form method='post'>
                         <div id="paypal-button-container"></div>
 
-                        <script src="https://www.paypal.com/sdk/js?client-id=AVF-Rm38cZLM-9p7H_m-RR3cDm0xeo5_xBhDcLLvD58iWh63mZ8zMNVJ1rT63CTPNMDMzo2-0yELB_nC&currency=EUR"></script>
+                        <script src="https://www.paypal.com/sdk/js?client-id=AaOvluVx3_tbxX782Q3zyGBSmCPfnaEdHVcbwDqOXu_dgFCtxQmMGtdy-jDzY8JWPmpGL5bZm-ovGAyn&currency=EUR"></script>
                         <?php
                         $order = [
+
                             'purchase_units' => [
                                 [
-                                    'amount' => [
 
+                                    'amount' => [
                                         'value' => "{$montantTotal}", // Montant en euros
-                                        'currency_code' => 'EUR'
+                                        'currency_code' => 'EUR',
+                                        'breakdown' => [
+                                            'item_total' => [
+                                                'currency_code' => "EUR",
+                                                'value' => $montantTotal
+                                            ]
+                                        ],
                                     ],
-                                    // 'shipping' => [
-                                    //     'address' => [
-                                    //         // 'address_line_1' => "{$_SESSION} {$rue}",
-                                    //         // 'admin_area_2' => $ville,
-                                    //         // 'postal_code' => $cdp,
-                                    //         // 'country_code' => $pays,
-                                    //         // 'given_name' => $prenom,
-                                    //         // 'surname' => $nom
-                                    //     ]
-                                    // ],
-                                    'item_list' => [
-                                        'items' => []
-                                    ]
-                                ]
+                                    'shipping' => [
+                                        'name' => [  // Ajoutez cette partie pour spécifier le nom du destinataire
+                                            'full_name' => "{$prenom} {$nom}"
+                                        ],
+                                        'address' => [
+                                            'address_line_1' => "{$numeroRue} {$rue}",
+                                            'admin_area_2' => $ville,
+                                            'postal_code' => $codePostal,
+                                            'country_code' => $pays,
+                                        ],
+                                    ],
+                                    'items' => [],
+                                ],
+
+                            ],
+
+                            "payer" => [
+                                "name" => [
+                                    "given_name" => $prenom,
+                                    "surname" => $nom
+                                ],
+                                "email_address" => $email,
+
                             ]
+
                         ];
                         if (isset($nomCommande)) {
                             for ($i = 0; $i < count($nomCommande); $i++) {
                                 $item_name = $nomCommande[$i];
                                 $item_prix = $prix[$i];
                                 $item_qte = $quantite[$i];
-
+                                //echo $item_name;
                                 $item = [
+
                                     'name' => $item_name,
                                     'unit_amount' => [
-                                        'price' => $item_prix,
+                                        'value' => $item_prix,
                                         'currency_code' => 'EUR'
                                     ],
                                     'quantity' => $item_qte
                                 ];
 
                                 // Utilisez [] pour ajouter un élément à la liste d'articles
-                                $order['purchase_units'][0]['item_list']['items'][] = $item;
+                                $order['purchase_units'][0]['items'][] = $item;
                             }
                         }
 
@@ -591,18 +628,24 @@ include 'modele/ProduitsBDD.php';
 
                         ?>
                         <script>
+                            console.log(<?= $order ?>);
                             paypal.Buttons({
                                 createOrder: function(data, actions) {
                                     return actions.order.create(<?= $order ?>);
+
                                 },
 
                                 // JavaScript (Front-end)
                                 onApprove: function(data, actions) {
+
+
                                     return actions.order.capture().then(function(details) {
-                                        // Afficher les détails de la transaction dans la console
+
+
+
                                         console.log(details);
 
-                                        // Récupérer les détails de la commande
+
                                         var nomCommande = [];
                                         var prix = [];
                                         var quantite = [];
@@ -611,7 +654,7 @@ include 'modele/ProduitsBDD.php';
                                         // PHP (Back-end)
                                         $cart = $_SESSION['cart'];
                                         foreach ($cart as $produit) {
-                                            // Vérifier si les clés existent avant de les utiliser
+
                                             $nomCommande = isset($produit['nom']) ? $produit['nom'] : '';
                                             $quantite = isset($produit['quantite']) ? $produit['quantite'] : 0;
                                             $prix = isset($produit['prix']) ? $produit['prix'] : 0;
@@ -642,9 +685,10 @@ include 'modele/ProduitsBDD.php';
 
 
                                         xhr.send(JSON.stringify(dataToSend));
+                                        var prenom = '<?= $prenom ?>';
+                                        var nom = '<?= $nom ?>';
 
-
-                                        alert(details.payer.name.given_name + ' ' + details.payer.name.surname + ', votre transaction est effectuée. Vous allez recevoir une notification très bientôt lorsque nous validons votre paiement.');
+                                        alert(prenom + ' ' + nom + ', votre transaction est effectuée. Vous allez recevoir une notification très bientôt lorsque nous validons votre paiement.');
                                     });
                                 },
 

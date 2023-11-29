@@ -89,6 +89,8 @@ if (isset($_SESSION['adresseFacturation'])) {
     ];
 }
 
+
+
 // Réponse JSON
 $response['livraison'] = $_SESSION['adresse'];
 $response['facturation'] = $_SESSION['adresseFacturation'];

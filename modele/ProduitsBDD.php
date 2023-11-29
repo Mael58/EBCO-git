@@ -1,17 +1,23 @@
 <?php
-
+require_once('DB.php');
 class ProduitsBDD
 {
     private $db;
     private $username;
+    private $db_host = DB_HOST;
+    private $db_name = DB_NAME;
+    private $db_user = DB_USERNAME;
+    private $db_pass = DB_PASSWORD;
+
     private $mdp;
     public function __construct()
+
     {
         try {
             $this->db = new PDO(
-                'mysql:host=localhost;dbname=ebcon_crm;',
-                'root',
-                ''
+                'mysql:host=' . $this->db_host . ';dbname=' . $this->db_name . ';',
+                $this->db_user,
+                $this->db_pass
             );
         } catch (Exception $e) {
             die('erreur: ' . $e);
@@ -20,6 +26,8 @@ class ProduitsBDD
 
     public function getVente($categorie)
     {
+
+
         $sqlQuery = "SELECT * FROM vente WHERE categorie='$categorie';";
         $donnees = $this->db->prepare($sqlQuery);
 
