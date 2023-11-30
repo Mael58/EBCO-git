@@ -682,6 +682,17 @@ if (isset($_SESSION['adresseFacturation'])) {
                                             prix: prix
 
                                         };
+                                        var xhr2 = new XMLHttpRequest();
+                                        xhr2.open('POST', 'controller/update_quantity.php', true);
+                                        xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                        xhr2.onreadystatechange = function() {
+                                            if (xhr2.readyState == 4 && xhr2.status == 200) {
+                                                // Mettez à jour l'interface utilisateur ou effectuez d'autres actions si nécessaire
+                                                console.log(xhr2.responseText);
+                                                // Vous pouvez également mettre à jour le panierCounter ici
+                                            }
+                                        };
+                                        xhr2.send('quantite=' + quantite + '&nom=' + nomCommande);
 
 
                                         xhr.send(JSON.stringify(dataToSend));

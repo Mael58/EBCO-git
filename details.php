@@ -7,6 +7,7 @@ include 'template/header.php';
 <?php
 // Récupérez la référence du produit depuis l'URL
 $nomLien = $_GET['nom'];
+
 try {
     $db = new PDO(
         'mysql:host=localhost;dbname=ebcon_crm;',
@@ -38,7 +39,16 @@ if ($recipe) {
     $ref = $recipe['reference'];
     $des = $recipe['description'];
     $lienDoc = $recipe['lienDoc'];
-    $lienDriver = $recipe['lienDriver']; ?>
+    $lienDriver = $recipe['lienDriver'];
+    $quantite= $recipe['Quantite'];
+    $TVA= $recipe['TVA'];
+
+    
+
+    $db=null;
+    
+    
+    ?>
 
 
     <div class="small-container single-product">
@@ -50,21 +60,28 @@ if ($recipe) {
                 <p>Accueil / <?= $des ?> / <?= $nom ?></p>
                 <h1><?= $nom ?></h1>
                 <h5><?= $ref ?></h5>
-                <!-- <p>Le composant FT232RL de FTDICHIP permet une
-                    connexion USB vers une liaison <?= $nom ?> très rapide.<br>
-                    Une liaison série virtuelle ou une programmation utilisant la
-                    librairie DDL permet l'interfaçage aussi bien sous Windows,
-                    Mac ou Linux</p> -->
+
+               
                 <h4><?= $prix ?> €</h4>
-                <!-- 
-            <select>
-               <option>Personnalisation</option>
-               <option>OUI</option>
+            
+
+                <p> Quantité: <?=$quantite?></p>
+
+                <?php
+                if($quantite>0){
+    echo'<p style="color:green;">En stock</p>';
+   echo '<input type="number" id="quantite" value="1" min="1" max='.$quantite.'>';
+   echo '<a href="#" id="ajouter-au-panier" class="btn">Ajouter au panier</a>
+      ';
               
-              
-           </select> -->
-                <input type="number" id="quantite" value="1">
-                <a href="#" id="ajouter-au-panier" class="btn">Ajouter au panier</a>
+                }else{
+                    echo '<p style="color:red;">Produit indisponible</p>';
+                }
+
+                
+                ?>
+                
+            
 
                 <h3>Spécifications techniques:</h3>
                 <br>
@@ -94,23 +111,27 @@ if ($recipe) {
 }
 
 
-// if (isset($_SESSION['username'])) {
-
-
-// L'utilisateur est connecté, permettez-lui d'ajouter au panier
-// Insérez ici la logique pour ajouter au panier
 ?><script>
     document.addEventListener('DOMContentLoaded', function() {
         var btnAjouterAuPanier = document.getElementById('ajouter-au-panier');
         var inputQuantite = document.getElementById('quantite');
         var panierCounter = document.getElementById('cart-count'); // Assuming you have an element with id 'panier-counter'
-
+       var quantiteDisponible= <?=$quantite?>;
 
         btnAjouterAuPanier.addEventListener('click', function(e) {
             e.preventDefault(); // Empêche le lien de rediriger immédiatement
 
             var quantite = inputQuantite.value;
             var nom = "<?= $nom ?>";
+
+            if (parseInt(quantite) > quantiteDisponible || parseInt(quantite) <= 0) {
+            alert("La quantité spécifiée n'est pas valide. Veuillez choisir une quantité comprise entre 1 et " + quantiteDisponible + ".");
+            return; // Ne pas poursuivre l'ajout au panier
+        }
+          
+
+
+           
             var prix = "<?= $prix ?>";
             var image = "<?= $image ?>";
 
