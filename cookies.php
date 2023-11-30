@@ -14,7 +14,7 @@
        <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <a href="index.html"><img src="images/logo.png" width="200px"></a>
+                    <a href="index.html"><img src="Public/images/logo.png" width="200px"></a>
                 </div>
                 <nav>
                     <ul id="MenuItems">
@@ -26,8 +26,8 @@
                     <li><a href="compte.html">Compte</a></li>
                     </ul>
                 </nav>
-                <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>
-                <img src="images/menu.png" onclick="menutoggle()" class="menu-icon">
+                <a href="cart.html"><img src="Public/images/cart.png" width="30px" height="30px"></a>
+                <img src="Public/images/menu.png" onclick="menutoggle()" class="menu-icon">
             </div>
        </div>
    </div>
@@ -52,7 +52,7 @@
                     </ul>
                 </div>
                 <div class="footer-col2">
-                   <img src="images/logo.png">
+                   <img src="Public/images/logo.png">
                     <h4>Votre Partenaire "Connectique"</h4>
                 </div>
                 <div class="footer-col3">

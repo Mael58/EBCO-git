@@ -23,7 +23,7 @@ if(isset($_SESSION['username'])){?>
                     <a href="Solutions.php" class="btn">Explorer &#8594;</a>
                 </div>
                 <div class="col-2">
-                    <img src="images/montage-2.png">
+                    <img src="Public/images/montage-2.png">
                 </div>
                
            </div>
@@ -35,13 +35,13 @@ if(isset($_SESSION['username'])){?>
          <div class="small-container">
            <div class="row">
                <div class="col-3">
-                   <img src="images/switch-c-550x604.jpg">
+                   <img src="Public/images/switch-c-550x604.jpg">
                </div> 
                <div class="col-3">
-                  <img src="images/fabrication-550x604.jpg" alt="switch craft avec injection">
+                  <img src="Public/images/fabrication-550x604.jpg" alt="switch craft avec injection">
                </div> 
                <div class="col-3">
-                   <img src="images/usbfils1-550x604.jpg">
+                   <img src="Public/images/usbfils1-550x604.jpg">
                </div> 
            </div>
        </div>
@@ -114,7 +114,7 @@ Longueur: <?= $longueur ?><br></p>
        <div class="small-container">
            <div class="row">
            <div class="col-2">
-               <img src="images/Exclusive-700x613.png" class="offer-img">
+               <img src="Public/images/Exclusive-700x613.png" class="offer-img">
            </div>
            <div class="col-2">
                <h2>Câbles entièrement personnalisables</h2>
@@ -135,18 +135,18 @@ Longueur: <?= $longueur ?><br></p>
        <div class="row">
             <a href="EBconnections.php"> <div class="col-3">
                    
-                       <img src="images/Eric-belouet.jpg">
+                       <img src="Public/images/Eric-belouet.jpg">
                        <h3>Qui sommes-nous?</h3>
            </div></a>
             <a href="Solutions.php"><div class="col-3">
                    
-                       <img src="images/fabrication-2.jpg">
+                       <img src="Public/images/fabrication-2.jpg">
                        <h3>Nos prestations</h3>
            </div></a>
             <a href="usb.php"><div class="col-3">
                     
                       
-                       <img src="images/RS485-lg.png">
+                       <img src="Public/images/RS485-lg.png">
                        <h3>Nos câbles</h3>
            </div></a> 
        </div>
@@ -159,10 +159,10 @@ Longueur: <?= $longueur ?><br></p>
                 
               
                 <div class="col-5">
-                    <img src="images/logo-digikey.png">
+                    <img src="Public/images/logo-digikey.png">
                 </div>
                 <div class="col-5">
-                    <img src="images/logo-pp.png">
+                    <img src="Public/images/logo-pp.png">
                 </div>
                 </div>
         </div>

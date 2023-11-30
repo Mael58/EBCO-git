@@ -33,7 +33,7 @@ include 'template/header.php';
                     echo '<div>';
                     echo '<p>' . $produit['nom'] . '</p>';
                     echo '<small>Prix: ' . $produit['prix'] . ' €</small><br>';
-                    echo '<a href="controller/supprimer.php?nom=' . $produit['nom'] . '">Supprimer</a>';
+                    echo '<a href="Controller/supprimer.php?nom=' . $produit['nom'] . '">Supprimer</a>';
                     echo '</div>';
                     echo '</div>';
                     echo '</td>';
@@ -70,7 +70,7 @@ include 'template/header.php';
 
         // Utiliser AJAX pour envoyer les données au serveur
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "controller/update_panier.php", true);
+        xhr.open("POST", "Controller/update_panier.php", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {

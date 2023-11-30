@@ -18,7 +18,7 @@
                 </p>
             </div>
             <div class="col-2">
-                <img src="images/Eric-belouet.jpg" alt="Eric Belouet">
+                <img src="Public/images/Eric-belouet.jpg" alt="Eric Belouet">
             </div>
         </div>
         <div class="row">
@@ -34,7 +34,7 @@
                 </p>
             </div>
             <div class="col-2">
-                <img src="images/Production.jpeg" width="500px" alt="câbles">
+                <img src="Public/images/Production.jpeg" width="500px" alt="câbles">
             </div>
         </div>
 

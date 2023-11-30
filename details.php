@@ -138,7 +138,7 @@ if ($recipe) {
 
 
             // Redirigez l'utilisateur vers ajouter_au_panier.php en incluant les valeurs dans la requête
-            window.location.href = 'controller/ajouter_au_panier.php?nom=' + nom + '&prix=' + prix + '&image=' + image + '&quantite=' + quantite;
+            window.location.href = 'Controller/ajouter_au_panier.php?nom=' + nom + '&prix=' + prix + '&image=' + image + '&quantite=' + quantite;
 
         });
 

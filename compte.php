@@ -15,7 +15,7 @@ include 'modele/ProduitsBDD.php';
     <div class="row">
 
         <div class="col-2">
-            <img src="images/montage-2.png" width="100%">
+            <img src="Public/images/montage-2.png" width="100%">
         </div>
 
         <div class="col-2">

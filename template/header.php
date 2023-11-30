@@ -13,7 +13,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Catalogue des Produits | EBconnections</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Public/Style/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -48,13 +48,13 @@ $categoriesUniques = array_unique($categories);
 
         <div class="navbar-logo">
             <div class="logo">
-                <a href="index.php"><img src="images/logo.png" width="200px"></a>
+                <a href="index.php"><img src="Public/images/logo.png" width="200px"></a>
 
 
 
             </div>
             <ul>
-                <li> <a href="cart.php"><img src="images/cart.png" width="30px" height="30px">
+                <li> <a href="cart.php"><img src="Public/images/cart.png" width="30px" height="30px">
                         <span id="cart-count">
                             <?php
 
@@ -66,12 +66,12 @@ $categoriesUniques = array_unique($categories);
 
                             ?>
                         </span>
-                        <img src="images/menu.png" onclick="menutoggle()" class="menu-icon">Panier</a>
+                        <img src="Public/images/menu.png" onclick="menutoggle()" class="menu-icon">Panier</a>
 
                 </li>
 
                 <?php if (!isset($_SESSION['username'])) {
-                    echo '<li><a href="compte.php"><img src="images/conn.png"  width="30px" height="30px"> Connexion</a></li>';
+                    echo '<li><a href="compte.php"><img src="Public/images/conn.png"  width="30px" height="30px"> Connexion</a></li>';
                 } ?>
 
 

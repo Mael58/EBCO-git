@@ -385,8 +385,8 @@ if (isset($_SESSION['adresseFacturation'])) {
                 }
 
                 Promise.all([
-                        AjaxRequest('controller/formAdresse.php'),
-                        AjaxRequest('controller/ajout_client.php'),
+                        AjaxRequest('Controller/formAdresse.php'),
+                        AjaxRequest('Controller/ajout_client.php'),
                     ]).then(results => {
                         // results est un tableau contenant les résultats des deux requêtes
                         const result1 = results[0];
@@ -673,7 +673,7 @@ if (isset($_SESSION['adresseFacturation'])) {
 
                                         // Maintenant, vous pouvez envoyer ces données au serveur via une requête AJAX
                                         var xhr = new XMLHttpRequest();
-                                        xhr.open('POST', 'controller/ajout_commandes.php', true);
+                                        xhr.open('POST', 'Controller/ajout_commandes.php', true);
                                         xhr.setRequestHeader('Content-Type', 'application/json');
 
                                         var dataToSend = {
@@ -683,7 +683,7 @@ if (isset($_SESSION['adresseFacturation'])) {
 
                                         };
                                         var xhr2 = new XMLHttpRequest();
-                                        xhr2.open('POST', 'controller/update_quantity.php', true);
+                                        xhr2.open('POST', 'Controller/update_quantity.php', true);
                                         xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                                         xhr2.onreadystatechange = function() {
                                             if (xhr2.readyState == 4 && xhr2.status == 200) {

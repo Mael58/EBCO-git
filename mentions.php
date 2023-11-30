@@ -81,7 +81,7 @@
                 </ul>
             </div> 
             <div class="footer-col2">
-               <img src="images/logo.png">
+               <img src="Public/images/logo.png">
                 <h4>Votre Partenaire "Connectique"</h4>
             </div>
             <div class="footer-col3">

@@ -13,14 +13,14 @@
                 </div>
 
                 <div class="col-2">
-                    <img src="images/Eric-belouet.jpg" alt="Eric Belouet">
+                    <img src="Public/images/Eric-belouet.jpg" alt="Eric Belouet">
                 </div>
             </div>
 
             
                 <div class="row cgv">
                     <div class="col-2">
-                        <img src="images/fabrication-2.jpg" alt="produit électronique">
+                        <img src="Public/images/fabrication-2.jpg" alt="produit électronique">
                     </div>
                     <div class="col-2">
                     <h2>Fabrication de produits électroniques</h2>
@@ -42,13 +42,13 @@
                     </div>
     
                     <div class="col-2">
-                        <img src="images/montage-700x650.png" alt="produit électronique">
+                        <img src="Public/images/montage-700x650.png" alt="produit électronique">
                     </div>
                 </div>
 
                 <div class="row cgv">
                     <div class="col-2">
-                        <img src="images/Production-3.jpg" alt="produit électronique">
+                        <img src="Public/images/Production-3.jpg" alt="produit électronique">
                     </div>
                     <div class="col-2">
                     <h2>Injection plastique</h2>
