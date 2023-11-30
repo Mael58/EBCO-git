@@ -89,15 +89,15 @@ $categoriesUniques = array_unique($categories);
             <nav>
                 <ul id="MenuItems">
                     <li><a href="index.php">Accueil</a></li>
-                    <li><a href="EBconnections.php">EBconnections</a></li>
-                    <li><a href="solutions.php">Solutions</a></li>
+                    <li><a href="index.php?page=ebco">EBconnections</a></li>
+                    <li><a href="index.php?page=solution">Solutions</a></li>
                     <div class="dropdown">
                         <li onclick="myFunction()" class="dropbtn">Produits</li>
                         <div id="menuDeroulant" class="dropdown-content">
                             <?php
 
                             $liens = [
-                                'Cable USB' => 'usb.php',
+                                'Cable USB' => 'index.php?page=usb',
                                 'Objet connectes' => 'iot.php',
                                 // Ajoutez d'autres catégories et URLs au besoin
                             ];
@@ -129,7 +129,7 @@ $categoriesUniques = array_unique($categories);
                     </script>
 
 
-                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="index.php?page=contact">Contact</a></li>
 
 
 

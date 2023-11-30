@@ -43,7 +43,8 @@ if ($recipe) {
     $quantite= $recipe['Quantite'];
     $TVA= $recipe['TVA'];
 
-    
+    $prixTVA= ((100+$TVA)/100)*$prix;
+    echo $prixTVA;
 
     $db=null;
     
@@ -63,6 +64,7 @@ if ($recipe) {
 
                
                 <h4><?= $prix ?> €</h4>
+                
             
 
                 <p> Quantité: <?=$quantite?></p>
