@@ -2,7 +2,7 @@
 ob_start();
 
 include 'template/header.php';
-include 'modele/ProduitsBDD.php';
+include 'Model/ProduitsBDD.php';
 ?>
 
 <!-------------- details compte--------------->

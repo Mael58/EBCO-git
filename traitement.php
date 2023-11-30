@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-include 'modele/ProduitsBDD.php';
+include 'Model/ProduitsBDD.php';
 
 
 

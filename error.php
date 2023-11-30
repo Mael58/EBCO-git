@@ -1,4 +1,4 @@
-<?php include 'modele/ProduitsBDD.php';
+<?php include 'Model/ProduitsBDD.php';
 include 'template/header.php';
 
 ?>
