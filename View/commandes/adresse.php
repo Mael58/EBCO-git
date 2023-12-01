@@ -1,6 +1,6 @@
 <?php include 'template/header.php';
 ob_start();
-include 'Model/ProduitsBDD.php';
+include_once 'Model/ProduitsBDD.php';
 
 if (isset($_SESSION['adresseFacturation'])) {
     $prenom = $_SESSION['adresseFacturation']['prenom'];
