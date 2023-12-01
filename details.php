@@ -40,16 +40,16 @@ if ($recipe) {
     $des = $recipe['description'];
     $lienDoc = $recipe['lienDoc'];
     $lienDriver = $recipe['lienDriver'];
-    $quantite= $recipe['Quantite'];
-    $_SESSION['TVA']= $recipe['TVA'];
+    $quantite = $recipe['Quantite'];
+    $_SESSION['TVA'] = $recipe['TVA'];
 
-$_SESSION['quantiteMax']=$quantite;
-  var_dump( $_SESSION['quantiteMax']);
+    $_SESSION['quantiteMax'] = $quantite;
+    var_dump($_SESSION['quantiteMax']);
 
-    $db=null;
-    
-    
-    ?>
+    $db = null;
+
+
+?>
 
 
     <div class="small-container single-product">
@@ -62,28 +62,27 @@ $_SESSION['quantiteMax']=$quantite;
                 <h1><?= $nom ?></h1>
                 <h5><?= $ref ?></h5>
 
-               
-                <h4><?= $prix ?> €</h4>
-                
-            
 
-                <p> Quantité: <?=$quantite?></p>
+                <h4><?= $prix ?> €</h4>
+
+
+
+                <p> Quantité: <?= $quantite ?></p>
 
                 <?php
-                if($quantite>0){
-    echo'<p style="color:green;">En stock</p>';
-   echo '<input type="number" id="quantite" value="1" min="1" max='.$quantite.'>';
-   echo '<a href="#" id="ajouter-au-panier" class="btn">Ajouter au panier</a>
+                if ($quantite > 0) {
+                    echo '<p style="color:green;">En stock</p>';
+                    echo '<input type="number" id="quantite" value="1" min="1" max=' . $quantite . '>';
+                    echo '<a href="#" id="ajouter-au-panier" class="btn">Ajouter au panier</a>
       ';
-              
-                }else{
+                } else {
                     echo '<p style="color:red;">Produit indisponible</p>';
                 }
 
-                
+
                 ?>
-                
-            
+
+
 
                 <h3>Spécifications techniques:</h3>
                 <br>
@@ -118,7 +117,7 @@ $_SESSION['quantiteMax']=$quantite;
         var btnAjouterAuPanier = document.getElementById('ajouter-au-panier');
         var inputQuantite = document.getElementById('quantite');
         var panierCounter = document.getElementById('cart-count'); // Assuming you have an element with id 'panier-counter'
-       var quantiteDisponible= <?=$quantite?>;
+        var quantiteDisponible = <?= $quantite ?>;
 
         btnAjouterAuPanier.addEventListener('click', function(e) {
             e.preventDefault(); // Empêche le lien de rediriger immédiatement
@@ -127,20 +126,41 @@ $_SESSION['quantiteMax']=$quantite;
             var nom = "<?= $nom ?>";
 
             if (parseInt(quantite) > quantiteDisponible || parseInt(quantite) <= 0) {
-            alert("La quantité spécifiée n'est pas valide. Veuillez choisir une quantité comprise entre 1 et " + quantiteDisponible + ".");
-            return; // Ne pas poursuivre l'ajout au panier
-        }
-          
+                alert("La quantité spécifiée n'est pas valide. Veuillez choisir une quantité comprise entre 1 et " + quantiteDisponible + ".");
+                return; // Ne pas poursuivre l'ajout au panier
+            }
 
 
-           
             var prix = "<?= $prix ?>";
             var image = "<?= $image ?>";
 
 
+            fetch('Controller/ajouter_au_panier.php', {
+                    method: 'POST', // ou 'GET' selon votre configuration
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'nom=' + encodeURIComponent(nom) +
+                        '&prix=' + encodeURIComponent(prix) +
+                        '&image=' + encodeURIComponent(image) +
+                        '&quantite=' + encodeURIComponent(quantite),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Manipuler la réponse du serveur ici
+                    // Par exemple, mettre à jour le compteur de panier
+                    panierCounter.textContent = data.nombreTotalArticles;
+                    location.reload();
+
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la requête AJAX:', error);
+                });
+
+
 
             // Redirigez l'utilisateur vers ajouter_au_panier.php en incluant les valeurs dans la requête
-            window.location.href = 'Controller/ajouter_au_panier.php?nom=' + nom + '&prix=' + prix + '&image=' + image + '&quantite=' + quantite;
+            //window.location.href = 'Controller/ajouter_au_panier.php?nom=' + nom + '&prix=' + prix + '&image=' + image + '&quantite=' + quantite;
 
         });
 

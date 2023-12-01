@@ -27,6 +27,7 @@ if(isset($_SESSION['TVA'])){
         $totalSansTVA = 0;
         $fraisPort = 10;
         if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
+            var_dump( $_SESSION['panier']);
 
             foreach ($_SESSION['panier'] as $produit) {
 
@@ -67,34 +68,32 @@ if(isset($_SESSION['TVA'])){
 </div>
 <script>
     function updateQuantitePrix(input, nomProduit, prix) {
-        var nouvelleQuantite = input.value;
+    var nouvelleQuantite = input.value;
 
-        // Utiliser AJAX pour envoyer les données au serveur
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "Controller/update_panier.php", true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var response = JSON.parse(xhr.responseText);
-                if (response.success) {
-                    // Actualisez la quantité dans la partie visible du panier
-                    var sousTotalCell = document.getElementById('quantite-' + nomProduit).parentNode.nextElementSibling;
-                    sousTotalCell.innerHTML = response.nouveauSousTotal + ' €';
-
-
-
-                    // Vous pouvez également mettre à jour d'autres éléments si nécessaire
-                } else {
-
-                }
+    // Utiliser AJAX pour envoyer les données au serveur
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "Controller/update_panier.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+                // Actualisez la quantité dans la partie visible du panier
+                var sousTotalCell = input.parentNode.nextElementSibling;
+                sousTotalCell.innerHTML = response.nouveauSousTotal + ' €';
+               
+          
+            } else {
+              
             }
-        };
-        console.log(nouvelleQuantite);
-        // Envoyer les données au serveur
-        var params = "nomProduit=" + encodeURIComponent(nomProduit) + "&nouvelleQuantite=" + encodeURIComponent(nouvelleQuantite) + "&prix=" + encodeURIComponent(prix);
-        xhr.send(params);
+        }
+    };
 
-    }
+    // Envoyer les données au serveur
+    var params = "nomProduit=" + encodeURIComponent(nomProduit) + "&nouvelleQuantite=" + encodeURIComponent(nouvelleQuantite) + "&prix=" + encodeURIComponent(prix);
+    xhr.send(params);
+}
+
 </script>
 <?php
 
