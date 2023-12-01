@@ -28,6 +28,9 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
             $_SESSION['panier'][] = $produit;
         }
 
+        
+     
+
 
 
         $_SESSION['panier'] = array();
@@ -41,12 +44,16 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
 // Calculer et stocker le nombre total d'articles dans le panier global
 $nombreTotalArticles = 0;
 foreach ($_SESSION['panier'] as $produit) {
+    
+    $quantiteMax= $_SESSION['quantiteMax'];
+    if($produit['quantite'] > $quantiteMax){
+        $produit['quantite'] = $quantiteMax;
+    }
     $nombreTotalArticles += $produit['quantite'];
 }
 $_SESSION['nombreTotalArticles'] = $nombreTotalArticles;
 
 // Afficher le nombre total d'articles dans le panier global
 echo $nombreTotalArticles;
-echo '<script>
-window.history.back();
-</script>';
+header("Location:". $_SERVER['HTTP_REFERER']); 
+exit(); 

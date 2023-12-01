@@ -2,12 +2,12 @@
 
 $requestedPage = $_GET['page'] ?? 'home';
 
-$validPages = ['home', 'compte', 'Panier', 'solution', 'ebco', 'usb', 'Contact'];
+$validPages = ['home', 'compte', 'Panier', 'solution', 'ebco', 'usb', 'Contact', 'commandes', 'details'];
 
 // Vérifie si la page demandée est valide
 if (!in_array($requestedPage, $validPages)) {
     // Gérer la page non valide ici, par exemple rediriger vers une page d'erreur.
-    echo "Page non valide";
+    echo "Page non valide $requestedPage";
     exit;
 }
 
@@ -21,5 +21,5 @@ if (file_exists($controllerFile)) {
     $controller->index();
 } else {
     // Gérer le contrôleur manquant ici, par exemple rediriger vers une page d'erreur.
-    echo "Contrôleur non trouvé";
+    echo "Contrôleur non trouvé $requestedPage";
 }

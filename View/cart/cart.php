@@ -1,6 +1,11 @@
 <?php
 include 'template/header.php';
-$TVA= $_SESSION['TVA'];
+if(isset($_SESSION['TVA'])){
+    $TVA= $_SESSION['TVA'];
+}else{
+    $TVA=20;
+}
+
  
 
 ?>
@@ -92,6 +97,7 @@ $TVA= $_SESSION['TVA'];
     }
 </script>
 <?php
+
 $total= ((100+$TVA)/100)*$totalSansTVA;
 ?>
 
@@ -117,7 +123,7 @@ $total= ((100+$TVA)/100)*$totalSansTVA;
 
     <?php
     if (!empty($_SESSION['panier'])) {
-        echo '<a href="adresse.php" class="btn">Passer la commande &#8594;</a>';
+        echo '<a href="commandes" class="btn">Passer la commande &#8594;</a>';
     }
     ?>
 
