@@ -15,6 +15,8 @@ if (isset($_SESSION['adresseFacturation'])) {
     $numeroRue = $_SESSION['adresseFacturation']['numRue'];
 }
 
+$TVA=$_SESSION['TVA'];
+
 
 ?>
 
@@ -277,7 +279,7 @@ if (isset($_SESSION['adresseFacturation'])) {
             function makeAjaxRequest() {
                 var username = document.getElementById('username2').value;
                 var password = document.getElementById('password2').value;
-                var url = 'traitement.php?username2=' + encodeURIComponent(username) + '&password2=' + encodeURIComponent(password);
+                var url = 'Model/traitement.php?username2=' + encodeURIComponent(username) + '&password2=' + encodeURIComponent(password);
 
                 fetch(url, {
                         method: 'GET',
@@ -466,6 +468,7 @@ if (isset($_SESSION['adresseFacturation'])) {
                     <th>Prix</th>
                     <th>Quantité</th>
                     <th>Sous total</th>
+
                 </tr>
 
                 <?php
@@ -531,23 +534,21 @@ if (isset($_SESSION['adresseFacturation'])) {
                 $montantTotal = array_sum(array_map(function ($p, $q) {
                     return $p * $q;
                 }, $prix, $quantite));
-                $totalProduit = $prix[$i] * $quantite[$i];
+                
 
                 echo "<div class='produit-recap'>";
                 // echo "<p><strong>Produit:</strong> " . $nomCommande[$i] . "</p>";
                 echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
                 echo "<p><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
-                echo "<p><strong>Total:</strong> " . $totalProduit . " EUR</p>";
-                if ($pays != "FR") {
-                    echo "<p><strong>Frais de port :</strong> " . $fraisPort . "€</p>";
-                    //$montantTotal = $montantTotal + $fraisPort;
-                }
+                // echo "<p><strong>Total:</strong> " . $totalProduit . " EUR</p>";
+              
                 echo "</div>";
             }
+            $total= ((100+$TVA)/100)*$montantTotal;
 
 
-
-            echo "<p><strong>Montant total de la commande:</strong> " . $montantTotal . " EUR</p>";
+echo '<p><strong>Total HT:</strong> ' . $montantTotal. ' EUR </p>';
+            echo "<p><strong>Montant total de la commande:</strong> " . $total . " EUR</p>";
 
 
 

@@ -1,7 +1,7 @@
 <?php
 include 'template/header.php';
-
-
+$TVA= $_SESSION['TVA'];
+ 
 
 ?>
 
@@ -14,12 +14,12 @@ include 'template/header.php';
             <th>Produit</th>
             <th>Quantité</th>
             <th>Sous-total</th>
-            <th>Frais de port</th>
+           
         </tr>
 
         <?php
-
-        $total = 0;
+ 
+        $totalSansTVA = 0;
         $fraisPort = 10;
         if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
 
@@ -43,17 +43,13 @@ include 'template/header.php';
                     // echo '</tr>';
                     $sousTotal = floatval($produit['prix']) * floatval($produit['quantite']);
 
-                    $total += $sousTotal; // Ajoutez le sous-total au total
+                    $totalSansTVA += $sousTotal; // Ajoutez le sous-total au total
                     echo '<td>' . $sousTotal . ' €</td>';
-                    echo '<td>' . $fraisPort . ' €</td>';
+                
                     echo '</tr>';
                 }
                 // Vérifiez si le total est inférieur à 50 euros
-                if ($total < 50) {
-                    $total += $fraisPort;
-                } else {
-                    $fraisPort = 0;
-                }
+              
             }
         } else {
             echo '<tr><td colspan="3">Votre panier est vide.</td></tr>';
@@ -95,14 +91,24 @@ include 'template/header.php';
 
     }
 </script>
-
+<?php
+$total= ((100+$TVA)/100)*$totalSansTVA;
+?>
 
 <div class="total-price">
     <table>
 
         <tr>
+            <td colspan="2">Total HT</td>
+            <td><?= $totalSansTVA ?> €</td>
+        </tr>
+        <tr>
+            <td colspan="2">TVA</td>
+            <td><?= $TVA ?> %</td>
+        </tr>
+        <tr>
             <td colspan="2">Total</td>
-            <td><?= $total ?></td>
+            <td><?= $total ?> €</td>
         </tr>
 
     </table>

@@ -41,10 +41,9 @@ if ($recipe) {
     $lienDoc = $recipe['lienDoc'];
     $lienDriver = $recipe['lienDriver'];
     $quantite= $recipe['Quantite'];
-    $TVA= $recipe['TVA'];
+    $_SESSION['TVA']= $recipe['TVA'];
 
-    $prixTVA= ((100+$TVA)/100)*$prix;
-    echo $prixTVA;
+   
 
     $db=null;
     

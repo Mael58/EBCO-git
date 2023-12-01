@@ -54,7 +54,7 @@ $categoriesUniques = array_unique($categories);
 
             </div>
             <ul>
-                <li> <a href="index.php?page=cart"><img src="Public/images/cart.png" width="30px" height="30px">
+                <li> <a href="Panier"><img src="Public/images/cart.png" width="30px" height="30px">
                         <span id="cart-count">
                             <?php
 
@@ -71,7 +71,7 @@ $categoriesUniques = array_unique($categories);
                 </li>
 
                 <?php if (!isset($_SESSION['username'])) {
-                    echo '<li><a href="index.php?page=compte"><img src="Public/images/conn.png"  width="30px" height="30px"> Connexion</a></li>';
+                    echo '<li><a href="compte"><img src="Public/images/conn.png"  width="30px" height="30px"> Connexion</a></li>';
                 } ?>
 
 
@@ -89,15 +89,15 @@ $categoriesUniques = array_unique($categories);
             <nav>
                 <ul id="MenuItems">
                     <li><a href="index.php">Accueil</a></li>
-                    <li><a href="index.php?page=ebco">EBconnections</a></li>
-                    <li><a href="index.php?page=solution">Solutions</a></li>
+                    <li><a href="ebco">EBconnections</a></li>
+                    <li><a href="solution">Solutions</a></li>
                     <div class="dropdown">
                         <li onclick="myFunction()" class="dropbtn">Produits</li>
                         <div id="menuDeroulant" class="dropdown-content">
                             <?php
 
                             $liens = [
-                                'Cable USB' => 'index.php?page=usb',
+                                'Cable USB' => 'usb',
                                 'Objet connectes' => 'iot.php',
                                 // Ajoutez d'autres catégories et URLs au besoin
                             ];
@@ -129,7 +129,7 @@ $categoriesUniques = array_unique($categories);
                     </script>
 
 
-                    <li><a href="index.php?page=contact">Contact</a></li>
+                    <li><a href="Contact">Contact</a></li>
 
 
 

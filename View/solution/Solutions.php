@@ -9,7 +9,7 @@
                          grâce à notre savoir-faire en R&D électronique depuis 
                          plus de 30 ans</p>
                     
-                    <a href="contact.html" class="btn">Contactez-nous &#8594;</a>
+                    <a href="index.php?page=contact" class="btn">Contactez-nous &#8594;</a>
                 </div>
 
                 <div class="col-2">
