@@ -54,7 +54,7 @@ $categoriesUniques = array_unique($categories);
 
             </div>
             <ul>
-                <li> <a href="cart.php"><img src="Public/images/cart.png" width="30px" height="30px">
+                <li> <a href="index.php?page=cart"><img src="Public/images/cart.png" width="30px" height="30px">
                         <span id="cart-count">
                             <?php
 
@@ -71,7 +71,7 @@ $categoriesUniques = array_unique($categories);
                 </li>
 
                 <?php if (!isset($_SESSION['username'])) {
-                    echo '<li><a href="compte.php"><img src="Public/images/conn.png"  width="30px" height="30px"> Connexion</a></li>';
+                    echo '<li><a href="index.php?page=compte"><img src="Public/images/conn.png"  width="30px" height="30px"> Connexion</a></li>';
                 } ?>
 
 

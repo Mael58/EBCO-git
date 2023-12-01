@@ -23,6 +23,12 @@ foreach ($files as $file) {
 $requestedPage = $_GET['page'] ?? 'home';
 
 switch ($requestedPage) {
+    case 'compte':
+        $controller = new CompteController();
+        break;
+    case 'cart':
+        $controller = new CartController();
+        break;
     case 'solution':
         $controller = new SolutionController();
         break;
