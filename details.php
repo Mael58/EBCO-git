@@ -1,6 +1,7 @@
 <?php
 ob_start();
 include 'template/header.php';
+
 ?>
 
 

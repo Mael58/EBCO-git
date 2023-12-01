@@ -2,7 +2,7 @@
 
 $response = array();
 
-if (isset($_POST['quantite']) && $_POST['nom']) {
+if (isset($_POST['quantite'], $_POST['nom'])) {
     $quantite = $_POST['quantite'];
     $nom = $_POST['nom'];
 
@@ -12,6 +12,8 @@ if (isset($_POST['quantite']) && $_POST['nom']) {
             'root',
             ''
         );
+
+        // Validate and sanitize input (not shown in this example)
 
         // Récupérer la quantité actuelle depuis la base de données
         $sqlQuantiteActuelle = "SELECT quantite FROM vente WHERE nom = :nom";
@@ -41,11 +43,15 @@ if (isset($_POST['quantite']) && $_POST['nom']) {
             $response['success'] = false;
             $response['message'] = 'Erreur lors de la récupération de la quantité depuis la base de données.';
         }
-
-        $db = null;
+    } catch (PDOException $e) {
+        $response['success'] = false;
+        $response['message'] = 'Erreur PDO : ' . $e->getMessage();
     } catch (Exception $e) {
         $response['success'] = false;
         $response['message'] = 'Erreur : ' . $e->getMessage();
+    } finally {
+        // Close the database connection
+        $db = null;
     }
 } else {
     $response['success'] = false;

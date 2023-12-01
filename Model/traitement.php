@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-include 'ProduitsBDD.php';
+include_once 'ProduitsBDD.php';
 
 
 
