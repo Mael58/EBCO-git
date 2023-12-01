@@ -1,21 +1,16 @@
 <?php
-include_once 'Model/DB.php';
-$response = array();
 
- $db_host = DB_HOST;
-    $db_name = DB_NAME;
-    $db_user = DB_USERNAME;
-    $db_pass = DB_PASSWORD;
+$response = array();
 
 if (isset($_POST['quantite']) && $_POST['nom']) {
     $quantite = $_POST['quantite'];
     $nom = $_POST['nom'];
 
     try {
-        $this->db = new PDO(
-            'mysql:host=' . $db_host . ';dbname=' . $db_name . ';',
-            $db_user,
-            $db_pass
+        $db = new PDO(
+            'mysql:host=localhost;dbname=ebcon_crm;',
+            'root',
+            ''
         );
 
         // Récupérer la quantité actuelle depuis la base de données

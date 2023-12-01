@@ -47,8 +47,9 @@ if ($stmt->execute([$telLivraison])) {
     if ($row > 0) {
         echo "Le client existe déjà avec ce numéro de téléphone.";
     } else {
-        $sqlQuery = "INSERT INTO clients (client, contact, tel, email, cdp, ville, adresse, pays, status) VALUES ('$societeLivraison', '$contact', '$telLivraison', '$emailLivraison', '$cdpLivraison', '$villeLivraison', '$adresse', '$paysLivraison', 'CS') ";
+        $sqlQuery = "INSERT INTO clients (client, contact, tel, email, cdp, ville, adresse, pays, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'CS')";
         $stmt = $pdo->prepare($sqlQuery);
+        $stmt->execute([$societeLivraison, $contact, $telLivraison, $emailLivraison, $cdpLivraison, $villeLivraison, $adresse, $paysLivraison]);
     }
 }
 
