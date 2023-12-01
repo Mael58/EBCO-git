@@ -1,5 +1,5 @@
-<?php include 'template/header.php';
-include 'Model/ProduitsBDD.php';
+<?php include_once 'template/header.php';
+include_once 'Model/ProduitsBDD.php';
 
  
 
@@ -169,4 +169,4 @@ Longueur: <?= $longueur ?><br></p>
     </div>
 <!----------Footer---------------> 
 
-<?php include 'template/footer.html'?>
+<?php include_once 'template/footer.html'?>

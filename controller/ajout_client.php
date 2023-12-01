@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once '../Model/DB.php';
 
 $response = array();
 
@@ -26,14 +27,17 @@ $contact = $prenomLivraison . " " . $nomLivraison;
 $adresse = $numRueLivraison . " " . $rueLivraison;
 $client = $societeLivraison . "-" . $contact;
 // $_SESSION['client'] = $client;
-
+ $db_host = DB_HOST;
+ $db_name = DB_NAME;
+$db_user = DB_USERNAME;
+ $db_pass = DB_PASSWORD;
 
 
 try {
     $pdo = new PDO(
-        'mysql:host=localhost;dbname=ebcon_crm;',
-        'root',
-        ''
+        'mysql:host=' . $db_host . ';dbname=' . $db_name . ';',
+        $db_user,
+        $db_pass
     );
 } catch (Exception $e) {
     die('erreur: ' . $e);
@@ -47,8 +51,9 @@ if ($stmt->execute([$telLivraison])) {
     if ($row > 0) {
         echo "Le client existe déjà avec ce numéro de téléphone.";
     } else {
-        $sqlQuery = "INSERT INTO clients (client, contact, tel, email, cdp, ville, adresse, pays, status) VALUES ('$societeLivraison', '$contact', '$telLivraison', '$emailLivraison', '$cdpLivraison', '$villeLivraison', '$adresse', '$paysLivraison', 'CS') ";
+        $sqlQuery = "INSERT INTO clients (client, contact, tel, email, cdp, ville, adresse, pays, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'CS')";
         $stmt = $pdo->prepare($sqlQuery);
+        $stmt->execute([$societeLivraison, $contact, $telLivraison, $emailLivraison, $cdpLivraison, $villeLivraison, $adresse, $paysLivraison]);
     }
 }
 

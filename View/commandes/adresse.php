@@ -1,6 +1,6 @@
 <?php include 'template/header.php';
 ob_start();
-include 'Model/ProduitsBDD.php';
+include_once 'Model/ProduitsBDD.php';
 
 if (isset($_SESSION['adresseFacturation'])) {
     $prenom = $_SESSION['adresseFacturation']['prenom'];
@@ -15,7 +15,12 @@ if (isset($_SESSION['adresseFacturation'])) {
     $numeroRue = $_SESSION['adresseFacturation']['numRue'];
 }
 
-$TVA=$_SESSION['TVA'];
+
+if (isset($_SESSION['TVA'])) {
+    $TVA = $_SESSION['TVA'];
+} else {
+    $TVA = 20;
+}
 
 
 ?>
@@ -534,20 +539,20 @@ $TVA=$_SESSION['TVA'];
                 $montantTotal = array_sum(array_map(function ($p, $q) {
                     return $p * $q;
                 }, $prix, $quantite));
-                
+
 
                 echo "<div class='produit-recap'>";
                 // echo "<p><strong>Produit:</strong> " . $nomCommande[$i] . "</p>";
                 echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
                 echo "<p><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
                 // echo "<p><strong>Total:</strong> " . $totalProduit . " EUR</p>";
-              
+
                 echo "</div>";
             }
-            $total= ((100+$TVA)/100)*$montantTotal;
+            $total = ((100 + $TVA) / 100) * $montantTotal;
 
 
-echo '<p><strong>Total HT:</strong> ' . $montantTotal. ' EUR </p>';
+            echo '<p><strong>Total HT:</strong> ' . $montantTotal . ' EUR </p>';
             echo "<p><strong>Montant total de la commande:</strong> " . $total . " EUR</p>";
 
 
