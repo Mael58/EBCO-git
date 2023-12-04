@@ -1272,3 +1272,21 @@ h1 {
 }
 
 
+.recapAdresse {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 15px;
+    background-color: #f9f9f9;
+    height: 50%;
+    width: 25%;
+    display: none;
+}
+
+#modifier {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+

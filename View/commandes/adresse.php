@@ -2,6 +2,8 @@
 ob_start();
 include_once 'Model/ProduitsBDD.php';
 
+
+
 if (isset($_SESSION['adresseFacturation'])) {
     $prenom = $_SESSION['adresseFacturation']['prenom'];
     $nom = $_SESSION['adresseFacturation']['nom'];
@@ -274,6 +276,9 @@ if (isset($_SESSION['TVA'])) {
             const facturation = document.getElementById("container-facturation");
             const boutton = document.getElementById("btnAdresse");
             const adresse = document.getElementById('adresseCommande');
+            const recap = document.getElementById("recapAdresse");
+            var reloadPage = true;
+
 
             const loginButton = document.getElementById('bouton');
             loginButton.addEventListener('click', function(event) {
@@ -300,6 +305,8 @@ if (isset($_SESSION['TVA'])) {
                     });
             }
 
+        
+
 
             <?php
             if (isset($_SESSION['username'])) {
@@ -308,18 +315,19 @@ if (isset($_SESSION['TVA'])) {
 
             ?>
 
-            // modifier.addEventListener("click", function() {
-            //     handleLogin();
-            // });
+         
 
             function handleLogin() {
                 formAdresse.style.display = "flex";
                 loginForm.style.display = "none";
                 regForm.style.display = "none";
                 verif.style.display = "none";
+                recap.style = "none";
                 // adresse.style.display = "none";
                 updateCompletedSteps(3);
             }
+
+
 
             function handleAddAdresse() {
 
@@ -385,6 +393,7 @@ if (isset($_SESSION['TVA'])) {
                         .then(data => {
                             console.log(data); // Vous pouvez accéder aux données encodées en JSON ici
                             // Traitez les données comme nécessaire
+                            location.reload();
                         })
                         .catch(error => {
                             console.error('Erreur lors de l\'envoi de la requête AJAX:', error);
@@ -399,10 +408,6 @@ if (isset($_SESSION['TVA'])) {
                         const result1 = results[0];
                         const result2 = results[1];
 
-                        // Faites quelque chose avec les résultats
-
-
-                        // Exécutez une action supplémentaire ici
                     })
                     .catch(error => {
                         console.error('Erreur lors de l\'exécution simultanée des requêtes:', error);
@@ -413,20 +418,39 @@ if (isset($_SESSION['TVA'])) {
                 facturation.style.display = "none";
                 // adresse.style.display = "flex";
                 verif.style.display = "flex";
+                recap.style.display = "block";
                 updateCompletedSteps(4);
+
+
+
+
             }
+
+
+            modifier.addEventListener('click', function() {
+                handleLogin();
+            })
+
 
             const btnAdresse = document.getElementById('btnAdresse');
             const btnLivraison = document.getElementById("btnLivraison");
             btnLivraison.addEventListener('click', function(event) {
                 event.preventDefault();
                 handleAddAdresse();
+
+
+
             });
 
             btnAdresse.addEventListener('click', function(event) {
                 event.preventDefault();
+                reloadPage = true;
                 handleAddAdresse();
+
+
+
             });
+
 
             function updateCompletedSteps(stepNumber) {
                 steps.forEach(step => {
@@ -457,10 +481,22 @@ if (isset($_SESSION['TVA'])) {
 
 
 
+    <div class="recapAdresse" id="recapAdresse">
+
+        <p><strong>Prénom:</strong> <?php echo $prenom; ?></p>
+        <p><strong>Nom:</strong> <?php echo $nom; ?></p>
+        <p><strong>Email:</strong> <?php echo $email; ?></p>
+        <p><strong>Téléphone:</strong> <?php echo $telephone; ?></p>
+        <p><strong>Code Postal:</strong> <?php echo $codePostal; ?></p>
+        <p><strong>Adresse:</strong> <?php echo "$numeroRue $rue, $ville"; ?></p>
+        <p id="modifier">Modifier</p>
+    </div>
+
 
 
 
     <div class="verif" id="verif">
+
 
 
 
@@ -505,12 +541,6 @@ if (isset($_SESSION['TVA'])) {
                             echo '<td>' . $sousTotal . ' €</td>';
                             echo '</tr>';
                         }
-                        // Vérifiez si le total est inférieur à 50 euros
-                        // if ($total < 50) {
-                        //     $total += $fraisPort;
-                        // } else {
-                        //     $fraisPort = 0;
-                        // }
                     }
                 }
 
@@ -523,250 +553,263 @@ if (isset($_SESSION['TVA'])) {
 
         </div>
         <?php
-        if (isset($_SESSION['cart'])) {
-
-            foreach ($_SESSION['cart'] as $produit) {
-                if (isset($produit['nom']) && isset($produit['prix']) && isset($produit['quantite'])) {
-                    $nomCommande[] = $produit['nom'];
-                    $prix[] = $produit['prix'];
-                    $quantite[] = $produit['quantite'];
-                }
-            }
-            echo '<div class="recap">';
-
-            for ($i = 0; $i < count($nomCommande); $i++) {
-
-                $montantTotal = array_sum(array_map(function ($p, $q) {
-                    return $p * $q;
-                }, $prix, $quantite));
+        $nomCommande = [];
+        $prix = [];
+        $quantite = [];
+        $cart = isset($_SESSION['panier']) ? $_SESSION['panier'] : [];
 
 
-                echo "<div class='produit-recap'>";
-                // echo "<p><strong>Produit:</strong> " . $nomCommande[$i] . "</p>";
-                echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
-                echo "<p><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
-                // echo "<p><strong>Total:</strong> " . $totalProduit . " EUR</p>";
+        foreach ($cart as $produit) {
+            $nomProduit = isset($produit['nom']) ? $produit['nom'] : '';
+            $quantiteProduit = isset($produit['quantite']) ? $produit['quantite'] : 0;
+            $prixProduit = isset($produit['prix']) ? $produit['prix'] : 0;
 
-                echo "</div>";
-            }
-            $total = (($TVA) / 100) * $montantTotal;
-            
-            $totalTAxe= round($total,2);
+            // Ajoutez ces valeurs aux tableaux
+            $nomCommande[] = $nomProduit;
+            $quantite[] = $quantiteProduit;
+            $prix[] = $prixProduit;
+
+            // ... Autres opérations de base de données
+        }
+        echo '<div class="recap">';
 
 
-            echo '<p><strong>Total HT:</strong> ' . $montantTotal . ' EUR </p>';
-            
-            echo "<p><strong>TVA:</strong> " . $total . " EUR</p>";
-            echo "<h2>TOTAL : " . number_format((float)$montantTotal + $total, 2, '.',);
+
+
+
+
+
+        for ($i = 0; $i < count($nomCommande); $i++) {
+
+            $montantTotal = array_sum(array_map(function ($p, $q) {
+                return $p * $q;
+            }, $prix, $quantite));
+
+
+            echo "<div class='produit-recap'>";
+            // echo "<p><strong>Produit:</strong> " . $nomCommande[$i] . "</p>";
+            echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
+            echo "<p><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
+            // echo "<p><strong>Total:</strong> " . $totalProduit . " EUR</p>";
+
+            echo "</div>";
+        }
+        $total = (($TVA) / 100) * $montantTotal;
+
+        $totalTAxe = round($total, 2);
+
+
+        echo '<p><strong>Total HT:</strong> ' . $montantTotal . ' EUR </p>';
+
+        echo "<p><strong>TVA:</strong> " . $total . " EUR</p>";
+        echo "<h2>TOTAL : " . number_format((float)$montantTotal + $total, 2, '.',);
 
 
 
         ?>
 
-            <div class="paiement">
-                <div class="form-container-achat">
-                    <form method='post'>
-                        <div id="paypal-button-container"></div>
+        <div class="paiement">
+            <div class="form-container-achat">
+                <form method='post'>
+                    <div id="paypal-button-container"></div>
 
-                        <script src="https://www.paypal.com/sdk/js?client-id=AaOvluVx3_tbxX782Q3zyGBSmCPfnaEdHVcbwDqOXu_dgFCtxQmMGtdy-jDzY8JWPmpGL5bZm-ovGAyn&currency=EUR"></script>
-                        <?php
-                        $tax_total = 0;
-                        $shipping = 0;
-                        $handling = 0;
-                        $insurance = 0;
-                        $shipping_discount = 0;
-                        $discount = 0;
-                        $totalAmount = $montantTotal + $totalTAxe + $shipping + $handling + $insurance - $shipping_discount - $discount;
-                        echo $totalAmount;
-                        $order = [
+                    <script src="https://www.paypal.com/sdk/js?client-id=AaOvluVx3_tbxX782Q3zyGBSmCPfnaEdHVcbwDqOXu_dgFCtxQmMGtdy-jDzY8JWPmpGL5bZm-ovGAyn&currency=EUR"></script>
+                    <?php
+                    $tax_total = 0;
+                    $shipping = 0;
+                    $handling = 0;
+                    $insurance = 0;
+                    $shipping_discount = 0;
+                    $discount = 0;
+                    $totalAmount = $montantTotal + $totalTAxe + $shipping + $handling + $insurance - $shipping_discount - $discount;
 
-                            'purchase_units' => [
-                                [
+                    $order = [
 
-                                    'amount' => [
-                                        'value' =>  number_format($totalAmount, 2, '.', ''), // Montant en euros
-                                        'currency_code' => 'EUR',
-                                        'breakdown' => [
-                                            'item_total' => [
-                                                'currency_code' => "EUR",
-                                                'value' => $montantTotal
-                                            ],
-                                            'tax_total' => [
-                                                'currency_code' => 'EUR',
-                                                'value' => $totalTAxe 
-                                            ],
-                                            'shipping' => [
-                                                'currency_code' => 'EUR',
-                                                'value' => 0,
-                                            ],
-                                            'handling' => [
-                                                'currency_code' => 'EUR',
-                                                'value' => 0,
-                                            ],
-                                            'insurance' => [
-                                                'currency_code' => 'EUR',
-                                                'value' => 0,
-                                            ],
-                                            'shipping_discount' => [
-                                                'currency_code' => 'EUR',
-                                                'value' => 0,
-                                            ],
-                                            'discount' => [
-                                                'currency_code' => 'EUR',
-                                                'value' => 0,
-                                            ],
-                                        
-                        
+                        'purchase_units' => [
+                            [
+
+                                'amount' => [
+                                    'value' =>  number_format($totalAmount, 2, '.', ''), // Montant en euros
+                                    'currency_code' => 'EUR',
+                                    'breakdown' => [
+                                        'item_total' => [
+                                            'currency_code' => "EUR",
+                                            'value' => $montantTotal
                                         ],
-                                       
+                                        'tax_total' => [
+                                            'currency_code' => 'EUR',
+                                            'value' => $totalTAxe
+                                        ],
+                                        'shipping' => [
+                                            'currency_code' => 'EUR',
+                                            'value' => 0,
+                                        ],
+                                        'handling' => [
+                                            'currency_code' => 'EUR',
+                                            'value' => 0,
+                                        ],
+                                        'insurance' => [
+                                            'currency_code' => 'EUR',
+                                            'value' => 0,
+                                        ],
+                                        'shipping_discount' => [
+                                            'currency_code' => 'EUR',
+                                            'value' => 0,
+                                        ],
+                                        'discount' => [
+                                            'currency_code' => 'EUR',
+                                            'value' => 0,
+                                        ],
+
+
                                     ],
-                                    'shipping' => [
-                                        'name' => [  // Ajoutez cette partie pour spécifier le nom du destinataire
-                                            'full_name' => "{$prenom} {$nom}"
-                                        ],
-                                        'address' => [
-                                            'address_line_1' => "{$numeroRue} {$rue}",
-                                            'admin_area_2' => $ville,
-                                            'postal_code' => $codePostal,
-                                            'country_code' => $pays,
-                                        ],
-                                    ],
-                                    'items' => [],
+
                                 ],
-
+                                'shipping' => [
+                                    'name' => [  // Ajoutez cette partie pour spécifier le nom du destinataire
+                                        'full_name' => "{$prenom} {$nom}"
+                                    ],
+                                    'address' => [
+                                        'address_line_1' => "{$numeroRue} {$rue}",
+                                        'admin_area_2' => $ville,
+                                        'postal_code' => $codePostal,
+                                        'country_code' => $pays,
+                                    ],
+                                ],
+                                'items' => [],
                             ],
 
-                            "payer" => [
-                                "name" => [
-                                    "given_name" => $prenom,
-                                    "surname" => $nom
+                        ],
+
+                        "payer" => [
+                            "name" => [
+                                "given_name" => $prenom,
+                                "surname" => $nom
+                            ],
+                            "email_address" => $email,
+
+                        ]
+
+                    ];
+                    if (isset($nomCommande)) {
+                        for ($i = 0; $i < count($nomCommande); $i++) {
+                            $item_name = $nomCommande[$i];
+                            $item_prix = $prix[$i];
+                            $item_qte = $quantite[$i];
+                            //echo $item_name;
+                            $item = [
+
+                                'name' => $item_name,
+                                'unit_amount' => [
+                                    'value' => $item_prix,
+                                    'currency_code' => 'EUR'
                                 ],
-                                "email_address" => $email,
+                                'quantity' => $item_qte
+                            ];
 
-                            ]
-
-                        ];
-                        if (isset($nomCommande)) {
-                            for ($i = 0; $i < count($nomCommande); $i++) {
-                                $item_name = $nomCommande[$i];
-                                $item_prix = $prix[$i];
-                                $item_qte = $quantite[$i];
-                                //echo $item_name;
-                                $item = [
-
-                                    'name' => $item_name,
-                                    'unit_amount' => [
-                                        'value' => $item_prix,
-                                        'currency_code' => 'EUR'
-                                    ],
-                                    'quantity' => $item_qte
-                                ];
-
-                                // Utilisez [] pour ajouter un élément à la liste d'articles
-                                $order['purchase_units'][0]['items'][] = $item;
-                            }
+                            // Utilisez [] pour ajouter un élément à la liste d'articles
+                            $order['purchase_units'][0]['items'][] = $item;
                         }
+                    }
 
-                        // Convertissez le tableau en JSON à la fin
-                        $order = json_encode($order);
-
-
-                        ?>
-                        <script>
-                            console.log(<?= $order ?>);
-                            paypal.Buttons({
-                                createOrder: function(data, actions) {
-                                    return actions.order.create(<?= $order ?>);
-
-                                },
-
-                                // JavaScript (Front-end)
-                                onApprove: function(data, actions) {
+                    // Convertissez le tableau en JSON à la fin
+                    $order = json_encode($order);
 
 
-                                    return actions.order.capture().then(function(details) {
-
-
-
-                                        console.log(details);
-
-
-                                        var nomCommande = [];
-                                        var prix = [];
-                                        var quantite = [];
-
-                                        <?php
-                                        // PHP (Back-end)
-                                        $cart = $_SESSION['cart'];
-                                        foreach ($cart as $produit) {
-
-                                            $nomCommande = isset($produit['nom']) ? $produit['nom'] : '';
-                                            $quantite = isset($produit['quantite']) ? $produit['quantite'] : 0;
-                                            $prix = isset($produit['prix']) ? $produit['prix'] : 0;
-                                            $total = $quantite * $prix;
-
-                                            // Ici, vous pouvez stocker ces valeurs dans des tableaux JavaScript
-                                            echo "nomCommande.push('" . $nomCommande . "');\n";
-                                            echo "quantite.push(" . $quantite . ");\n";
-                                            echo "prix.push(" . $prix . ");\n";
-
-                                            // ... Autres opérations de base de données
-                                        }
-
-
-                                        ?>
-
-                                        // Maintenant, vous pouvez envoyer ces données au serveur via une requête AJAX
-                                        var xhr = new XMLHttpRequest();
-                                        xhr.open('POST', 'Controller/ajout_commandes.php', true);
-                                        xhr.setRequestHeader('Content-Type', 'application/json');
-
-                                        var dataToSend = {
-                                            nomCommande: nomCommande,
-                                            quantite: quantite,
-                                            prix: prix
-
-                                        };
-                                        
-
-
-                                        xhr.send(JSON.stringify(dataToSend));
-
-                                        var xhr2 = new XMLHttpRequest();
-                                        xhr2.open('POST', 'Controller/update_quantity.php', true);
-                                        xhr2.setRequestHeader('Content-Type', 'application/json');
-                         
-                                        xhr2.onreadystatechange = function() {
-                                            if (xhr2.readyState == 4 && xhr2.status == 200) {
-                                                // Mettez à jour l'interface utilisateur ou effectuez d'autres actions si nécessaire
-                                                console.log(xhr2.responseText);
-                                                // Vous pouvez également mettre à jour le panierCounter ici
-                                            }
-                                        };
-                                        xhr2.send(JSON.stringify(dataToSend));
-                                        var prenom = '<?= $prenom ?>';
-                                        var nom = '<?= $nom ?>';
-
-                                        alert(prenom + ' ' + nom + ', votre transaction est effectuée. Vous allez recevoir une notification très bientôt lorsque nous validons votre paiement.');
-                                    });
-                                },
-
-                                onCancel: function(data) {
-                                    alert("Transaction annulée !");
-                                }
-                            }).render('#paypal-button-container');
-                        </script>
-
-
-
-
-                    </form>
-                </div>
-            </div><?php
-
-                    echo "</div>";
-                }
                     ?>
+                    <script>
+                        console.log(<?= $order ?>);
+                        paypal.Buttons({
+                            createOrder: function(data, actions) {
+                                return actions.order.create(<?= $order ?>);
+
+                            },
+
+                            // JavaScript (Front-end)
+                            onApprove: function(data, actions) {
+
+
+                                return actions.order.capture().then(function(details) {
+
+
+
+                                    console.log(details);
+
+
+                                    var nomCommande = [];
+                                    var prix = [];
+                                    var quantite = [];
+
+                                    <?php
+                                    // PHP (Back-end)
+                                    $cart = $_SESSION['panier'];
+                                    foreach ($cart as $produit) {
+
+                                        $nomCommande = isset($produit['nom']) ? $produit['nom'] : '';
+                                        $quantite = isset($produit['quantite']) ? $produit['quantite'] : 0;
+                                        $prix = isset($produit['prix']) ? $produit['prix'] : 0;
+                                        $total = $quantite * $prix;
+
+                                        // Ici, vous pouvez stocker ces valeurs dans des tableaux JavaScript
+                                        echo "nomCommande.push('" . $nomCommande . "');\n";
+                                        echo "quantite.push(" . $quantite . ");\n";
+                                        echo "prix.push(" . $prix . ");\n";
+
+                                        // ... Autres opérations de base de données
+                                    }
+
+
+                                    ?>
+
+                                    // Maintenant, vous pouvez envoyer ces données au serveur via une requête AJAX
+                                    var xhr = new XMLHttpRequest();
+                                    xhr.open('POST', 'Controller/ajout_commandes.php', true);
+                                    xhr.setRequestHeader('Content-Type', 'application/json');
+
+                                    var dataToSend = {
+                                        nomCommande: nomCommande,
+                                        quantite: quantite,
+                                        prix: prix
+
+                                    }
+                                    xhr.send(JSON.stringify(dataToSend));
+
+                                    var xhr2 = new XMLHttpRequest();
+                                    xhr2.open('POST', 'Controller/update_quantity.php', true);
+                                    xhr2.setRequestHeader('Content-Type', 'application/json');
+
+                                    xhr2.onreadystatechange = function() {
+                                        if (xhr2.readyState == 4 && xhr2.status == 200) {
+                                            // Mettez à jour l'interface utilisateur ou effectuez d'autres actions si nécessaire
+                                            console.log(xhr2.responseText);
+                                            // Vous pouvez également mettre à jour le panierCounter ici
+                                        }
+                                    };
+                                    xhr2.send(JSON.stringify(dataToSend));
+                                    var prenom = '<?= $prenom ?>';
+                                    var nom = '<?= $nom ?>';
+
+                                    alert(prenom + ' ' + nom + ', votre transaction est effectuée. Vous allez recevoir une notification très bientôt lorsque nous validons votre paiement.');
+                                });
+                            },
+
+                            onCancel: function(data) {
+                                alert("Transaction annulée !");
+                            }
+                        }).render('#paypal-button-container');
+                    </script>
+
+
+
+
+                </form>
+            </div>
+        </div>
+        <?php
+
+        echo "</div>";
+
+        ?>
 
 
     </div>

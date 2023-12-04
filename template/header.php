@@ -66,7 +66,7 @@ $categoriesUniques = array_unique($categories);
 
                             ?>
                         </span>
-                        <img src="Public/images/menu.png" onclick="menutoggle()" class="menu-icon">Panier</a>
+                        <a href="#" id="menuIcon"><img src="Public/images/menu.png" class="menu-icon">Panier</a>
 
                 </li>
 
@@ -99,7 +99,7 @@ $categoriesUniques = array_unique($categories);
                             $liens = [
                                 'Cable USB' => 'usb',
                                 'Objet connectes' => 'iot.php',
-                                // Ajoutez d'autres catégories et URLs au besoin
+                           
                             ];
 
 
@@ -180,16 +180,21 @@ $categoriesUniques = array_unique($categories);
 
 
 
-    <script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
         var MenuItems = document.getElementById("MenuItems");
-
         MenuItems.style.maxHeight = "0px";
 
         function menutoggle() {
             if (MenuItems.style.maxHeight == "0px") {
                 MenuItems.style.maxHeight = "200px";
             } else {
-                MenuItems.style.maxHeight = "0px"
+                MenuItems.style.maxHeight = "0px";
             }
         }
-    </script>
+
+        // Assurez-vous que votre image a une balise d'ouverture <a> associée
+        var menuIcon = document.getElementById("menuIcon");
+        menuIcon.addEventListener("click", menutoggle);
+    });
+</script>
