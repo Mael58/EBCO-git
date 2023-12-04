@@ -1,4 +1,4 @@
-<?php include 'template/header.php';
+<?php include_once 'template/header.php';
 ob_start();
 include_once 'Model/ProduitsBDD.php';
 
@@ -393,7 +393,7 @@ if (isset($_SESSION['TVA'])) {
                         .then(data => {
                             console.log(data); // Vous pouvez accéder aux données encodées en JSON ici
                             // Traitez les données comme nécessaire
-                            location.reload();
+                          
                         })
                         .catch(error => {
                             console.error('Erreur lors de l\'envoi de la requête AJAX:', error);
@@ -444,7 +444,7 @@ if (isset($_SESSION['TVA'])) {
 
             btnAdresse.addEventListener('click', function(event) {
                 event.preventDefault();
-                reloadPage = true;
+         
                 handleAddAdresse();
 
 
@@ -814,4 +814,4 @@ if (isset($_SESSION['TVA'])) {
 
     </div>
 
-    <?php include 'template/footer.html' ?>
+    <?php include_once 'template/footer.html' ?>

@@ -1,6 +1,8 @@
 <?php
 ob_start();
-include 'template/header.php';
+include_once 'template/header.php';
+
+
 
 ?>
 
@@ -11,9 +13,9 @@ $nomLien = $_GET['nom'];
 
 try {
     $db = new PDO(
-        'mysql:host=localhost;dbname=ebcon_crm;',
-        'root',
-        ''
+        'mysql:host=' . $db_host . ';dbname=' . $db_name . ';',
+        $db_user,
+        $db_pass,
     );
 } catch (Exception $e) {
     die('erreur: ' . $e);

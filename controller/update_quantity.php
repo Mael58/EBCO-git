@@ -1,5 +1,12 @@
 <?php
+include_once '../Model/DB.php';
 $response = array();
+
+
+$db_host = DB_HOST;
+ $db_name = DB_NAME;
+$db_user = DB_USERNAME;
+ $db_pass = DB_PASSWORD;
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -12,12 +19,13 @@ $prix = $data->prix;
 $nomCommande = $data->nomCommande;
   
 
-    try {
-        $db = new PDO(
-            'mysql:host=localhost;dbname=ebcon_crm;',
-            'root',
-            ''
-        );
+try {
+    $db = new PDO(
+        'mysql:host=' . $db_host . ';dbname=' . $db_name . ';',
+        $db_user,
+        $db_pass,
+    );
+
 
         // Validate and sanitize input (not shown in this example)
 

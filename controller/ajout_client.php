@@ -1,4 +1,10 @@
 <?php
+include_once '../Model/DB.php';
+
+$db_host = DB_HOST;
+ $db_name = DB_NAME;
+$db_user = DB_USERNAME;
+ $db_pass = DB_PASSWORD;
 session_start();
 
 $response = array();
@@ -31,9 +37,9 @@ $client = $societeLivraison . "-" . $contact;
 
 try {
     $pdo = new PDO(
-        'mysql:host=localhost;dbname=ebcon_crm;',
-        'root',
-        ''
+        'mysql:host=' . $db_host . ';dbname=' . $db_name . ';',
+        $db_user,
+        $db_pass,
     );
 } catch (Exception $e) {
     die('erreur: ' . $e);

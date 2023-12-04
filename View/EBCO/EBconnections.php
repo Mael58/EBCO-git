@@ -1,4 +1,4 @@
-<?php include 'template/header.php'?>
+<?php include_once 'template/header.php'?>
         
         <div class="row">
             <div class="col-2 entrep">
@@ -61,7 +61,7 @@
         
       <!----------Footer---------------> 
 
-<?php include 'template/footer.html'?>
+<?php include_once 'template/footer.html'?>
 
 
 

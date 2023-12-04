@@ -1,5 +1,5 @@
 <?php
-include 'template/header.php';
+include_once 'template/header.php';
 if(isset($_SESSION['TVA'])){
     $TVA= $_SESSION['TVA'];
 }else{
@@ -144,4 +144,4 @@ $_SESSION['total'] = $total;
 
 
 
-include 'template/footer.html'; ?>
+include_once 'template/footer.html'; ?>

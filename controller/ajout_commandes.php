@@ -16,7 +16,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 // Vous pouvez maintenant traiter les données, les insérer dans la base de données, etc.
 $nomCommande = $data->nomCommande;
-var_dump($nomCommande);
+
 $quantite = $data->quantite;
 $prix = $data->prix;
 
