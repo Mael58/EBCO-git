@@ -17,8 +17,10 @@ $controllerFile = 'Controller/ControllerView/' . $controllerName . '.php';
 
 if (file_exists($controllerFile)) {
     include_once $controllerFile;
+
+    $recipeName = $_GET['recipeName'] ?? '';
     $controller = new $controllerName();
-    $controller->index();
+    $controller->index($recipeName);
 } else {
     // Gérer le contrôleur manquant ici, par exemple rediriger vers une page d'erreur.
     echo "Contrôleur non trouvé $requestedPage";

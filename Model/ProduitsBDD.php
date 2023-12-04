@@ -1,5 +1,5 @@
 <?php
-require_once('DB.php');
+require_once 'DB.php';
 class ProduitsBDD
 {
     private $db;
@@ -134,6 +134,13 @@ class ProduitsBDD
 
 
             $_SESSION['adresseFacturation'] = $user_data;
+        }
+
+        if (isset($_COOKIE['nbArticle-' . $username])) {
+            $user_data = json_decode($_COOKIE['nbArticle-' . $username], true);
+
+
+            $_SESSION['nombreTotalArticles'] = $user_data;
         }
 
         ob_end_flush();

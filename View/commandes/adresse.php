@@ -312,6 +312,9 @@ if (isset($_SESSION['TVA'])) {
             if (isset($_SESSION['username'])) {
                 echo 'handleLogin();';
             }
+            if(isset($_SESSION['adresse'])){
+                echo 'handleAddAdresse()';
+            }
 
             ?>
 

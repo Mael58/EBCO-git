@@ -41,7 +41,7 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
 
     // Calculer et stocker le nombre total d'articles dans le panier global
     $nombreTotalArticles = array_sum(array_column($_SESSION['panier'], 'quantite'));
-    $_SESSION['nombreTotalArticles'] = $nombreTotalArticles;
+    $_SESSION['nombreTotalArticles']= $nombreTotalArticles;
 
     // Afficher le nombre total d'articles dans le panier global
     echo $nombreTotalArticles;

@@ -47,7 +47,7 @@ if ($recipe) {
     $_SESSION['TVA'] = $recipe['TVA'];
 
     $_SESSION['quantiteMax'] = $quantite;
-    var_dump($_SESSION['quantiteMax']);
+ 
 
     $db = null;
 

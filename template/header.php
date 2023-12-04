@@ -6,6 +6,8 @@ $db_host = DB_HOST;
 $db_user = DB_USERNAME;
  $db_pass = DB_PASSWORD;
 
+ var_dump($_SESSION['nombreTotalArticles']);
+
 
 
 ?>
@@ -167,6 +169,8 @@ $categoriesUniques = array_unique($categories);
 
 
             setcookie("panier-$username", json_encode($_SESSION['panier']), $cookie_expiration, '/');
+            setcookie("nbArticle-$username", json_encode($_SESSION['nombreTotalArticles']), $cookie_expiration, '/');
+
 
 
             session_destroy();
