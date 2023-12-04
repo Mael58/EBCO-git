@@ -549,11 +549,15 @@ if (isset($_SESSION['TVA'])) {
 
                 echo "</div>";
             }
-            $total = ((100 + $TVA) / 100) * $montantTotal;
+            $total = (($TVA) / 100) * $montantTotal;
+            
+            $totalTAxe= round($total,2);
 
 
             echo '<p><strong>Total HT:</strong> ' . $montantTotal . ' EUR </p>';
-            echo "<p><strong>Montant total de la commande:</strong> " . $total . " EUR</p>";
+            
+            echo "<p><strong>TVA:</strong> " . $total . " EUR</p>";
+            echo "<h2>TOTAL : " . number_format((float)$montantTotal + $total, 2, '.',);
 
 
 
@@ -566,20 +570,55 @@ if (isset($_SESSION['TVA'])) {
 
                         <script src="https://www.paypal.com/sdk/js?client-id=AaOvluVx3_tbxX782Q3zyGBSmCPfnaEdHVcbwDqOXu_dgFCtxQmMGtdy-jDzY8JWPmpGL5bZm-ovGAyn&currency=EUR"></script>
                         <?php
+                        $tax_total = 0;
+                        $shipping = 0;
+                        $handling = 0;
+                        $insurance = 0;
+                        $shipping_discount = 0;
+                        $discount = 0;
+                        $totalAmount = $montantTotal + $totalTAxe + $shipping + $handling + $insurance - $shipping_discount - $discount;
+                        echo $totalAmount;
                         $order = [
 
                             'purchase_units' => [
                                 [
 
                                     'amount' => [
-                                        'value' => "{$montantTotal}", // Montant en euros
+                                        'value' =>  number_format($totalAmount, 2, '.', ''), // Montant en euros
                                         'currency_code' => 'EUR',
                                         'breakdown' => [
                                             'item_total' => [
                                                 'currency_code' => "EUR",
                                                 'value' => $montantTotal
-                                            ]
+                                            ],
+                                            'tax_total' => [
+                                                'currency_code' => 'EUR',
+                                                'value' => $totalTAxe 
+                                            ],
+                                            'shipping' => [
+                                                'currency_code' => 'EUR',
+                                                'value' => 0,
+                                            ],
+                                            'handling' => [
+                                                'currency_code' => 'EUR',
+                                                'value' => 0,
+                                            ],
+                                            'insurance' => [
+                                                'currency_code' => 'EUR',
+                                                'value' => 0,
+                                            ],
+                                            'shipping_discount' => [
+                                                'currency_code' => 'EUR',
+                                                'value' => 0,
+                                            ],
+                                            'discount' => [
+                                                'currency_code' => 'EUR',
+                                                'value' => 0,
+                                            ],
+                                        
+                        
                                         ],
+                                       
                                     ],
                                     'shipping' => [
                                         'name' => [  // Ajoutez cette partie pour spécifier le nom du destinataire
@@ -688,9 +727,15 @@ if (isset($_SESSION['TVA'])) {
                                             prix: prix
 
                                         };
+                                        
+
+
+                                        xhr.send(JSON.stringify(dataToSend));
+
                                         var xhr2 = new XMLHttpRequest();
                                         xhr2.open('POST', 'Controller/update_quantity.php', true);
-                                        xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                        xhr2.setRequestHeader('Content-Type', 'application/json');
+                         
                                         xhr2.onreadystatechange = function() {
                                             if (xhr2.readyState == 4 && xhr2.status == 200) {
                                                 // Mettez à jour l'interface utilisateur ou effectuez d'autres actions si nécessaire
@@ -698,10 +743,7 @@ if (isset($_SESSION['TVA'])) {
                                                 // Vous pouvez également mettre à jour le panierCounter ici
                                             }
                                         };
-                                        xhr2.send('quantite=' + quantite + '&nom=' + nomCommande);
-
-
-                                        xhr.send(JSON.stringify(dataToSend));
+                                        xhr2.send(JSON.stringify(dataToSend));
                                         var prenom = '<?= $prenom ?>';
                                         var nom = '<?= $nom ?>';
 
