@@ -2,6 +2,6 @@
 
 class UsbController {
     public function index() {
-        include_once 'View/usb/usb.php';
+        include 'View/usb/usb.php';
     }
 }
