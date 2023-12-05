@@ -59,6 +59,7 @@ if(isset($_SESSION['username'])){?>
 
 $produit=new ProduitsBDD();
 $recipes=$produit->getProduit();
+$produit->close();
 
 
 

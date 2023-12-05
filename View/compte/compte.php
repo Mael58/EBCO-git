@@ -57,6 +57,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
     $bdd = new ProduitsBDD;
     $bdd->inscription($username, $password);
+    $bdd->close();
 }
 
 
@@ -66,6 +67,7 @@ if (isset($_POST['username2']) && isset($_POST['password2'])) {
     $password2 = $_POST['password2'];
     $bdd = new ProduitsBDD;
     $bdd->connexion($username2, $password2);
+    $bdd->close();
 }
 
 

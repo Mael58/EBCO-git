@@ -59,6 +59,7 @@ if (is_array($nomCommande) && is_array($quantite) && is_array($prix)) {
 } else {
     echo "Les tableaux sont nuls ou incorrects.";
 }
+$pdo=null;
 
 // Répondre au client (facultatif)
 $response = array('message' => 'Données enregistrées avec succès.');

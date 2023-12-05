@@ -26,7 +26,9 @@ include 'Model/ProduitsBDD.php';
 
 
         $recipeController = new ProduitsBDD();
+        
         $recipes = $recipeController->getVente("USB");
+        $recipeController->close();
 
 
 
@@ -105,6 +107,10 @@ include 'Model/ProduitsBDD.php';
                 <h2>${recipe.nom}</h2>
                 <a href="details?nom=<?= urlencode($recipe['nom']) ?>">
                     <img src="${recipe.lienImage}">
+                    <p>Puissance: <?= $puissance ?><br>
+                        Connecteur: <?= $connecteur ?><br>
+                        Debit: <?= $dataRate ?><br>
+                        Longueur: <?= $longueur ?><br></p>
                 </a>
                 <p>${recipe.prix} €</p>
             `;

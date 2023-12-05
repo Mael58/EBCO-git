@@ -36,7 +36,7 @@ $client = $societeLivraison . "-" . $contact;
 
 
 try {
-    $db = new PDO(
+    $pdo = new PDO(
         'mysql:host=' . $db_host . ';dbname=' . $db_name . ';',
         $db_user,
         $db_pass,
@@ -51,7 +51,7 @@ if ($stmt->execute([$telLivraison])) {
     $row = $stmt->fetchColumn();
 
     if ($row > 0) {
-        echo "Le client existe déjà avec ce numéro de téléphone.";
+        $reponse['message']= "Le client existe déjà avec ce numéro de téléphone.";
     } else {
         $sqlQuery = "INSERT INTO clients (client, contact, tel, email, cdp, ville, adresse, pays, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'CS')";
         $stmt = $pdo->prepare($sqlQuery);
@@ -62,13 +62,14 @@ if ($stmt->execute([$telLivraison])) {
 
 // Exécutez la requête
 if ($stmt->execute()) {
-    echo "Le client a été ajouté avec succès.";
+    $reponse['message']= "Le client a été ajouté avec succès.";
 } else {
-    echo "Erreur lors de l'ajout du client : ";
+    $reponse['message']= "Erreur lors de l'ajout du client : ";
 }
+$pdo=null;
 
 
-$jsonResponse = json_encode($response);
+$jsonResponse = json_encode($reponse);
 
 // Envoi du résultat au client
 header('Content-Type: application/json');

@@ -6,7 +6,7 @@ $db_host = DB_HOST;
 $db_user = DB_USERNAME;
  $db_pass = DB_PASSWORD;
 
- var_dump($_SESSION['nombreTotalArticles']);
+ 
 
 
 

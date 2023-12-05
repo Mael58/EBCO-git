@@ -4,17 +4,17 @@ include_once 'Model/ProduitsBDD.php';
 
 
 
-if (isset($_SESSION['adresseFacturation'])) {
-    $prenom = $_SESSION['adresseFacturation']['prenom'];
-    $nom = $_SESSION['adresseFacturation']['nom'];
-    $email = $_SESSION['adresseFacturation']['email'];
+if (isset($_SESSION['adresse'])) {
+    $prenom = $_SESSION['adresse']['prenom'];
+    $nom = $_SESSION['adresse']['nom'];
+    $email = $_SESSION['adresse']['email'];
 
-    $telephone = $_SESSION['adresseFacturation']['tel'];
-    $codePostal = $_SESSION['adresseFacturation']['cdp'];
-    $ville = $_SESSION['adresseFacturation']['ville'];
-    $pays = $_SESSION['adresseFacturation']['pays'];
-    $rue = $_SESSION['adresseFacturation']['rue'];
-    $numeroRue = $_SESSION['adresseFacturation']['numRue'];
+    $telephone = $_SESSION['adresse']['tel'];
+    $codePostal = $_SESSION['adresse']['cdp'];
+    $ville = $_SESSION['adresse']['ville'];
+    $pays = $_SESSION['adresse']['pays'];
+    $rue = $_SESSION['adresse']['rue'];
+    $numeroRue = $_SESSION['adresse']['numRue'];
 }
 
 
@@ -394,8 +394,8 @@ if (isset($_SESSION['TVA'])) {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log(data); // Vous pouvez accéder aux données encodées en JSON ici
-                            // Traitez les données comme nécessaire
+                            console.log(data); 
+                           
                           
                         })
                         .catch(error => {
@@ -409,7 +409,10 @@ if (isset($_SESSION['TVA'])) {
                     ]).then(results => {
                         // results est un tableau contenant les résultats des deux requêtes
                         const result1 = results[0];
+                    
                         const result2 = results[1];
+               
+               
 
                     })
                     .catch(error => {
@@ -486,7 +489,7 @@ if (isset($_SESSION['TVA'])) {
 
     <div class="recapAdresse" id="recapAdresse">
 
-        <p><strong>Prénom:</strong> <?php echo $prenom; ?></p>
+        <p><strong>Prénom:</strong> </p>
         <p><strong>Nom:</strong> <?php echo $nom; ?></p>
         <p><strong>Email:</strong> <?php echo $email; ?></p>
         <p><strong>Téléphone:</strong> <?php echo $telephone; ?></p>

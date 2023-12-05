@@ -23,6 +23,7 @@ include 'template/header.php';
 
                 $bdd = new ProduitsBDD;
                 $bdd->mdpOublie($username, $password);
+                $bdd->close();
             }
 
 

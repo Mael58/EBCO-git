@@ -24,6 +24,10 @@ class ProduitsBDD
         }
     }
 
+    public function close(){
+        $this->db=null;
+    }
+
     public function getVente($categorie)
     {
 
@@ -142,11 +146,14 @@ class ProduitsBDD
 
             $_SESSION['nombreTotalArticles'] = $user_data;
         }
-        // echo '<script>';
-        // echo ' window.history.back();';
-        // echo '</script>';
-
+        setcookie('panier-' . $username, '', time() - 3600, '/');
+        setcookie('adresse-' . $username, '', time() - 3600, '/');
+        setcookie('adresseFacturation-' . $username, '', time() - 3600, '/');
+        setcookie('nbArticle-' . $username, '', time() - 3600, '/');
+     
         ob_end_flush();
+        
+      
     }
 
 
