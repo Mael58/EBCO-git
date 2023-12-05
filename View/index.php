@@ -77,7 +77,7 @@ foreach ($recipes as $recipe) {
 
 
 <div class="col-usb">
-<a href="details.php?nom=<?= $recipe['nom'] ?>">
+<a href="details?nom=<?= urlencode($recipe['nom']) ?>">
 <h2><?= $recipe['nom'] ?></h2>
 
     <img src="<?= $recipe['lienImage'] ?>">

@@ -27,7 +27,7 @@ if(isset($_SESSION['TVA'])){
         $totalSansTVA = 0;
         $fraisPort = 10;
         if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
-            var_dump( $_SESSION['panier']);
+          
 
             foreach ($_SESSION['panier'] as $produit) {
 
@@ -81,6 +81,7 @@ if(isset($_SESSION['TVA'])){
                 // Actualisez la quantité dans la partie visible du panier
                 var sousTotalCell = input.parentNode.nextElementSibling;
                 sousTotalCell.innerHTML = response.nouveauSousTotal + ' €';
+              location.reload();
                
           
             } else {

@@ -142,6 +142,9 @@ class ProduitsBDD
 
             $_SESSION['nombreTotalArticles'] = $user_data;
         }
+        // echo '<script>';
+        // echo ' window.history.back();';
+        // echo '</script>';
 
         ob_end_flush();
     }

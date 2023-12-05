@@ -10,9 +10,19 @@ $nouvelleQuantite = isset($_POST["nouvelleQuantite"]) ? $_POST["nouvelleQuantite
 $prix = isset($_POST["prix"]) ? $_POST["prix"] : "";
 $nouveauSousTotal = floatval($prix) * floatval($nouvelleQuantite);
 
-$_SESSION['nouveauSousTotal']= $nouveauSousTotal;
 
-$_SESSION['nouvelleQuantite']= $nouvelleQuantite;
+if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
+    foreach ($_SESSION['panier'] as &$produit) {
+        if ($produit['nom'] == $nomProduit) {
+            // Mettre à jour la quantité et le prix du produit existant
+            $produit['quantite'] = $nouvelleQuantite;
+            $produit['prix'] = $prix;
+            $produit['sousTotal'] = $nouveauSousTotal;
+            $nombreTotalArticles = array_sum(array_column($_SESSION['panier'], 'quantite'));
+    $_SESSION['nombreTotalArticles']= $nombreTotalArticles;
+        }
+    }
+}
 
 
 

@@ -540,7 +540,7 @@ if (isset($_SESSION['TVA'])) {
 
                             $total += $sousTotal; // Ajoutez le sous-total au total
                             echo '<td>' . $produit['prix'] . ' €</td>';
-                            echo '<td><input type="number" value="' . $produit['quantite'] . '"></td>';
+                            echo '<td><input type="number" min="1" value="' . $produit['quantite'] . '" id="quantite-' . $produit['nom'] . '" data-prix="' . $produit['prix'] . '" onchange="updateQuantitePrix(this, \'' . $produit['nom'] . '\',\'' . $produit['prix'] . '\')"></td>';
                             echo '<td>' . $sousTotal . ' €</td>';
                             echo '</tr>';
                         }
@@ -551,6 +551,38 @@ if (isset($_SESSION['TVA'])) {
                 ?>
 
             </table>
+
+
+            <script>
+    function updateQuantitePrix(input, nomProduit, prix) {
+    var nouvelleQuantite = input.value;
+
+    // Utiliser AJAX pour envoyer les données au serveur
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "Controller/update_panier.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+                // Actualisez la quantité dans la partie visible du panier
+                var sousTotalCell = input.parentNode.nextElementSibling;
+                sousTotalCell.innerHTML = response.nouveauSousTotal + ' €';
+             
+                
+                location.reload();
+            } else {
+              
+            }
+        }
+    };
+
+    // Envoyer les données au serveur
+    var params = "nomProduit=" + encodeURIComponent(nomProduit) + "&nouvelleQuantite=" + encodeURIComponent(nouvelleQuantite) + "&prix=" + encodeURIComponent(prix);
+    xhr.send(params);
+}
+
+</script>
 
 
 

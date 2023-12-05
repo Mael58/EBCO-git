@@ -103,7 +103,7 @@ include 'Model/ProduitsBDD.php';
                 colUsb.classList.add("col-usb");
                 colUsb.innerHTML = `
                 <h2>${recipe.nom}</h2>
-                <a href="details.php?nom=${recipe.nom}">
+                <a href="details?nom=<?= urlencode($recipe['nom']) ?>">
                     <img src="${recipe.lienImage}">
                 </a>
                 <p>${recipe.prix} €</p>
