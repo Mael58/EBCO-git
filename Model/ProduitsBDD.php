@@ -146,10 +146,10 @@ class ProduitsBDD
 
             $_SESSION['nombreTotalArticles'] = $user_data;
         }
-        setcookie('panier-' . $username, '', time() - 3600, '/');
+        setcookie('panier-' . $username, '', time() - 3600, '/', '', true, true);
         setcookie('adresse-' . $username, '', time() - 3600, '/');
-        setcookie('adresseFacturation-' . $username, '', time() - 3600, '/');
-        setcookie('nbArticle-' . $username, '', time() - 3600, '/');
+        setcookie('adresseFacturation-' . $username, '', time() - 3600, '/', '', true, true);
+        setcookie('nbArticle-' . $username, '', time() - 3600, '/', '', true, true);
      
         ob_end_flush();
         
