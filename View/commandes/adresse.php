@@ -651,7 +651,7 @@ if (isset($_SESSION['TVA'])) {
                 <form method='post'>
                     <div id="paypal-button-container"></div>
 
-                    <script src="https://www.paypal.com/sdk/js?client-id=AaOvluVx3_tbxX782Q3zyGBSmCPfnaEdHVcbwDqOXu_dgFCtxQmMGtdy-jDzY8JWPmpGL5bZm-ovGAyn&currency=EUR"></script>
+                    <script src="https://www.paypal.com/sdk/js?client-id=AaOvluVx3_tbxX782Q3zyGBSmCPfnaEdHVcbwDqOXu_dgFCtxQmMGtdy-jDzY8JWPmpGL5bZm-ovGAyn&currency=EUR" ></script>
                     <?php
                     $tax_total = 0;
                     $shipping = 0;
