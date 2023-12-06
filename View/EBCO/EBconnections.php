@@ -52,7 +52,7 @@
                 </p>
             </div>
             <div class="col-2">
-                <a href="contact.php" class="btn">Contactez-nous &#8594;</a>
+                <a href="Contact" class="btn">Contactez-nous &#8594;</a>
             </div>
            
         </div>

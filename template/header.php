@@ -2,11 +2,11 @@
 session_start();
 include_once 'Model/DB.php';
 $db_host = DB_HOST;
- $db_name = DB_NAME;
+$db_name = DB_NAME;
 $db_user = DB_USERNAME;
- $db_pass = DB_PASSWORD;
+$db_pass = DB_PASSWORD;
 
- 
+
 
 
 
@@ -22,7 +22,7 @@ $db_user = DB_USERNAME;
     <title>Catalogue des Produits | EBconnections</title>
     <link rel="stylesheet" href="Public/Style/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> -->
 
@@ -72,7 +72,7 @@ $categoriesUniques = array_unique($categories);
                             }
 
                             ?>
-                        </span>
+                        </span></a>
                         <a href="#" id="menuIcon"><img src="Public/images/menu.png" class="menu-icon">Panier</a>
 
                 </li>
@@ -99,14 +99,14 @@ $categoriesUniques = array_unique($categories);
                     <li><a href="ebco">EBconnections</a></li>
                     <li><a href="solution">Solutions</a></li>
                     <div class="dropdown">
-                        <li onclick="myFunction()" class="dropbtn">Produits</li>
+                        <li class="dropbtn">Produits</li>
                         <div id="menuDeroulant" class="dropdown-content">
                             <?php
 
                             $liens = [
                                 'Cable USB' => 'usb',
                                 'Objet connectes' => 'iot.php',
-                           
+
                             ];
 
 
@@ -124,16 +124,7 @@ $categoriesUniques = array_unique($categories);
                         </div>
                     </div>
 
-                    <script>
-                        function myFunction() {
-                            var menu = document.getElementById("menuDeroulant");
-                            if (menu.style.display === "block") {
-                                menu.style.display = "none";
-                            } else {
-                                menu.style.display = "block";
-                            }
-                        }
-                    </script>
+
 
 
                     <li><a href="Contact">Contact</a></li>
@@ -189,21 +180,21 @@ $categoriesUniques = array_unique($categories);
 
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var MenuItems = document.getElementById("MenuItems");
-        MenuItems.style.maxHeight = "0px";
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var MenuItems = document.getElementById("MenuItems");
+            MenuItems.style.maxHeight = "0px";
 
-        function menutoggle() {
-            if (MenuItems.style.maxHeight == "0px") {
-                MenuItems.style.maxHeight = "200px";
-            } else {
-                MenuItems.style.maxHeight = "0px";
+            function menutoggle() {
+                if (MenuItems.style.maxHeight == "0px") {
+                    MenuItems.style.maxHeight = "200px";
+                } else {
+                    MenuItems.style.maxHeight = "0px";
+                }
             }
-        }
 
-        // Assurez-vous que votre image a une balise d'ouverture <a> associée
-        var menuIcon = document.getElementById("menuIcon");
-        menuIcon.addEventListener("click", menutoggle);
-    });
-</script>
+            // Assurez-vous que votre image a une balise d'ouverture <a> associée
+            var menuIcon = document.getElementById("menuIcon");
+            menuIcon.addEventListener("click", menutoggle);
+        });
+    </script>

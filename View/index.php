@@ -9,18 +9,23 @@ if(isset($_SESSION['username'])){?>
 <h1>Bienvenue <?=$_SESSION['username'];?></h1>
 <?php
 }?>
+
+
+
+
+
            <div class="row">
                 <div class="col-2">
 
                     <h1>EBconnections</h1>
-                    <h1>Vos Idées<br>Produites<br>Chez Nous</h1>
+                    <h2>Vos Idées Produites Chez Nous</h2>
                     <p class="parag">Fabrication de câbles sur mesure <br>
                         Surmoulage de connecteurs pour milieu difficile <br>
                         Conseil en intégration électronique <br>
                         Conception de produits électroniques sur-mesure <br>
                         Conception et réalisation de prototypes avant industrialisation série <br>
                         SAV, garantie de pérennité sur toutes nos réalisations</p>
-                    <a href="Solutions.php" class="btn">Explorer &#8594;</a>
+                    <a href="solution" class="btn">Explorer &#8594;</a>
                 </div>
                 <div class="col-2">
                     <img src="Public/images/montage-2.png">
@@ -93,6 +98,7 @@ Longueur: <?= $longueur ?><br></p>
 
 
 
+
     
     
     <?php
@@ -105,6 +111,9 @@ Longueur: <?= $longueur ?><br></p>
 ?>
 </div>
 </div>
+
+
+
            
          
        </div>
@@ -122,7 +131,7 @@ Longueur: <?= $longueur ?><br></p>
                <h1>Nos Solutions Câbles</h1>
                <small class="parag">Nos câbles intelligents sont personnalisables à la demande</small>
                <br>
-               <a href="usb.php" class="btn">Acheter &#8594;</a>
+               <a href="usb" class="btn">Acheter &#8594;</a>
            </div>
        </div>
        </div>
@@ -134,17 +143,17 @@ Longueur: <?= $longueur ?><br></p>
    <div class="testimonial">
        <div class="small-container">
        <div class="row">
-            <a href="EBconnections.php"> <div class="col-3">
+            <a href="ebco"> <div class="col-3">
                    
                        <img src="Public/images/Eric-belouet.jpg">
                        <h3>Qui sommes-nous?</h3>
            </div></a>
-            <a href="Solutions.php"><div class="col-3">
+            <a href="solution"><div class="col-3">
                    
                        <img src="Public/images/fabrication-2.jpg">
                        <h3>Nos prestations</h3>
            </div></a>
-            <a href="usb.php"><div class="col-3">
+            <a href="usb"><div class="col-3">
                     
                       
                        <img src="Public/images/RS485-lg.png">

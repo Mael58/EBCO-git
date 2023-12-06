@@ -9,7 +9,7 @@
                          grâce à notre savoir-faire en R&D électronique depuis 
                          plus de 30 ans</p>
                     
-                    <a href="index.php?page=contact" class="btn">Contactez-nous &#8594;</a>
+                    <a href="Contact" class="btn">Contactez-nous &#8594;</a>
                 </div>
 
                 <div class="col-2">
@@ -30,7 +30,7 @@
                         Four à refusion <br>
                         Fraiseuse numérique <br>
                         Imprimante 3D résine</p>
-                    <a href="contact.html" class="btn">Contactez-nous &#8594;</a>
+                    <a href="Contact" class="btn">Contactez-nous &#8594;</a>
                     </div>
                 </div>  
                 <div class="row">
@@ -38,7 +38,7 @@
                         <h2>Cordons sur-mesure</h2>
                     <p>Nous réalisons selon vos schémas tous types de cordons</p>
                         
-                        <a href="contact.php" class="btn">Contactez-nous &#8594;</a>
+                        <a href="Contact" class="btn">Contactez-nous &#8594;</a>
                     </div>
     
                     <div class="col-2">
@@ -59,7 +59,7 @@
                          Le procédé d’injection basse pression de résine polyuréthane, <br>
                           consiste à injecter de la résine polyuréthane (PUR) <br>
                           dans un moule fermé (en résine ou en aluminium).</p>
-                    <a href="contact.php" class="btn">Contactez-nous &#8594;</a>
+                    <a href="Contact" class="btn">Contactez-nous &#8594;</a>
                     </div>
                 </div>  
     
