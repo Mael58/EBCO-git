@@ -44,7 +44,7 @@ if(isset($_SESSION['TVA'])){
                     echo '</div>';
                     echo '</td>';
                     //echo '<td><input type="number" value="' . $produit['quantite'] . '"></td>';
-                    echo '<td><input type="number" min="1" value="' . $produit['quantite'] . '" id="quantite-' . $produit['nom'] . '" data-prix="' . $produit['prix'] . '" onchange="updateQuantitePrix(this, \'' . $produit['nom'] . '\',\'' . $produit['prix'] . '\')"></td>';
+                    echo '<td><input type="number" min="1" max=' . $quantite . ' value="' . $produit['quantite'] . '" id="quantite-' . $produit['nom'] . '" data-prix="' . $produit['prix'] . '" onchange="updateQuantitePrix(this, \'' . $produit['nom'] . '\',\'' . $produit['prix'] . '\')"></td>';
                     // echo '<td>' .$sousTotal= ($produit['prix'] * $produit['quantite']) . ' €</td>';
                     // echo '</tr>';
                     $sousTotal = floatval($produit['prix']) * floatval($produit['quantite']);
@@ -81,11 +81,21 @@ if(isset($_SESSION['TVA'])){
                 // Actualisez la quantité dans la partie visible du panier
                 var sousTotalCell = input.parentNode.nextElementSibling;
                 sousTotalCell.innerHTML = response.nouveauSousTotal + ' €';
-              location.reload();
+                // Mettez à jour le total général
+
+                var sousTotal= response.nouveauSousTotal;
+                document.getElementById('sousTotal').innerText = sousTotal + ' €';
+
+
+                var TVA= "<?php echo $TVA?>";              
+                var total=((1+TVA)/100)*sousTotal;
+                document.getElementById('total').innerText = total + ' €';
+
+                
+
+             
                
           
-            } else {
-              
             }
         }
     };
@@ -96,17 +106,17 @@ if(isset($_SESSION['TVA'])){
 }
 
 </script>
-<?php
+<!-- <?php
 
 $total= ((100+$TVA)/100)*$totalSansTVA;
-?>
+?> -->
 
 <div class="total-price">
     <table>
 
         <tr>
             <td colspan="2">Total HT</td>
-            <td><?= $totalSansTVA ?> €</td>
+            <td id="sousTotal"><?= $totalSansTVA ?> €</td>
         </tr>
         <tr>
             <td colspan="2">TVA</td>
@@ -114,7 +124,7 @@ $total= ((100+$TVA)/100)*$totalSansTVA;
         </tr>
         <tr>
             <td colspan="2">Total</td>
-            <td><?= $total ?> €</td>
+            <td id="total"><?= $total ?> €</td>
         </tr>
 
     </table>

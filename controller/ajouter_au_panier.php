@@ -30,6 +30,7 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
             // Le produit existe déjà dans le panier, mettez à jour la quantité
             $produitExiste = true;
             $p['quantite'] += $produit['quantite'];
+            
             break;
         }
     }
@@ -38,17 +39,16 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
     if (!$produitExiste) {
         $_SESSION['panier'][] = $produit;
     }
-
+  
     // Calculer et stocker le nombre total d'articles dans le panier global
     $nombreTotalArticles = array_sum(array_column($_SESSION['panier'], 'quantite'));
     $_SESSION['nombreTotalArticles']= $nombreTotalArticles;
+    
 
     // Afficher le nombre total d'articles dans le panier global
-    echo $nombreTotalArticles;
-} else {
-    // Gérer le cas où l'utilisateur est connecté (si nécessaire)
-    // ...
-}
+ // À la fin de votre script PHP
+echo json_encode(array('nombreTotalArticles' => $nombreTotalArticles, 'produits' => $_SESSION['panier']));
 
-// Terminer le script
-exit();
+} 
+
+

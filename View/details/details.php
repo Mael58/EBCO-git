@@ -42,17 +42,13 @@ if ($recipe) {
     $lienDriver = $recipe['lienDriver'];
     $quantite = $recipe['Quantite'];
     $_SESSION['TVA'] = $recipe['TVA'];
-
     $_SESSION['quantiteMax'] = $quantite;
+  
 
 
     $db = null;
 
-
 ?>
-
-
-
     <div class="page-container">
         <div class="overlay" id="overlay"></div>
 
@@ -111,157 +107,176 @@ if ($recipe) {
 
 
         <div class="Panier" id="panier">
-    <div class="Panier_header">
-        <span>Panier</span>
-        <button id="close" class="Panier_close">
-            <img src="Public/images/croix.png" alt="logo" width="50%">
-        </button>
-    </div>
-
-    <?php
-    if (!empty($_SESSION['panier'])) {
-    ?>
-        <div class="Panier_body">
-            <?php
-            $total=0;
-            foreach ($_SESSION['panier'] as $produits) {
-                echo '<div class="produit">';
-                echo '<img src="' . $produits['image'] . '" width="50%">';
-                echo '<div>';
-                echo '<p>' . $produits['nom'] . '</p>';
-                echo '<small>Prix: ' . $produits['prix'] . ' €</small>';
-                echo '<a href="Controller/supprimer.php?nom=' . $produits['nom'] . '">
-                    <img src="Public/images/poubelle.png" width="15px"></a>';
-                echo '<input class="small-input" type="number" min="1" value="' . $produits['quantite'] . '" 
-                    id="quantite-' . $produits['nom'] . '" data-prix="' . $produits['prix'] . '" 
-                    onchange="updateQuantitePrix(this, \'' . $produits['nom'] . '\',\'' . $produits['prix'] . '\')">';
-                echo '</div>';
-                echo '</div>';
-
-                $sousTotal = floatval($produits['prix']) * floatval($produits['quantite']);
-                $total+=$sousTotal;
-            }
-            ?>
-            
-        </div>
-
-        <div class="Panier_footer">
-            <p>Total: <?= $total ?> €</p>
-         
+            <div class="Panier_header">
+                <span>Panier</span>
+                <button id="close" class="Panier_close">
+                    <img src="Public/images/croix.png" alt="logo" width="50%">
+                </button>
+            </div>
 
 
-            <a href="Panier" class="btnPanier">Voir le panier</a>
+            <div class="Panier_body" id="Panier_body">
 
-            <p><small> Taxes incluses et frais de port calculés à la caisse</small></p>
-        </div>
 
-    <?php
+            </div>
+
+
+            <div class="Panier_footer">
+                <p id="total"></p>
+
+
+
+                <a href="Panier" class="btnPanier">Voir le panier</a>
+
+                <p><small> Taxes incluses et frais de port calculés à la caisse</small></p>
+            </div>
+
+        <?php
     } else {
         echo '<p class="vide">Votre panier est vide.</p>';
     }
-    ?>
-</div>
+        ?>
+        </div>
     </div>
-<?php
+    <script>
+        const prixTotal = document.getElementById('total');
+        document.addEventListener('DOMContentLoaded', function() {
+            var btnAjouterAuPanier = document.getElementById('ajouter-au-panier');
+            var inputQuantite = document.getElementById('quantite');
+            var panierCounter = document.getElementById('cart-count'); // Assuming you have an element with id 'panier-counter'
+            var quantiteDisponible = <?= $quantite ?>;
 
-} else {
+            var panier = document.getElementById('panier');
+            var overlay = document.getElementById('overlay');
+            var closeBtn = document.getElementById('close');
+       
 
-    echo "Produit non trouvé.";
-}
+            function togglePanier() {
 
+                panier.style.display = "flex"
+                overlay.style.display = (panier.style.display === 'none') ? 'none' : 'block';
 
-?><script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var btnAjouterAuPanier = document.getElementById('ajouter-au-panier');
-        var inputQuantite = document.getElementById('quantite');
-        var panierCounter = document.getElementById('cart-count'); // Assuming you have an element with id 'panier-counter'
-        var quantiteDisponible = <?= $quantite ?>;
+            }
 
+            function Panier() {
 
-        btnAjouterAuPanier.addEventListener('click', function(e) {
-            e.preventDefault(); // Empêche le lien de rediriger immédiatement
+                panier.style.display = "none"
+                overlay.style.display = (panier.style.display === 'none') ? 'none' : 'block';
+                location.reload();
 
-
-
-            var quantite = inputQuantite.value;
-            var nom = "<?= $nom ?>";
-
-            if (parseInt(quantite) > quantiteDisponible || parseInt(quantite) <= 0) {
-                alert("La quantité spécifiée n'est pas valide. Veuillez choisir une quantité comprise entre 1 et " + quantiteDisponible + ".");
-                return; // Ne pas poursuivre l'ajout au panier
             }
 
 
-            var prix = "<?= $prix ?>";
-            var image = "<?= $image ?>";
-
-
-            fetch('Controller/ajouter_au_panier.php', {
-                    method: 'POST', // ou 'GET' selon votre configuration
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'nom=' + encodeURIComponent(nom) +
-                        '&prix=' + encodeURIComponent(prix) +
-                        '&image=' + encodeURIComponent(image) +
-                        '&quantite=' + encodeURIComponent(quantite),
-                })
-                .then(response => response.json())
-                .then(data => {
-
-                    panierCounter.textContent = data.nombreTotalArticles;
-
-                    location.reload();
-
-
-
-                })
-                .catch(error => {
-                    console.error('Erreur lors de la requête AJAX:', error);
-                });
+            closeBtn.addEventListener('click', Panier);
 
 
 
 
+            btnAjouterAuPanier.addEventListener('click', function(e) {
+                e.preventDefault(); // Empêche le lien de rediriger immédiatement
+
+
+
+                var quantite = inputQuantite.value;
+                var nom = "<?= $nom ?>";
+
+                if (parseInt(quantite) > quantiteDisponible || parseInt(quantite) <= 0) {
+                    alert("La quantité spécifiée n'est pas valide. Veuillez choisir une quantité comprise entre 1 et " + quantiteDisponible + ".");
+                    return; // Ne pas poursuivre l'ajout au panier
+                }
+
+
+                var prix = "<?= $prix ?>";
+                var image = "<?= $image ?>";
+
+
+                fetch('Controller/ajouter_au_panier.php', {
+                        method: 'POST', // ou 'GET' selon votre configuration
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'nom=' + encodeURIComponent(nom) +
+                            '&prix=' + encodeURIComponent(prix) +
+                            '&image=' + encodeURIComponent(image) +
+                            '&quantite=' + encodeURIComponent(quantite),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+
+                        panierCounter.textContent = data.nombreTotalArticles;
+
+
+                        console.log(data);
+                        if (Array.isArray(data.produits)) {
+                            const panierBody = document.getElementById('Panier_body');
+                            // Effacez le contenu actuel du panier
+                            var total = 0;
+                            data.produits.forEach(produit => {
+                                const produitHTML = `
+            <div class="produit">
+                <img src="${produit.image}" width="50%">
+                <div>
+                    <p>${produit.nom}</p>
+                    <small>Prix: ${produit.prix} €</small>
+                    <a href="Controller/supprimer.php?nom=${produit.nom}">
+                        <img src="Public/images/poubelle.png" width="15px">
+                    </a>
+                    <input class="small-input" type="number" min="1" value="${produit.quantite}" 
+                        id="quantite-${produit.nom}" data-prix="${produit.prix}" 
+                        onchange="updateQuantitePrix(this, '${produit.nom}','${produit.prix}')">
+                </div>
+            </div>
+        `;
+                                var sousTotal = parseFloat(produit.prix) * parseFloat(produit.quantite);
+
+                                total += sousTotal;
+
+
+                                panierBody.innerHTML += produitHTML;
+                            });
+                        }
+                        prixTotal.innerText = 'Total: ' + total + '€';
+                        togglePanier();
+
+
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors de la requête AJAX:', error);
+                    });
+
+            });
 
         });
 
+        function updateQuantitePrix(input, nomProduit, prix) {
+            var nouvelleQuantite = input.value;
 
+            // Utiliser AJAX pour envoyer les données au serveur
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "Controller/update_panier.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        // Actualisez la quantité dans la partie visible du panier
 
+                        console.log(response.nouveauSousTotal);
+                        prixTotal.innerHTML = 'Total: ' + response.nouveauSousTotal + '€';
 
-    });
-</script>
-<?php
+                    }
+                }
+            };
 
-
-ob_end_flush();
-?>
-
-
-
-
-
-
-<script>
-    var panier = document.getElementById('panier');
-    var overlay = document.getElementById('overlay');
-    var closeBtn = document.getElementById('close');
-    var btnPanier = document.querySelector('.btnPanier');
-
-    function togglePanier() {
-        if (panier.style.display === 'none') {
-            panier.style.display = 'block';
-            overlay.style.display = 'block';
-        } else {
-            panier.style.display = 'none';
-            overlay.style.display = 'none';
+            // Envoyer les données au serveur
+            var params = "nomProduit=" + encodeURIComponent(nomProduit) + "&nouvelleQuantite=" + encodeURIComponent(nouvelleQuantite) + "&prix=" + encodeURIComponent(prix);
+            xhr.send(params);
         }
-    }
-
-    closeBtn.addEventListener('click', togglePanier);
-    btnPanier.addEventListener('click', togglePanier);
-</script>
+    </script>
+    <?php
 
 
-
-<?php include 'template/footer.html'; ?>
+    ob_end_flush();
+    ?>
+   
+    <?php include 'template/footer.html'; ?>

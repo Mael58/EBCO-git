@@ -6,6 +6,12 @@ $db_name = DB_NAME;
 $db_user = DB_USERNAME;
 $db_pass = DB_PASSWORD;
 
+var_dump($_SESSION['nombreTotalArticles']);
+
+
+
+var_dump($_SESSION['panier']);
+
 
 
 
@@ -22,12 +28,12 @@ $db_pass = DB_PASSWORD;
     <title>Catalogue des Produits | EBconnections</title>
     <link rel="stylesheet" href="Public/Style/style.css">
     <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <!-- <link rel="stylesheet" href="Public/Bootstrap/css/bootstrap.css"> -->
-   
+
 
 
 </head>
@@ -46,6 +52,7 @@ try {
 
 $sqlQuery = "SELECT description FROM vente ";
 $donnees = $db->prepare($sqlQuery);
+$db=null;
 $donnees->execute();
 $categories = $donnees->fetchAll(PDO::FETCH_COLUMN);
 
@@ -76,7 +83,7 @@ $categoriesUniques = array_unique($categories);
 
                             ?>
                         </span></a>
-                       
+
 
                 </li>
 
@@ -96,7 +103,7 @@ $categoriesUniques = array_unique($categories);
             </ul>
         </div>
 
-        
+
         <div class="navbar">
             <nav>
                 <ul id="MenuItems">
@@ -109,7 +116,7 @@ $categoriesUniques = array_unique($categories);
                             <?php
 
                             $liens = [
-                                'Cable USB' => 'usb',
+                                'Câble USB' => 'usb',
                                 'Objet connectes' => 'iot.php',
 
                             ];
@@ -127,7 +134,7 @@ $categoriesUniques = array_unique($categories);
                             ?>
 
                         </div>
-                    </div>              
+                    </div>
 
 
 
@@ -138,7 +145,7 @@ $categoriesUniques = array_unique($categories);
 
                 </ul>
             </nav>
-          
+
 
 
         </div>
@@ -174,7 +181,7 @@ $categoriesUniques = array_unique($categories);
             session_destroy();
 
             // Redirigez l'utilisateur vers la page de connexion (ou une autre page de votre choix)
-            header("Location: " . $_SERVER['HTTP_REFERER']);
+            header("Location: index.php");
             exit;
         }
     }

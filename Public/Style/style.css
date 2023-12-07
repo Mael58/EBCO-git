@@ -1346,18 +1346,18 @@ h1 {
 }
 
 .Panier {
-    position: absolute;
+   
     width: 300px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: flex-end;
-    z-index: 2; /* Assurez-vous que le panier est au-dessus de l'overlay */
+    z-index: 2000; /* Assurez-vous que le panier est au-dessus de l'overlay */
 }
 
 .overlay {
-    position: fixed;
+   position: fixed;
     top: 0;
     left: 0;
     width: 100%;
