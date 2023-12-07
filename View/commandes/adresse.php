@@ -362,6 +362,7 @@ if (isset($_SESSION['TVA'])) {
 
 
                 const formData = new FormData();
+                const formData2 = new FormData();
 
 
                 formData.append('prenomLivraison', prenomLivraison);
@@ -386,38 +387,54 @@ if (isset($_SESSION['TVA'])) {
                 formData.append('villeFacturation', villeFacturation);
                 formData.append('paysFacturation', paysFacturation);
 
+                formData2.append('prenomLivraison', prenomLivraison);
+                formData2.append('nomLivraison', nomLivraison);
+                formData2.append('emailLivraison', emailLivraison);
+                formData2.append('societeLivraison', societeLivraison);
+                formData2.append('telLivraison', telLivraison);
+                formData2.append('numRueLivraison', numRueLivraison);
+                formData2.append('rueLivraison', rueLivraison);
+                formData2.append('cdpLivraison', cdpLivraison);
+                formData2.append('villeLivraison', villeLivraison);
+                formData2.append('paysLivraison', paysLivraison);
+
 
                 function AjaxRequest(url) {
-                    return fetch(url, {
-                            method: 'POST',
-                            body: formData
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log(data);
+    return fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .catch(error => {
+            console.error('Erreur lors de l\'envoi de la requête AJAX:', error);
+        });
+}
 
 
-                        })
-                        .catch(error => {
-                            console.error('Erreur lors de l\'envoi de la requête AJAX:', error);
-                        });
-                }
+AjaxRequest('Controller/formAdresse.php')
+    .then(result1 => {
+       
+        console.log(result1);
 
-                Promise.all([
-                        AjaxRequest('Controller/formAdresse.php'),
-                        AjaxRequest('Controller/ajout_client.php'),
-                    ]).then(results => {
-                        // results est un tableau contenant les résultats des deux requêtes
-                        const result1 = results[0];
-
-                        const result2 = results[1];
+    
+        updateFacturation(result1);
+    })
+    .catch(error => {
+        console.error('Erreur lors de l\'exécution de la première requête AJAX:', error);
+    });
 
 
+    fetch('Controller/ajout_client.php', {
+            method: 'POST',
+            body: formData2
+        })
+        .then(response => response.json())
+        .catch(error => {
+            console.error('Erreur lors de l\'envoi de la requête AJAX:', error);
+        });
 
-                    })
-                    .catch(error => {
-                        console.error('Erreur lors de l\'exécution simultanée des requêtes:', error);
-                    });
+  
+
 
 
                 formAdresse.style.display = "none";
@@ -431,6 +448,15 @@ if (isset($_SESSION['TVA'])) {
 
 
             }
+
+            function updateFacturation(data) {
+    document.getElementById('LivraisonPrenom').innerHTML = `<strong>Prénom:</strong> ${data.livraison.prenom}`;
+    document.getElementById('LivraisonNom').innerHTML = `<strong>Nom:</strong> ${data.livraison.nom}`;
+    document.getElementById('LivraisonEmail').innerHTML = `<strong>Email:</strong> ${data.livraison.email}`;
+    document.getElementById('LivraisonTelephone').innerHTML = `<strong>Téléphone:</strong> ${data.livraison.tel}`;
+    document.getElementById('LivraisonCodePostal').innerHTML = `<strong>Code Postal:</strong> ${data.livraison.cdp}`;
+    document.getElementById('LivraisonAdresse').innerHTML = `<strong>Adresse:</strong> ${data.livraison.numRue} ${data.livraison.rue}, ${data.livraison.ville}`;
+}
 
 
             modifier.addEventListener('click', function() {
@@ -489,12 +515,15 @@ if (isset($_SESSION['TVA'])) {
 
     <div class="recapAdresse" id="recapAdresse">
 
-        <p><strong>Prénom:</strong> </p>
-        <p><strong>Nom:</strong> <?php echo $nom; ?></p>
-        <p><strong>Email:</strong> <?php echo $email; ?></p>
-        <p><strong>Téléphone:</strong> <?php echo $telephone; ?></p>
-        <p><strong>Code Postal:</strong> <?php echo $codePostal; ?></p>
-        <p><strong>Adresse:</strong> <?php echo "$numeroRue $rue, $ville"; ?></p>
+
+    <p id="LivraisonPrenom"><strong>Prénom:</strong> </p>
+    <p id="LivraisonNom"><strong>Nom:</strong> </p>
+    <p id="LivraisonEmail"><strong>Email:</strong> </p>
+    <p id="LivraisonTelephone"><strong>Téléphone:</strong> </p>
+    <p id="LivraisonCodePostal"><strong>Code Postal:</strong> </p>
+    <p id="LivraisonAdresse"><strong>Adresse:</strong> </p>
+
+
         <p id="modifier">Modifier</p>
     </div>
 
@@ -711,30 +740,26 @@ if (isset($_SESSION['TVA'])) {
 
                                     ],
                                     'shipping' => [
-                                        'name' => [  // Ajoutez cette partie pour spécifier le nom du destinataire
-                                            'full_name' => "{$prenom} {$nom}"
+                                        'name' => [
+                                            'full_name' => isset($prenom) && isset($nom) ? "{$prenom} {$nom}" : "Nom par défaut",
                                         ],
                                         'address' => [
-                                            'address_line_1' => "{$numeroRue} {$rue}",
-                                            'admin_area_2' => $ville,
-                                            'postal_code' => $codePostal,
-                                            'country_code' => $pays,
+                                            'address_line_1' => isset($numeroRue) && isset($rue) ? "{$numeroRue} {$rue}" : "Adresse par défaut",
+                                            'admin_area_2' => isset($ville) ? $ville : "Ville par défaut",
+                                            'postal_code' => isset($codePostal) ? $codePostal : "Code postal par défaut",
+                                            'country_code' => isset($pays) ? $pays : "Pays par défaut",
                                         ],
                                     ],
                                     'items' => [],
                                 ],
-
                             ],
-
-                            "payer" => [
-                                "name" => [
-                                    "given_name" => $prenom,
-                                    "surname" => $nom
+                            'payer' => [
+                                'name' => [
+                                    'given_name' => isset($prenom) ? $prenom : "Prénom par défaut",
+                                    'surname' => isset($nom) ? $nom : "Nom par défaut",
                                 ],
-                                "email_address" => $email,
-
-                            ]
-
+                                'email_address' => isset($email) ? $email : "Email par défaut",
+                            ],
                         ];
                         if (isset($nomCommande)) {
                             for ($i = 0; $i < count($nomCommande); $i++) {

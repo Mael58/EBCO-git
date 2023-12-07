@@ -50,6 +50,9 @@ if ($recipe) {
 
 
 ?>
+
+
+
     <div class="page-container">
         <div class="overlay" id="overlay"></div>
 
@@ -120,9 +123,10 @@ if ($recipe) {
     ?>
         <div class="Panier_body">
             <?php
+            $total=0;
             foreach ($_SESSION['panier'] as $produits) {
                 echo '<div class="produit">';
-                echo '<img src="' . $produits['image'] . '" width="15%">';
+                echo '<img src="' . $produits['image'] . '" width="50%">';
                 echo '<div>';
                 echo '<p>' . $produits['nom'] . '</p>';
                 echo '<small>Prix: ' . $produits['prix'] . ' €</small>';
@@ -135,14 +139,20 @@ if ($recipe) {
                 echo '</div>';
 
                 $sousTotal = floatval($produits['prix']) * floatval($produits['quantite']);
+                $total+=$sousTotal;
             }
             ?>
             
         </div>
 
         <div class="Panier_footer">
-            <p>Total: <?= $sousTotal ?> €</p>
+            <p>Total: <?= $total ?> €</p>
+         
+
+
             <a href="Panier" class="btnPanier">Voir le panier</a>
+
+            <p><small> Taxes incluses et frais de port calculés à la caisse</small></p>
         </div>
 
     <?php

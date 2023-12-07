@@ -21,10 +21,13 @@ $db_pass = DB_PASSWORD;
 
     <title>Catalogue des Produits | EBconnections</title>
     <link rel="stylesheet" href="Public/Style/style.css">
+    <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="Public/Bootstrap/css/bootstrap.css"> -->
+   
 
 
 </head>
@@ -73,7 +76,7 @@ $categoriesUniques = array_unique($categories);
 
                             ?>
                         </span></a>
-                        <a href="#" id="menuIcon"><img src="Public/images/menu.png" class="menu-icon">Panier</a>
+                       
 
                 </li>
 
@@ -92,6 +95,8 @@ $categoriesUniques = array_unique($categories);
                 ?>
             </ul>
         </div>
+
+        
         <div class="navbar">
             <nav>
                 <ul id="MenuItems">
@@ -122,7 +127,7 @@ $categoriesUniques = array_unique($categories);
                             ?>
 
                         </div>
-                    </div>
+                    </div>              
 
 
 
@@ -133,9 +138,11 @@ $categoriesUniques = array_unique($categories);
 
                 </ul>
             </nav>
+          
 
 
         </div>
+        <a href="#" id="menuIcon"><img src="Public/images/menu.png" class="menu-icon"></a>
     </div>
     <?php
 
