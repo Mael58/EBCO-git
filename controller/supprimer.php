@@ -13,8 +13,9 @@ if (isset($_GET['nom']) && isset($_SESSION['panier']) && is_array($_SESSION['pan
     }
 }
 
-// Rediriger ou faire d'autres actions ici
+
 echo '<script>
 window.history.back();
 </script>';
+exit;
 ?>

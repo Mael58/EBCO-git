@@ -1,6 +1,7 @@
 <?php
 ob_start();
 include_once 'template/header.php';
+$quantiteMax=$_SESSION['quantiteMax'];
 ?>
 
 
@@ -42,20 +43,24 @@ if ($recipe) {
     $lienDriver = $recipe['lienDriver'];
     $quantite = $recipe['Quantite'];
     $_SESSION['TVA'] = $recipe['TVA'];
+
     $_SESSION['quantiteMax'] = $quantite;
-  
 
 
     $db = null;
 
+
 ?>
+
+
+
     <div class="page-container">
         <div class="overlay" id="overlay"></div>
 
         <div class="small-container single-product" id="produit">
             <div class="row">
-                <div class="col-2">
-                    <img class="imgDetail" src="<?= $image ?>" width="100%" id="ProductImg">
+                <div class="col-1">
+                    <img class="imgDetail" src="<?= $image ?>"  id="ProductImg">
                 </div>
                 <div class="col-2">
                     <p>Accueil / <?= $des ?> / <?= $nom ?></p>
@@ -83,24 +88,51 @@ if ($recipe) {
 
 
 
-                    <h3>Spécifications techniques:</h3>
-                    <br>
+                    <h3>Spécifications techniques:</h3><br>
+             <table>
+    <tr >
+        <td>Norme:</td>
+        <td><?= $norme ?></td>
+    </tr>
+    <tr>
+        <td>Puissance:</td>
+        <td><?= $puissance ?></td>
+    </tr>
+    <tr>
+        <td>Connecteur:</td>
+        <td><?= $connecteur ?></td>
+    </tr>
+    <tr>
+        <td>Débit:</td>
+        <td><?= $dataRate ?></td>
+    </tr>
+    <tr>
+        <td>Longueur:</td>
+        <td> <?= $longueur ?> </td>
+    </tr>
+  
+</table><br>
 
-                    <ul>
-                        <li>Norme: <?= $norme ?> </li>
-                        <li>Puissance: <?= $puissance ?> </li>
-                        <li>Connecteur: <?= $connecteur ?> </li>
-                        <li>Debit: <?= $dataRate ?> </li>
-                        <li>Longueur: <?= $longueur ?> </li>
-                        <li>Lien de la documentation: <a class="lienDoc" href="<?= $lienDoc ?>"><?= $lienDoc ?></a></li>
-                        <li>Telecharger les drivers <a href="<?= $lienDriver ?>" class="btn">Driver.zip</a></li>
+<h3>Lien:</h3><br>
 
-                    </ul>
-                    <br>
+<table>  <tr>
+        <td>Lien de la documentation:</td>
+        <td>
+            
+        <a href="<?= $lienDoc ?>" target="_blank"><img class="pdf" src="Public/images/pdf.png">Fiche technique</a></td>
+    </tr>
+    <tr>
+        <td>Télécharger les drivers:</td>
+        <td><a href="<?= $lienDriver ?>" download><img class="zip" src="Public\images\downloadZip-removebg-preview.png">Drivers.zip</a>
+  
+</td>
+    </tr>
+
+</table>
 
 
 
-                </div>
+                </div><br>
             </div>
         </div>
 
@@ -137,7 +169,7 @@ if ($recipe) {
     }
         ?>
         </div>
-    </div>
+    </div><br>
     <script>
         const prixTotal = document.getElementById('total');
         document.addEventListener('DOMContentLoaded', function() {
@@ -175,9 +207,10 @@ if ($recipe) {
             btnAjouterAuPanier.addEventListener('click', function(e) {
                 e.preventDefault(); // Empêche le lien de rediriger immédiatement
 
-
-
+                quantiteMax=<?=$quantiteMax?>;
+                
                 var quantite = inputQuantite.value;
+              
                 var nom = "<?= $nom ?>";
 
                 if (parseInt(quantite) > quantiteDisponible || parseInt(quantite) <= 0) {
@@ -202,16 +235,22 @@ if ($recipe) {
                     })
                     .then(response => response.json())
                     .then(data => {
+                   
+                        console.log('Produit dans le panier:', data);
+                        console.log('Produit dans le panier:', data.produits);
 
                         panierCounter.textContent = data.nombreTotalArticles;
 
-
-                        console.log(data);
-                        if (Array.isArray(data.produits)) {
+                        
+                      
+                        if (Array.isArray(data.produits) && data.produits.length > 0) {
                             const panierBody = document.getElementById('Panier_body');
-                            // Effacez le contenu actuel du panier
+                            panierBody.innerHTML = '';
                             var total = 0;
+                           
                             data.produits.forEach(produit => {
+                                console.log('Produit dans le panier:', produit);
+                            
                                 const produitHTML = `
             <div class="produit">
                 <img src="${produit.image}" width="50%">
@@ -221,12 +260,11 @@ if ($recipe) {
                     <a href="Controller/supprimer.php?nom=${produit.nom}">
                         <img src="Public/images/poubelle.png" width="15px">
                     </a>
-                    <input class="small-input" type="number" min="1" value="${produit.quantite}" 
+                    <input class="small-input" type="number" min="1" max="<?=$quantiteMax?>" value="${produit.quantite}" 
                         id="quantite-${produit.nom}" data-prix="${produit.prix}" 
                         onchange="updateQuantitePrix(this, '${produit.nom}','${produit.prix}')">
                 </div>
-            </div>
-        `;
+            </div>`;
                                 var sousTotal = parseFloat(produit.prix) * parseFloat(produit.quantite);
 
                                 total += sousTotal;
@@ -234,12 +272,13 @@ if ($recipe) {
 
                                 panierBody.innerHTML += produitHTML;
                             });
-                        }
+                        
                         prixTotal.innerText = 'Total: ' + total + '€';
                         togglePanier();
 
-
+                        }
                     })
+                    
                     .catch(error => {
                         console.error('Erreur lors de la requête AJAX:', error);
                     });
@@ -250,6 +289,7 @@ if ($recipe) {
 
         function updateQuantitePrix(input, nomProduit, prix) {
             var nouvelleQuantite = input.value;
+
 
             // Utiliser AJAX pour envoyer les données au serveur
             var xhr = new XMLHttpRequest();
@@ -279,4 +319,7 @@ if ($recipe) {
     ob_end_flush();
     ?>
    
+
+
+
     <?php include 'template/footer.html'; ?>

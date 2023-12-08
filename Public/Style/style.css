@@ -99,14 +99,11 @@ nav ul li {
     margin: 0;
 }
 
-.navbar a, .dropdown:hover .dropbtn {
-    background-color: #555; /* Couleur de fond lorsque la souris est sur le bouton dropdown */
-}
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #ddd;
   
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -150,6 +147,11 @@ nav ul li {
 
 .header .row {
     margin-top: 70px;
+}
+.col-1 {
+    flex-basis: 50%;
+    min-width: 300px;
+    margin-right: 30px;
 }
 
 .col-2 {
@@ -857,7 +859,7 @@ input {
 
 .col-usb img {
     width: 100%;
-    border: 1px solid #ddd;
+  
 }
 
 .col-usb h2 {
@@ -923,13 +925,13 @@ h1 {
 
 .navbar-logo {
     display: flex;
-    align-items: center;
-    padding: 20px;
+    justify-content: end;
+    align-items: end;
+   padding: 20px;
+ 
 }
 
-.navbar-logo ul {
-    margin-left: 60%;
-}
+
 
 .navbar-logo li {
     display: inline-block;
@@ -1341,7 +1343,7 @@ h1 {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     margin: 0;
 }
 
@@ -1490,8 +1492,9 @@ h1 {
   
 .small-container.single-product {
     position: relative;
-    z-index: 1; /* Assurez-vous que le contenu est au-dessus de l'overlay */
-    /*  */
+    z-index: 1; 
+    width: 100%;
+   
 }
 
 /* Pour Chrome, Safari, Edge et Opera */
@@ -1702,6 +1705,9 @@ h1 {
     color: #fff;
     text-align: center;
   }
+ .carousel-caption h3 {
+    color: #000;
+  }
   
   .carousel-dark .carousel-control-prev-icon,
   .carousel-dark .carousel-control-next-icon {
@@ -1725,6 +1731,97 @@ h1 {
   [data-bs-theme=dark] .carousel .carousel-caption, [data-bs-theme=dark].carousel .carousel-caption {
     color: #000;
   }
+
+  .small-container.single-product .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.small-container.single-product .col-2 {
+    flex: 1;
+    width: 100%;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+
+.small-container.single-product .imgDetail {
+    width: 50%;
+}
+
+.small-container.single-product table {
+    width: 100%;
+    border: #BBBFBF 1px solid;
+}
+.small-container.single-product table tr {
+     /* Light gray background for even rows */
+    border: #BBBFBF 1px solid;
+}
+
+a[href$=".pdf"] img {
+    width: 30px;
+    height: 30px;
+}
+
+/* Style for ZIP files */
+a[href$=".zip"] img {
+    width: 30px;
+    height: 30px;
+    
+}
+
+
+
+
+.small-container.single-product table td {
+    padding: 5px;
+    
+}
+
+.small-container.single-product table a {
+    color: #007bff; /* Add a link color */
+}
+
+.row.mt-3 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row.mt-3 .col {
+ width: 10%;
+    margin-right: 10px;
+    margin-bottom: 10px; /* Espace entre les colonnes, ajustez selon vos besoins */
+}
+
+.row.mt-3 .col:last-child {
+    margin-right: 0; /* Supprimez la marge à droite pour la dernière colonne */
+}
+
+.row.mt-3 img {
+    width: 100%;
+    height: auto;
+    border: 1px black solid;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
   
 
   

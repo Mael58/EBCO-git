@@ -1,11 +1,14 @@
 <?php
 session_start();
 
+
+
 // Vérifier si les données nécessaires sont présentes dans la requête POST
 if (!isset($_POST['nom'], $_POST['prix'], $_POST['image'], $_POST['quantite'])) {
     echo 'Erreur : Paramètres manquants.';
     exit();
 }
+
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
@@ -30,25 +33,23 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
             // Le produit existe déjà dans le panier, mettez à jour la quantité
             $produitExiste = true;
             $p['quantite'] += $produit['quantite'];
-            
+
             break;
         }
     }
+
 
     // Si le produit n'existe pas, ajoutez-le au panier
     if (!$produitExiste) {
         $_SESSION['panier'][] = $produit;
     }
-  
+
     // Calculer et stocker le nombre total d'articles dans le panier global
     $nombreTotalArticles = array_sum(array_column($_SESSION['panier'], 'quantite'));
-    $_SESSION['nombreTotalArticles']= $nombreTotalArticles;
-    
+    $_SESSION['nombreTotalArticles'] = $nombreTotalArticles;
+
 
     // Afficher le nombre total d'articles dans le panier global
- // À la fin de votre script PHP
-echo json_encode(array('nombreTotalArticles' => $nombreTotalArticles, 'produits' => $_SESSION['panier']));
-
-} 
-
-
+    // À la fin de votre script PHP
+    echo json_encode(['nombreTotalArticles' => $nombreTotalArticles, 'produits' => array_values($_SESSION['panier'])]);
+}

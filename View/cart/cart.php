@@ -6,7 +6,7 @@ if(isset($_SESSION['TVA'])){
     $TVA=20;
 }
 
- 
+ $quantiteMax=$_SESSION['quantiteMax'];
 
 ?>
 
@@ -44,7 +44,7 @@ if(isset($_SESSION['TVA'])){
                     echo '</div>';
                     echo '</td>';
                     //echo '<td><input type="number" value="' . $produit['quantite'] . '"></td>';
-                    echo '<td><input type="number" min="1" max=' . $quantite . ' value="' . $produit['quantite'] . '" id="quantite-' . $produit['nom'] . '" data-prix="' . $produit['prix'] . '" onchange="updateQuantitePrix(this, \'' . $produit['nom'] . '\',\'' . $produit['prix'] . '\')"></td>';
+                    echo '<td><input type="number" min="1" value="' . $produit['quantite'] . '" id="quantite-' . $produit['nom'] . '" data-prix="' . $produit['prix'] . '" onchange="updateQuantitePrix(this, \'' . $produit['nom'] . '\',\'' . $produit['prix'] . '\')"></td>';
                     // echo '<td>' .$sousTotal= ($produit['prix'] * $produit['quantite']) . ' €</td>';
                     // echo '</tr>';
                     $sousTotal = floatval($produit['prix']) * floatval($produit['quantite']);
@@ -78,20 +78,20 @@ if(isset($_SESSION['TVA'])){
         if (xhr.readyState == 4 && xhr.status == 200) {
             var response = JSON.parse(xhr.responseText);
             if (response.success) {
-                // Actualisez la quantité dans la partie visible du panier
+              
                 var sousTotalCell = input.parentNode.nextElementSibling;
+                
                 sousTotalCell.innerHTML = response.nouveauSousTotal + ' €';
-                // Mettez à jour le total général
+
+         
 
                 var sousTotal= response.nouveauSousTotal;
                 document.getElementById('sousTotal').innerText = sousTotal + ' €';
 
 
                 var TVA= "<?php echo $TVA?>";              
-                var total=((1+TVA)/100)*sousTotal;
-                document.getElementById('total').innerText = total + ' €';
-
-                
+                var total=((1+TVA/100)*sousTotal).toFixed(2);
+                document.getElementById('total').innerText = total + ' €';            
 
              
                

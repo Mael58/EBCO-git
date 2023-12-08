@@ -6,11 +6,7 @@ $db_name = DB_NAME;
 $db_user = DB_USERNAME;
 $db_pass = DB_PASSWORD;
 
-var_dump($_SESSION['nombreTotalArticles']);
 
-
-
-var_dump($_SESSION['panier']);
 
 
 
@@ -63,16 +59,12 @@ $categoriesUniques = array_unique($categories);
 
     <div class="container">
 
-        <div class="navbar-logo">
-            <div class="logo">
-                <a href="index.php"><img src="Public/images/logo.png" width="200px"></a>
-
-
-
-            </div>
+    <div class="navbar-logo">
+           
+          
             <ul>
                 <li> <a href="Panier"><img src="Public/images/cart.png" width="30px" height="30px">
-                        <span id="cart-count">
+                        <span id="cart-count"> 
                             <?php
 
                             if (isset($_SESSION['nombreTotalArticles'])) {
@@ -82,7 +74,7 @@ $categoriesUniques = array_unique($categories);
                             }
 
                             ?>
-                        </span></a>
+                        </span>Panier</a>
 
 
                 </li>
@@ -103,8 +95,14 @@ $categoriesUniques = array_unique($categories);
             </ul>
         </div>
 
-
+       
         <div class="navbar">
+        <div class="logo">
+                <a href="index.php"><img src="Public/images/logo.png" width="130px"></a>
+
+
+
+            </div>
             <nav>
                 <ul id="MenuItems">
                     <li><a href="index.php">Accueil</a></li>

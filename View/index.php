@@ -67,7 +67,17 @@ if (isset($_SESSION['username'])) { ?>
     <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
         <span class="carousel-control-next-icon"></span>
     </button>
+
+   
 </div>
+
+<div class="row mt-3">
+        <?php foreach ($datas as $i => $data) : ?>
+            <div class="col">
+            <img src="<?= $data['image'] ?>" alt="Thumbnail <?= $i + 1 ?>" class="d-block mx-auto"  data-bs-target="#demo" data-bs-slide-to="<?= $i ?>">
+        </div>
+        <?php endforeach; ?>
+    </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 
