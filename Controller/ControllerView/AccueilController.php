@@ -5,6 +5,6 @@ class AccueilController
     public function index()
     {
         // Charge la vue associée
-        include 'View/index.php';
+        include_once 'View/index.php';
     }
 }

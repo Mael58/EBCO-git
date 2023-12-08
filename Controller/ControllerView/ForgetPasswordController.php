@@ -2,6 +2,6 @@
 
 class ForgetPasswordController {
     public function index() {
-        include 'View/compte/ForgetPassword.php';
+        include_once 'View/compte/ForgetPassword.php';
     }
 }

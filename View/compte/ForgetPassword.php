@@ -1,5 +1,5 @@
-<?php include 'Model/ProduitsBDD.php';
-include 'template/header.php';
+<?php include_once 'Model/ProduitsBDD.php';
+include_once 'template/header.php';
 
 ?>
 
@@ -35,4 +35,4 @@ include 'template/header.php';
 </div>
 
 <!----------Footer--------------->
-<?php include 'template/footer.html'; ?>
+<?php include_once 'template/footer.html'; ?>

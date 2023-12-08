@@ -2,6 +2,6 @@
 
 class CompteController {
     public function index() {
-        include 'View/compte/compte.php';
+        include_once 'View/compte/compte.php';
     }
 }

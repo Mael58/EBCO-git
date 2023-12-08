@@ -106,7 +106,7 @@ if (isset($_SESSION['username'])) { ?>
         <a href="solution" class="btn">Explorer &#8594;</a>
     </div>
     <div class="col-2">
-        <img src="Public/images/montage-2.png">
+        <img src="Public/images/montage-2.png" alt="montage">
     </div>
 
 </div>
@@ -118,13 +118,13 @@ if (isset($_SESSION['username'])) { ?>
     <div class="small-container">
         <div class="row">
             <div class="col-3">
-                <img src="Public/images/switch-c-550x604.jpg">
+                <img src="Public/images/switch-c-550x604.jpg" alt="switch craft avec injection">
             </div>
             <div class="col-3">
-                <img src="Public/images/fabrication-550x604.jpg" alt="switch craft avec injection">
+                <img src="Public/images/fabrication-550x604.jpg" alt="carte electronique">
             </div>
             <div class="col-3">
-                <img src="Public/images/usbfils1-550x604.jpg">
+                <img src="Public/images/usbfils1-550x604.jpg" alt="usb RS485">
             </div>
         </div>
     </div>
@@ -202,7 +202,7 @@ if (isset($_SESSION['username'])) { ?>
     <div class="small-container">
         <div class="row">
             <div class="col-2">
-                <img src="Public/images/Exclusive-700x613.png" class="offer-img">
+                <img src="Public/images/Exclusive-700x613.png" alt="usb RS232" class="offer-img">
             </div>
             <div class="col-2">
                 <h2>Câbles entièrement personnalisables</h2>
@@ -224,14 +224,14 @@ if (isset($_SESSION['username'])) { ?>
             <a href="ebco">
                 <div class="col-3">
 
-                    <img src="Public/images/Eric-belouet.jpg">
+                    <img src="Public/images/Eric-belouet.jpg" alt="Eric-belouet">
                     <h3>Qui sommes-nous?</h3>
                 </div>
             </a>
             <a href="solution">
                 <div class="col-3">
 
-                    <img src="Public/images/fabrication-2.jpg">
+                    <img src="Public/images/fabrication-2.jpg" alt="fabrication">
                     <h3>Nos prestations</h3>
                 </div>
             </a>
@@ -239,7 +239,7 @@ if (isset($_SESSION['username'])) { ?>
                 <div class="col-3">
 
 
-                    <img src="Public/images/RS485-lg.png">
+                    <img src="Public/images/RS485-lg.png" alt="RS485">
                     <h3>Nos câbles</h3>
                 </div>
             </a>
@@ -253,10 +253,10 @@ if (isset($_SESSION['username'])) { ?>
 
 
             <div class="col-5">
-                <img src="Public/images/logo-digikey.png">
+                <img src="Public/images/logo-digikey.png" alt="logo-digikey">
             </div>
             <div class="col-5">
-                <img src="Public/images/logo-pp.png">
+                <img src="Public/images/logo-pp.png" alt="paypal">
             </div>
         </div>
     </div>

@@ -2,6 +2,6 @@
 
 class MentionController {
     public function index() {
-        include 'View/Mention/Mentions.php';
+        include_once 'View/Mention/Mentions.php';
     }
 }

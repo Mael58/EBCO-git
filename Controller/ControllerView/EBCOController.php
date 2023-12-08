@@ -2,6 +2,6 @@
 
 class EbcoController {
     public function index() {
-        include 'View/EBCO/EBconnections.php';
+        include_once 'View/EBCO/EBconnections.php';
     }
 }

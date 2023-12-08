@@ -2,6 +2,6 @@
 
 class ContactController {
     public function index() {
-        include 'View/contact/contact.php';
+        include_once 'View/contact/contact.php';
     }
 }

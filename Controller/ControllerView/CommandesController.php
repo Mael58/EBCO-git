@@ -2,6 +2,6 @@
 
 class CommandesController {
     public function index() {
-        include 'View/commandes/adresse.php';
+        include_once 'View/commandes/adresse.php';
     }
 }

@@ -63,7 +63,7 @@ $categoriesUniques = array_unique($categories);
            
           
             <ul>
-                <li> <a href="Panier"><img src="Public/images/cart.png" width="30px" height="30px">
+                <li> <a href="Panier"><img src="Public/images/cart.png" alt="panier" width="30px" height="30px">
                         <span id="cart-count"> 
                             <?php
 
@@ -98,7 +98,7 @@ $categoriesUniques = array_unique($categories);
        
         <div class="navbar">
         <div class="logo">
-                <a href="Accueil"><img src="Public/images/logo.png" width="130px"></a>
+                <a href="Accueil"><img src="Public/images/logo.png" alt="logo-EBCO" width="130px"></a>
 
 
 
@@ -114,7 +114,7 @@ $categoriesUniques = array_unique($categories);
                             <?php
 
                             $liens = [
-                                'Câble USB' => 'usb',
+                                'Câbles USB' => 'usb',
                                 'Objet connectes' => 'iot.php',
 
                             ];
@@ -147,7 +147,7 @@ $categoriesUniques = array_unique($categories);
 
 
         </div>
-        <a href="#" id="menuIcon"><img src="Public/images/menu.png" class="menu-icon"></a>
+        <a href="#" id="menuIcon"><img src="Public/images/menu.png" alt="menu" class="menu-icon"></a>
     </div>
     <?php
 

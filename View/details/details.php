@@ -61,7 +61,7 @@ if ($recipe) {
             <div class="row">
                 <div class="col-1">
                 <p>Accueil / <?= $des ?> / <?= $nom ?></p><br>
-                    <img class="imgDetail" src="<?= $image ?>"  id="ProductImg">
+                    <img class="imgDetail" alt="image-produit" src="<?= $image ?>"  id="ProductImg">
                 </div>
                 <div class="col-2">
                  
@@ -120,11 +120,11 @@ if ($recipe) {
         <td>Lien de la documentation:</td>
         <td>
             
-        <a href="<?= $lienDoc ?>" target="_blank"><img class="pdf" src="Public/images/pdf.png">Fiche technique</a></td>
+        <a href="<?= $lienDoc ?>" alt="logo-pdf" target="_blank"><img class="pdf" src="Public/images/pdf.png">Fiche technique</a></td>
     </tr>
     <tr>
         <td>Télécharger les drivers:</td>
-        <td><a href="<?= $lienDriver ?>" download><img class="zip" src="Public\images\downloadZip-removebg-preview.png">Drivers.zip</a>
+        <td><a href="<?= $lienDriver ?>" alt="logo-zip" download><img class="zip" src="Public\images\downloadZip-removebg-preview.png">Drivers.zip</a>
   
 </td>
     </tr>
@@ -323,4 +323,4 @@ if ($recipe) {
 
 
 
-    <?php include 'template/footer.html'; ?>
+    <?php include_once 'template/footer.html'; ?>
