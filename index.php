@@ -2,7 +2,7 @@
 
 $requestedPage = $_GET['page'] ?? 'home';
 
-$validPages = ['home', 'compte', 'Panier', 'solution', 'ebco', 'usb', 'Contact', 'commandes', 'details'];
+$validPages = ['Accueil', 'compte', 'Panier', 'solution', 'ebco', 'usb', 'Contact', 'commandes', 'details', 'Mention', 'ForgetPassword'];
 
 // Vérifie si la page demandée est valide
 if (!in_array($requestedPage, $validPages)) {

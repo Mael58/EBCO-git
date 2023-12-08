@@ -1,6 +1,6 @@
 <?php
 
-class HomeController
+class AccueilController
 {
     public function index()
     {

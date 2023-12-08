@@ -60,10 +60,11 @@ if ($recipe) {
         <div class="small-container single-product" id="produit">
             <div class="row">
                 <div class="col-1">
+                <p>Accueil / <?= $des ?> / <?= $nom ?></p><br>
                     <img class="imgDetail" src="<?= $image ?>"  id="ProductImg">
                 </div>
                 <div class="col-2">
-                    <p>Accueil / <?= $des ?> / <?= $nom ?></p>
+                 
                     <h1><?= $nom ?></h1>
                     <h5><?= $ref ?></h5>
 

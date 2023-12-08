@@ -51,7 +51,7 @@ if (isset($_SESSION['username'])) { ?>
     <div class="carousel-inner">
         <?php foreach ($datas as $i => $data) : ?>
             <div class="carousel-item<?= $i === 0 ? ' active' : '' ?>">
-                <img src="<?= $data['image'] ?>" alt="Image <?= $i + 1 ?>" class="d-block mx-auto" style="width:30%">
+                <img src="<?= $data['image'] ?>" alt="Image <?= $i + 1 ?>" class="d-block mx-auto thumbnail" style="width:30%">
                 <div class="carousel-caption d-none d-md-block">
                     <h3><?= $data['titre']?></h3>
                     
@@ -71,21 +71,23 @@ if (isset($_SESSION['username'])) { ?>
    
 </div>
 
-<div class="row mt-3">
+<!-- <div class="row mt-3">
         <?php foreach ($datas as $i => $data) : ?>
             <div class="col">
             <img src="<?= $data['image'] ?>" alt="Thumbnail <?= $i + 1 ?>" class="d-block mx-auto"  data-bs-target="#demo" data-bs-slide-to="<?= $i ?>">
         </div>
         <?php endforeach; ?>
-    </div>
+    </div> -->
+
+    
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 
-<script>
+<!-- <script>
     $(document).ready(function() {
         $('.carousel').carousel();
     });
-</script>
+</script> -->
 
 
 

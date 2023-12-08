@@ -98,14 +98,14 @@ $categoriesUniques = array_unique($categories);
        
         <div class="navbar">
         <div class="logo">
-                <a href="index.php"><img src="Public/images/logo.png" width="130px"></a>
+                <a href="Accueil"><img src="Public/images/logo.png" width="130px"></a>
 
 
 
             </div>
             <nav>
                 <ul id="MenuItems">
-                    <li><a href="index.php">Accueil</a></li>
+                    <li><a href="Accueil">Accueil</a></li>
                     <li><a href="ebco">EBconnections</a></li>
                     <li><a href="solution">Solutions</a></li>
                     <div class="dropdown">

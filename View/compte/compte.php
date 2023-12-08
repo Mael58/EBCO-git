@@ -33,7 +33,7 @@ include 'Model/ProduitsBDD.php';
                         <input type="checkbox" class="check" name="remember" value="1">Se souvenir de moi
                     </div> -->
                     <button type="submit" class="btn">Connection</button>
-                    <a href="error.php">Mot de passe oublié</a>
+                    <a href="ForgetPassword">Mot de passe oublié</a>
                 </form>
 
                 <form id="RegForm" method="post">
