@@ -32,7 +32,7 @@ class ProduitsBDD
     {
 
 
-        $sqlQuery = "SELECT * FROM vente WHERE categorie='$categorie';";
+        $sqlQuery = "SELECT * FROM vente WHERE categorie='$categorie' ORDER BY 'nom';";
         $donnees = $this->db->prepare($sqlQuery);
 
         $donnees->execute();
@@ -145,6 +145,7 @@ class ProduitsBDD
 
 
             $_SESSION['nombreTotalArticles'] = $user_data;
+          
         }
         setcookie('panier-' . $username, '', time() - 3600, '/', '', true, true);
         setcookie('adresse-' . $username, '', time() - 3600, '/', '', true, true);

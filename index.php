@@ -1,6 +1,6 @@
 <?php
 
-$requestedPage = $_GET['page'] ?? 'home';
+$requestedPage = $_GET['page'] ?? 'Accueil';
 
 $validPages = ['Accueil', 'compte', 'Panier', 'solution', 'ebco', 'usb', 'Contact', 'commandes', 'details', 'Mention', 'ForgetPassword'];
 

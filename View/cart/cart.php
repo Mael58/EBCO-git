@@ -6,7 +6,7 @@ if(isset($_SESSION['TVA'])){
     $TVA=20;
 }
 
- $quantiteMax=$_SESSION['quantiteMax'];
+
 
 ?>
 
@@ -49,8 +49,8 @@ if(isset($_SESSION['TVA'])){
                     // echo '</tr>';
                     $sousTotal = floatval($produit['prix']) * floatval($produit['quantite']);
 
-                    $totalSansTVA += $sousTotal; // Ajoutez le sous-total au total
-                    echo '<td>' . $sousTotal . ' €</td>';
+                    $totalSansTVA += $produit['sousTotal']; // Ajoutez le sous-total au total
+                    echo '<td>' . $produit['sousTotal'] . ' €</td>';
                 
                     echo '</tr>';
                 }
@@ -81,11 +81,11 @@ if(isset($_SESSION['TVA'])){
               
                 var sousTotalCell = input.parentNode.nextElementSibling;
                 
-                sousTotalCell.innerHTML = response.nouveauSousTotal + ' €';
+                sousTotalCell.innerHTML = response.nouveauSousTotal.toFixed(2) + ' €';
 
          
 
-                var sousTotal= response.nouveauSousTotal;
+                var sousTotal= response.nouveauTotal.toFixed(2);
                 document.getElementById('sousTotal').innerText = sousTotal + ' €';
 
 

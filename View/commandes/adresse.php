@@ -575,7 +575,7 @@ AjaxRequest('Controller/formAdresse.php')
                             $total += $sousTotal; // Ajoutez le sous-total au total
                             echo '<td>' . $produit['prix'] . ' €</td>';
                             echo '<td><input type="number" min="1" value="' . $produit['quantite'] . '" id="quantite-' . $produit['nom'] . '" data-prix="' . $produit['prix'] . '" onchange="updateQuantitePrix(this, \'' . $produit['nom'] . '\',\'' . $produit['prix'] . '\')"></td>';
-                            echo '<td>' . $sousTotal . ' €</td>';
+                            echo '<td>' . $produit['sousTotal'] . ' €</td>';
                             echo '</tr>';
                         }
                     }

@@ -61,7 +61,11 @@ $categoriesUniques = array_unique($categories);
 
     <div class="navbar-logo">
            
-          
+    <div class="logo">
+                <a href="Accueil"><img src="Public/images/logo.png" alt="logo-EBCO" width="130px"></a>
+            </div>
+
+            <div class="liste">
             <ul>
                 <li> <a href="Panier"><img src="Public/images/cart.png" alt="panier" width="30px" height="30px">
                         <span id="cart-count"> 
@@ -94,15 +98,11 @@ $categoriesUniques = array_unique($categories);
                 ?>
             </ul>
         </div>
+        </div>
 
        
         <div class="navbar">
-        <div class="logo">
-                <a href="Accueil"><img src="Public/images/logo.png" alt="logo-EBCO" width="130px"></a>
-
-
-
-            </div>
+       
             <nav>
                 <ul id="MenuItems">
                     <li><a href="Accueil">Accueil</a></li>
@@ -179,7 +179,7 @@ $categoriesUniques = array_unique($categories);
             session_destroy();
 
             // Redirigez l'utilisateur vers la page de connexion (ou une autre page de votre choix)
-            header("Location: index.php");
+            header("Location: Accueil");
             exit;
         }
     }

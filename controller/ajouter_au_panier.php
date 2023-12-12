@@ -34,6 +34,20 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
             $produitExiste = true;
             $p['quantite'] += $produit['quantite'];
 
+            $p['sousTotal'] = $p['quantite'] * $p['prix'];
+
+            // Appliquer des réductions en fonction de la quantité
+            if ($p['quantite'] >= 10 && $p['quantite'] < 50) {
+                $p['sousTotal'] *= 0.97;
+            } elseif ($p['quantite'] >= 50 && $p['quantite'] < 100) {
+                $p['sousTotal'] *= 0.93;
+            } elseif ($p['quantite'] >= 100) {
+                $p['sousTotal'] *= 0.86;
+            }
+            
+
+            
+
             break;
         }
     }
@@ -41,6 +55,16 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
 
     // Si le produit n'existe pas, ajoutez-le au panier
     if (!$produitExiste) {
+        $produit['sousTotal'] = $produit['quantite'] * $produit['prix'];
+
+        if ($produit['quantite'] >= 10 && $produit['quantite'] < 50) {
+            $produit['sousTotal'] *= 0.97;
+        } elseif ($produit['quantite'] >= 50 && $produit['quantite'] < 100) {
+            $produit['sousTotal'] *= 0.93;
+        } elseif ($produit['quantite'] >= 100) {
+            $produit['sousTotal'] *= 0.86;
+        }
+
         $_SESSION['panier'][] = $produit;
     }
 
@@ -48,6 +72,7 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
     $nombreTotalArticles = array_sum(array_column($_SESSION['panier'], 'quantite'));
     $_SESSION['nombreTotalArticles'] = $nombreTotalArticles;
 
+   
 
     // Afficher le nombre total d'articles dans le panier global
     // À la fin de votre script PHP

@@ -1,7 +1,8 @@
 <?php
 ob_start();
 include_once 'template/header.php';
-$quantiteMax=$_SESSION['quantiteMax'];
+
+
 ?>
 
 
@@ -44,98 +45,131 @@ if ($recipe) {
     $quantite = $recipe['Quantite'];
     $_SESSION['TVA'] = $recipe['TVA'];
 
-    $_SESSION['quantiteMax'] = $quantite;
+
 
 
     $db = null;
 
 
 ?>
+    <p>Accueil / <?= $des ?> / <?= $nom ?></p><br>
 
 
 
     <div class="page-container">
         <div class="overlay" id="overlay"></div>
 
-        <div class="small-container single-product" id="produit">
-            <div class="row">
-                <div class="col-1">
-                <p>Accueil / <?= $des ?> / <?= $nom ?></p><br>
-                    <img class="imgDetail" alt="image-produit" src="<?= $image ?>"  id="ProductImg">
+
+        <div class="row-details">
+            <div class="col-detail-1">
+                <h1><?= $nom ?></h1>
+                <div class="testContainer">
+                    <div class="test1">
+
+
+                        <img class="imgDetail" alt="image-produit" src="<?= $image ?>" id="ProductImg">
+                    </div>
+
+                    <div class="test3">
+                        <div class="spef">
+                            <h3>Spécifications techniques:</h3><br>
+                            <table>
+                                <tr>
+                                    <td>référence:</td>
+                                    <td><?= $ref ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Norme:</td>
+                                    <td><?= $norme ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Puissance:</td>
+                                    <td><?= $puissance ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Connecteur:</td>
+                                    <td><?= $connecteur ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Débit:</td>
+                                    <td><?= $dataRate ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Longueur:</td>
+                                    <td> <?= $longueur ?> </td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                        <div class="doc">
+                            <h3>Documentations techniques</h3>
+
+                            <table>
+                                <tr>
+                                    <td>Lien de la documentation:</td>
+                                    <td>
+
+                                        <a href="<?= $lienDoc ?>" alt="logo-pdf" target="_blank"><img class="pdf" src="Public/images/pdf.png">Fiche technique</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Télécharger les drivers:</td>
+                                    <td><a href="<?= $lienDriver ?>" alt="logo-zip" download><img class="zip" src="Public\images\downloadZip-removebg-preview.png">Drivers.zip</a>
+
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
                 </div>
-                <div class="col-2">
-                 
-                    <h1><?= $nom ?></h1>
-                    <h5><?= $ref ?></h5>
-
-
-                    <h4><?= $prix ?> €</h4>
 
 
 
-                    <p> Quantité: <?= $quantite ?></p>
-
-                    <?php
-                    if ($quantite > 0) {
-                        echo '<p style="color:green;">En stock</p>';
-                        echo '<input type="number" id="quantite" value="1" min="1" max=' . $quantite . '>';
-                        echo '<a href="#" id="ajouter-au-panier" class="btn">Ajouter au panier</a>';
-                    } else {
-                        echo '<p style="color:red;">Produit indisponible</p>';
-                    }
-
-
-                    ?>
-
-
-
-                    <h3>Spécifications techniques:</h3><br>
-             <table>
-    <tr >
-        <td>Norme:</td>
-        <td><?= $norme ?></td>
-    </tr>
-    <tr>
-        <td>Puissance:</td>
-        <td><?= $puissance ?></td>
-    </tr>
-    <tr>
-        <td>Connecteur:</td>
-        <td><?= $connecteur ?></td>
-    </tr>
-    <tr>
-        <td>Débit:</td>
-        <td><?= $dataRate ?></td>
-    </tr>
-    <tr>
-        <td>Longueur:</td>
-        <td> <?= $longueur ?> </td>
-    </tr>
-  
-</table><br>
-
-<h3>Lien:</h3><br>
-
-<table>  <tr>
-        <td>Lien de la documentation:</td>
-        <td>
-            
-        <a href="<?= $lienDoc ?>" alt="logo-pdf" target="_blank"><img class="pdf" src="Public/images/pdf.png">Fiche technique</a></td>
-    </tr>
-    <tr>
-        <td>Télécharger les drivers:</td>
-        <td><a href="<?= $lienDriver ?>" alt="logo-zip" download><img class="zip" src="Public\images\downloadZip-removebg-preview.png">Drivers.zip</a>
-  
-</td>
-    </tr>
-
-</table>
-
-
-
-                </div><br>
             </div>
         </div>
+
+
+
+
+
+
+        <div class="test2">
+
+
+            <h4><?= $prix ?> €</h4>
+
+
+
+
+            <!-- <p> Quantité: <?= $quantite ?></p> -->
+
+            <?php
+            if ($quantite > 0) {
+                echo '<p style="color:green;">En stock</p>';
+                echo '<input type="number" id="quantite" value="1" min="1" >';
+                echo '<a href="#" id="ajouter-au-panier" class="btn">Ajouter au panier</a>';
+            } else {
+                echo '<p style="color:red;">Produit indisponible</p>';
+            }
+
+
+            ?>
+
+
+
+
+        </div>
+
+
+
+
+
+
 
 
 
@@ -177,12 +211,12 @@ if ($recipe) {
             var btnAjouterAuPanier = document.getElementById('ajouter-au-panier');
             var inputQuantite = document.getElementById('quantite');
             var panierCounter = document.getElementById('cart-count'); // Assuming you have an element with id 'panier-counter'
-            var quantiteDisponible = <?= $quantite ?>;
+            // var quantiteDisponible = <?= $quantite ?>;
 
             var panier = document.getElementById('panier');
             var overlay = document.getElementById('overlay');
             var closeBtn = document.getElementById('close');
-       
+
 
             function togglePanier() {
 
@@ -208,16 +242,12 @@ if ($recipe) {
             btnAjouterAuPanier.addEventListener('click', function(e) {
                 e.preventDefault(); // Empêche le lien de rediriger immédiatement
 
-                quantiteMax=<?=$quantiteMax?>;
-                
+
+
                 var quantite = inputQuantite.value;
-              
+
                 var nom = "<?= $nom ?>";
 
-                if (parseInt(quantite) > quantiteDisponible || parseInt(quantite) <= 0) {
-                    alert("La quantité spécifiée n'est pas valide. Veuillez choisir une quantité comprise entre 1 et " + quantiteDisponible + ".");
-                    return; // Ne pas poursuivre l'ajout au panier
-                }
 
 
                 var prix = "<?= $prix ?>";
@@ -236,50 +266,54 @@ if ($recipe) {
                     })
                     .then(response => response.json())
                     .then(data => {
-                   
+
                         console.log('Produit dans le panier:', data);
                         console.log('Produit dans le panier:', data.produits);
 
                         panierCounter.textContent = data.nombreTotalArticles;
 
-                        
-                      
+
+
                         if (Array.isArray(data.produits) && data.produits.length > 0) {
                             const panierBody = document.getElementById('Panier_body');
                             panierBody.innerHTML = '';
                             var total = 0;
-                           
+
                             data.produits.forEach(produit => {
                                 console.log('Produit dans le panier:', produit);
-                            
+
                                 const produitHTML = `
-            <div class="produit">
+            <div class="produit" id="quantite-${produit.nom}>
                 <img src="${produit.image}" width="50%">
                 <div>
                     <p>${produit.nom}</p>
-                    <small>Prix: ${produit.prix} €</small>
+                    <small id="prix-${produit.nom}">Prix: ${produit.prix} €</small>
                     <a href="Controller/supprimer.php?nom=${produit.nom}">
                         <img src="Public/images/poubelle.png" width="15px">
                     </a>
-                    <input class="small-input" type="number" min="1" max="<?=$quantiteMax?>" value="${produit.quantite}" 
+                    <input class="small-input" type="number" min="1"  value="${produit.quantite}" 
                         id="quantite-${produit.nom}" data-prix="${produit.prix}" 
                         onchange="updateQuantitePrix(this, '${produit.nom}','${produit.prix}')">
                 </div>
             </div>`;
-                                var sousTotal = parseFloat(produit.prix) * parseFloat(produit.quantite);
+                                console.log(produit.prix);
+                                console.log(produit.quantite);
+                                var sousTotal = produit.sousTotal;
+
 
                                 total += sousTotal;
 
 
+
                                 panierBody.innerHTML += produitHTML;
                             });
-                        
-                        prixTotal.innerText = 'Total: ' + total + '€';
-                        togglePanier();
+
+                            prixTotal.innerText = 'Total: ' + total.toFixed(2) + '€';
+                            togglePanier();
 
                         }
                     })
-                    
+
                     .catch(error => {
                         console.error('Erreur lors de la requête AJAX:', error);
                     });
@@ -300,10 +334,33 @@ if ($recipe) {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var response = JSON.parse(xhr.responseText);
                     if (response.success) {
-                        // Actualisez la quantité dans la partie visible du panier
 
-                        console.log(response.nouveauSousTotal);
-                        prixTotal.innerHTML = 'Total: ' + response.nouveauSousTotal + '€';
+                        var prixAffiche = parseFloat(prix);
+
+                        prixTotal.innerHTML = 'Total: ' + response.nouveauTotal.toFixed(2) + '€';
+                        var quantite = response.quantite;
+                        // var produitHTML = document.getElementById('quantite-' + nomProduit);
+                        var prixElement = document.getElementById('prix-' + nomProduit);
+
+                        if (quantite >= 10 && quantite < 50) {
+                            prixAffiche *= 0.97;
+
+                            prixElement.innerHTML = 'Prix: ' + prixAffiche.toFixed(2) + '€';
+                        }
+                        if (quantite >= 50 && quantite < 100) {
+                            prixAffiche *= 0.93;
+
+                            prixElement.innerHTML = 'Prix: ' + prixAffiche.toFixed(2) + '€';
+                        }
+
+                        if (quantite >= 100) {
+                            prixAffiche *= 0.86;
+
+                            prixElement.innerHTML = 'Prix: ' + prixAffiche.toFixed(2) + '€';
+
+                        }
+
+
 
                     }
                 }
@@ -319,7 +376,7 @@ if ($recipe) {
 
     ob_end_flush();
     ?>
-   
+
 
 
 
