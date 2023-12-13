@@ -4,10 +4,7 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, 'Poppins', sans-serif;
 
-}
 
 a {
     text-decoration: none;
@@ -45,9 +42,10 @@ h1 {
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial;
     margin: 0;
     padding: 0;
+ 
 }
 
 .navbar {
@@ -1013,7 +1011,7 @@ h1 {
 }
 
 .separator {
-    border-top: 1px solid grey;
+    border-top: 1px solid black;
     width: 100%;
     height: 0;
     margin: 10px 0;
@@ -1843,7 +1841,7 @@ a[href$=".zip"] img {
 
 
 .row-details {
-    display: a;
+    
     align-items: flex-start;
     justify-content: space-around;
 
@@ -1858,31 +1856,117 @@ a[href$=".zip"] img {
 .col-detail-1 {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
     padding: 20px;
-    /* background-color: transparent;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  
     border-radius: 8px;
     margin: 10px;
+    
 
 }
 
-.test3{
+.produitContainer {
+    display: flex;
+   margin-top: 20px;
     width: 100%;
-    margin-right: 15%;
-    margin-left: 10px;
+   
+
 }
 
+
+
+.produit3{
+   
+    width: 30%;      
+   
+}
+
+.produit1{
+    
+    margin-top: 20px;
+    
+    text-align: end;
+    width: 30%;
+    
+    
+}
+
+.produit1 img{
+   
+    border: #000 solid 1px;
+    border-radius: 8px;
+    width: 70%;
+
+
+}
+
+
+
+.produit2{
+    margin-left: 150px;
+    
+}
+
+.container-quantite{
+
+display: flex;
+align-items: center;
+
+
+}
+
+.container-quantite h3{
+
+   margin-right: 20px;
+    
+    
+    }
+
+
+
+.produit2 h2{
+   
+   
+   
+    margin-bottom: 30px;
+    
+   
+}
+
+.produit2 input {
+   width: 50%;
+ 
+    border-radius: 10px; 
+    
+   
+
+}
+.produit2 .btn{
+   text-align: center;
+   margin-left: 10px;
+   width: 95%;
+   
+ 
+}
+
+.produit2 p{
+  
+   margin-bottom: 10px;
+  
+ }
+ 
+
+
+.doc,
 .spef{
-margin-bottom: 15%;
+
+margin-top: 30px;
+margin-left: 30px;
 }
 
 
-.test2 input {
-    width: 15%;
-    margin-right: 20px;
 
-}
+
 
 
 
@@ -1894,24 +1978,55 @@ table {
 }
 
 
-th,
+
 td {
     padding: 10px;
     text-align: left;
 }
 
-.test2 h5 {
-    margin-bottom: 10%;
-    margin-top: 20%;
+
+
+
+
+
+
+
+.doc-p strong{
+    margin-right: 10px;
 }
 
-.test2 h4 {
-    color: #000;
+
+.spef-p strong{
+    margin-right: 10px;
+
 }
 
-.testContainer {
+
+
+.banderole{
+   
+    width:100%;
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-
-}
+    text-align: center;
+    margin-bottom: 20px;
+    overflow-x: hidden;
+ 
+ 
+    
+  }
+  
+  .txt{
+    white-space: nowrap;
+    font-size: 20px;
+    animation: Scroll 10s linear infinite;
+    display: inline-block;
+  }
+  
+  @keyframes Scroll{
+    0%{
+      transform: translateX(100%);
+    }
+    100%{
+       transform: translateX(-100%);
+    }
+  }

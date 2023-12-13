@@ -3,10 +3,7 @@ ob_start();
 include_once 'template/header.php';
 
 
-?>
 
-
-<?php
 // Récupérez la référence du produits depuis l'URL
 $nomLien = $_GET['nom'];
 
@@ -63,68 +60,110 @@ if ($recipe) {
         <div class="row-details">
             <div class="col-detail-1">
                 <h1><?= $nom ?></h1>
-                <div class="testContainer">
-                    <div class="test1">
+                <div class="produitContainer">
+                    <div class="produit1">
 
 
                         <img class="imgDetail" alt="image-produit" src="<?= $image ?>" id="ProductImg">
                     </div>
 
-                    <div class="test3">
+
+                    <div class="produit3">
                         <div class="spef">
                             <h3>Spécifications techniques:</h3><br>
-                            <table>
-                                <tr>
-                                    <td>référence:</td>
-                                    <td><?= $ref ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Norme:</td>
-                                    <td><?= $norme ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Puissance:</td>
-                                    <td><?= $puissance ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Connecteur:</td>
-                                    <td><?= $connecteur ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Débit:</td>
-                                    <td><?= $dataRate ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Longueur:</td>
-                                    <td> <?= $longueur ?> </td>
-                                </tr>
+                            <p class="spef-p">
+                                Référence: <?= $ref ?><br>
+                                Norme: <?= $norme ?><br>
+                                Puissance: <?= $puissance ?><br>
+                                Connecteur: <?= $connecteur ?><br>
+                                Débit: <?= $dataRate ?><br>
+                                Longueur: <?= $longueur ?><br>
+                            </p>
 
-                            </table>
+
+
+
                         </div>
-
+                        <div class="separator"></div>
                         <div class="doc">
                             <h3>Documentations techniques</h3>
+                            <p class="doc-p">
+                                <strong>Lien de la documentation:</strong>
+                                <a href="<?= $lienDoc ?>" alt="logo-pdf" target="_blank"><img class="pdf" title=" Fiche technique" src="Public/images/pdf.png"></a>
+                            </p>
+                            <p class="doc-p">
+                                <strong>Télécharger les drivers:</strong>
+                                <a href="<?= $lienDriver ?>" alt="logo-zip" download><img class="zip" title="Drivers.zip" src="Public\images\downloadZip-removebg-preview.png"></a>
+                            </p>
 
-                            <table>
-                                <tr>
-                                    <td>Lien de la documentation:</td>
-                                    <td>
-
-                                        <a href="<?= $lienDoc ?>" alt="logo-pdf" target="_blank"><img class="pdf" src="Public/images/pdf.png">Fiche technique</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Télécharger les drivers:</td>
-                                    <td><a href="<?= $lienDriver ?>" alt="logo-zip" download><img class="zip" src="Public\images\downloadZip-removebg-preview.png">Drivers.zip</a>
-
-                                    </td>
-                                </tr>
-
-                            </table>
 
                         </div>
 
                     </div>
+
+
+                    <div class="produit2">
+                        <h2 id="prix"> <?=$prix?> €</h2>
+
+
+
+                        <?php
+
+
+                        if ($quantite > 0) {
+                            echo '<p style="color:green;">En stock</p>';
+                            echo '<div class="container-quantite">';
+                            echo '<h3 class="quantite">Quantité</h3>';
+                           
+                            echo '<input type="number" id="quantite" value="1" min="1" >';
+                            echo '</div>';
+                            echo '<a href="#" id="ajouter-au-panier" class="btn">Ajouter au panier</a>';
+                        } else {
+                            echo '<p style="color:red;">Produit indisponible</p>';
+                        }
+
+
+                        ?>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                var inputQuantite = document.getElementById('quantite');
+                                var prixElement = document.getElementById('prix');
+
+                                inputQuantite.addEventListener('input', function() {
+                                    var quantite = inputQuantite.value;
+
+                                    var prixInitial = <?= $recipe['prix'] ?>;
+
+                                    var prixReduit;
+
+                                    if (quantite >= 10 && quantite < 50) {
+                                        prixReduit = prixInitial * 0.97;
+                                        console.log(prixReduit);
+                                    } else if (quantite >= 50 && quantite < 100) {
+                                        prixReduit = prixInitial * 0.931;
+                                        console.log(prixReduit);
+                                    } else if (quantite >= 100) {
+                                        prixReduit = prixInitial * 0.866;
+                                        console.log(prixReduit);
+                                    } else {
+                                        prixReduit = prixInitial;
+                                    }
+
+                                    // Affichage du prix réduit
+
+                                    prixElement.innerHTML = '<h2>' + prixReduit.toFixed(2) + ' €</h2>';
+                                });
+
+                            });
+                        </script>
+
+
+
+                    </div>
+
+
+
 
                 </div>
 
@@ -138,32 +177,7 @@ if ($recipe) {
 
 
 
-        <div class="test2">
 
-
-            <h4><?= $prix ?> €</h4>
-
-
-
-
-            <!-- <p> Quantité: <?= $quantite ?></p> -->
-
-            <?php
-            if ($quantite > 0) {
-                echo '<p style="color:green;">En stock</p>';
-                echo '<input type="number" id="quantite" value="1" min="1" >';
-                echo '<a href="#" id="ajouter-au-panier" class="btn">Ajouter au panier</a>';
-            } else {
-                echo '<p style="color:red;">Produit indisponible</p>';
-            }
-
-
-            ?>
-
-
-
-
-        </div>
 
 
 

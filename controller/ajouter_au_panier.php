@@ -18,6 +18,8 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
         $_SESSION['panier'] = array();
     }
 
+
+
     // Ajouter le produit au panier global
     $produit = array(
         'nom' => $_POST['nom'],
@@ -40,9 +42,9 @@ if (!isset($_SESSION['username']) || !is_array($_SESSION['username'])) {
             if ($p['quantite'] >= 10 && $p['quantite'] < 50) {
                 $p['sousTotal'] *= 0.97;
             } elseif ($p['quantite'] >= 50 && $p['quantite'] < 100) {
-                $p['sousTotal'] *= 0.93;
+                $p['sousTotal'] *= 0.931;
             } elseif ($p['quantite'] >= 100) {
-                $p['sousTotal'] *= 0.86;
+                $p['sousTotal'] *= 0.866;
             }
             
 

@@ -5,6 +5,8 @@ $nouveauSousTotal = 0;
 
 $nomProduit = isset($_POST["nomProduit"]) ? $_POST["nomProduit"] : "";
 $nouvelleQuantite = isset($_POST["nouvelleQuantite"]) ? $_POST["nouvelleQuantite"] : "";
+$_SESSION['quantite']= $nouvelleQuantite;
+
 $prix = isset($_POST["prix"]) ? $_POST["prix"] : "";
 $nouveauSousTotal = floatval($prix) * floatval($nouvelleQuantite);
 
@@ -20,9 +22,9 @@ if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
             if ($produit['quantite'] >= 10 && $produit['quantite'] < 50) {
                 $produit['sousTotal'] = $produit['quantite'] * $produit['prix'] * 0.97;
             } elseif ($produit['quantite'] >= 50 && $produit['quantite'] < 100) {
-                $produit['sousTotal'] = $produit['quantite'] * $produit['prix'] * 0.93;
+                $produit['sousTotal'] = $produit['quantite'] * $produit['prix'] * 0.931;
             } elseif ($produit['quantite'] >= 100) {
-                $produit['sousTotal'] = $produit['quantite'] * $produit['prix'] * 0.86;
+                $produit['sousTotal'] = $produit['quantite'] * $produit['prix'] * 0.866;
             } else {
                 $produit['sousTotal'] = $produit['quantite'] * $produit['prix'];
             }
