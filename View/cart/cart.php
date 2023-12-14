@@ -25,7 +25,7 @@ if (isset($_SESSION['TVA'])) {
         <?php
 
         $totalSansTVA = 0;
-        $fraisPort = 10;
+    
         $totalSansfraisPort=0;
    
         if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
@@ -45,10 +45,9 @@ if (isset($_SESSION['TVA'])) {
                     echo '</div>';
                     echo '</div>';
                     echo '</td>';
-                    //echo '<td><input type="number" value="' . $produit['quantite'] . '"></td>';
+                   
                     echo '<td><input type="number" min="1" value="' . $produit['quantite'] . '" id="quantite-' . $produit['nom'] . '" data-prix="' . $produit['prix'] . '" onchange="updateQuantitePrix(this, \'' . $produit['nom'] . '\',\'' . $produit['prix'] . '\')"></td>';
-                    // echo '<td>' .$sousTotal= ($produit['prix'] * $produit['quantite']) . ' €</td>';
-                    // echo '</tr>';
+                    
                     $sousTotal = floatval($produit['prix']) * floatval($produit['quantite']);
 
                     $totalSansTVA += $produit['sousTotal']; 
@@ -62,11 +61,11 @@ if (isset($_SESSION['TVA'])) {
 
             }
             
-            if($totalSansTVA <50){
-                $totalSansTVA +=$fraisPort;
+            // if($totalSansTVA <50){
+            //     $totalSansTVA +=$fraisPort;
               
                
-            }
+            // }
         } else {
             echo '<tr><td colspan="3">Votre panier est vide.</td></tr>';
         }
@@ -99,29 +98,30 @@ if (isset($_SESSION['TVA'])) {
                     document.getElementById('sousTotalHT').innerText = sousTotal + ' €';
                     console.log(sousTotal)
 
-                    if (parseFloat(sousTotal) < 50) {
-                        sousTotal = (parseFloat(sousTotal) + 10).toFixed(2);
-                        console.log(sousTotal);
-                        fraisPort = true;
-                    }
+                    // if (parseFloat(sousTotal) < 50) {
+                    //     sousTotal = (parseFloat(sousTotal) + 10).toFixed(2);
+                    //     console.log(sousTotal);
+                    //     fraisPort = true;
+                    // }
 
-                    document.getElementById('sousTotal').innerText = sousTotal + ' €';
+                    // document.getElementById('sousTotal').innerText = sousTotal + ' €';
 
 
                     var TVA = "<?php echo $TVA ?>";
                     var total = ((1 + TVA / 100) * sousTotal).toFixed(2);
                     document.getElementById('total').innerText = total + ' €';
+  
 
-                    var fraisPortRow = document.getElementById('fraisPortRow');
-                    var totalAvecFraisPortRow = document.getElementById('totalAvecFraisPortRow');
+                    // var fraisPortRow = document.getElementById('fraisPortRow');
+                    // var totalAvecFraisPortRow = document.getElementById('totalAvecFraisPortRow');
 
-                    if (fraisPort) {
-                        fraisPortRow.style.display = 'table-row';
-                        totalAvecFraisPortRow.style.display = 'table-row';
-                    } else {
-                        fraisPortRow.style.display = 'none';
-                        totalAvecFraisPortRow.style.display = 'none';
-                    }
+                    // if (fraisPort) {
+                    //     fraisPortRow.style.display = 'table-row';
+                    //     totalAvecFraisPortRow.style.display = 'table-row';
+                    // } else {
+                    //     fraisPortRow.style.display = 'none';
+                    //     totalAvecFraisPortRow.style.display = 'none';
+                    // }
 
 
 
@@ -145,10 +145,10 @@ if (isset($_SESSION['TVA'])) {
 
     <tr>
             <td colspan="2">Total HT:</td>
-            <td id="sousTotalHT"><?=$totalSansfraisPort?> €</td>
+            <td id="sousTotalHT"><?= $totalSansTVA ?> €</td>
         </tr>
        
-        <tr id="fraisPortRow">
+        <!-- <tr id="fraisPortRow">
             <td colspan="2" >Frais de port</td>
             <td><?= $fraisPort ?> €</td>
         </tr>
@@ -158,7 +158,7 @@ if (isset($_SESSION['TVA'])) {
             <td colspan="2" >Total avec frais de port:</td>
             <td id="sousTotal"><?= $totalSansTVA ?> €</td>
         </tr>
-     
+      -->
         
         <tr>
             <td colspan="2">TVA</td>

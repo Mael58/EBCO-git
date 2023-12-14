@@ -45,7 +45,7 @@ body {
     font-family: Arial;
     margin: 0;
     padding: 0;
- 
+
 }
 
 .navbar {
@@ -1841,7 +1841,7 @@ a[href$=".zip"] img {
 
 
 .row-details {
-    
+
     align-items: flex-start;
     justify-content: space-around;
 
@@ -1858,175 +1858,148 @@ a[href$=".zip"] img {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-  
+
     border-radius: 8px;
     margin: 10px;
-    
+
 
 }
 
 .produitContainer {
     display: flex;
-   margin-top: 20px;
-    width: 100%;
-   
-
-}
-
-
-
-.produit3{
-   
-    width: 30%;      
-   
-}
-
-.produit1{
-    
     margin-top: 20px;
-    
-    text-align: end;
-    width: 30%;
-    
-    
+    width: 100%;
+
+
 }
 
-.produit1 img{
-   
+
+
+.produit1 {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+
+}
+
+.produit1 img {
+
     border: #000 solid 1px;
     border-radius: 8px;
-    width: 70%;
+    max-width: 100%;
 
 
 }
 
 
 
-.produit2{
-    margin-left: 150px;
-    
-}
-
-.container-quantite{
-
-display: flex;
-align-items: center;
-
+.produit2 {
+    margin-left: 40px;
+    margin-top: 30px;
 
 }
 
-.container-quantite h3{
+.container-quantite {
 
-   margin-right: 20px;
-    
-    
-    }
+    display: flex;
+    align-items: center;
 
 
+}
 
-.produit2 h2{
-   
-   
-   
+.container-quantite h3 {
+
+    margin-right: 20px;
+
+
+}
+
+
+
+.produit2 h2 {
     margin-bottom: 30px;
-    
-   
 }
 
 .produit2 input {
-   width: 50%;
- 
-    border-radius: 10px; 
-    
-   
+    width: 50%;
+
+    border-radius: 10px;
+
+
 
 }
-.produit2 .btn{
-   text-align: center;
-   margin-left: 10px;
-   width: 95%;
-   
- 
+
+.produit2 .btn {
+    text-align: center;
+    margin-left: 10px;
+    width: 95%;
+
+
 }
 
-.produit2 p{
-  
-   margin-bottom: 10px;
-  
- }
- 
+.produit2 p {
+
+    margin-bottom: 10px;
+
+}
+
 
 
 .doc,
-.spef{
+.spef {
 
-margin-top: 30px;
-margin-left: 30px;
+    margin-top: 70px;
+  
+
 }
 
-
-
-
-
-
-
-
-table {
+.spef-p,
+.doc-p{
+    margin-top: 40px;
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
 }
 
-
-
-td {
-    padding: 10px;
-    text-align: left;
-}
-
-
-
-
-
-
-
-
-.doc-p strong{
+.doc-p strong,
+.spef-p strong {
     margin-right: 10px;
-}
-
-
-.spef-p strong{
-    margin-right: 10px;
-
-}
-
-
-
-.banderole{
+  
    
-    width:100%;
+}
+
+
+
+
+
+
+
+
+.banderole {
+
+    width: 100%;
     display: flex;
     text-align: center;
     margin-bottom: 20px;
     overflow-x: hidden;
- 
- 
-    
-  }
-  
-  .txt{
+
+
+
+}
+
+.txt {
     white-space: nowrap;
     font-size: 20px;
     animation: Scroll 10s linear infinite;
     display: inline-block;
-  }
-  
-  @keyframes Scroll{
-    0%{
-      transform: translateX(100%);
+}
+
+@keyframes Scroll {
+    0% {
+        transform: translateX(100%);
     }
-    100%{
-       transform: translateX(-100%);
+
+    100% {
+        transform: translateX(-100%);
     }
-  }
+}

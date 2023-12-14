@@ -65,26 +65,38 @@ if ($recipe) {
 
 
                         <img class="imgDetail" alt="image-produit" src="<?= $image ?>" id="ProductImg">
-                    </div>
 
-
-                    <div class="produit3">
                         <div class="spef">
-                            <h3>Spécifications techniques:</h3><br>
+                            <h3>Spécifications techniques:</h3>
                             <p class="spef-p">
-                                Référence: <?= $ref ?><br>
-                                Norme: <?= $norme ?><br>
-                                Puissance: <?= $puissance ?><br>
-                                Connecteur: <?= $connecteur ?><br>
-                                Débit: <?= $dataRate ?><br>
-                                Longueur: <?= $longueur ?><br>
+                                <strong>Référence:</strong> <?= $ref ?>
+                                </p>
+
+                                <p class="spef-p">
+                                <strong>Norme:</strong> <?= $norme ?>
+                                </p>
+
+                                <p class="spef-p">
+                                <strong>Puissance:</strong> <?= $puissance ?>
+                                </p>
+
+                                <p class="spef-p">
+                                <strong>Connecteur:</strong> <?= $connecteur ?>
+                                </p>
+
+                                <p class="spef-p">
+                                <strong> Débit:</strong> <?= $dataRate ?>
+                                </p>
+
+                                <p class="spef-p">
+                                <strong> Longueur:</strong> <?= $longueur ?>
                             </p>
 
 
 
 
                         </div>
-                        <div class="separator"></div>
+                       
                         <div class="doc">
                             <h3>Documentations techniques</h3>
                             <p class="doc-p">
@@ -99,10 +111,7 @@ if ($recipe) {
 
                         </div>
 
-                    </div>
-
-
-                    <div class="produit2">
+                        <div class="produit2">
                         <h2 id="prix"> <?=$prix?> €</h2>
 
 
@@ -124,6 +133,17 @@ if ($recipe) {
 
 
                         ?>
+                    </div>
+                    </div>
+
+
+                    <!-- <div class="produit3">
+                       
+
+                    </div> -->
+
+
+                 
 
                         <script>
                             document.addEventListener("DOMContentLoaded", function() {
@@ -160,7 +180,7 @@ if ($recipe) {
 
 
 
-                    </div>
+                
 
 
 

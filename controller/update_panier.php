@@ -8,7 +8,7 @@ $nouvelleQuantite = isset($_POST["nouvelleQuantite"]) ? $_POST["nouvelleQuantite
 $_SESSION['quantite']= $nouvelleQuantite;
 
 $prix = isset($_POST["prix"]) ? $_POST["prix"] : "";
-$nouveauSousTotal = floatval($prix) * floatval($nouvelleQuantite);
+// $nouveauSousTotal = floatval($prix) * floatval($nouvelleQuantite);
 
 if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
     $nouveauTotal = 0;
@@ -28,10 +28,13 @@ if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
             } else {
                 $produit['sousTotal'] = $produit['quantite'] * $produit['prix'];
             }
+            $nouveauSousTotal = $produit['sousTotal'];
+
         }
 
-        // Ajouter le sous-total de chaque produit au nouveau total du panier
+   
         $nouveauTotal += $produit['sousTotal'];
+        
     }
 
     // Mettre à jour le nombre total d'articles dans le panier
@@ -39,5 +42,5 @@ if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
     $_SESSION['nombreTotalArticles'] = $nombreTotalArticles;
 }
 
-echo json_encode(["success" => true, "nouveauSousTotal" => $nouveauSousTotal, "nouveauTotal" => $nouveauTotal, "quantite" => $nouvelleQuantite]);
+echo json_encode(["success" => true, "nouveauSousTotal" => $nouveauSousTotal, "nouveauTotal" => $nouveauTotal, "quantite" => $nouvelleQuantite, "nomProduit"=> $nomProduit]);
 ?>

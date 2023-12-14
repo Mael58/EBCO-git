@@ -550,6 +550,7 @@ AjaxRequest('Controller/formAdresse.php')
                 </tr>
 
                 <?php
+               
                 $montantTotal = 0;
                 $total = 0;
                 $fraisPort = 10;
@@ -572,7 +573,7 @@ AjaxRequest('Controller/formAdresse.php')
                             // echo '</tr>';
                             $sousTotal = floatval($produit['prix']) * floatval($produit['quantite']);
 
-                            $total += $sousTotal; // Ajoutez le sous-total au total
+                            $montantTotal += $produit['sousTotal']; 
                             echo '<td>' . $produit['prix'] . ' €</td>';
                             echo '<td><input type="number" min="1" value="' . $produit['quantite'] . '" id="quantite-' . $produit['nom'] . '" data-prix="' . $produit['prix'] . '" onchange="updateQuantitePrix(this, \'' . $produit['nom'] . '\',\'' . $produit['prix'] . '\')"></td>';
                             echo '<td>' . $produit['sousTotal'] . ' €</td>';
@@ -603,10 +604,22 @@ AjaxRequest('Controller/formAdresse.php')
                             if (response.success) {
                                 // Actualisez la quantité dans la partie visible du panier
                                 var sousTotalCell = input.parentNode.nextElementSibling;
-                                sousTotalCell.innerHTML = response.nouveauSousTotal + ' €';
+                                sousTotalCell.innerHTML = response.nouveauSousTotal.toFixed(2) + ' €';
+
+                                var sousTotal= response.nouveauTotal.toFixed(2);
+                                document.getElementById('TotalHT').innerHTML='<p id="TotalHT"><strong>Total HT:</strong> '+ sousTotal+' </p>';
+
+                                var quantite = response.quantite;
+                                var nomProduit= response.nomProduit;
+                                document.getElementById('quantiteProduits-'+nomProduit).innerHTML = "<p id='quantiteProduits-" + nomProduit + "'><strong>Quantité:</strong> "+quantite+"</p>";
+
+                                var TVA = "<?php echo $TVA ?>";
+                    var total = ((1 + TVA / 100) * sousTotal).toFixed(2);
+                                document.getElementById('total').innerText = "TOTAL : "+ total+ " €";
+                        
 
 
-                                location.reload();
+                               
                             } else {
 
                             }
@@ -635,13 +648,17 @@ AjaxRequest('Controller/formAdresse.php')
             $quantiteProduit = isset($produit['quantite']) ? $produit['quantite'] : 0;
             $prixProduit = isset($produit['prix']) ? $produit['prix'] : 0;
 
-            // Ajoutez ces valeurs aux tableaux
+          
             $nomCommande[] = $nomProduit;
             $quantite[] = $quantiteProduit;
             $prix[] = $prixProduit;
 
-            // ... Autres opérations de base de données
         }
+
+        ?>
+
+
+<?php
         echo '<div class="recap">';
 
 
@@ -651,30 +668,33 @@ AjaxRequest('Controller/formAdresse.php')
 
 
         for ($i = 0; $i < count($nomCommande); $i++) {
+          
 
-            $montantTotal = array_sum(array_map(function ($p, $q) {
-                return $p * $q;
-            }, $prix, $quantite));
+            // $montantTotal = array_sum(array_map(function ($p, $q) {
+            //     return $p * $q;
+            // }, $prix, $quantite));
           
 
                 echo "<div class='produit-recap'>";
-                // echo "<p><strong>Produit:</strong> " . $nomCommande[$i] . "</p>";
+                
                 echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
-                echo "<p><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
-                // echo "<p><strong>Total:</strong> " . $totalProduit . " EUR</p>";
-
+                echo "<p id='quantiteProduits-" . $nomCommande[$i] . "'><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
+              
                 echo "</div>";
             }
 
             $total = (($TVA) / 100) * $montantTotal;
+       
 
             $totalTAxe = round($total, 2);
+            
+$totalTTC=number_format((float)$montantTotal + $total, 2, '.',);
 
+            echo '<p id="TotalHT"><strong>Total HT:</strong> ' . $montantTotal . ' EUR </p>';
 
-            echo '<p><strong>Total HT:</strong> ' . $montantTotal . ' EUR </p>';
+            echo "<p><strong>TVA:</strong> " . $TVA . " %</p>";
+            echo "<h2 id='total'>TOTAL : " .$totalTTC." € </h2>";
 
-            echo "<p><strong>TVA:</strong> " . $total . " EUR</p>";
-            echo "<h2>TOTAL : " . number_format((float)$montantTotal + $total, 2, '.',);
 
 
   if ($montantTotal != 0) {
@@ -690,11 +710,17 @@ AjaxRequest('Controller/formAdresse.php')
                         <script src="https://www.paypal.com/sdk/js?client-id=AaOvluVx3_tbxX782Q3zyGBSmCPfnaEdHVcbwDqOXu_dgFCtxQmMGtdy-jDzY8JWPmpGL5bZm-ovGAyn&currency=EUR" ></script>
                         <?php
                         $tax_total = 0;
-                        $shipping = 0;
+                        if($montantTotal<50){
+                            $shipping = 10;
+                        }else{
+                            $shipping=0;
+                        }
+                        
                         $handling = 0;
                         $insurance = 0;
                         $shipping_discount = 0;
                         $discount = 0;
+                     
                         $totalAmount = $montantTotal + $totalTAxe + $shipping + $handling + $insurance - $shipping_discount - $discount;
 
                         $order = [
@@ -703,7 +729,7 @@ AjaxRequest('Controller/formAdresse.php')
                                 [
 
                                     'amount' => [
-                                        'value' =>  number_format($totalAmount, 2, '.', ''), // Montant en euros
+                                        'value' =>  number_format($totalAmount, 2, '.', ''), 
                                         'currency_code' => 'EUR',
                                         'breakdown' => [
                                             'item_total' => [
@@ -716,7 +742,7 @@ AjaxRequest('Controller/formAdresse.php')
                                             ],
                                             'shipping' => [
                                                 'currency_code' => 'EUR',
-                                                'value' => 0,
+                                                'value' => $shipping,
                                             ],
                                             'handling' => [
                                                 'currency_code' => 'EUR',
