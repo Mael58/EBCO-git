@@ -280,6 +280,7 @@ if (isset($_SESSION['TVA'])) {
             var reloadPage = true;
 
 
+
             const loginButton = document.getElementById('bouton');
             loginButton.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent the form from submitting
@@ -400,40 +401,42 @@ if (isset($_SESSION['TVA'])) {
 
 
                 function AjaxRequest(url) {
-    return fetch(url, {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .catch(error => {
-            console.error('Erreur lors de l\'envoi de la requête AJAX:', error);
-        });
-}
+                    return fetch(url, {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .catch(error => {
+                            console.error('Erreur lors de l\'envoi de la requête AJAX:', error);
+                        });
+                }
 
 
-AjaxRequest('Controller/formAdresse.php')
-    .then(result1 => {
-       
-        console.log(result1);
-
-    
-        updateFacturation(result1);
-    })
-    .catch(error => {
-        console.error('Erreur lors de l\'exécution de la première requête AJAX:', error);
-    });
+                AjaxRequest('Controller/formAdresse.php')
+                    .then(result1 => {
 
 
-    fetch('Controller/ajout_client.php', {
-            method: 'POST',
-            body: formData2
-        })
-        .then(response => response.json())
-        .catch(error => {
-            console.error('Erreur lors de l\'envoi de la requête AJAX:', error);
-        });
 
-  
+
+
+
+                        updateFacturation(result1);
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors de l\'exécution de la première requête AJAX:', error);
+                    });
+
+
+                fetch('Controller/ajout_client.php', {
+                        method: 'POST',
+                        body: formData2
+                    })
+                    .then(response => response.json())
+                    .catch(error => {
+                        console.error('Erreur lors de l\'envoi de la requête AJAX:', error);
+                    });
+
+
 
 
 
@@ -449,14 +452,28 @@ AjaxRequest('Controller/formAdresse.php')
 
             }
 
+            // function getPays(data) {
+            //     var pays1 = data.livraison.pays;
+            //     return pays1;
+
+            // }
+
+
             function updateFacturation(data) {
-    document.getElementById('LivraisonPrenom').innerHTML = `<strong>Prénom:</strong> ${data.livraison.prenom}`;
-    document.getElementById('LivraisonNom').innerHTML = `<strong>Nom:</strong> ${data.livraison.nom}`;
-    document.getElementById('LivraisonEmail').innerHTML = `<strong>Email:</strong> ${data.livraison.email}`;
-    document.getElementById('LivraisonTelephone').innerHTML = `<strong>Téléphone:</strong> ${data.livraison.tel}`;
-    document.getElementById('LivraisonCodePostal').innerHTML = `<strong>Code Postal:</strong> ${data.livraison.cdp}`;
-    document.getElementById('LivraisonAdresse').innerHTML = `<strong>Adresse:</strong> ${data.livraison.numRue} ${data.livraison.rue}, ${data.livraison.ville}`;
-}
+                document.getElementById('LivraisonPrenom').innerHTML = `<strong>Prénom:</strong> ${data.livraison.prenom}`;
+                document.getElementById('LivraisonNom').innerHTML = `<strong>Nom:</strong> ${data.livraison.nom}`;
+                document.getElementById('LivraisonEmail').innerHTML = `<strong>Email:</strong> ${data.livraison.email}`;
+                document.getElementById('LivraisonTelephone').innerHTML = `<strong>Téléphone:</strong> ${data.livraison.tel}`;
+                document.getElementById('LivraisonCodePostal').innerHTML = `<strong>Code Postal:</strong> ${data.livraison.cdp}`;
+                document.getElementById('LivraisonAdresse').innerHTML = `<strong>Adresse:</strong> ${data.livraison.numRue} ${data.livraison.rue}, ${data.livraison.ville}`;
+
+
+            }
+
+
+
+
+
 
 
             modifier.addEventListener('click', function() {
@@ -507,6 +524,8 @@ AjaxRequest('Controller/formAdresse.php')
                 }
             })
 
+
+
         });
     </script>
 
@@ -516,12 +535,12 @@ AjaxRequest('Controller/formAdresse.php')
     <div class="recapAdresse" id="recapAdresse">
 
 
-    <p id="LivraisonPrenom"><strong>Prénom:</strong> </p>
-    <p id="LivraisonNom"><strong>Nom:</strong> </p>
-    <p id="LivraisonEmail"><strong>Email:</strong> </p>
-    <p id="LivraisonTelephone"><strong>Téléphone:</strong> </p>
-    <p id="LivraisonCodePostal"><strong>Code Postal:</strong> </p>
-    <p id="LivraisonAdresse"><strong>Adresse:</strong> </p>
+        <p id="LivraisonPrenom"><strong>Prénom:</strong> </p>
+        <p id="LivraisonNom"><strong>Nom:</strong> </p>
+        <p id="LivraisonEmail"><strong>Email:</strong> </p>
+        <p id="LivraisonTelephone"><strong>Téléphone:</strong> </p>
+        <p id="LivraisonCodePostal"><strong>Code Postal:</strong> </p>
+        <p id="LivraisonAdresse"><strong>Adresse:</strong> </p>
 
 
         <p id="modifier">Modifier</p>
@@ -550,7 +569,7 @@ AjaxRequest('Controller/formAdresse.php')
                 </tr>
 
                 <?php
-               
+
                 $montantTotal = 0;
                 $total = 0;
                 $fraisPort = 10;
@@ -573,7 +592,7 @@ AjaxRequest('Controller/formAdresse.php')
                             // echo '</tr>';
                             $sousTotal = floatval($produit['prix']) * floatval($produit['quantite']);
 
-                            $montantTotal += $produit['sousTotal']; 
+                            $montantTotal += $produit['sousTotal'];
                             echo '<td>' . $produit['prix'] . ' €</td>';
                             echo '<td><input type="number" min="1" value="' . $produit['quantite'] . '" id="quantite-' . $produit['nom'] . '" data-prix="' . $produit['prix'] . '" onchange="updateQuantitePrix(this, \'' . $produit['nom'] . '\',\'' . $produit['prix'] . '\')"></td>';
                             echo '<td>' . $produit['sousTotal'] . ' €</td>';
@@ -591,6 +610,20 @@ AjaxRequest('Controller/formAdresse.php')
 
 
             <script>
+
+var sousTotal;
+var frais_port;
+var tvaPrix;
+var prenomLivraison=<?php echo $prenom;?>;
+var nomLivraison= "<?php echo $nom;?>";
+var numRue = "<?php echo $numeroRue;?>";
+var rue = "<?php echo $rue;?>";
+
+var cdpLivraison="<?php echo $codePostal;?>";
+
+var villeLivraison="<?php echo $ville;?>";
+var paysLivraison="<?php echo $pays;?>";
+
                 function updateQuantitePrix(input, nomProduit, prix) {
                     var nouvelleQuantite = input.value;
 
@@ -602,24 +635,67 @@ AjaxRequest('Controller/formAdresse.php')
                         if (xhr.readyState == 4 && xhr.status == 200) {
                             var response = JSON.parse(xhr.responseText);
                             if (response.success) {
-                                // Actualisez la quantité dans la partie visible du panier
+                                var pays = response.pays;
+                                console.log(pays);
                                 var sousTotalCell = input.parentNode.nextElementSibling;
                                 sousTotalCell.innerHTML = response.nouveauSousTotal.toFixed(2) + ' €';
 
-                                var sousTotal= response.nouveauTotal.toFixed(2);
-                                document.getElementById('TotalHT').innerHTML='<p id="TotalHT"><strong>Total HT:</strong> '+ sousTotal+' </p>';
+                                 sousTotal = response.nouveauTotal.toFixed(2);
+                                frais_port = <?= $fraisPort ?>;
+                                
+                                if (pays == "FR") {
+                                    if (sousTotal < 50) {
+                                        var TotalFraisPort = parseFloat(sousTotal) + frais_port;
+                                        document.getElementById('TotalPort').innerHTML = '<p><strong>Total avec frais de port:</strong> ' + TotalFraisPort + ' EUR </p>'
+                                        var TVA = "<?php echo $TVA ?>";
+                                        tvaPrix = (TotalFraisPort * TVA) / 100;
+                                        var total = ((1 + TVA / 100) * TotalFraisPort).toFixed(2);
+                                        document.getElementById('total').innerText = "TOTAL : " + total + " €";
+                                        document.getElementById('TotalPort').style.display = "block";
+                                        document.getElementById('fraisPort').style.display = "block";
+                                    } else {
+                                        var TVA = "<?php echo $TVA ?>";
+                                        tvaPrix = (sousTotal * TVA) / 100;
+                                        var total = ((1 + TVA / 100) * sousTotal).toFixed(2);
+                                        document.getElementById('total').innerText = "TOTAL : " + total + " €";
+                                        document.getElementById('TotalPort').style.display = "none";
+                                        document.getElementById('fraisPort').style.display = "none";
+                                    }
+                                } else {
+                                    if (sousTotal < 70) {
+                                        var TotalFraisPort = parseFloat(sousTotal) + frais_port;
+                                        document.getElementById('TotalPort').innerHTML = '<p><strong>Total avec frais de port:</strong> ' + TotalFraisPort + ' EUR </p>'
+                                        var TVA = "<?php echo $TVA ?>";
+                                        tvaPrix = (TotalFraisPort * TVA) / 100;
+                                        var total = ((1 + TVA / 100) * TotalFraisPort).toFixed(2);
+                                        document.getElementById('total').innerText = "TOTAL : " + total + " €";
+                                        document.getElementById('TotalPort').style.display = "block";
+                                        document.getElementById('fraisPort').style.display = "block";
+                                    } else {
+                                        var TVA = "<?php echo $TVA ?>";
+                                        tvaPrix = (sousTotal * TVA) / 100;
+                                        var total = ((1 + TVA / 100) * sousTotal).toFixed(2);
+                                        document.getElementById('total').innerText = "TOTAL : " + total + " €";
+                                        document.getElementById('TotalPort').style.display = "none";
+                                        document.getElementById('fraisPort').style.display = "none";
+                                    }
+                                }
+
+
+                                console.log(TotalFraisPort);
+                                document.getElementById('TotalHT').innerHTML = '<p id="TotalHT"><strong>Total HT:</strong> ' + sousTotal + ' </p>';
+
 
                                 var quantite = response.quantite;
-                                var nomProduit= response.nomProduit;
-                                document.getElementById('quantiteProduits-'+nomProduit).innerHTML = "<p id='quantiteProduits-" + nomProduit + "'><strong>Quantité:</strong> "+quantite+"</p>";
-
-                                var TVA = "<?php echo $TVA ?>";
-                    var total = ((1 + TVA / 100) * sousTotal).toFixed(2);
-                                document.getElementById('total').innerText = "TOTAL : "+ total+ " €";
-                        
+                                var nomProduit = response.nomProduit;
+                                document.getElementById('quantiteProduits-' + nomProduit).innerHTML = "<p id='quantiteProduits-" + nomProduit + "'><strong>Quantité:</strong> " + quantite + "</p>";
 
 
-                               
+                                configurerBoutonPayPal();
+
+
+
+
                             } else {
 
                             }
@@ -630,6 +706,132 @@ AjaxRequest('Controller/formAdresse.php')
                     var params = "nomProduit=" + encodeURIComponent(nomProduit) + "&nouvelleQuantite=" + encodeURIComponent(nouvelleQuantite) + "&prix=" + encodeURIComponent(prix);
                     xhr.send(params);
                 }
+
+
+
+
+
+
+function configurerBoutonPayPal() {
+    // Vous pouvez ajuster cela en fonction de vos besoins
+    var formdata = new FormData();
+    
+    formdata.append("sousTotal", sousTotal);
+    formdata.append("fraisPort", frais_port);
+    formdata.append("tvaPrix", tvaPrix);
+    formdata.append('prenomLivraison', prenomLivraison);
+    formdata.append('nomLivraison', nomLivraison);
+    
+ 
+    formdata.append('numLivraison', numRue);
+    formdata.append('rueLivraison', rue);
+  
+  
+    formdata.append('cdpLivraison', cdpLivraison);
+    formdata.append('villeLivraison', villeLivraison);
+    formdata.append('paysLivraison', paysLivraison);
+
+    var request = new XMLHttpRequest();
+    request.open('POST', 'controller/Paypal_order.php', true);
+    request.onreadystatechange = function() {
+        if (request.readyState === 4 && request.status === 200) {
+            var apiData = JSON.parse(request.responseText);
+
+            document.getElementById('paypal-button-container').innerHTML=""
+
+            
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: apiData.purchase_units.map(unit => {
+                            return {
+                                amount: unit.amount,
+                                // Autres propriétés nécessaires à la construction de l'objet order
+                            };
+                        })
+                    });
+                },
+                onApprove: function(data, actions) {
+
+
+return actions.order.capture().then(function(details) {
+
+
+
+    console.log(details);
+
+
+    var nomCommande = [];
+    var prix = [];
+    var quantite = [];
+
+    <?php
+    // PHP (Back-end)
+    $cart = $_SESSION['panier'];
+    foreach ($cart as $produit) {
+
+        $nomCommande = isset($produit['nom']) ? $produit['nom'] : '';
+        $quantite = isset($produit['quantite']) ? $produit['quantite'] : 0;
+        $prix = isset($produit['prix']) ? $produit['prix'] : 0;
+        $total = $quantite * $prix;
+
+
+        echo "nomCommande.push('" . $nomCommande . "');\n";
+        echo "quantite.push(" . $quantite . ");\n";
+        echo "prix.push(" . $prix . ");\n";
+    }
+
+
+    ?>
+
+    // Maintenant, vous pouvez envoyer ces données au serveur via une requête AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'Controller/ajout_commandes.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    var dataToSend = {
+        nomCommande: nomCommande,
+        quantite: quantite,
+        prix: prix
+
+    }
+    xhr.send(JSON.stringify(dataToSend));
+
+    var xhr2 = new XMLHttpRequest();
+    xhr2.open('POST', 'Controller/update_quantity.php', true);
+    xhr2.setRequestHeader('Content-Type', 'application/json');
+
+    xhr2.onreadystatechange = function() {
+        if (xhr2.readyState == 4 && xhr2.status == 200) {
+            // Mettez à jour l'interface utilisateur ou effectuez d'autres actions si nécessaire
+            console.log(xhr2.responseText);
+            // Vous pouvez également mettre à jour le panierCounter ici
+        }
+    };
+    xhr2.send(JSON.stringify(dataToSend));
+    var prenom = '<?= $prenom ?>';
+    var nom = '<?= $nom ?>';
+
+    alert(prenom + ' ' + nom + ', votre transaction est effectuée. Vous allez recevoir une notification très bientôt lorsque nous validons votre paiement.');
+});
+},
+
+onCancel: function(data) {
+alert("Transaction annulée !");
+}
+                // onApprove: function(data, actions) {
+                //     return actions.order.capture().then(function(details) {
+                //         // Insertion de la logique de confirmation ici
+                //     });
+                // }
+            }).render('#paypal-button-container');
+        }
+    };
+
+    request.send(formdata);
+}
+
+                
             </script>
 
 
@@ -648,17 +850,16 @@ AjaxRequest('Controller/formAdresse.php')
             $quantiteProduit = isset($produit['quantite']) ? $produit['quantite'] : 0;
             $prixProduit = isset($produit['prix']) ? $produit['prix'] : 0;
 
-          
+
             $nomCommande[] = $nomProduit;
             $quantite[] = $quantiteProduit;
             $prix[] = $prixProduit;
-
         }
 
         ?>
 
 
-<?php
+        <?php
         echo '<div class="recap">';
 
 
@@ -667,37 +868,54 @@ AjaxRequest('Controller/formAdresse.php')
 
 
 
+
         for ($i = 0; $i < count($nomCommande); $i++) {
-          
+
 
             // $montantTotal = array_sum(array_map(function ($p, $q) {
             //     return $p * $q;
             // }, $prix, $quantite));
-          
 
-                echo "<div class='produit-recap'>";
-                
-                echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
-                echo "<p id='quantiteProduits-" . $nomCommande[$i] . "'><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
-              
-                echo "</div>";
+
+            echo "<div class='produit-recap'>";
+
+            echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
+            echo "<p id='quantiteProduits-" . $nomCommande[$i] . "'><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
+
+            echo "</div>";
+        }
+
+
+
+        echo '<p id="TotalHT"><strong>Total HT:</strong> ' . $montantTotal . ' EUR </p>';
+        $sansPort = $montantTotal;
+       $sansPortArrondi = round($sansPort, 2);
+        if ($pays === "FR") {
+            if ($montantTotal < 50) {
+                $montantTotal += $fraisPort;
             }
-
-            $total = (($TVA) / 100) * $montantTotal;
-       
-
-            $totalTAxe = round($total, 2);
-            
-$totalTTC=number_format((float)$montantTotal + $total, 2, '.',);
-
-            echo '<p id="TotalHT"><strong>Total HT:</strong> ' . $montantTotal . ' EUR </p>';
-
-            echo "<p><strong>TVA:</strong> " . $TVA . " %</p>";
-            echo "<h2 id='total'>TOTAL : " .$totalTTC." € </h2>";
+        } else {
+            if ($montantTotal < 70) {
+                $montantTotal += $fraisPort;
+            }
+        }
+        $total = (($TVA) / 100) * $montantTotal;
 
 
+        $totalTAxe = round($total, 2);
+        // echo $montantTotal;
 
-  if ($montantTotal != 0) {
+        $totalTTC = number_format((float)$montantTotal + $total, 2, '.',);
+
+
+        echo '<p id="fraisPort"><strong>Frais de port:</strong> ' . $fraisPort . ' EUR </P>';
+        echo '<p id="TotalPort"><strong>Total avec frais de port:</strong> ' . $montantTotal . ' EUR </p>';
+        echo "<p><strong>TVA:</strong> " . $TVA . " %</p>";
+        echo "<h2 id='total'>TOTAL : " . $totalTTC . " € </h2>";
+
+
+
+        if ($montantTotal != 0) {
 
 
 
@@ -707,21 +925,22 @@ $totalTTC=number_format((float)$montantTotal + $total, 2, '.',);
                     <form method='post'>
                         <div id="paypal-button-container"></div>
 
-                        <script src="https://www.paypal.com/sdk/js?client-id=AaOvluVx3_tbxX782Q3zyGBSmCPfnaEdHVcbwDqOXu_dgFCtxQmMGtdy-jDzY8JWPmpGL5bZm-ovGAyn&currency=EUR" ></script>
+                        <script src="https://www.paypal.com/sdk/js?client-id=AaOvluVx3_tbxX782Q3zyGBSmCPfnaEdHVcbwDqOXu_dgFCtxQmMGtdy-jDzY8JWPmpGL5bZm-ovGAyn&currency=EUR"></script>
                         <?php
-                        $tax_total = 0;
-                        if($montantTotal<50){
-                            $shipping = 10;
-                        }else{
-                            $shipping=0;
-                        }
                         
+
                         $handling = 0;
                         $insurance = 0;
                         $shipping_discount = 0;
                         $discount = 0;
-                     
-                        $totalAmount = $montantTotal + $totalTAxe + $shipping + $handling + $insurance - $shipping_discount - $discount;
+                        if ($sansPort < 50) {
+                            $shipping = $fraisPort;
+                        } else {
+                            $shipping = 0;
+                        }
+
+
+                        $totalAmount = $sansPort + $totalTAxe + $shipping + $handling + $insurance - $shipping_discount - $discount;
 
                         $order = [
 
@@ -729,12 +948,12 @@ $totalTTC=number_format((float)$montantTotal + $total, 2, '.',);
                                 [
 
                                     'amount' => [
-                                        'value' =>  number_format($totalAmount, 2, '.', ''), 
+                                        'value' =>  number_format($totalAmount, 2, '.', ''),
                                         'currency_code' => 'EUR',
                                         'breakdown' => [
                                             'item_total' => [
                                                 'currency_code' => "EUR",
-                                                'value' => $montantTotal
+                                                'value' => $sansPortArrondi
                                             ],
                                             'tax_total' => [
                                                 'currency_code' => 'EUR',
@@ -776,7 +995,7 @@ $totalTTC=number_format((float)$montantTotal + $total, 2, '.',);
                                             'country_code' => isset($pays) ? $pays : "Pays par défaut",
                                         ],
                                     ],
-                                    'items' => [],
+
                                 ],
                             ],
                             'payer' => [
@@ -787,12 +1006,18 @@ $totalTTC=number_format((float)$montantTotal + $total, 2, '.',);
                                 'email_address' => isset($email) ? $email : "Email par défaut",
                             ],
                         ];
+
+                        $totalItemAmount = 0;
                         if (isset($nomCommande)) {
                             for ($i = 0; $i < count($nomCommande); $i++) {
                                 $item_name = $nomCommande[$i];
                                 $item_prix = $prix[$i];
                                 $item_qte = $quantite[$i];
-                                //echo $item_name;
+                                echo $item_qte . "\n";
+                                echo $item_prix;
+
+
+
                                 $item = [
 
                                     'name' => $item_name,
@@ -804,9 +1029,10 @@ $totalTTC=number_format((float)$montantTotal + $total, 2, '.',);
                                 ];
 
                                 // Utilisez [] pour ajouter un élément à la liste d'articles
-                                $order['purchase_units'][0]['items'][] = $item;
+                                // $order['purchase_units'][0]['items'][] = $item;
                             }
                         }
+                        // $order['purchase_units'][0]['amount']['breakdown']['item_total']['value'] = number_format($totalItemAmount, 2, '.', '');
 
                         // Convertissez le tableau en JSON à la fin
                         $order = json_encode($order);
@@ -814,7 +1040,6 @@ $totalTTC=number_format((float)$montantTotal + $total, 2, '.',);
 
                         ?>
                         <script>
-                            console.log(<?= $order ?>);
                             paypal.Buttons({
                                 createOrder: function(data, actions) {
                                     return actions.order.create(<?= $order ?>);
@@ -846,12 +1071,10 @@ $totalTTC=number_format((float)$montantTotal + $total, 2, '.',);
                                             $prix = isset($produit['prix']) ? $produit['prix'] : 0;
                                             $total = $quantite * $prix;
 
-                                            // Ici, vous pouvez stocker ces valeurs dans des tableaux JavaScript
+
                                             echo "nomCommande.push('" . $nomCommande . "');\n";
                                             echo "quantite.push(" . $quantite . ");\n";
                                             echo "prix.push(" . $prix . ");\n";
-
-                                            // ... Autres opérations de base de données
                                         }
 
 

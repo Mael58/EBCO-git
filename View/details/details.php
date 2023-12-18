@@ -40,13 +40,15 @@ if ($recipe) {
     $lienDoc = $recipe['lienDoc'];
     $lienDriver = $recipe['lienDriver'];
     $quantite = $recipe['Quantite'];
+    $imageA = $recipe['lienImageA'];
     $_SESSION['TVA'] = $recipe['TVA'];
 
 
-
+    $testImage = is_array($recipe['lienImage']) ? $recipe['lienImage'] : [$recipe['lienImage']];
+    $imageA = is_array($recipe['lienImageA']) ? $recipe['lienImageA'] : [$recipe['lienImageA']];
+    $images = array_merge($testImage, $imageA);
 
     $db = null;
-
 
 ?>
     <p>Accueil / <?= $des ?> / <?= $nom ?></p><br>
@@ -64,31 +66,74 @@ if ($recipe) {
                     <div class="produit1">
 
 
-                        <img class="imgDetail" alt="image-produit" src="<?= $image ?>" id="ProductImg">
+                        <?php if (count(array_filter($images)) > 1) : ?>
+                            <div id="demo" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5500" data-bs-theme="dark">
+
+                                <div class="carousel-indicators">
+                                    <?php foreach ($images as $i => $data) : ?>
+
+
+                                        <button type="button" data-bs-target="#demo" data-bs-slide-to="<?= $i ?>" class="<?= $i === 0 ? 'active' : '' ?>"></button>
+                                    <?php endforeach; ?>
+                                </div>
+
+                                <div class="carousel-inner">
+                                    <?php foreach ($images as $i => $data) : ?>
+                                        <div class="carousel-item<?= $i === 0 ? ' active' : '' ?>">
+                                            <img src="<?= $data ?>" alt="Image <?= $i + 1 ?>" class="d-block mx-auto thumbnail d-none d-md-block">
+                                            <div class="carousel-caption d-none d-md-block">
+
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+
+
+                                <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                </button>
+
+
+                            </div>
+                        <?php else : ?>
+
+                            <img src="<?= $images[0] ?>" alt="Image 1" class="d-block mx-auto thumbnail">
+                        <?php endif; ?>
+
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+
+
+
+
+
 
                         <div class="spef">
                             <h3>Spécifications techniques:</h3>
                             <p class="spef-p">
                                 <strong>Référence:</strong> <?= $ref ?>
-                                </p>
+                            </p>
 
-                                <p class="spef-p">
+                            <p class="spef-p">
                                 <strong>Norme:</strong> <?= $norme ?>
-                                </p>
+                            </p>
 
-                                <p class="spef-p">
+                            <p class="spef-p">
                                 <strong>Puissance:</strong> <?= $puissance ?>
-                                </p>
+                            </p>
 
-                                <p class="spef-p">
+                            <p class="spef-p">
                                 <strong>Connecteur:</strong> <?= $connecteur ?>
-                                </p>
+                            </p>
 
-                                <p class="spef-p">
+                            <p class="spef-p">
                                 <strong> Débit:</strong> <?= $dataRate ?>
-                                </p>
+                            </p>
 
-                                <p class="spef-p">
+                            <p class="spef-p">
                                 <strong> Longueur:</strong> <?= $longueur ?>
                             </p>
 
@@ -96,91 +141,121 @@ if ($recipe) {
 
 
                         </div>
-                       
-                        <div class="doc">
-                            <h3>Documentations techniques</h3>
-                            <p class="doc-p">
-                                <strong>Lien de la documentation:</strong>
-                                <a href="<?= $lienDoc ?>" alt="logo-pdf" target="_blank"><img class="pdf" title=" Fiche technique" src="Public/images/pdf.png"></a>
-                            </p>
-                            <p class="doc-p">
-                                <strong>Télécharger les drivers:</strong>
-                                <a href="<?= $lienDriver ?>" alt="logo-zip" download><img class="zip" title="Drivers.zip" src="Public\images\downloadZip-removebg-preview.png"></a>
-                            </p>
 
+                       
+
+
+
+
+                            <div class="doc">
+                                <h3>Documentations techniques</h3>
+                                <p class="doc-p">
+                                    <strong>Lien de la documentation:</strong>
+                                    <a href="<?= $lienDoc ?>" alt="logo-pdf" target="_blank"><img class="pdf" title=" Fiche technique" src="Public/images/pdf.png"></a>
+                                </p>
+                                <p class="doc-p">
+                                    <strong>Télécharger les drivers:</strong>
+                                    <a href="<?= $lienDriver ?>" alt="logo-zip" download><img class="zip" title="Drivers.zip" src="Public\images\downloadZip-removebg-preview.png"></a>
+                                </p>
+
+
+                            </div>
+                            <div class="containerPrix">
+                            <div class="produit2">
+                                <h2 id="prix"> <?= $prix ?> €</h2>
+
+
+
+                                <?php
+
+
+                                if ($quantite > 0) {
+                                    echo '<p style="color:green;">En stock</p>';
+                                    echo '<div class="container-quantite">';
+                                    echo '<h3 class="quantite">Quantité</h3>';
+
+                                    echo '<input type="number" id="quantite" value="1" min="1" >';
+                                    echo '</div>';
+                                    echo '<a href="#" id="ajouter-au-panier" class="btn">Ajouter au panier</a>';
+                                } else {
+                                    echo '<p style="color:red;">Produit indisponible</p>';
+                                }
+
+
+                                ?>
+                            </div>
+
+
+                            <div class="TableauPrixDegressif">
+                            <table>
+    <tr>
+        <th><strong>Quantité</strong></th>
+        <th><strong>Prix unitaire</strong></th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td><?php echo $prix ?> €</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td><?php echo $prix*0.97 ?> €</td>
+    </tr>
+    <tr>
+        <td>50</td>
+        <td><?php echo $prix*0.931 ?> €</td>
+    </tr>
+    <tr>
+        <td>100</td>
+        <td><?php echo $prix*0.866 ?> €</td>
+    </tr>
+ 
+</table>
+
+
+
+                            </div>
 
                         </div>
 
-                        <div class="produit2">
-                        <h2 id="prix"> <?=$prix?> €</h2>
 
-
-
-                        <?php
-
-
-                        if ($quantite > 0) {
-                            echo '<p style="color:green;">En stock</p>';
-                            echo '<div class="container-quantite">';
-                            echo '<h3 class="quantite">Quantité</h3>';
-                           
-                            echo '<input type="number" id="quantite" value="1" min="1" >';
-                            echo '</div>';
-                            echo '<a href="#" id="ajouter-au-panier" class="btn">Ajouter au panier</a>';
-                        } else {
-                            echo '<p style="color:red;">Produit indisponible</p>';
-                        }
-
-
-                        ?>
-                    </div>
                     </div>
 
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            var inputQuantite = document.getElementById('quantite');
+                            var prixElement = document.getElementById('prix');
 
-                    <!-- <div class="produit3">
-                       
+                            inputQuantite.addEventListener('input', function() {
+                                var quantite = inputQuantite.value;
 
-                    </div> -->
+                                var prixInitial = <?= $recipe['prix'] ?>;
 
+                                var prixReduit;
 
-                 
+                                if (quantite >= 10 && quantite < 50) {
+                                    prixReduit = prixInitial * 0.97;
 
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function() {
-                                var inputQuantite = document.getElementById('quantite');
-                                var prixElement = document.getElementById('prix');
+                                } else if (quantite >= 50 && quantite < 100) {
+                                    prixReduit = prixInitial * 0.931;
 
-                                inputQuantite.addEventListener('input', function() {
-                                    var quantite = inputQuantite.value;
+                                } else if (quantite >= 100) {
+                                    prixReduit = prixInitial * 0.866;
 
-                                    var prixInitial = <?= $recipe['prix'] ?>;
+                                } else {
+                                    prixReduit = prixInitial;
+                                }
 
-                                    var prixReduit;
+                                // Affichage du prix réduit
 
-                                    if (quantite >= 10 && quantite < 50) {
-                                        prixReduit = prixInitial * 0.97;
-                                        console.log(prixReduit);
-                                    } else if (quantite >= 50 && quantite < 100) {
-                                        prixReduit = prixInitial * 0.931;
-                                        console.log(prixReduit);
-                                    } else if (quantite >= 100) {
-                                        prixReduit = prixInitial * 0.866;
-                                        console.log(prixReduit);
-                                    } else {
-                                        prixReduit = prixInitial;
-                                    }
-
-                                    // Affichage du prix réduit
-
-                                    prixElement.innerHTML = '<h2>' + prixReduit.toFixed(2) + ' €</h2>';
-                                });
-
+                                prixElement.innerHTML = '<h2>' + prixReduit.toFixed(2) + ' €</h2>';
                             });
-                        </script>
+
+                        });
+                    </script>
 
 
 
-                
+
 
 
 
@@ -191,20 +266,6 @@ if ($recipe) {
 
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         <div class="Panier" id="panier">
@@ -236,6 +297,8 @@ if ($recipe) {
     } else {
         echo '<p class="vide">Votre panier est vide.</p>';
     }
+
+
         ?>
         </div>
     </div><br>
@@ -288,6 +351,8 @@ if ($recipe) {
                 var image = "<?= $image ?>";
 
 
+
+
                 fetch('Controller/ajouter_au_panier.php', {
                         method: 'POST', // ou 'GET' selon votre configuration
                         headers: {
@@ -301,8 +366,8 @@ if ($recipe) {
                     .then(response => response.json())
                     .then(data => {
 
-                        console.log('Produit dans le panier:', data);
-                        console.log('Produit dans le panier:', data.produits);
+
+
 
                         panierCounter.textContent = data.nombreTotalArticles;
 
@@ -314,10 +379,11 @@ if ($recipe) {
                             var total = 0;
 
                             data.produits.forEach(produit => {
-                                console.log('Produit dans le panier:', produit);
+
+                                console.log(produit.image);
 
                                 const produitHTML = `
-            <div class="produit" id="quantite-${produit.nom}>
+            <div class="produit" id="quantite-${produit.nom}">
                 <img src="${produit.image}" width="50%">
                 <div>
                     <p>${produit.nom}</p>
@@ -330,8 +396,6 @@ if ($recipe) {
                         onchange="updateQuantitePrix(this, '${produit.nom}','${produit.prix}')">
                 </div>
             </div>`;
-                                console.log(produit.prix);
-                                console.log(produit.quantite);
                                 var sousTotal = produit.sousTotal;
 
 

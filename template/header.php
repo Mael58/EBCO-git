@@ -150,8 +150,20 @@ $categoriesUniques = array_unique($categories);
 
     <div class="banderole">
   
-  <p class="txt">
-Les frais d'expédition s'élèvent à 10 euros pour les commandes inférieures à 50 euros.</p>
+  <span class="txt">
+
+  Les frais d'expédition sont de 10 euros pour les commandes d'un montant inférieur à 50 euros, et de 70 euros pour les commandes effectuées en dehors de la France.
+</span>
+
+<span class="txt txt-2">
+
+Les frais d'expédition sont de 10 euros pour les commandes d'un montant inférieur à 50 euros, et de 70 euros pour les commandes effectuées en dehors de la France.
+</span>
+
+
+
+
+
   
 </div>
 

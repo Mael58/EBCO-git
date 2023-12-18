@@ -3,6 +3,8 @@ session_start();
 
 $nouveauSousTotal = 0;
 
+$pays=$_SESSION['adresse']['pays'];
+
 $nomProduit = isset($_POST["nomProduit"]) ? $_POST["nomProduit"] : "";
 $nouvelleQuantite = isset($_POST["nouvelleQuantite"]) ? $_POST["nouvelleQuantite"] : "";
 $_SESSION['quantite']= $nouvelleQuantite;
@@ -34,6 +36,7 @@ if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
 
    
         $nouveauTotal += $produit['sousTotal'];
+      
         
     }
 
@@ -42,5 +45,5 @@ if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
     $_SESSION['nombreTotalArticles'] = $nombreTotalArticles;
 }
 
-echo json_encode(["success" => true, "nouveauSousTotal" => $nouveauSousTotal, "nouveauTotal" => $nouveauTotal, "quantite" => $nouvelleQuantite, "nomProduit"=> $nomProduit]);
+echo json_encode(["success" => true, "nouveauSousTotal" => $nouveauSousTotal, "nouveauTotal" => $nouveauTotal, "quantite" => $nouvelleQuantite, "nomProduit"=> $nomProduit, "pays"=>$pays]);
 ?>

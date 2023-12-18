@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
 
@@ -455,7 +456,7 @@ h4 {
 
     nav ul {
         position: absolute;
-        top: 70px;
+        height: 13%;
         left: 0;
         background: #333;
         width: 100%;
@@ -482,7 +483,14 @@ h4 {
     }
 
 
+    .banderole{
+        margin-top: 70px;
+    }
+
+
 }
+
+
 
 /*---------- 600 media query -------*/
 @media only screen and (max-width: 600px) {
@@ -632,6 +640,8 @@ table {
     display: flex;
     flex-wrap: wrap;
 }
+
+
 
 th {
     text-align: left;
@@ -1540,8 +1550,10 @@ h1 {
 
 .carousel-inner {
     position: relative;
-    width: 100%;
+
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
 }
 
 .carousel-inner::after {
@@ -1560,7 +1572,8 @@ h1 {
     margin-right: -100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    transition: transform 0.6s ease-in-out;
+    transition: transform 1s ease-in-out;
+    height: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1807,30 +1820,6 @@ a[href$=".zip"] img {
 
 
 
-.row.mt-3 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
-
-}
-
-.row.mt-3 .col {
-
-    margin-right: 10px;
-    width: 125px;
-}
-
-.row.mt-3 .col:last-child {
-    margin-right: 0;
-    /* Supprimez la marge à droite pour la dernière colonne */
-}
-
-.row.mt-3 img {
-    width: 100%;
-    height: auto;
-    border: 1px black solid;
-}
 
 .active-thumbnail {
     display: none;
@@ -1856,7 +1845,7 @@ a[href$=".zip"] img {
 .col-detail-1 {
     display: flex;
     flex-direction: column;
-    align-items: center;
+ 
     padding: 20px;
 
     border-radius: 8px;
@@ -1867,6 +1856,8 @@ a[href$=".zip"] img {
 
 .produitContainer {
     display: flex;
+    
+    
     margin-top: 20px;
     width: 100%;
 
@@ -1879,16 +1870,51 @@ a[href$=".zip"] img {
     display: flex;
     margin-top: 20px;
     justify-content: space-around;
-    align-items: flex-start;
+    
+    
     width: 100%;
 
 }
 
+@media only screen and (max-width: 800px) {
+    .produit1 {
+        display: flex;
+        flex-direction: column;
+        
+        
+        margin-top: 20px;     
+        
+        
+        width: 100%;
+    
+    } 
+    .containerImages {
+        display: flex;
+   align-items: center;
+    }
+    
+    .containerImages img{
+        width: 100%;
+    }
+    .containerPrix{
+        border-top: #000 1px solid;
+        margin-top: 10px;
+    }
+
+    #demo{
+       
+        width: 100%;
+    }
+   
+}
+
 .produit1 img {
 
-    border: #000 solid 1px;
+
     border-radius: 8px;
-    max-width: 100%;
+    max-height: 100%;
+    /* Assure que l'image ne dépasse pas la hauteur de l'élément du carrousel */
+
 
 
 }
@@ -1950,23 +1976,22 @@ a[href$=".zip"] img {
 .doc,
 .spef {
 
-    margin-top: 70px;
-  
-
+    margin-top: 30px;
 }
 
 .spef-p,
-.doc-p{
-    margin-top: 40px;
+.doc-p {
+    margin-top: 20px;
     width: 100%;
 }
 
 .doc-p strong,
 .spef-p strong {
     margin-right: 10px;
-  
-   
 }
+
+
+
 
 
 
@@ -1976,30 +2001,41 @@ a[href$=".zip"] img {
 
 
 .banderole {
-
     width: 100%;
     display: flex;
     text-align: center;
     margin-bottom: 20px;
     overflow-x: hidden;
-
-
-
 }
 
 .txt {
     white-space: nowrap;
     font-size: 20px;
-    animation: Scroll 10s linear infinite;
+    opacity: 1;
     display: inline-block;
+    animation: Scroll 10s linear infinite;
+}
+
+.txt-2 {
+    white-space: nowrap;
+    font-size: 20px;
+    opacity: 0;
+    /* Le deuxième span est initialement invisible */
+    display: inline-block;
+    animation: Scroll 10s linear infinite;
+    animation-delay: 5s;
+    /* Le deuxième span commence après une itération complète du premier span */
 }
 
 @keyframes Scroll {
     0% {
         transform: translateX(100%);
+        opacity: 1;
     }
 
     100% {
         transform: translateX(-100%);
+        opacity: 1;
+        /* Rend le deuxième span visible après une itération complète du premier span */
     }
 }
