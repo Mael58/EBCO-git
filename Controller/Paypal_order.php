@@ -13,6 +13,8 @@ $codePostal= $_POST['cdpLivraison'];
 
 
 
+
+
                         
 $handling = 0;
 $insurance = 0;

@@ -4,6 +4,8 @@ include_once 'Model/ProduitsBDD.php';
 
 
 
+
+
 if (isset($_SESSION['adresse'])) {
     $prenom = $_SESSION['adresse']['prenom'];
     $nom = $_SESSION['adresse']['nom'];
@@ -610,23 +612,29 @@ if (isset($_SESSION['TVA'])) {
 
 
             <script>
+                var sousTotal;
+                var frais_port;
+                var tvaPrix;
+                var prenomLivraison = "<?php echo $prenom; ?>";
+                var nomLivraison = "<?php echo $nom; ?>";
+                var numRue = "<?php echo $numeroRue; ?>";
+                var rue = "<?php echo $rue; ?>";
 
-var sousTotal;
-var frais_port;
-var tvaPrix;
-var prenomLivraison=<?php echo $prenom;?>;
-var nomLivraison= "<?php echo $nom;?>";
-var numRue = "<?php echo $numeroRue;?>";
-var rue = "<?php echo $rue;?>";
+                var quantite;
+                var montantUnitaire;
+                var nomProduit1;
+                
 
-var cdpLivraison="<?php echo $codePostal;?>";
+                var cdpLivraison = "<?php echo $codePostal; ?>";
 
-var villeLivraison="<?php echo $ville;?>";
-var paysLivraison="<?php echo $pays;?>";
+                var villeLivraison = "<?php echo $ville; ?>";
+                var paysLivraison = "<?php echo $pays; ?>";
+
 
                 function updateQuantitePrix(input, nomProduit, prix) {
                     var nouvelleQuantite = input.value;
-
+                 
+                    
                     // Utiliser AJAX pour envoyer les données au serveur
                     var xhr = new XMLHttpRequest();
                     xhr.open("POST", "Controller/update_panier.php", true);
@@ -636,13 +644,14 @@ var paysLivraison="<?php echo $pays;?>";
                             var response = JSON.parse(xhr.responseText);
                             if (response.success) {
                                 var pays = response.pays;
-                                console.log(pays);
+                               
                                 var sousTotalCell = input.parentNode.nextElementSibling;
                                 sousTotalCell.innerHTML = response.nouveauSousTotal.toFixed(2) + ' €';
 
-                                 sousTotal = response.nouveauTotal.toFixed(2);
+
+                                sousTotal = response.nouveauTotal.toFixed(2);
                                 frais_port = <?= $fraisPort ?>;
-                                
+
                                 if (pays == "FR") {
                                     if (sousTotal < 50) {
                                         var TotalFraisPort = parseFloat(sousTotal) + frais_port;
@@ -682,17 +691,18 @@ var paysLivraison="<?php echo $pays;?>";
                                 }
 
 
-                                console.log(TotalFraisPort);
+                             
                                 document.getElementById('TotalHT').innerHTML = '<p id="TotalHT"><strong>Total HT:</strong> ' + sousTotal + ' </p>';
 
 
-                                var quantite = response.quantite;
-                                var nomProduit = response.nomProduit;
-                                document.getElementById('quantiteProduits-' + nomProduit).innerHTML = "<p id='quantiteProduits-" + nomProduit + "'><strong>Quantité:</strong> " + quantite + "</p>";
-
+                                quantite = response.quantite;
+                                nomProduit1 = response.nomProduit;
+                                montantUnitaire = (response.nouveauSousTotal) / quantite;
+                              
+                                document.getElementById('quantiteProduits-' + nomProduit1).innerHTML = "<p id='quantiteProduits-" + nomProduit1 + "'><strong>Quantité:</strong> " + quantite + "</p>";
+                                document.getElementById('prix-' + nomProduit1).innerHTML = "<p id='prix-" + nomProduit1 + "'><strong>Prix unitaire:</strong> " + montantUnitaire.toFixed(2) + "</p>";
 
                                 configurerBoutonPayPal();
-
 
 
 
@@ -712,126 +722,147 @@ var paysLivraison="<?php echo $pays;?>";
 
 
 
-function configurerBoutonPayPal() {
-    // Vous pouvez ajuster cela en fonction de vos besoins
-    var formdata = new FormData();
-    
-    formdata.append("sousTotal", sousTotal);
-    formdata.append("fraisPort", frais_port);
-    formdata.append("tvaPrix", tvaPrix);
-    formdata.append('prenomLivraison', prenomLivraison);
-    formdata.append('nomLivraison', nomLivraison);
-    
- 
-    formdata.append('numLivraison', numRue);
-    formdata.append('rueLivraison', rue);
-  
-  
-    formdata.append('cdpLivraison', cdpLivraison);
-    formdata.append('villeLivraison', villeLivraison);
-    formdata.append('paysLivraison', paysLivraison);
+                function configurerBoutonPayPal() {
+                    let form = new FormData();
+                    var formdata = new FormData();
 
-    var request = new XMLHttpRequest();
-    request.open('POST', 'controller/Paypal_order.php', true);
-    request.onreadystatechange = function() {
-        if (request.readyState === 4 && request.status === 200) {
-            var apiData = JSON.parse(request.responseText);
+                    var nom;
+                    var prenom;
 
-            document.getElementById('paypal-button-container').innerHTML=""
-
-            
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: apiData.purchase_units.map(unit => {
-                            return {
-                                amount: unit.amount,
-                                // Autres propriétés nécessaires à la construction de l'objet order
-                            };
-                        })
-                    });
-                },
-                onApprove: function(data, actions) {
+                    formdata.append("sousTotal", sousTotal);
+                    formdata.append("fraisPort", frais_port);
+                    formdata.append("tvaPrix", tvaPrix);
+                    formdata.append('prenomLivraison', prenomLivraison);
+                    formdata.append('nomLivraison', nomLivraison);
 
 
-return actions.order.capture().then(function(details) {
+                    formdata.append('numLivraison', numRue);
+                    formdata.append('rueLivraison', rue);
+
+
+                    formdata.append('cdpLivraison', cdpLivraison);
+                    formdata.append('villeLivraison', villeLivraison);
+                    formdata.append('paysLivraison', paysLivraison);
+
+                    form.append("prix", montantUnitaire.toFixed(2));
+                    form.append("quantite", quantite);
+                    form.append("nomProduit", nomProduit1);
+
+                    console.log(montantUnitaire);
+                    console.log(quantite);
+                    console.log(nomProduit1);
+                    var request = new XMLHttpRequest();
+                    request.open('POST', 'controller/Paypal_order.php', true);
+                    request.onreadystatechange = function() {
+                        if (request.readyState === 4 && request.status === 200) {
+                            var apiData = JSON.parse(request.responseText);
+
+                            document.getElementById('paypal-button-container').innerHTML = ""
+
+
+                            paypal.Buttons({
+                                createOrder: function(data, actions) {
+                                    return actions.order.create({
+                                        purchase_units: apiData.purchase_units.map(unit => {
+                                            return {
+                                                amount: unit.amount,
+                                                // Autres propriétés nécessaires à la construction de l'objet order
+                                            };
+                                        })
+                                    });
+                                },
+                                onApprove: function(data, actions) {
+
+
+                                    return actions.order.capture().then(function(details) {
 
 
 
-    console.log(details);
+                                       
 
 
-    var nomCommande = [];
-    var prix = [];
-    var quantite = [];
+                                        var nomCommande = [];
+                                        var prixArray = [];
+                                        var quantite = [];
+                                        var dataToSend;
 
-    <?php
-    // PHP (Back-end)
-    $cart = $_SESSION['panier'];
-    foreach ($cart as $produit) {
+                                        fetch("Controller/get_cart_data.php", {
+                                            header: 'Content-Type: application/json',
+                                                method: 'POST',
+                                                body: form
+                                            }).then(response => response.json())
+                                            .then(data => {
+                                            
 
-        $nomCommande = isset($produit['nom']) ? $produit['nom'] : '';
-        $quantite = isset($produit['quantite']) ? $produit['quantite'] : 0;
-        $prix = isset($produit['prix']) ? $produit['prix'] : 0;
-        $total = $quantite * $prix;
-
-
-        echo "nomCommande.push('" . $nomCommande . "');\n";
-        echo "quantite.push(" . $quantite . ");\n";
-        echo "prix.push(" . $prix . ");\n";
-    }
+                                                var cartData = data.cartData;
+                                                var quantitetest= parseInt(data.cartData.quantite);
+                                                var prix = parseFloat(data.cartData.montantUnitaire);
+                                                var nom= data.cartData.nomProduit;
+                                                
 
 
-    ?>
+                                              
+                                                   
+                                                    quantite.push(quantitetest);
+                                                    prixArray.push(prix);
+                                                    nomCommande.push(nom);
+                                                    
+                                           
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.open('POST', 'Controller/ajout_commandes.php', true);
+                                                xhr.setRequestHeader('Content-Type', 'application/json');
 
-    // Maintenant, vous pouvez envoyer ces données au serveur via une requête AJAX
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'Controller/ajout_commandes.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
+                                                dataToSend = {
+                                                    nomCommande: nomCommande,
+                                                    quantite: quantite,
+                                                    prix: prixArray
 
-    var dataToSend = {
-        nomCommande: nomCommande,
-        quantite: quantite,
-        prix: prix
+                                                }
+                                                
+                                                xhr.send(JSON.stringify(dataToSend));
+                                                
+                                            
+                                                
 
-    }
-    xhr.send(JSON.stringify(dataToSend));
 
-    var xhr2 = new XMLHttpRequest();
-    xhr2.open('POST', 'Controller/update_quantity.php', true);
-    xhr2.setRequestHeader('Content-Type', 'application/json');
+                                        var xhr2 = new XMLHttpRequest();
+                                        xhr2.open('POST', 'Controller/update_quantity.php', true);
+                                        xhr2.setRequestHeader('Content-Type', 'application/json');
 
-    xhr2.onreadystatechange = function() {
-        if (xhr2.readyState == 4 && xhr2.status == 200) {
-            // Mettez à jour l'interface utilisateur ou effectuez d'autres actions si nécessaire
-            console.log(xhr2.responseText);
-            // Vous pouvez également mettre à jour le panierCounter ici
-        }
-    };
-    xhr2.send(JSON.stringify(dataToSend));
-    var prenom = '<?= $prenom ?>';
-    var nom = '<?= $nom ?>';
+                                        xhr2.onreadystatechange = function() {
+                                            if (xhr2.readyState == 4 && xhr2.status == 200) {
+                                               
+                                            }
+                                        };
+                                        xhr2.send(JSON.stringify(dataToSend));
+                                         prenom = '<?= $prenom ?>';
+                                         nom = '<?= $nom ?>';
 
-    alert(prenom + ' ' + nom + ', votre transaction est effectuée. Vous allez recevoir une notification très bientôt lorsque nous validons votre paiement.');
-});
-},
 
-onCancel: function(data) {
-alert("Transaction annulée !");
-}
-                // onApprove: function(data, actions) {
-                //     return actions.order.capture().then(function(details) {
-                //         // Insertion de la logique de confirmation ici
-                //     });
-                // }
-            }).render('#paypal-button-container');
-        }
-    };
+                                               
 
-    request.send(formdata);
-}
+                                            })
+                                            .catch(error => console.error('Error fetching cart data:', error));
 
-                
+                                           
+                                        alert(prenom + ' ' + nom + ', votre transaction est effectuée. Vous allez recevoir une notification très bientôt lorsque nous validons votre paiement.');
+                                    });
+                                },
+
+                                onCancel: function(data) {
+                                    alert("Transaction annulée !");
+                                }
+                                // onApprove: function(data, actions) {
+                                //     return actions.order.capture().then(function(details) {
+                                //         // Insertion de la logique de confirmation ici
+                                //     });
+                                // }
+                            }).render('#paypal-button-container');
+                        }
+                    };
+
+                    request.send(formdata);
+                }
             </script>
 
 
@@ -879,7 +910,7 @@ alert("Transaction annulée !");
 
             echo "<div class='produit-recap'>";
 
-            echo "<p><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
+            echo "<p id='prix-" . $nomCommande[$i] . "'><strong>Prix unitaire:</strong> " . $prix[$i] . " EUR</p>";
             echo "<p id='quantiteProduits-" . $nomCommande[$i] . "'><strong>Quantité:</strong> " . $quantite[$i] . "</p>";
 
             echo "</div>";
@@ -889,7 +920,7 @@ alert("Transaction annulée !");
 
         echo '<p id="TotalHT"><strong>Total HT:</strong> ' . $montantTotal . ' EUR </p>';
         $sansPort = $montantTotal;
-       $sansPortArrondi = round($sansPort, 2);
+        $sansPortArrondi = round($sansPort, 2);
         if ($pays === "FR") {
             if ($montantTotal < 50) {
                 $montantTotal += $fraisPort;
@@ -927,7 +958,7 @@ alert("Transaction annulée !");
 
                         <script src="https://www.paypal.com/sdk/js?client-id=AaOvluVx3_tbxX782Q3zyGBSmCPfnaEdHVcbwDqOXu_dgFCtxQmMGtdy-jDzY8JWPmpGL5bZm-ovGAyn&currency=EUR"></script>
                         <?php
-                        
+
 
                         $handling = 0;
                         $insurance = 0;
@@ -1054,7 +1085,7 @@ alert("Transaction annulée !");
 
 
 
-                                        console.log(details);
+                                      
 
 
                                         var nomCommande = [];
@@ -1099,9 +1130,7 @@ alert("Transaction annulée !");
 
                                         xhr2.onreadystatechange = function() {
                                             if (xhr2.readyState == 4 && xhr2.status == 200) {
-                                                // Mettez à jour l'interface utilisateur ou effectuez d'autres actions si nécessaire
-                                                console.log(xhr2.responseText);
-                                                // Vous pouvez également mettre à jour le panierCounter ici
+                                              
                                             }
                                         };
                                         xhr2.send(JSON.stringify(dataToSend));
