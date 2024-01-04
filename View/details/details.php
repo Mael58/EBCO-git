@@ -51,7 +51,8 @@ if ($recipe) {
     $db = null;
 
 ?>
-    <p>Accueil / <?= $des ?> / <?= $nom ?></p><br>
+    <p><a href="Accueil">Accueil</a> / <a href="usb" ><?= $des ?></a> / <a href="details?nom=<?= $nom ?>"><?php echo $nom; ?></a>
+</p><br>
 
 
 

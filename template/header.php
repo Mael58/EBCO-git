@@ -53,15 +53,17 @@ $categories = $donnees->fetchAll(PDO::FETCH_COLUMN);
 $categoriesUniques = array_unique($categories);
 ?>
 
-<body class="bleu">
+<body>
 
-    <div class="container">
+    <div class="bleu">
 
         <div class="navbar-logo">
 
             <div class="logo">
                 <a href="Accueil"><img src="Public/images/logo.png" alt="logo-EBCO" width="130px"></a>
             </div>
+
+
 
             <div class="liste">
                 <ul>
@@ -100,47 +102,35 @@ $categoriesUniques = array_unique($categories);
 
 
         <div class="navbar">
-
             <nav>
-                <ul id="MenuItems">
+                <ul>
                     <li><a href="Accueil">Accueil</a></li>
                     <li><a href="ebco">EBconnections</a></li>
                     <li><a href="solution">Solutions</a></li>
-                    <div class="dropdown">
-                        <li class="dropbtn">Produits</li>
-                        <div id="menuDeroulant" class="dropdown-content">
-                            <?php
 
-                            $liens = [
-                                'Câbles USB' => 'usb',
-                                'Objet connectes' => 'iot.php',
+                    <li class="dropdown">
+                <a class="dropbtn">Produits</a>
+                <div id="menuDeroulant" class="dropdown-content">
+                    <?php
+                    $liens = [
+                        'Câbles USB' => 'usb',
+                        'Objet connectes' => 'iot.php',
+                    ];
 
-                            ];
-
-
-                            foreach ($categoriesUniques as $categorie) {
-                                // Assurez-vous que la catégorie existe dans le tableau de liens
-                                if (isset($liens[$categorie])) {
-                                    $lien = $liens[$categorie];
-                                } else {
-                                    $lien = 'produits.php'; // Lien par défaut si la catégorie n'est pas trouvée
-                                }
-                                echo '<a href="' . $lien . '">' . $categorie . '</a>';
-                            }
-                            ?>
-
-                        </div>
-                    </div>
-
-
-
-
+                    foreach ($categoriesUniques as $categorie) {
+                        if (isset($liens[$categorie])) {
+                            $lien = $liens[$categorie];
+                        }
+                        echo '<a href="' . $lien . '">' . $categorie . '</a>';
+                    }
+                    ?>
+                </div>
+            </li>
                     <li><a href="Contact">Contact</a></li>
-
-
-
                 </ul>
             </nav>
+
+         
 
 
 
@@ -148,27 +138,10 @@ $categoriesUniques = array_unique($categories);
         <a href="#" id="menuIcon"><img src="Public/images/menu.png" alt="menu" class="menu-icon"></a>
     </div>
 
-    <div class="banderole">
-  
-  <span class="txt">
-
-  Les frais d'expédition sont de 10 euros pour les commandes d'un montant inférieur à 50 euros, et de 70 euros pour les commandes effectuées en dehors de la France.
-</span>
-
-<span class="txt txt-2">
-
-Les frais d'expédition sont de 10 euros pour les commandes d'un montant inférieur à 50 euros, et de 70 euros pour les commandes effectuées en dehors de la France.
-</span>
 
 
 
 
-
-  
-</div>
-
-
-    
     <?php
 
 

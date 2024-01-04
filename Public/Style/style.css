@@ -60,7 +60,7 @@ body {
     float: left;
     display: block;
     color: #f2f2f2;
-    /* Couleur du texte */
+
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -68,9 +68,9 @@ body {
 
 .navbar a:hover {
     background-color: #ddd;
-    /* Couleur de fond au survol */
+  
     color: black;
-    /* Couleur du texte au survol */
+  
 }
 
 nav {
@@ -87,7 +87,7 @@ nav ul li {
 }
 
 .dropdown {
-    float: right;
+
     overflow: hidden;
 }
 
@@ -111,6 +111,7 @@ nav ul li {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    margin-top: 46px;
 }
 
 .dropdown-content a {
@@ -124,7 +125,7 @@ nav ul li {
 
 .dropdown-content a:hover {
     background-color: #ddd;
-    /* Couleur de fond au survol */
+ /
 }
 
 .dropdown:hover .dropdown-content {
@@ -379,6 +380,7 @@ small {
     color: #8a8a8a;
     font-size: 16px;
     padding: 60px 0 20px;
+
 }
 
 .footer p,
@@ -401,6 +403,10 @@ h4 {
 
 .footer-col1 {
     flex-basis: 30%;
+ margin-left: 20px;
+}
+.footer-col1 ul li {
+  margin-bottom: 2px;
 }
 
 .footer-col2 {
@@ -431,7 +437,12 @@ h4 {
     display: block;
 
 }
-
+.facebook,
+.linkedin{
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+}
 .lien {
     color: #8a8a8a;
 }
@@ -786,7 +797,8 @@ form a {
 
 /* CGV */
 .cgv {
-    padding: 60px 0px 40px 0px;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 /* mentions */
@@ -850,11 +862,10 @@ input {
 .row-usb {
     display: flex;
     flex-wrap: wrap;
-
-
-
+justify-content: space-between;
 
 }
+
 
 .col-usb {
 
@@ -865,7 +876,7 @@ input {
     cursor: pointer;
     flex-basis: 25%;
     padding: 10px;
-
+    flex-basis: calc(25% - 30px);
     margin-left: 30px;
     margin-bottom: 30px;
     transition: transform 0.5s;
@@ -874,6 +885,7 @@ input {
 
 
 }
+
 
 
 .col-usb img {
@@ -892,6 +904,7 @@ input {
     line-height: 1.5;
     margin-top: 10px;
     padding: 10px;
+    margin-right: 40px;
     background-color: #f7f7f7;
     border: 1px solid #ddd;
 }
@@ -937,10 +950,6 @@ input {
 
 
 
-
-h1 {
-    text-align: center;
-}
 
 
 .navbar-logo {
@@ -2039,3 +2048,118 @@ a[href$=".zip"] img {
         /* Rend le deuxième span visible après une itération complète du premier span */
     }
 }
+
+.section3,
+.section2,
+.section1{
+
+    display: flex;
+    flex-direction: column;
+  
+  
+
+}
+.section3 input,
+.section2 input,
+.section1 input{
+border-radius: 4px;
+width: auto;
+margin-left: 10px;
+margin-right: 10px;
+}
+
+
+.section3 select,
+.section1 select{
+    margin-left: 10px;
+margin-right: 10px;
+border-radius: 4px;
+margin-bottom: 10px;
+}
+.section3 label,
+.section2 label,
+.section1 label{
+    margin-left: 10px;
+}
+
+.file{
+    border: white;
+}
+
+
+.row-Form {
+    display: flex;
+   
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+
+
+}
+
+.form-control{
+    margin-top: 20px;
+width: 100%;
+border-radius: 4px;
+}
+
+
+.col-2-Contact h1{
+text-align: start;
+margin: 10px;
+}
+.col-2-Contact p {
+    text-align: start;
+    margin-left: 20px;
+}
+
+.row-index{
+    display: flex;
+    
+    text-align: center;
+    
+      
+
+}
+
+
+.col-2-index h2, p{
+ margin-left: 40px;
+ margin-top: 20px;
+    
+}
+.col-2-index h1{
+    margin-left: 20px;
+    margin-top: 20px;
+       
+   }
+
+.col-2-index img{
+
+height: 100%;
+width: 50%;
+}
+
+.row-Solution{
+display: flex;
+
+justify-content: center;
+margin-top: 5%;
+
+}
+
+.col-2-Solution{
+
+text-align: start;
+align-self: flex-start;
+margin-right: 10%;
+
+
+}
+.col-2-Solution-img{
+  margin-left: 5%;
+    
+}
+    
+
+ 

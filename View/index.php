@@ -53,8 +53,8 @@ if (isset($_SESSION['username'])) { ?>
             <div class="carousel-item<?= $i === 0 ? ' active' : '' ?>">
                 <img src="<?= $data['image'] ?>" alt="Image <?= $i + 1 ?>" class="d-block mx-auto thumbnail" style="width:30%">
                 <div class="carousel-caption d-none d-md-block">
-                    <h3><?= $data['titre']?></h3>
-                    
+                    <h3><?= $data['titre'] ?></h3>
+
                 </div>
             </div>
         <?php endforeach; ?>
@@ -68,32 +68,20 @@ if (isset($_SESSION['username'])) { ?>
         <span class="carousel-control-next-icon"></span>
     </button>
 
-   
+
 </div>
 
-<!-- <div class="row mt-3">
-        <?php foreach ($datas as $i => $data) : ?>
-            <div class="col">
-            <img src="<?= $data['image'] ?>" alt="Thumbnail <?= $i + 1 ?>" class="d-block mx-auto"  data-bs-target="#demo" data-bs-slide-to="<?= $i ?>">
-        </div>
-        <?php endforeach; ?>
-    </div> -->
-
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
 
-<!-- <script>
-    $(document).ready(function() {
-        $('.carousel').carousel();
-    });
-</script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
 
 
 
-<div class="row">
-    <div class="col-2">
+
+
+<div class="row-index">
+    <div class="col-2-index">
 
         <h1>EBconnections</h1>
         <h2>Vos Idées Produites Chez Nous</h2>
@@ -105,7 +93,7 @@ if (isset($_SESSION['username'])) { ?>
             SAV, garantie de pérennité sur toutes nos réalisations</p>
         <a href="solution" class="btn">Explorer &#8594;</a>
     </div>
-    <div class="col-2">
+    <div class="col-2-index">
         <img src="Public/images/montage-2.png" alt="montage">
     </div>
 

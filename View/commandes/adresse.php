@@ -6,6 +6,7 @@ include_once 'Model/ProduitsBDD.php';
 
 
 
+
 if (isset($_SESSION['adresse'])) {
     $prenom = $_SESSION['adresse']['prenom'];
     $nom = $_SESSION['adresse']['nom'];
@@ -903,10 +904,7 @@ if (isset($_SESSION['TVA'])) {
         for ($i = 0; $i < count($nomCommande); $i++) {
 
 
-            // $montantTotal = array_sum(array_map(function ($p, $q) {
-            //     return $p * $q;
-            // }, $prix, $quantite));
-
+     
 
             echo "<div class='produit-recap'>";
 
@@ -1044,8 +1042,7 @@ if (isset($_SESSION['TVA'])) {
                                 $item_name = $nomCommande[$i];
                                 $item_prix = $prix[$i];
                                 $item_qte = $quantite[$i];
-                                echo $item_qte . "\n";
-                                echo $item_prix;
+                               
 
 
 
