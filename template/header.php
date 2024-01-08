@@ -7,12 +7,8 @@ $db_user = DB_USERNAME;
 $db_pass = DB_PASSWORD;
 
 
-
-
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -24,9 +20,12 @@ $db_pass = DB_PASSWORD;
     <title>Catalogue des Produits | EBconnections</title>
     <link rel="stylesheet" href="Public/Style/style.css">
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/cd2e96c95e.js" crossorigin="anonymous"></script>
 
 
 
@@ -63,7 +62,34 @@ $categoriesUniques = array_unique($categories);
                 <a href="Accueil"><img src="Public/images/logo.png" alt="logo-EBCO" width="130px"></a>
             </div>
 
+<div class="containerRecherche">
+            <form class="search" method="POST" autocomplete="off">
+                <input type="text" class="recherche" name="nomProduit" placeholder=" Rechercher... "></input>
+                <button class="searchButton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <div class="resultat" id="resultats"></div>
+            </div>
 
+
+
+            <script>
+        $(document).ready(function () {
+            $('.recherche').on('input', function () {
+                var nomProduit = $(this).val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'Model/recherche.php', 
+                    data: { nomProduit: nomProduit },
+                    success: function (data) {
+                        $('#resultats').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+
+          
 
             <div class="liste">
                 <ul>
@@ -100,6 +126,9 @@ $categoriesUniques = array_unique($categories);
             </div>
         </div>
 
+     
+    
+
 
         <div class="navbar">
             <nav>
@@ -109,36 +138,35 @@ $categoriesUniques = array_unique($categories);
                     <li><a href="solution">Solutions</a></li>
 
                     <li class="dropdown">
-                <a class="dropbtn">Produits</a>
-                <div id="menuDeroulant" class="dropdown-content">
-                    <?php
-                    $liens = [
-                        'Câbles USB' => 'usb',
-                        'Objet connectes' => 'iot.php',
-                    ];
+                        <a class="dropbtn">Produits</a>
+                        <div id="menuDeroulant" class="dropdown-content">
+                            <?php
+                            $liens = [
+                                'Câbles USB' => 'usb',
+                                'Objet connectes' => 'iot.php',
+                            ];
 
-                    foreach ($categoriesUniques as $categorie) {
-                        if (isset($liens[$categorie])) {
-                            $lien = $liens[$categorie];
-                        }
-                        echo '<a href="' . $lien . '">' . $categorie . '</a>';
-                    }
-                    ?>
-                </div>
-            </li>
+                            foreach ($categoriesUniques as $categorie) {
+                                if (isset($liens[$categorie])) {
+                                    $lien = $liens[$categorie];
+                                }
+                                echo '<a href="' . $lien . '">' . $categorie . '</a>';
+                            }
+                            ?>
+                        </div>
+                    </li>
                     <li><a href="Contact">Contact</a></li>
                 </ul>
             </nav>
 
-         
+
 
 
 
         </div>
         <a href="#" id="menuIcon"><img src="Public/images/menu.png" alt="menu" class="menu-icon"></a>
+        <div class="overlay2" id="overlay2"></div>   
     </div>
-
-
 
 
 
@@ -171,7 +199,7 @@ $categoriesUniques = array_unique($categories);
 
             session_destroy();
 
-            // Redirigez l'utilisateur vers la page de connexion (ou une autre page de votre choix)
+           
             header("Location: Accueil");
             exit;
         }
@@ -181,25 +209,23 @@ $categoriesUniques = array_unique($categories);
     ?>
 
 
+ 
 
 
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var overlay = document.getElementById("overlay2");
+  
+    var rechercheInput = document.querySelector(".recherche");
+    
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var MenuItems = document.getElementById("MenuItems");
-            MenuItems.style.maxHeight = "0px";
+    rechercheInput.addEventListener("focus", function () {
+        overlay.style.display = "block";
+    });
 
-            function menutoggle() {
-                if (MenuItems.style.maxHeight == "0px") {
-                    MenuItems.style.maxHeight = "200px";
-                } else {
-                    MenuItems.style.maxHeight = "0px";
-                }
-            }
-
-            // Assurez-vous que votre image a une balise d'ouverture <a> associée
-            var menuIcon = document.getElementById("menuIcon");
-            menuIcon.addEventListener("click", menutoggle);
-        });
-    </script>
+    rechercheInput.addEventListener("blur", function () {
+        overlay.style.display = "none";
+    });
+});
+</script>

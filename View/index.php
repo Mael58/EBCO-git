@@ -27,6 +27,7 @@ $db = null;
 
 
 ?>
+
 <?php
 if (isset($_SESSION['username'])) { ?>
     <h1>Bienvenue <?= $_SESSION['username']; ?></h1>
@@ -35,32 +36,31 @@ if (isset($_SESSION['username'])) { ?>
 
 
 
+<div id="demo"  class="carousel slide" data-bs-ride="carousel"  data-bs-interval="3500">
+  
 
-<div id="demo" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3500">
-
-    <!-- Indicators/dots -->
-    <div class="carousel-indicators">
+    <div class="carousel-indicators" >
         <?php foreach ($datas as $i => $data) : ?>
 
 
             <button type="button" data-bs-target="#demo" data-bs-slide-to="<?= $i ?>" class="<?= $i === 0 ? 'active' : '' ?>"></button>
         <?php endforeach; ?>
     </div>
+   
 
-    <!-- The slideshow/carousel -->
     <div class="carousel-inner">
         <?php foreach ($datas as $i => $data) : ?>
             <div class="carousel-item<?= $i === 0 ? ' active' : '' ?>">
                 <img src="<?= $data['image'] ?>" alt="Image <?= $i + 1 ?>" class="d-block mx-auto thumbnail" style="width:30%">
                 <div class="carousel-caption d-none d-md-block">
-                    <h3><?= $data['titre'] ?></h3>
-
+                    <h3><?= $data['titre']?></h3>
+                    
                 </div>
             </div>
         <?php endforeach; ?>
     </div>
 
-    <!-- Left and right controls/icons -->
+  
     <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
     </button>
@@ -68,12 +68,11 @@ if (isset($_SESSION['username'])) { ?>
         <span class="carousel-control-next-icon"></span>
     </button>
 
-
+     
 </div>
 
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
 
 
@@ -83,19 +82,17 @@ if (isset($_SESSION['username'])) { ?>
 <div class="row-index">
     <div class="col-2-index">
 
-        <h1>EBconnections</h1>
+     
         <h2>Vos Idées Produites Chez Nous</h2>
-        <p class="parag">Fabrication de câbles sur mesure <br>
-            Surmoulage de connecteurs pour milieu difficile <br>
-            Conseil en intégration électronique <br>
-            Conception de produits électroniques sur-mesure <br>
-            Conception et réalisation de prototypes avant industrialisation série <br>
+        <p class="parag">Fabrication de câbles sur mesure,
+            surmoulage de connecteurs pour milieu difficile <br>
+            Conseil en intégration électronique,
+            conception de produits électroniques sur-mesure,
+            conception et réalisation de prototypes avant industrialisation série <br>
             SAV, garantie de pérennité sur toutes nos réalisations</p>
         <a href="solution" class="btn">Explorer &#8594;</a>
     </div>
-    <div class="col-2-index">
-        <img src="Public/images/montage-2.png" alt="montage">
-    </div>
+   
 
 </div>
 
@@ -104,7 +101,7 @@ if (isset($_SESSION['username'])) { ?>
 <!------------------ featured categories --------------->
 <div class="categories">
     <div class="small-container">
-        <div class="row">
+        <div class="row-image">
             <div class="col-3">
                 <img src="Public/images/switch-c-550x604.jpg" alt="switch craft avec injection">
             </div>
@@ -113,6 +110,9 @@ if (isset($_SESSION['username'])) { ?>
             </div>
             <div class="col-3">
                 <img src="Public/images/usbfils1-550x604.jpg" alt="usb RS485">
+            </div>
+            <div class="col-3">
+            <img src="Public/images/montage-2.png" alt="montage">
             </div>
         </div>
     </div>

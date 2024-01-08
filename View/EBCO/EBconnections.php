@@ -1,6 +1,6 @@
 <?php include_once 'template/header.php'?>
         
-        <div class="row">
+        <div class="row-EBCO">
             <div class="col-2 entrep">
                 <h2>Entreprise française d'électronique depuis 2006</h2>
                 <p>
@@ -17,11 +17,11 @@
                      toutes nos réalisations.
                 </p>
             </div>
-            <div class="col-2">
-                <img src="Public/images/Eric-belouet.jpg" alt="Eric Belouet">
+            <div class="col-2-EBCO">
+                <img src="Public/images/Eric-belouet.jpg" width="420px" alt="Eric Belouet">
             </div>
         </div>
-        <div class="row">
+        <div class="row-EBCO">
             <div class="col-2 entrep">
                 <h2>Atelier de production</h2>
                 <p>
@@ -33,12 +33,12 @@
                     réseaux bas débit LoraWAN.
                 </p>
             </div>
-            <div class="col-2">
-                <img src="Public/images/Production.jpeg" width="500px" alt="câbles">
+            <div class="col-2-EBCO">
+                <img src="Public/images/Production.jpeg" width="420px" alt="câbles">
             </div>
         </div>
 
-        <div class="row">
+        <div class="row-EBCO">
             <div class="col-2 entrep">
                 <h2>Offre</h2>
                 <p>
@@ -51,7 +51,7 @@
                     ​​​​
                 </p>
             </div>
-            <div class="col-2">
+            <div class="col-2-EBCO">
                 <a href="Contact" class="btn">Contactez-nous &#8594;</a>
             </div>
            

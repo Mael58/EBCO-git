@@ -51,13 +51,13 @@ if ($recipe) {
     $db = null;
 
 ?>
-    <p><a href="Accueil">Accueil</a> / <a href="usb" ><?= $des ?></a> / <a href="details?nom=<?= $nom ?>"><?php echo $nom; ?></a>
-</p><br>
+    <p><a href="Accueil">Accueil</a> / <a href="usb"><?= $des ?></a> / <a href="details?nom=<?= $nom ?>"><?php echo $nom; ?></a>
+    </p><br>
 
 
 
     <div class="page-container">
-        <div class="overlay" id="overlay"></div>
+            <div class="overlay" id="overlay"></div>
 
 
         <div class="row-details">
@@ -67,7 +67,7 @@ if ($recipe) {
                     <div class="produit1">
 
 
-                        <?php if (count(array_filter($images)) > 1) : ?>
+                        <!-- <?php if (count(array_filter($images)) > 1) : ?>
                             <div id="demo" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5500" data-bs-theme="dark">
 
                                 <div class="carousel-indicators">
@@ -99,15 +99,16 @@ if ($recipe) {
 
 
                             </div>
+                            
                         <?php else : ?>
 
                             <img src="<?= $images[0] ?>" alt="Image 1" class="d-block mx-auto thumbnail">
-                        <?php endif; ?>
+                        <?php endif; ?> -->
 
-                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+                        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
-
-
+ -->
+<img src="<?=$image?>" width="20%" >
 
 
 
@@ -143,27 +144,27 @@ if ($recipe) {
 
                         </div>
 
-                       
 
 
 
 
-                            <div class="doc">
-                                <h3>Documentations techniques</h3>
-                                <p class="doc-p">
-                                    <strong>Lien de la documentation:</strong>
-                                    <a href="<?= $lienDoc ?>" alt="logo-pdf" target="_blank"><img class="pdf" title=" Fiche technique" src="Public/images/pdf.png"></a>
-                                </p>
-                                <p class="doc-p">
-                                    <strong>Télécharger les drivers:</strong>
-                                    <a href="<?= $lienDriver ?>" alt="logo-zip" download><img class="zip" title="Drivers.zip" src="Public\images\downloadZip-removebg-preview.png"></a>
-                                </p>
+
+                        <div class="doc">
+                            <h3>Documentations techniques</h3>  
+                            <p class="doc-p">
+                                <strong>Lien de la documentation:</strong>
+                                <a href="<?= $lienDoc ?>" alt="logo-pdf" target="_blank"><img class="pdf" title=" Fiche technique" src="Public/images/pdf.png"></a>
+                            </p>
+                            <p class="doc-p">
+                                <strong>Télécharger les drivers:</strong>
+                                <a href="<?= $lienDriver ?>" alt="logo-zip" download><img class="zip" title="Drivers.zip" src="Public\images\downloadZip-removebg-preview.png"></a>
+                            </p>
 
 
-                            </div>
-                            <div class="containerPrix">
+                        </div>
+                        <div class="containerPrix">
                             <div class="produit2">
-                                <h2 id="prix"> <?= $prix ?> €</h2>
+                                <p   id="prix"><strong> <?= $prix ?> €</strong></p>
 
 
 
@@ -171,7 +172,7 @@ if ($recipe) {
 
 
                                 if ($quantite > 0) {
-                                    echo '<p style="color:green;">En stock</p>';
+                                    echo '<p class="stock" style="color:green;">En stock</p>';
                                     echo '<div class="container-quantite">';
                                     echo '<h3 class="quantite">Quantité</h3>';
 
@@ -188,29 +189,30 @@ if ($recipe) {
 
 
                             <div class="TableauPrixDegressif">
-                            <table>
-    <tr>
-        <th><strong>Quantité</strong></th>
-        <th><strong>Prix unitaire</strong></th>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td><?php echo $prix ?> €</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td><?php echo $prix*0.97 ?> €</td>
-    </tr>
-    <tr>
-        <td>50</td>
-        <td><?php echo $prix*0.931 ?> €</td>
-    </tr>
-    <tr>
-        <td>100</td>
-        <td><?php echo $prix*0.866 ?> €</td>
-    </tr>
- 
-</table>
+                                <table>
+                                    <tr>
+                                        <th><strong>Quantité</strong></th>
+                                        <th><strong>Prix unitaire</strong></th>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><?php echo $prix ?> €</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td><?php echo $prix * 0.97 ?> €</td>
+                                       
+                                    </tr>
+                                    <tr>
+                                        <td>50</td>
+                                        <td><?php echo $prix * 0.931 ?> €</td>
+                                    </tr>
+                                    <tr>
+                                        <td>100</td>
+                                        <td><?php echo $prix * 0.866 ?> €</td>
+                                    </tr>
+
+                                </table>
 
 
 
@@ -248,7 +250,7 @@ if ($recipe) {
 
                                 // Affichage du prix réduit
 
-                                prixElement.innerHTML = '<h2>' + prixReduit.toFixed(2) + ' €</h2>';
+                                prixElement.innerHTML = '<p> <strong>' + prixReduit.toFixed(2) + ' €<strong></p>';
                             });
 
                         });

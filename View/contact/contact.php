@@ -2,36 +2,14 @@
 
 <main>
 
-<div class="row-Contact">
-        <div class="col-2-Contact">
-            <h1>Contactez-nous :</h1>
-         
-        
-                  
-                    <p> Adresse : 3 rue Saint Vincent de Paul - 89420 Savigny-en-Terre-Plaine</p>
-          
-                    <p> Contact : 03 86 32 39 50</p>
-       
-            
-            
-                    
-                    <p> Email: ericbelouet@ebconnections.com</p>
-          
-              
-              
-                   
-                    <p> Adresse du site: www.ebconnections.com</p>
-       
-        </div>
-      
-    </div>
+
     <div class="row-Form">
         <div class="col-2">
             <h1>Formulaire de contact</h1>
 
             <form action="#" method="post">
                 <div class="section1">
-                    <h1>Demande:</h1>
+                    <h1>Demande</h1>
 
                     <label>Produit ou service</label>
                     <select>
@@ -75,7 +53,7 @@
 
                 </div>
                 <div class="section2">
-        <h1>Contact:</h1>
+        <h1>Contact</h1>
                     <label for="nom" class="form-label">Nom</label>
                     <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez votre nom" required>
                     <label for="prenom" class="form-label">Prenom</label>
@@ -97,7 +75,7 @@
                   
                 </div>
                 <div class="section3">
-                <h1>Société:</h1>
+                <h1>Société</h1>
                 <label>Nom*</label>
               <input type="text" name="societe" size="30" placeholder="Nom de la société" required>
             <label>Adresse</label>
@@ -141,12 +119,36 @@
 
     ?>
 
-<!-- <div class="col-2">
+<div class="row-Contact">
+        <div class="col-2-Contact">
+            <h1>Contactez-nous </h1>
+         
+        
+                  
+                    <p> Adresse : 3 rue Saint Vincent de Paul - 89420 Savigny-en-Terre-Plaine</p>
+          
+                    <p> Téléphone : 03 86 32 39 50</p>
+       
+            
+            
+                    
+                    <p> Email: ericbelouet@ebconnections.com</p>
+          
+              
+              
+                   
+                    <p> Site web: www.ebconnections.com</p>
+       
+        </div>
+      
+    </div>
+
+ <div class="carte">
             <iframe class="mentions" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4533.
                     683371922161!2d4.07342679474644!3d47.4948951788983!2m3!1f0!2f0!3f0!3m2!
                     1i1024!2i768!4f13.1!3m3!1m2!1s0x47ee079e24aac197%3A0x7b9d7c45a732318e!2s
                     Ebconnections!5e0!3m2!1sfr!2sfr!4v1686497805815!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" refer rerpolicy="no-referrer-when-downgrade"></iframe>
-        </div> -->
+        </div> 
     
 
 

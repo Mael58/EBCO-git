@@ -5,7 +5,7 @@ include 'Model/ProduitsBDD.php';
 
 <div class="small-container-usb">
     <div class="row-2-usb">
-        <h2>Câbles USB: </h2>
+        <h2>Câbles USB: </h2><br>
 
 
         <select id="tri">
@@ -94,12 +94,11 @@ include 'Model/ProduitsBDD.php';
                 recipes.sort((a, b) => a.nom.localeCompare(b.nom));
             }
 
-            // Effacez les éléments actuels de la liste
+        
             while (rowUsb.firstChild) {
                 rowUsb.removeChild(rowUsb.firstChild);
             }
 
-            // Réaffichez les éléments triés
             recipes.forEach(function(recipe) {
                 const colUsb = document.createElement("div");
                 colUsb.classList.add("col-usb");
