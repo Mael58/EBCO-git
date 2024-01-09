@@ -2225,3 +2225,7 @@ text-align: start;
     z-index: 1000;
     display: none;
 }
+
+.form-label{
+    margin-left: 10px;
+}

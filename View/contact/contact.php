@@ -7,7 +7,7 @@
         <div class="col-2">
             <h1>Formulaire de contact</h1>
 
-            <form action="#" method="post">
+            <form  action="#" method="post">
                 <div class="section1">
                     <h1>Demande</h1>
 

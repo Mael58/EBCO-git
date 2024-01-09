@@ -36,7 +36,7 @@ if (isset($_SESSION['username'])) { ?>
 
 
 
-<div id="demo"  class="carousel slide" data-bs-ride="carousel"  data-bs-interval="3500">
+<div id="demo"  class="carousel-dark slide" data-bs-ride="carousel"  data-bs-interval="2500">
   
 
     <div class="carousel-indicators" >
@@ -102,8 +102,8 @@ if (isset($_SESSION['username'])) { ?>
 <div class="categories">
     <div class="small-container">
         <div class="row-image">
-            <div class="col-3">
-                <img src="Public/images/switch-c-550x604.jpg" alt="switch craft avec injection">
+        <div class="col-3">
+            <img src="Public/images/montage-2.png" alt="montage">
             </div>
             <div class="col-3">
                 <img src="Public/images/fabrication-550x604.jpg" alt="carte electronique">
@@ -111,9 +111,7 @@ if (isset($_SESSION['username'])) { ?>
             <div class="col-3">
                 <img src="Public/images/usbfils1-550x604.jpg" alt="usb RS485">
             </div>
-            <div class="col-3">
-            <img src="Public/images/montage-2.png" alt="montage">
-            </div>
+           
         </div>
     </div>
 </div>
