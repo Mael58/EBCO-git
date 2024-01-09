@@ -108,7 +108,7 @@ if ($recipe) {
                         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
  -->
-<img src="<?=$image?>" width="20%" >
+        <img src="<?=$image?>" width="20%" >
 
 
 
@@ -164,7 +164,7 @@ if ($recipe) {
                         </div>
                         <div class="containerPrix">
                             <div class="produit2">
-                                <p   id="prix"><strong> <?= $prix ?> €</strong></p>
+                                <p id="prix"><strong> <?= $prix ?> €</strong></p>
 
 
 

@@ -70,6 +70,14 @@ $categoriesUniques = array_unique($categories);
             <div class="resultat" id="resultats"></div>
             </div>
 
+            <!-- <?php
+$nom= $_POST['nomProduit'];
+if(isset($_POST['nomProduit'])){
+header("Location usb");
+}
+            ?> -->
+
+
 
 
             <script>
@@ -126,8 +134,6 @@ $categoriesUniques = array_unique($categories);
             </div>
         </div>
 
-     
-    
 
 
         <div class="navbar">
@@ -159,10 +165,6 @@ $categoriesUniques = array_unique($categories);
                 </ul>
             </nav>
 
-
-
-
-
         </div>
         <a href="#" id="menuIcon"><img src="Public/images/menu.png" alt="menu" class="menu-icon"></a>
         <div class="overlay2" id="overlay2"></div>   
@@ -172,20 +174,12 @@ $categoriesUniques = array_unique($categories);
 
     <?php
 
-
-
-
     // Vérifiez si l'utilisateur est connecté et a cliqué sur le bouton de déconnexion
     if (isset($_SESSION['username'])) {
         if (isset($_POST['deconnexion'])) {
             // Détruisez la session actuelle
 
             $username = $_SESSION['username'];
-
-
-
-
-
 
             $cookie_expiration = time() + (7 * 24 * 60 * 60);
             setcookie("adresse-$username", json_encode($_SESSION['adresse']), $cookie_expiration, '/', '', true, true);
@@ -208,24 +202,33 @@ $categoriesUniques = array_unique($categories);
 
     ?>
 
-
- 
-
-
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     var overlay = document.getElementById("overlay2");
+    var resultat = document.querySelector(".resultat");
   
     var rechercheInput = document.querySelector(".recherche");
-    
+    console.log(resultat);
 
     rechercheInput.addEventListener("focus", function () {
         overlay.style.display = "block";
+        resultat.style.display = "block";
+       
     });
 
     rechercheInput.addEventListener("blur", function () {
+     
+        setTimeout(function () {
         overlay.style.display = "none";
+        resultat.style.display = "none";
+    }, 200);
+       
+     
     });
+
+    resultat.addEventListener("focus", function(){
+        resultat.style.display = "block";
+    });
+
 });
 </script>

@@ -2,7 +2,6 @@
 include 'Model/ProduitsBDD.php';
 ?>
 
-
 <div class="small-container-usb">
     <div class="row-2-usb">
         <h2>Câbles USB: </h2><br>
@@ -20,19 +19,10 @@ include 'Model/ProduitsBDD.php';
     <div class="row-usb">
 
         <?php
-
-
-
-
-
         $recipeController = new ProduitsBDD();
-        
+
         $recipes = $recipeController->getVente("USB");
         $recipeController->close();
-
-
-
-
 
         foreach ($recipes as $recipe) {
             $nom = $recipe['nom'];
@@ -44,38 +34,31 @@ include 'Model/ProduitsBDD.php';
             $dataRate = $recipe['dataRate'];
             $longueur = $recipe['longueur'];
             $prix = $recipe['prix'];
-        ?>
+            
+             ?>
 
+                <div class="col-usb">
+                    <a href="details?nom=<?= urlencode($recipe['nom']) ?>">
 
+                        <h2><?= $recipe['nom'] ?></h2>
 
+                        <img src="<?= $recipe['lienImage'] ?>">
 
-            <div class="col-usb">
-            <a href="details?nom=<?= urlencode($recipe['nom']) ?>">
+                        <p>Puissance: <?= $puissance ?><br>
+                            Connecteur: <?= $connecteur ?><br>
+                            Debit: <?= $dataRate ?><br>
+                            Longueur: <?= $longueur ?><br></p>
+                        <p><?= $recipe['prix'] ?> €</p>
+                    </a>
+                </div>
 
-
-
-                    <h2><?= $recipe['nom'] ?></h2>
-
-                    <img src="<?= $recipe['lienImage'] ?>">
-
-                    <p>Puissance: <?= $puissance ?><br>
-                        Connecteur: <?= $connecteur ?><br>
-                        Debit: <?= $dataRate ?><br>
-                        Longueur: <?= $longueur ?><br></p>
-                    <p><?= $recipe['prix'] ?> €</p>
-                </a>
-            </div>
-
-
-        <?php
-
+            <?php
 
         }
 
         ?>
     </div>
 </div>
-
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -94,7 +77,6 @@ include 'Model/ProduitsBDD.php';
                 recipes.sort((a, b) => a.nom.localeCompare(b.nom));
             }
 
-        
             while (rowUsb.firstChild) {
                 rowUsb.removeChild(rowUsb.firstChild);
             }

@@ -56,10 +56,10 @@ body {
 .navbar {
     background: rgba(72, 175, 219, 1);
     overflow: hidden;
-
-
-
-}
+    
+    z-index: 3000;
+  
+   }
 
 .navbar a {
     float: left;
@@ -1931,11 +1931,13 @@ a[href$=".zip"] img {
 
 .produit2 p {
  text-align: end;
+ margin-top: 30px;
 
 }
 .produit2 .stock{
 text-align: start;
 }
+
 
 .container-quantite {
 
@@ -1948,8 +1950,12 @@ text-align: start;
 .container-quantite h3 {
 
     margin-right: 20px;
+    margin-top: 30px;
 
 
+}
+.container-quantite input{
+    margin-top: 30px;
 }
 
 
@@ -1965,6 +1971,7 @@ text-align: start;
 
 .produit2 .btn {
     text-align: center;
+    width: 100%;
 
 }
 
@@ -2176,6 +2183,7 @@ text-align: start;
     margin-left: 10px;
     position: relative;
     z-index: 2000;
+    display: none;
    
 }
 
@@ -2186,14 +2194,7 @@ text-align: start;
     display: flex;
     flex-direction: column;
     width: 35%;
-    height: 60px;
-
-   
-    max-height: 200px;
-    overflow-y: auto;
-
-
-
+  
 }
 
 

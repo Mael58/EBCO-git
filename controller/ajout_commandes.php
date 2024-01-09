@@ -20,7 +20,6 @@ $nomCommande = $data->nomCommande;
 $quantite = $data->quantite;
 $prix = $data->prix;
 
-var_dump($prix);
 
 
     try {
