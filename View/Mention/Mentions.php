@@ -67,4 +67,4 @@
          sur le réseau d'Internet.</p>
 
 </main>
-<?php include 'template/footer.html';?>
+<?php include_once 'template/footer.php' ?>

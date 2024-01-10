@@ -481,4 +481,4 @@ if ($recipe) {
 
 
 
-    <?php include_once 'template/footer.html'; ?>
+<?php include_once 'template/footer.php' ?>

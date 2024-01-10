@@ -61,9 +61,6 @@
         
       <!----------Footer---------------> 
 
-<?php include_once 'template/footer.html'?>
+      <?php include_once 'template/footer.php' ?>
 
 
-
-    </body>
-</html>

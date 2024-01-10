@@ -197,4 +197,4 @@ $_SESSION['total'] = $total;
 
 
 
-include_once 'template/footer.html'; ?>
+ include_once 'template/footer.php' ?>

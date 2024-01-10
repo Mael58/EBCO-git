@@ -36,7 +36,7 @@ if (isset($_SESSION['username'])) { ?>
 
 
 
-<div id="demo"  class="carousel-dark slide" data-bs-ride="carousel"  data-bs-interval="2500">
+<div id="demo"  class="carousel slide" data-bs-ride="carousel"  data-bs-interval="2500">
   
 
     <div class="carousel-indicators" >
@@ -61,10 +61,10 @@ if (isset($_SESSION['username'])) { ?>
     </div>
 
   
-    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
+    <button class="carousel-dark carousel-control-prev " type="button" data-bs-target="#demo" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon "></span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+    <button class="carousel-dark carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
         <span class="carousel-control-next-icon"></span>
     </button>
 
@@ -249,4 +249,4 @@ if (isset($_SESSION['username'])) { ?>
 </div>
 <!----------Footer--------------->
 
-<?php include_once 'template/footer.html' ?>
+<?php include_once 'template/footer.php' ?>

@@ -1161,4 +1161,4 @@ if (isset($_SESSION['TVA'])) {
 
     </div>
 
-    <?php include_once 'template/footer.html' ?>
+    <?php include_once 'template/footer.php' ?>

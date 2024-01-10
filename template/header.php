@@ -6,6 +6,9 @@ $db_name = DB_NAME;
 $db_user = DB_USERNAME;
 $db_pass = DB_PASSWORD;
 
+$URL= "$_SERVER[REQUEST_URI]";
+$currentURL=basename($URL);
+
 
 ?>
 
@@ -17,7 +20,7 @@ $db_pass = DB_PASSWORD;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Catalogue des Produits | EBconnections</title>
+    <title><?=$currentURL?></title>
     <link rel="stylesheet" href="Public/Style/style.css">
     <!-- jQuery -->
 

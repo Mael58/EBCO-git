@@ -74,4 +74,4 @@
     </div>
 
     <!----------Footer---------------> 
-<?php include 'template/footer.html'?>
+    <?php include_once 'template/footer.php' ?>

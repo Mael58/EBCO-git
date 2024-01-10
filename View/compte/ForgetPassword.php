@@ -35,4 +35,4 @@ include_once 'template/header.php';
 </div>
 
 <!----------Footer--------------->
-<?php include_once 'template/footer.html'; ?>
+<?php include_once 'template/footer.php' ?>

@@ -4,7 +4,7 @@ include 'Model/ProduitsBDD.php';
 
 <div class="small-container-usb">
     <div class="row-2-usb">
-        <h2>Câbles USB: </h2><br>
+        <h1>Câbles USB</h1><br>
 
 
         <select id="tri">
@@ -34,7 +34,7 @@ include 'Model/ProduitsBDD.php';
             $dataRate = $recipe['dataRate'];
             $longueur = $recipe['longueur'];
             $prix = $recipe['prix'];
-            
+
              ?>
 
                 <div class="col-usb">
@@ -102,4 +102,4 @@ include 'Model/ProduitsBDD.php';
 </script>
 </diV>
 
-<?php include 'template/footer.html'; ?>
+<?php include_once 'template/footer.php' ?>

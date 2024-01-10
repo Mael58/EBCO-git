@@ -1,6 +1,6 @@
 <div class="footer">
     <div class="container">
-        <div class="row">
+        <div class="row-footer">
             <div class="footer-col1">
                 <h3>Coordonnées</h3>
                 <ul>
