@@ -78,6 +78,8 @@ if (isset($_SESSION['TVA'])) {
 <script>
     function updateQuantitePrix(input, nomProduit, prix) {
         var nouvelleQuantite = input.value;
+        console.log(nouvelleQuantite);
+         
 
         // Utiliser AJAX pour envoyer les données au serveur
         var xhr = new XMLHttpRequest();
@@ -96,7 +98,7 @@ if (isset($_SESSION['TVA'])) {
 
                     var sousTotal = response.nouveauTotal.toFixed(2);
                     document.getElementById('sousTotalHT').innerText = sousTotal + ' €';
-                    console.log(sousTotal)
+               
 
                     // if (parseFloat(sousTotal) < 50) {
                     //     sousTotal = (parseFloat(sousTotal) + 10).toFixed(2);
@@ -125,7 +127,7 @@ if (isset($_SESSION['TVA'])) {
 
 
 
-
+location.reload();
                 }
             }
         };
@@ -147,18 +149,7 @@ if (isset($_SESSION['TVA'])) {
             <td colspan="2">Total HT:</td>
             <td id="sousTotalHT"><?= $totalSansTVA ?> €</td>
         </tr>
-       
-        <!-- <tr id="fraisPortRow">
-            <td colspan="2" >Frais de port</td>
-            <td><?= $fraisPort ?> €</td>
-        </tr>
-     
-
-        <tr id="totalAvecFraisPortRow">
-            <td colspan="2" >Total avec frais de port:</td>
-            <td id="sousTotal"><?= $totalSansTVA ?> €</td>
-        </tr>
-      -->
+  
         
         <tr>
             <td colspan="2">TVA</td>

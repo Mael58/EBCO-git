@@ -1677,7 +1677,7 @@ input {
     justify-content: center;
     width: 15%;
     padding: 0;
-    color: #fff;
+    color: rgb(255, 255, 255);
     text-align: center;
     background: none;
     border: 0;
@@ -1762,7 +1762,7 @@ input {
     margin-left: 3px;
     text-indent: -999px;
     cursor: pointer;
-    background-color: #fff;
+    background-color: black;
     background-clip: padding-box;
     border: 0;
     border-top: 10px solid transparent;
