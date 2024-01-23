@@ -162,8 +162,9 @@
   $dest = "matzener.mael@gmail.com";
   $sujet = "Formulaire de contact - Demande de $produit";
  
-  $headers = "From: matzenerm@gmail.com\r\n";
+  $headers = "From: $email\r\n";
   $headers .= "Content-type: text/plain; charset=UTF-8\r\n";
+
   mail($dest, $sujet, $corpsEmail, $headers);
 
   
